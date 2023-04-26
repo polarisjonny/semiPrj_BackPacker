@@ -1,0 +1,7 @@
+**/Servers/
+*.classpath
+*.project
+**/.metadata/
+log.txt
+*.MF
+**/.settings/
