@@ -1,24 +1,28 @@
-
 body{
     margin: 0px;
     padding: 0px;
 }
 header{
+    margin: 0px;
+    padding: 0px;
     width: 100%;
-    height: 87px;
+    height: 66px;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    left: 0px;
 
 }
 
 .menu {
-    height: 87px;
+    height: 66px;
     display: flex;
     align-items: center;
 
 }
 .menu > a {
-    margin-right: 30px;
+    margin-right: 20px;
     text-decoration: none;
     color: black;
     font-size: 20px;
@@ -30,3 +34,11 @@ header{
 	margin-right:30px 
 }
 
+#profile-btn {
+    background-color: white;
+    width: 80px;
+    border: none;
+}
+.menu > div:first-child {
+    margin-right: 30px;
+}

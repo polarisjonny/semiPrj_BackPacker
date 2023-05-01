@@ -8,9 +8,20 @@
 <head>
 <meta charset="UTF-8">
 <title>홈</title>
-
+<style>
+	main{
+		margin: 0px;
+		padding: 0px;
+		width:100%;
+		height: 1100px; 
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<main>
+	
+	</main>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

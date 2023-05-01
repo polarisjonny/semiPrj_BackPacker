@@ -7,6 +7,8 @@
     
 <!-- 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- 폰트어썸 cdn -->
+<script src="https://kit.fontawesome.com/794ac64f16.js" crossorigin="anonymous"></script>
 
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" href="${root}/static/css/header.css">
@@ -19,9 +21,15 @@ $('.dropdown-toggle').dropdown();
 
 <header>
     <div class="logo">
-           <img width="278px" height="87px" src="${root}/static/img/logo/b_logo.png" alt="">
+           <img width="212px" height="66px" src="${root}/static/img/logo/b_logo.png" alt="">
     </div>
     <div class="menu">
+		
+		<c:if test="${not empty loginMember}">
+			<div>
+				<i class="fa-regular fa-comments fa-2xl" style="color: #000000;"></i>
+			</div>
+		</c:if>
         <a href="#">ABOUT</a>
         <a href="#">여행정보</a>
         <a href="#">후기</a>
@@ -29,21 +37,17 @@ $('.dropdown-toggle').dropdown();
        	<c:if test="${empty loginMember }">
 	        <a href="#">로그인</a>
        	</c:if>
-       	<!-- <c:if test="${not empty loginMember}">
-			<div class="btn-group">
-			  <button type="button" data-bs-toggle="dropdown" class="btn">
-			    <img width="70px" height="70px" alt="" src="${root}/static/img/temp_profile.png" id="profile-border">
-			  </button>
-			  <ul class="dropdown-menu">
-			    <li><a class="dropdown-item" href="#">Action</a></li>
-			    <li><a class="dropdown-item" href="#">Another action</a></li>
-			    <li><a class="dropdown-item" href="#">Something else here</a></li>
-			    <li><hr class="dropdown-divider"></li>
-			    <li><a class="dropdown-item" href="#">Separated link</a></li>
-			  </ul>
-			</div>
-       	</c:if> -->
+       	<c:if test="${not empty loginMember}">
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
+				</button>
+				<ul class="dropdown-menu">
+				  <li><a class="dropdown-item" href="#">Action</a></li>
+				  <li><a class="dropdown-item" href="#">Another action</a></li>
+				  <li><a class="dropdown-item" href="#">Something else here</a></li>
+				</ul>
+			  </div>
+       	</c:if>
     </div>
 </header>
-
-
