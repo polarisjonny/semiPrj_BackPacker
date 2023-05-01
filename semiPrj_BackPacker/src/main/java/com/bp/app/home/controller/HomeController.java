@@ -1,4 +1,4 @@
-package com.kh.app.home.controller;
+package com.bp.app.home.controller;
 
 import java.io.IOException;
 

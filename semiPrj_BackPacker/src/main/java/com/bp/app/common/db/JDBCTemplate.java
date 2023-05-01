@@ -1,4 +1,4 @@
-package com.kh.app.common.db;
+package com.bp.app.common.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

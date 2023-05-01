@@ -1,4 +1,4 @@
-package com.kh.app.util.file;
+package com.bp.app.util.file;
 
 public class AttachmentVo {
 	

@@ -1,4 +1,4 @@
-package com.kh.app.common.page;
+package com.bp.app.common.page;
 
 public class PageVo {
 	
