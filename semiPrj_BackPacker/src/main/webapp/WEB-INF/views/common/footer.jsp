@@ -66,7 +66,7 @@
 
    .hr-style {
     margin: auto;
-        width: 1830px;
+        width: 95vw;
    }
 
    footer > div:first-child{
