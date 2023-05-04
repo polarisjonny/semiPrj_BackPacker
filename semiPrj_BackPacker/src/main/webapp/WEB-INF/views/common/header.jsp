@@ -17,7 +17,11 @@
 $('.dropdown-toggle').dropdown();
 </script>
 
-
+<style>
+	header {
+		background-color: white;
+	}
+</style>
 
 <header>
     <div class="logo">
