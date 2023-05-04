@@ -32,7 +32,7 @@ $('.dropdown-toggle').dropdown();
 		</c:if>
         <a href="#">ABOUT</a>
         <a href="#">여행정보</a>
-        <a href="#">후기</a>
+        <a href="${root}/notice/travelReview">후기</a>
         
        	<c:if test="${empty loginMember }">
 	        <a href="#">로그인</a>
