@@ -30,15 +30,15 @@
         box-sizing: border-box;
     }
     #ca1 {
-        width: 10vw;
+        width: 20vw;
     }
 
     #ca2 {
-        width: 10vw;
+        width: 20vw;
     }
 
     #c-main {
-        width: 80vw;
+        width: 60vw;
     }
 
     #page-area {
@@ -117,9 +117,7 @@
         text-align: center;
         margin-top: 30px;
     }
-    #main-area > div:nth-child(4), #main-area > div:nth-child(8){
-        margin-right: 0px;
-    }
+  
 
     #c-main > div:first-child{
         margin-top: 30px;
@@ -156,6 +154,7 @@
         color: white;
         border-radius: 10px;
         border: none;
+        margin-right: 30px;
     }
 
     #main-img > img {
@@ -343,20 +342,19 @@
                     </div>
                 </div>
 
-
-
-
             </div>
             <div id="ca2"></div>
         </div>
         <div id="page-area">
-            <a href="#">이전</a>
+            <a href="#"><<</a>
+            <a href="#"><</a>
             <a href="#">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
             <a href="#">4</a>
             <a href="#">5</a>
-            <a href="#">다음</a>
+            <a href="#">></a>
+            <a href="#">>></a>
         </div>
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
