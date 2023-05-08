@@ -52,10 +52,18 @@
 		border : 1px solid lightgray;
 	}
 	
-	#information{
-		margin-left:130px;
-		font-size:2em;
-	}
+	#content-area{
+        margin-left: 130px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+    }
+    
+    #line{color:lightgray;}
+    
+   	#hit{margin-right:170px;}
+    
+    #information{font-size: 2em}
 	
 	#information-area1 > img{
 		width:60%;
@@ -111,6 +119,17 @@
     #page-area > a{
 		margin:15px;
     }
+    
+    .input-area {
+  		position:relative;
+  	}
+  	
+  	.input-area > i{
+  		position: absolute;
+		top :9px;
+		left: 20px;
+		z-index: 1;
+  	}
 
 </style>
 </head>
@@ -143,12 +162,22 @@
 					<option value="writer">작성자</option>
 					<option value="category">카테고리</option>
 				</select>
-				
-				<input type="text" placeholder="검색할 단어를 입력하세요.">
+				<span class = "input-area">
+				 	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
+					<input type="text" placeholder="검색할 단어를 입력하세요.">
+				</span>
 			</form>
 		</div>
 		
-		<div id="information">여행정보</div>
+		<div id="content-area">
+			<div id="information">여행정보</div>
+			
+			<div id="hit">
+				<a href="#">조회순</a>  
+				 <span id="line">|</span>   
+				<a href="#">등록순</a>     
+	        </div>
+		</div>
 		
 		
 		<div id="information-area1">
@@ -176,6 +205,7 @@
         <div id="page-area">
             	
             	<%-- <c:if test="${pv.currentPage > 1}"> --%>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
 	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
             	<%-- </c:if> --%>
     
@@ -203,6 +233,7 @@
             	
             	<%-- <c:if test="${pv.currentPage < pv.maxPage}"> --%>
 	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
             	<%-- </c:if> --%>
             </div>
 		
