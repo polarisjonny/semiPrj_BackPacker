@@ -151,6 +151,16 @@ footer, header, hgroup, menu, nav, section {
 		margin:15px;
     }
   
+  	.input-area {
+  		position:relative;
+  	}
+  	
+  	.input-area > i{
+  		position: absolute;
+		top :9px;
+		left: 20px;
+		z-index: 1;
+  	}
   	
   		
 </style>
@@ -181,7 +191,10 @@ footer, header, hgroup, menu, nav, section {
                         <option value="category">카테고리</option>
                 </select>
                	
-               	<input type="text" placeholder="검색할 단어를 입력하세요.">
+               <span class="input-area">
+	               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
+	               	<input type="text" placeholder="검색할 단어를 입력하세요.">
+               </span>
 
             </form>
         </div>
@@ -228,7 +241,8 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
             	
             	<%-- <c:if test="${pv.currentPage > 1}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
             	<%-- </c:if> --%>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
@@ -255,6 +269,7 @@ footer, header, hgroup, menu, nav, section {
             	
             	<%-- <c:if test="${pv.currentPage < pv.maxPage}"> --%>
 	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
             	<%-- </c:if> --%>
             </div>
    
