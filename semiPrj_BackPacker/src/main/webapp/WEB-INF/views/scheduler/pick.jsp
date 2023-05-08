@@ -16,6 +16,7 @@
     #intro {
         text-align: center;
         margin-top: 100px;
+        
     }
 
     #place-location-area {
@@ -54,7 +55,7 @@
 
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        grid-gap: 50px;
+        grid-gap: 30px;
         padding: 50px;
 
         position: relative;
@@ -66,18 +67,42 @@
 
     .country{
         width: 100px;
-        height: 30px;
-        border: 1px solid rgb(68, 170, 203);
+        height: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        
     }
     #place-location-area img{
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 180px;
+        transition: background-color 0.3s ease;
 
     }
     
 
 
 </style>
+<script defer>
+    function changeBackgroundColor(element){
+        element.style.backgroundColor = "rgb(68, 170, 203)";
+        element.style.color = "white";
+    }
+    function restoreBackgroundColor(element){
+        element.style.backgroundColor = "white";
+        element.style.color = "black";
+    }
+
+    function enlargeImage(element) {
+        element.style.transform = "scale(1.2)";
+    }
+
+    function resetImageSize(element) {
+        element.style.transform = "scale(1)";
+    }  
+</script>
 <body>
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -92,57 +117,68 @@
 
 
         <div id="country-pick">
-            <div class="country">한국</div>
-            <div class="country">일본</div>
-            <div class="country">중국</div>
-            <div class="country">싱가폴</div>
-            <div class="country">필리핀</div>
+            <div class="country" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">한국</div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">일본</div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">중국</div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">싱가폴</div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">필리핀</div>
         </div>
 
 
         <div id="place-location-area">
-            <div id="place-location">
-                <div>제주도</div>
-                <div class="place-location">
-                	<a href="">
+            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>JEJU</div>
+                    <div class="place-location">
+                            <img src="" alt="">
+                    </div>
+                </a>
+            </div>
+            
+            <div id="place-location" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>SEOUL</div>
+                    <div class="place-location">
                         <img src="" alt="">
-                    </a>
-                </div>
+                    </div>
+                </a>
+                
             </div>
             
-            <div id="place-location">
-                <div>서울</div>
-                <div class="place-location">
-                    <img src="" alt="">
-                </div>
-            </div>
-            
-            <div id="place-location">
-                <div>부산</div>
-                <div class="place-location">
-                    <img src="" alt="">
-                </div>
+            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>BUSAN</div>
+                    <div class="place-location">
+                        <img src="" alt="">
+                    </div>
+                </a>
             </div>
 
-            <div id="place-location">
-                <div>제주도</div>
-                <div class="place-location">
-                    <img src="" alt="">
-                </div>
+            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+               <a href="">
+                   <div>GANGWON</div>
+                   <div class="place-location">
+                       <img src="" alt="">
+                   </div>
+               </a>
             </div>
 
-            <div id="place-location">
-                <div>여수</div>
-                <div class="place-location">
-                    <img src="" alt="">
-                </div>
+            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>YEOSU</div>
+                    <div class="place-location">
+                        <img src="" alt="">
+                    </div>
+                </a>
             </div>
 
-            <div id="place-location">
-                <div>인천</div>
-                <div class="place-location">
-                    <img src="" alt="">
-                </div>
+            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>INCHEON</div>
+                    <div class="place-location">
+                        <img src="" alt="">
+                    </div>
+                </a>
             </div>
 
 
