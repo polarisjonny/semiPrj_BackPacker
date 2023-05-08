@@ -62,8 +62,19 @@ footer, header, hgroup, menu, nav, section {
     
     #review-search-area{
     	
-    	margin-left : 130px;
-    	
+		display:grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content:space-around;
+		margin:auto;
+		width:1000px;
+    }
+    
+    #review-search-area > .noticeBtn{
+    	grid-column-end: 5;
+    }
+    
+    .noticeBtn > button{
+    	padding:10px;
     }
     
     #review-search-area select{
@@ -72,73 +83,62 @@ footer, header, hgroup, menu, nav, section {
         border-color:#B9eeff;
         width: 77px;
         height:30px;
+        
     }
     
     #review-search-area input{
         border-radius: 25px;
         width:250px;
         height:30px;
-        text-align: center;
 		border : 1px solid lightgray;
+		padding-left:45px;
     }
     
     #content-area{
-        margin-left: 130px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
+        display:grid;
+        width:1000px;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin:auto;
+    }
+    
+    #content-area > #hit{
+		grid-column-end: 5;
+		margin-top:15px;
     }
     
     #line{color:lightgray;}
     
-   	#hit{margin-right:170px;}
     
     #review{font-size: 2em}
     
-    #review-area1{
-    	display: grid;
+	#reviewList{
+		margin:auto;
+		width:1000px;
+		display:grid;
+		grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
-    }
-   
-    #review-area1 > img{
-    	width:60%;
-    	height:200px;
-        border-radius: 30px;
+        grid-column-gap:40px;
+        grid-row-gap:30px;
         margin:auto;
-    }
+        justify-content: space-around;
+	}    
+	
+	#reviewList img{
+		width:500px;
+		height:200px;
+		border-radius:30px;
+	}
+	
+	#reviewList a{
+		font-size:1.3em;
+	}
+	
     
-    #review-area2{
-    	display:grid;
-    	grid-template-columns: 1fr 1fr;
-        
-    }
     
-    #review-area2>img{
-    	width:60%;
-    	height:200px;
-        border-radius: 30px;
-    	margin:auto;
-    }
-    
-    
-    #review-area1 > a , #review-area2 > a{
-        font-size: 1.3em;
-        margin:auto;
-    }
-
-    #noticeBtn{
-    	
-    	display:flex;
-    	justify-content: end;
-    	margin-right:150px;
-    	
-    }
-    
-    #noticeBtn>button{
+    .noticeBtn>button{
         border-radius: 10px;
         border: 1px solid #99ccff;
         background-color:  #99ccff;
-        width:10%;
         color:white;
     }
     
@@ -182,7 +182,7 @@ footer, header, hgroup, menu, nav, section {
 		
 		<br>
 		<br>
-
+		
         <div id="review-search-area">
             <form action="${root}/notice/travelReviewList">
                 <select name="search-type">
@@ -195,11 +195,16 @@ footer, header, hgroup, menu, nav, section {
 	               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 	               	<input type="text" placeholder="검색할 단어를 입력하세요.">
                </span>
-
+        
             </form>
+            
+	         <div class="noticeBtn">
+		        <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
+	        </div>
         </div>
         
         <div id="content-area">
+         
 
 			<div id="review">여행후기</div>
 			   
@@ -211,32 +216,43 @@ footer, header, hgroup, menu, nav, section {
 	        </div>
         </div>
 
-        
-        <div id="review-area1">
-        
+      <div id="reviewList">
+      
+        <div id="review-area">
         	<img alt="서브 이미지" src="${root}/static/img/travelReview/JejuReview.jpg">
-        	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
+           	<div>
             <a href="#">아름다운 제주도 투어 후기</a>
-            <a href="#">오사카 유니버셜 스튜디오 여행기</a>
+           	</div>
+        </div>
+        
 
-        <br>
+		<div class="review-area">
+        	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
+        	<div>
+           	 <a href="#">오사카 유니버셜 스튜디오 여행기</a>
+        	</div>
+		</div>
+
         
-        </div>
         
-        <div id="review-area2">
-        
+        <div class="review-area">
             <img alt="서브 이미지" src="${root}/static/img/travelReview/sanghiReview.jpg">
-            <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">
+            <div>
             <a href="#">상하이 건물이 진자 이쁘네요</a>
-            <a href="#">상가포르 여행은 언제든 아름다워요</a>
-        
+            </div>
         </div>
+
+		<div class="review-area">
+            <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">
+			<div>
+            <a href="#">상가포르 여행은 언제든 아름다워요</a>
+			</div>
+		</div>		
+      </div>  
         
         <br>
         
-        <div id="noticeBtn">
-	        <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
-        </div>
+       
         
         <div id="page-area">
             	
