@@ -5,76 +5,129 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeCCPwGX5gzSzh6lXqgoGIy_bGEmX1S1E&callback=initMap"
-    defer>
-</script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <style>
+	#wrap{
+		display: grid;
+		height: 100vh;
+		grid-template-columns: 1fr 2fr 1fr;
+		position: relative;
+		top: 66px;
+	}
+
 
     #sidebarLeft {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 25vw;
-        height: 100vh;
-        padding: 20px;
+        
+		padding: 20px;
         background-color: #f8f8f8;
         border: 1px solid #ddd;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 5;
     }
-    #map{
-        background-color: black;
-        height: 100%;
-        width: 49vw;
-        position: absolute;
-        top: 0;
-        left: 52%;
-        transform: translateX(-50%);
-    }
+
+	#scheduler-area{
+		align-items: center;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		padding: 20px;
+		width: 100%;
+		margin-top: 50px;
+	}
+
+	#scheduler-date-area{
+		align-items: center;
+		box-sizing: border-box;
+		display: grid;
+		
+		grid-template-columns: 1.3fr 4fr 1.3fr;
+		justify-items: center;
+	}
+
+	#scheduler-place-area {
+		display: flex;
+		align-items: center;
+	}
+
+	#scheduler-place {
+		display: flex;
+		align-items: center;
+		border: 1px solid black;
+		padding: 10px;
+		border-radius: 10px;
+		margin-top: 20px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	#sc-img {
+		margin-right: 10px;
+	}
+
+	#area {
+		margin-left: 10px;
+	}
+
+
+
+
+
+
+
+
+    
     #sidebarRight {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 20vw;
-        height: 100vh;
-        padding: 20px;
+
+		padding: 20px;
         background-color: #f8f8f8;
         border: 1px solid #ddd;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 5;
+        
     }
 
-    #scheduler-date{
-        padding: 10px;
-        top: 20px;
-        display: grid;
-        grid-template-columns: 1fr 4fr 1fr;
-        text-align: center;
-    }
+	#place-list-area{
+		align-items: center;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		padding: 10px;
+		width: 100%;
+	
+	}
+	#place{
+		width: 100%;
+		height: 80px;
+		display: flex;
+		align-items: center;
+		border: 1px solid black;
+		padding: 10px;
+		border-radius: 10px;
+		margin-top: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+	#place-img{
+		width: 100px;
+		height: 80px;
+		margin-right: 10px;
+	}
 
-    #place{
-        display: flex;
-        border: 2px solid black;
-        padding: 8px;
-        width: 100%;
-    }
-    .place-name{
-        display: inline-block;
-    }
+	input[name="placeName"]{
+		margin: 35px;
+	}
+
+
+    
   
     
 </style>
 <body>
 
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
 	
 	<main>
+	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
 		<div id="wrap">
 	
 	
@@ -84,25 +137,38 @@
 	           기간선택 : <input type="text" name="daterange" value="" />
 	        </div>
 	
-	        <div id="scheduler">
-	
-	            <div id="scheduler-date">
-	                <div id="x-date"> 이전날 </div>
-	                <div id="date"> 2023 05.17  DAY1 </div>
-	                <div id="next-date"> 다음날 </div>
-	            </div>
-	            
-	            <div id="place">
-	                <div>
-	                    <img src="" width="52px" height="52px">
-	                    <div class="place-name">장소명</div>
-	                    <div>소요시간</div>
-	                    <div>시작시간</div>
-	                </div>
-	            </div>
-	            
-	            <button> 일정저장 </button>
-	        </div>
+	        <div id="scheduler-area">
+
+				<div id="scheduler-date-area">
+					<div><a class="scheduler-date" href="">이전날</a></div>
+					<div class="scheduler-date" >2023.05.17 DAY 1</div>
+					<div><a class="scheduler-date" href="">다음날</a></div>
+				</div>
+
+				<div id="scheduler-place-area">
+					<div id="scheduler-place">
+						<img id="sc-img" height="80px" width="80px" src="" alt="">
+						<div id="area">
+							<div class="place">장소명 : 해운대</div>
+							<div class="time">소요시간 : 90분</div>
+							<div class="class-time">시작시간 : 11:00</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="scheduler-place-area">
+					<div id="scheduler-place">
+						<img id="sc-img" height="80px" width="80px" src="" alt="">
+						<div id="area">
+							<div class="place">장소명 : 해운대</div>
+							<div class="time">소요시간 : 90분</div>
+							<div class="class-time">시작시간 : 11:00</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
 	
 	
 	
@@ -115,17 +181,61 @@
 	
 	        <input type="text" placeholder="여행지검색" name="placeName">
 	
-	        <h1>추천장소</h1>
-	
-	        <div id="placelist">
-	            <div>이미지</div>
-	            <div>여행지 이름</div>
+			
+	        <div id="place-list-area">
+				
+				<h4>여행지 장소 리스트</h4>
+				
+				<div id="place">
+					<img id="place-img" src="" alt="">
+					<div id="p-area">
+						<div id="p-place">해운데</div>
+						<div id="p-introduce">i</div>
+						<div id="p-pick">+</div>
+					</div>
+
+				</div>
+				<div id="place">
+					<img id="place-img" src="" alt="">
+					<div id="p-area">
+						<div id="p-place">해운데</div>
+						<div id="p-introduce">i</div>
+						<div id="p-pick">+</div>
+					</div>
+
+				</div>
+				<div id="place">
+					<img id="place-img" src="" alt="">
+					<div id="p-area">
+						<div id="p-place">해운데</div>
+						<div id="p-introduce">i</div>
+						<div id="p-pick">+</div>
+					</div>
+
+				</div>
+				<div id="place">
+					<img id="place-img" src="" alt="">
+					<div id="p-area">
+						<div id="p-place">해운데</div>
+						<div id="p-introduce">i</div>
+						<div id="p-pick">+</div>
+					</div>
+
+				</div>
+	           
 	        </div>
 	
 	    </div>
 	</div>
 	
-	    <script>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	
+	
+	</main>
+	
+	
+	
+	    <script defer>
 	        $(function() {
 	          $('input[name="daterange"]').daterangepicker({
 	            opens: 'left',
@@ -156,11 +266,6 @@
 	        window.initMap = initMap;
 	
 	        </script>
-	
-	</main>
-	
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	
 
 </body>
 </html>
