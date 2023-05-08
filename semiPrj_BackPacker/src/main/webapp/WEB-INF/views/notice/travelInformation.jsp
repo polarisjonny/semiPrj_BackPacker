@@ -6,121 +6,152 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+	/* <!-- css --> */
+<!-- html, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 	main{
 		margin-top: 66px;
 		padding: 0px;
 		width:100%;
 		height: 1100px; 
 	}
+
+    #mainImg-area{
+       position: relative;
+    }
 	
-	#mainImg-area{
-		position:relative;
-	}
-	
-	#mainImg-area > img{
+	#mainImg-area > #mainImg{
 		width:100%;
 		height:400px;
+		margin:0;
 	}
 
-	#mainContent{
-		position: absolute;
-		display:flex;
-		flex-direction:column;
-		top: 35%;
-		left: 5%;
-		color:whitesmoke;
-		font-size:2.5em;
-	}
-	
-	#search-area{
-		margin-left : 130px;
-	}
-	
-	#search-area select{
-		border : 1px solid #B9eeff;
-		border-radius:20px;
-		background-color:#B9eeff;
-		width: 77px;
+    #mainContent{
+        position: absolute;
+        top:10%;
+        left:65%;
+        font-weight: bold;
+        font-size: 2em;
+        color: rgb(247, 247, 247);
+    }
+    
+    
+    #review-search-area{
+    	
+		display:grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content:space-around;
+		margin:auto;
+		width:1000px;
+    }
+    
+    #review-search-area > .noticeBtn{
+    	grid-column-end: 5;
+    }
+    
+    .noticeBtn > button{
+    	padding:10px;
+    }
+    
+    #review-search-area select{
+        border-radius: 20px;
+        background-color: #B9eeff;
+        border-color:#B9eeff;
+        width: 77px;
         height:30px;
-	}
-	
-	#search-area input{
-		border-radius: 25px;
+        
+    }
+    
+    #review-search-area input{
+        border-radius: 25px;
         width:250px;
         height:30px;
-        text-align: center;
 		border : 1px solid lightgray;
-	}
-	
-	#content-area{
-        margin-left: 130px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
+		padding-left:45px;
+    }
+    
+    #content-area{
+        display:grid;
+        width:1000px;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin:auto;
+    }
+    
+    #content-area > #hit{
+		grid-column-end: 5;
+		margin-top:15px;
     }
     
     #line{color:lightgray;}
     
-   	#hit{margin-right:170px;}
     
-    #information{font-size: 2em}
-	
-	#information-area1 > img{
-		width:60%;
-    	height:200px;
-        border-radius: 30px;
-        margin:auto;
-	}
-	
-	#information-area1{
-		display:grid;
-		grid-template-columns: repeat(2,1fr);
-	}
-	
-	#information-area2 > img{
-		width:60%;
-    	height:200px;
-        border-radius: 30px;
-        margin:auto;
-	}
-	
-	#information-area2{
-		display:grid;
-		grid-template-columns: 1fr 1fr;
-	}
-	
-	#information-area1 > a , #information-area2 > a{
+    #review{font-size: 2em}
+    
+	#reviewList{
 		margin:auto;
+		width:1000px;
+		display:grid;
+		grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap:40px;
+        grid-row-gap:30px;
+        margin:auto;
+        justify-content: space-around;
+	}    
+	
+	#reviewList img{
+		width:500px;
+		height:200px;
+		border-radius:30px;
+	}
+	
+	#reviewList a{
 		font-size:1.3em;
 	}
 	
-	 #noticeBtn{
-    	
-    	display:flex;
-    	justify-content: end;
-    	margin-right:150px;
-    	
-    }
     
-    #noticeBtn>button{
+    
+    .noticeBtn>button{
         border-radius: 10px;
         border: 1px solid #99ccff;
         background-color:  #99ccff;
-        width:10%;
         color:white;
     }
     
-     #page-area{
+    #page-area{
     	display:flex;
     	justify-content:center;
     	align-items:center;
     }
-    
     #page-area > a{
 		margin:15px;
     }
-    
-    .input-area {
+  
+  	.input-area {
   		position:relative;
   	}
   	
@@ -130,100 +161,121 @@
 		left: 20px;
 		z-index: 1;
   	}
-
+  	
+  		
 </style>
 </head>
 <body>
 
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
-	<main>
-	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+    
+    
+    <main>
+    
+   
+
 		<div id="mainImg-area">
-			
-			<img alt="" src="${root}/static/img/travelInformation/mainImg.jpg">
-			
-			<div id="mainContent">
-				<div>다양한</div>
-				<div>여행 정보를</div>
-				<div>만나볼 수 있는 곳,</div>
-				<div>맛집부터 액티비티까지</div>
-			</div>
-		
+	        <img id="mainImg" src="${root}/static/img/travelReview/travelReviewMain.jpg" alt="메인 이미지">
+	        <div id="mainContent">백팩커들의 솔직한 여행 이야기</div>
 		</div>
 		
 		<br>
 		<br>
 		
-		<div id="search-area">
-			<form action="${root}/notice/travelInformation">
-				<select>
-					<option value="title">제목</option>
-					<option value="writer">작성자</option>
-					<option value="category">카테고리</option>
-				</select>
-				<span class = "input-area">
-				 	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-					<input type="text" placeholder="검색할 단어를 입력하세요.">
-				</span>
-			</form>
-		</div>
-		
-		<div id="content-area">
-			<div id="information">여행정보</div>
-			
-			<div id="hit">
+        <div id="review-search-area">
+            <form action="${root}/notice/travelReviewList">
+                <select name="search-type">
+                        <option value="title">제목</option>
+                        <option value="writer">작성자</option>
+                        <option value="category">카테고리</option>
+                </select>
+               	
+               <span class="input-area">
+	               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
+	               	<input type="text" placeholder="검색할 단어를 입력하세요.">
+               </span>
+        
+            </form>
+            
+	         <div class="noticeBtn">
+		        <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
+	        </div>
+        </div>
+        
+        <div id="content-area">
+         
+
+			<div id="review">여행후기</div>
+			   
+	        
+	        <div id="hit">
 				<a href="#">조회순</a>  
 				 <span id="line">|</span>   
 				<a href="#">등록순</a>     
 	        </div>
-		</div>
-		
-		
-		<div id="information-area1">
-			<img alt="" src="${root}/static/img/travelInformation/fireworks.jpg">
-			<img alt="" src="${root}/static/img/travelInformation/paris.jpg">
-			<a href="#">5.10~5.12 오사카 불꽃놀이 축제</a>
-			<a href="#">10.1~10.4 파리 에펠탑 투어</a>
-		</div>
-		
-		<br>
-		
-		<div id="information-area2">
-			<img alt="" src="${root}/static/img/travelInformation/dokyo.jpg">
-			<img alt="" src="${root}/static/img/travelInformation/jejudo.jpg">
-			<a href="#">도쿄 맛집 총정리</a>
-			<a href="#">제주도 액티비티 추천</a>
-		</div>
-		
-		<br>
-		
-		 <div id="noticeBtn">
-	        <button onclick="location.href='${root}/notice/travelInformationWrite'">게시글 작성</button>
         </div>
+
+      <div id="reviewList">
+      
+        <div id="review-area">
+        	<img alt="서브 이미지" src="${root}/static/img/travelReview/JejuReview.jpg">
+           	<div>
+            <a href="#">아름다운 제주도 투어 후기</a>
+           	</div>
+        </div>
+        
+
+		<div class="review-area">
+        	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
+        	<div>
+           	 <a href="#">오사카 유니버셜 스튜디오 여행기</a>
+        	</div>
+		</div>
+
+        
+        
+        <div class="review-area">
+            <img alt="서브 이미지" src="${root}/static/img/travelReview/sanghiReview.jpg">
+            <div>
+            <a href="#">상하이 건물이 진자 이쁘네요</a>
+            </div>
+        </div>
+
+		<div class="review-area">
+            <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">
+			<div>
+            <a href="#">상가포르 여행은 언제든 아름다워요</a>
+			</div>
+		</div>		
+      </div>  
+        
+        <br>
+        
+       
         
         <div id="page-area">
             	
             	<%-- <c:if test="${pv.currentPage > 1}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
             	<%-- </c:if> --%>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">1</a>
+		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">1</a>
             		</c:if>
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">2</a>
+		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">2</a>
             		</c:if>
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">3</a>
+		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">3</a>
             		</c:if>
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">4</a>
+		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">4</a>
             		</c:if>
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">5</a>
+		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">5</a>
             		</c:if>
             		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
@@ -236,13 +288,17 @@
 	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
             	<%-- </c:if> --%>
             </div>
-		
-		
+   
+    
+    </main>
+    
+    
+    
+    
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
-	</main>
+
 	
-		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-		
 
 </body>
 </html>
