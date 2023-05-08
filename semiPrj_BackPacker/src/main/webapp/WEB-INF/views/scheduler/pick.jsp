@@ -27,9 +27,10 @@
         
         position: relative;
         bottom: 70px;
+        top: 10px;
     }
 
-    #place-location {
+    .place-location {
         background-color: #f8f8f8;
         border: 1px solid #ddd;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -37,7 +38,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 50px;
+        
+    
         text-align: center;
     }
 
@@ -47,6 +49,7 @@
         width: 700px;
         height: 80px;
 
+        justify-content: center;
         align-items: center;
 
         display: grid;
@@ -56,12 +59,20 @@
 
         position: relative;
         bottom: 50px;
+        top: 10px;
 
         text-align: center;
     }
 
     .country{
+        width: 100px;
+        height: 30px;
         border: 1px solid rgb(68, 170, 203);
+    }
+    #place-location-area img{
+        width: 150px;
+        height: 150px;
+
     }
     
 
@@ -92,32 +103,46 @@
         <div id="place-location-area">
             <div id="place-location">
                 <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div class="place-location">
+                	<a href="">
+                        <img src="" alt="">
+                    </a>
+                </div>
             </div>
             
             <div id="place-location">
-                <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div>서울</div>
+                <div class="place-location">
+                    <img src="" alt="">
+                </div>
             </div>
             
             <div id="place-location">
-                <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div>부산</div>
+                <div class="place-location">
+                    <img src="" alt="">
+                </div>
             </div>
 
             <div id="place-location">
                 <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div class="place-location">
+                    <img src="" alt="">
+                </div>
             </div>
 
             <div id="place-location">
-                <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div>여수</div>
+                <div class="place-location">
+                    <img src="" alt="">
+                </div>
             </div>
 
             <div id="place-location">
-                <div>제주도</div>
-                <div><img src="" alt=""></div>
+                <div>인천</div>
+                <div class="place-location">
+                    <img src="" alt="">
+                </div>
             </div>
 
 
