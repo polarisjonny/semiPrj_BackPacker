@@ -95,41 +95,37 @@ footer, header, hgroup, menu, nav, section {
     
     #review{font-size: 2em}
     
-   
-    #subImg1-area > img{
-    	width:60%;
-    	height:200px;
-        border-radius: 30px;
-    }
-    
-    #subImg1-area{
+    #review-area1{
     	display: grid;
         grid-template-columns: 1fr 1fr;
-        place-items: center;
     }
-    
-    #subImg2-area>img{
+   
+    #review-area1 > img{
     	width:60%;
     	height:200px;
         border-radius: 30px;
-    	
+        margin:auto;
     }
     
-    #subImg2-area{
+    #review-area2{
     	display:grid;
     	grid-template-columns: 1fr 1fr;
-        place-items: center;
         
     }
     
-    #subImg1-area > a{
-        font-size: 1.3em;
-    }
-
-    #subImg2-area > a{
-        font-size: 1.3em;
+    #review-area2>img{
+    	width:60%;
+    	height:200px;
+        border-radius: 30px;
+    	margin:auto;
     }
     
+    
+    #review-area1 > a , #review-area2 > a{
+        font-size: 1.3em;
+        margin:auto;
+    }
+
     #noticeBtn{
     	
     	display:flex;
@@ -203,7 +199,7 @@ footer, header, hgroup, menu, nav, section {
         </div>
 
         
-        <div id="subImg1-area">
+        <div id="review-area1">
         
         	<img alt="서브 이미지" src="${root}/static/img/travelReview/JejuReview.jpg">
         	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
@@ -214,7 +210,7 @@ footer, header, hgroup, menu, nav, section {
         
         </div>
         
-        <div id="subImg2-area">
+        <div id="review-area2">
         
             <img alt="서브 이미지" src="${root}/static/img/travelReview/sanghiReview.jpg">
             <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">

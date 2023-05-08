@@ -13,7 +13,7 @@
 		height: 1100px; 
 	}
 	
-	#travelReviewWrite{
+	#travelInformationWrite{
 		background-color:white;
 		height:900px;
 		width: 60%;
@@ -23,7 +23,7 @@
 		justify-content:space-evenly;
 	}
 	
-	#reviewWrite{
+	#InformationWrite{
 		font-size: 2em;
 	}
 	
@@ -74,27 +74,23 @@
         margin-left:650px;
         margin-top:10px;
     }
-
-	
-	
 </style>
 </head>
 <body>
-
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
-	<main>
-	
-		<div id="travelReviewWrite">
+		<main>
+		
+		<div id="travelInformationWrite">
 			<br>
 			<br>
 		
-			<div id="reviewWrite">여행후기 게시글 작성</div>
+			<div id="InformationWrite">여행정보 게시글 작성</div>
 			<br>
 				<form action="" method="post" enctype="multipart/form-data">
 				<div id="imgUpload">
 						<label for="imgFile">
-							썸네일 사진 올리기
+							대표 사진 올리기
 						</label>
 						<input type="file" id="imgFile">
 				</div>
@@ -109,11 +105,10 @@
 
 		</div>
 		
-		
-		
-	</main>
+		</main>
 	
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+		
 
 </body>
 </html>
