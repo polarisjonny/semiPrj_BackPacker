@@ -31,7 +31,7 @@ $('.dropdown-toggle').dropdown();
 			</div>
 		</c:if>
         <a href="#">ABOUT</a>
-        <a href="#">여행정보</a>
+        <a href="${root}/notice/travelInformation">여행정보</a>
         <a href="${root}/notice/travelReview">후기</a>
         
        	<c:if test="${empty loginMember }">
