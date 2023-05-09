@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,7 +55,7 @@
 	#scheduler-place {
 		display: flex;
 		align-items: center;
-		border: 1px solid black;
+		border: 1px solid rgb(191, 186, 186);
 		padding: 10px;
 		border-radius: 10px;
 		margin-top: 20px;
@@ -94,14 +95,15 @@
 		flex-shrink: 0;
 		padding: 10px;
 		width: 100%;
+		margin-top: -5px;
 	
 	}
 	#place{
 		width: 100%;
-		height: 80px;
+		height: 90px;
 		display: flex;
 		align-items: center;
-		border: 1px solid black;
+		border: 1px solid rgb(195, 191, 191);
 		padding: 10px;
 		border-radius: 10px;
 		margin-top: 10px;
@@ -113,10 +115,13 @@
 		height: 80px;
 		margin-right: 10px;
 	}
-
-	input[name="placeName"]{
-		margin: 35px;
+	#placeName{
+		display: flex;
+		justify-content: center;
+		padding: 20px;
 	}
+	
+	
 	#p-area {
 		position: absolute;
 		bottom: 0;
@@ -128,15 +133,60 @@
 
 	#p-introduce {
 		margin-right: 5px;
+		
 	}
+
+
+
+
+
+
+
+
+
 	.btnn{
 		width: 250px;
 		height: 70px;
 		padding: 5px;
 		margin-top: 15px;
 		border-radius: 10px;
+		border: 0;
+		background-color: rgb(225, 224, 224);
+		font-size: 20px;
 	}
 
+	#tripDate{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+	}
+
+	#intro{
+		position: relative;
+	    top: 250px;
+	    display: flex;
+	    justify-content: center;
+	}
+	#in{
+		display: grid;
+		grid-template-rows: 1fr 1fr;
+	}
+	#in>input{
+		width: 150px;
+	}
+	#po{
+		position: relative;
+		top: 10px;
+	}
+	#placeName>input{
+		width: 150px;
+	}
+	#delete{
+		display: inline-block;
+		position: relative;
+		top: 33px;
+	}
 	
 
     
@@ -157,67 +207,64 @@
 	    <div id="sidebarLeft">
 	
 	        <div id="tripDate">
-	           기간선택 : <input type="text" name="daterange" value="" />
+	           기간선택 : &nbsp; <input type="text" name="daterange" value="" />
 	        </div>
-	
-	        <div id="scheduler-area">
-
-				<div id="scheduler-date-area">
-					<div><a class="scheduler-date" href="">이전날</a></div>
-					<div class="scheduler-date" ><h4>2023.05.10 DAY 1</h4></div>
-					<div><a class="scheduler-date" href="">다음날</a></div>
-				</div>
-
-				<div id="scheduler-place-area">
-					<div id="scheduler-place">
-						<img id="sc-img" height="80px" width="80px" src="" alt="">
-						<div id="area">
-							<div class="place">장소명 : 해운대</div>
-							<div class="time">소요시간 : 90분</div>
-							<div class="class-time">시작시간 : 11:00</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="scheduler-place-area">
-					<div id="scheduler-place">
-						<img id="sc-img" height="80px" width="80px" src="" alt="">
-						<div id="area">
-							<div class="place">장소명 : 해운대</div>
-							<div class="time">소요시간 : 90분</div>
-							<div class="class-time">시작시간 : 11:00</div>
-						</div>
-					</div>
-				</div>
-
-				<button class="btnn" >일정저장</button>
-
-
+			
+			<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
+				여행기간을 설정하시오    
 			</div>
+		
 	
+			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
+		        <div id="scheduler-area">
 	
+					<div id="scheduler-date-area">
+						<div><a class="scheduler-date" href="">이전날</a></div>
+						<div class="scheduler-date" ><h4>2023.05.10 DAY 1</h4></div>
+						<div><a class="scheduler-date" href="">다음날</a></div>
+					</div>
 	
-	
-	    </div>
+					  <%-- 여행지을 가져 왔을때 생성 --%>
+						<div id="scheduler-place-area">
+							<div id="scheduler-place">
+								<img id="sc-img" height="80px" width="80px" src="" alt="">
+								<div id="area">
+									<div class="place">장소명 : 해운대</div>
+									<div class="time">소요시간 : 90분</div>
+									<div class="class-time">시작시간 : 11:00</div>
+								</div>
+								<div id="delete">X</div>
+							</div>
+						</div>
+					
+					<button class="btnn" >일정저장하기</button>
+				</div>
+			
+		    </div>
+			
 	
 	    <div id="map"></div>
 	
 	    <div id="sidebarRight">
 	
-	        <input type="text" placeholder="여행지검색" name="placeName">
+			<div id="placeName">
+				<i id="po" class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
+				<input type="text" placeholder="여행지검색" name="placeName">
+			</div>
 	
 			
 	        <div id="place-list-area">
 				
 				<h4>여행지 장소 리스트</h4>
-
-		
 				
 				<div id="place">
 					<img id="place-img" src="" alt="">
-					<div id="p-place">해운대</div>
+						<div id="in">
+							<div>사용자 지정 여행지</div>
+							<input type="text" name="name" placeholder="장소이름">
+							<input type="text" name="time" placeholder="소요시간">
+						</div>
 					<div id="p-area">
-						<div id="p-introduce">i</div>
 						<div id="p-pick">+</div>
 					</div>
 

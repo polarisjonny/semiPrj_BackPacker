@@ -66,8 +66,23 @@
 		color: white;
 		position: relative;
 		top: 20px;
+		font-size: 20px;
 	}
 
+	#title{
+		padding: 5px;
+		border: 1px solid #979797;
+		border-radius: 5px;
+		width: 550px;
+		height: 35px;
+	}
+
+	textarea{
+		padding: 5px;
+		border: 1px solid #979797;
+		border-radius: 5px;
+		width: 550px;
+	}
 	
 </style>
 <body>
@@ -277,16 +292,34 @@
 					</select>
 	
 				</div>
+
+				<div>
+					<input type="text" id="title" name="" placeholder="제목을 20자 이내로 적어주세요.">
+				</div>
 	
 				<div>
 					<h3>
 						게시글 내용을 작성해주세요
-
 					</h3>
 				</div>
 
 				<div>
-					<textarea name="" id="" cols="70" rows="20"></textarea>
+					<textarea name="" id="" cols="70" rows="20" 
+					placeholder=
+					"1.구할 동행인원
+					
+					
+
+2.어떤 동행을 찾고있나요?
+
+
+
+3.어떤 여행을 원하시나요?
+
+
+
+(1000자 이내)"
+					></textarea>
 
 				</div>
 		
