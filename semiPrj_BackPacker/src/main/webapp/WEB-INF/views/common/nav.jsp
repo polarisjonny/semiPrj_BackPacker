@@ -6,7 +6,7 @@
 
 <nav id="navBody">
   <c:if test="${loginMember.id =='ADMIN'}">
-       <button class="navBody-menu-btn" onclick="toggleSidebar()">메뉴</button>
+       <button class="navBody-menu-btn" onclick="toggleSidebar()" style="width: 20px">></button>
        <div class="navBody-sidebar">
            <ul class="navBody-menu-list">
              <li><a href="${root}/admin/member">회원관리</a></li>

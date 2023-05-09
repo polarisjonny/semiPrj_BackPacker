@@ -64,7 +64,7 @@
                         ${reviewListDetail.giverNo}
                     </td>
                     <td class = "imgInput " rowspan="2">
-                      <button onclick="imgClick(event)">50*50</button>
+                      <img width="50px" height="50px"  class="btnimg" src="${root}/static/img/profile/airplane.jpg" alt="" onclick="imgClick(event)">
                     </td>
                     <td class="comentContent" >${reviewListDetail.content}</td>
                 </tr>

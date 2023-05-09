@@ -27,9 +27,7 @@ public class MemberReviewWriteController extends HttpServlet{
          String selectMemberNo = req.getParameter("selectMemberNo");
          //데뭉
          //서비스
-         System.out.println("crv만든다");
          ChattingRoomVo crv = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
-         System.out.println(crv);
          if(crv != null) {
             req.setAttribute("loginMemberNo", loginMemberNo);
             req.setAttribute("selectMemberNo", selectMemberNo);

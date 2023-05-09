@@ -18,6 +18,7 @@
        
        justify-content: space-between;
    }
+ 
    #selopt{
        background-color: rgba(0, 102, 255, 0.211);
        border-radius: 15px;
@@ -31,9 +32,10 @@
        border-collapse: collapse;
        border-spacing: 0;
        text-align: center;
-       font-size: 26px;
+       font-size: 22px;
    }
    #adMemTable th{
+   		text-align: center;
        border: 1px solid black;
    }
    #adMemTable td{
@@ -45,6 +47,11 @@
          margin: auto;
          display: flex;
          justify-content: space-evenly; 
+   }
+   #subbtnstForm{
+   		height: 20px;
+   		border: 1px solid gray;
+   		font-size: 15px;
    }
 </style>
 </head>
@@ -167,7 +174,7 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
-                                <button type="submit">변경</button>
+                                <button type="submit" id="subbtnstForm">변경</button>
                             </form>
                         </td>
 
