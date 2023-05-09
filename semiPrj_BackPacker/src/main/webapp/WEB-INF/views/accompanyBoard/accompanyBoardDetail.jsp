@@ -158,11 +158,11 @@
 		border: none;
 	}
 	#comment-write-area {
-		margin-top: 10px;
+		margin-top: 20px;
 		display: grid;
 		grid-template-columns: 0.7fr 6fr 0.8fr;
 		place-items: center;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 	}
 	#comment-text {
 		font-size: 30px;
@@ -171,34 +171,13 @@
 	textarea {
 		border-radius: 5px;
 	}
-	/* 작성된 댓글을 보는 css입니다. */
-	.comment {
-		margin-bottom: 20px;
-		display: grid;
-		grid-template-columns: 0.7fr 6fr 0.8fr;
-	}
-	.comment-profile >img  {
-		width: 70px;
-		height: 70px;
-		border-radius: 70%;
-	}
-	.comment-id-area {
-		font-size: 12px;
-	}
-	.comment-id-area > button {
-		font-size: 8px;
-		border: none;
-		border-radius: 3px;
-		margin-right: 3px;
-	}
-
-	/* sub-area */
+	/* 큰버튼2개 연달아있는 에어리어 */
 	#sub-area > div:first-child{
 		margin-top: 10px;
 		color: #878787;
 		font-size: 12px;
 	}
-
+/* 버튼에어리어 안에 버튼 */
 	#sub-area > button{
 		width: 100%;
 		height: 80px;
@@ -210,6 +189,36 @@
 		font-weight: 900;
 		color: white;
 	}
+	/* 가장큰 프로필 사진 */
+	#profile-box {
+		margin-bottom: 20px;
+	}
+	/* ------------------------- */
+	/* 댓글 리스트 영역 시작*/
+	.comment {
+		display: grid;
+		grid-template-columns : 0.7fr 6.8fr;
+		
+	}
+	
+	.list-profile {
+		width: 70px;
+		height: 70px;
+		border-radius: 70%;
+	}
+	
+	.comment > div:first-child {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+	}
+	
+	.comment-list-id {
+		font-size: 17px;
+		font-weight: 1000;
+		color: gray;
+	}
+	/* 댓글 리스트 영역 끝 */
 </style>
 </head>
 <body>
@@ -225,26 +234,26 @@
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>
 						<div class="content-text">
-							저는 엘나스에 거주하고 있는 김밥이 좋더라입니다. 면허있구요 엘나스행 비행기표 있습니다.
-							저는 피아노를 전공했구요.. 프패커랑 가이드게시판 으음.. 모르겠습니다..
-							안녕하세요. 여행다니는걸 🥰좋아하는 20대 여성입니다. 저는 차 운전하는거 좋아합니다.
-							일본어 잘하구요.👌 일본에서 3년간 유학했던 유학생입니다. 
+							저는 엘나스에 거주하고 있는 김밥이 좋더라입니다. 면허있구요 엘나스행 비행기표 있습니다. <br>
+							저는 피아노를 전공했구요.. 프패커랑 가이드게시판 으음.. 모르겠습니다.. <br>
+							안녕하세요. 여행다니는걸 🥰좋아하는 20대 여성입니다. 저는 차 운전하는거 좋아합니다. <br>
+ 							일본어 잘하구요.👌 일본에서 3년간 유학했던 유학생입니다. <br>
 
-							저는 코골이 이갈이에 예민하구용
-							벌레 잘 못잡습니다. 벌레는 살려둬야죠.. 🤣 
-							유럽쪽에 여행 많이 다녀보고 싶어요.
-							저는 사진찍는걸 좋아합니다. 
+							저는 코골이 이갈이에 예민하구용 <br>
+							벌레 잘 못잡습니다. 벌레는 살려둬야죠.. 🤣  <br>
+							유럽쪽에 여행 많이 다녀보고 싶어요. <br>
+							저는 사진찍는걸 좋아합니다. <br>
 
-							예술공연 보러가는 것도 좋아해요 오케스트라 공연 보고싶어요
+							예술공연 보러가는 것도 좋아해요 오케스트라 공연 보고싶어요 <br>
 
-							술은 잘 못먹습니다 ㅠㅠ 주량은 소주 반잔 맥주 한병입니다!!
+							술은 잘 못먹습니다 ㅠㅠ 주량은 소주 반잔 맥주 한병입니다!! <br>
 						</div>
 					</div>
 					<div id="content-area">
 						<div class="bold-text">게시글 내용</div>
 						<div class="content-text">
-							오르비스로 여행가실 30대 여성분 구합니다. 저도 여자구요, 저는 오르비스에 거주한적이 있어서 
-							해당 지역의 언어 잘 합니다. 면허도 있구요 코콜이 안하시는분만 동행 신청하기를 눌러주세요
+							오르비스로 여행가실 30대 여성분 구합니다. 저도 여자구요, 저는 오르비스에 거주한적이 있어서 <br> 
+							해당 지역의 언어 잘 합니다. 면허도 있구요 코콜이 안하시는분만 동행 신청하기를 눌러주세요 
 						</div>
 					</div>
 					<div id="shedule-area">
@@ -419,44 +428,12 @@
 					</div>
 					<div id="comment-list-area">
 						<div class="comment">
-							<div class="comment-profile">
-								<img src="${root}/static/img/profile2.jpg" alt="">
+							<div><img class="list-profile" src="${root}/static/img/profile2.jpg" alt=""></div>
+							<div class="comment-list-text">
+								<div class="comment-list-id">두둥탁</div>
+								<div class="comment-list-content">ㅋㅋㅋㅋ라라라라ㅏ라라라라ㅏ라라라ㅏ라라라ㅏ랄와라라라라라라라라ㅏ라랄길어져라얍!ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋsidsidsid냥냥봍쿠라~ 스즈메의 문단속~ 바카나이떼~ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div>
+								<div class="comment-list-day">2023-04-25 13:00:03</div> 
 							</div>
-							<div>
-								<div class="comment-text-area">댓글작성한번 해봅니다~ 이거슨 대충 지은 텍스트로서..시라니아 바쇼에~ 보쿠와 이마스그 키미니 아이타이~ 카와라나이모노 사가시테이타~</div>
-								<div class="comment-id-area">ehatchu0527(눈내린아몬드) 2023-04-25 00:13:12 <button>수정</button><button>삭제</button> </div>
-							</div>
-							<div id="blank-97"></div>
-						</div>
-						<div class="comment">
-							<div class="comment-profile">
-								<img src="${root}/static/img/profile2.jpg" alt="">
-							</div>
-							<div>
-								<div class="comment-text-area">댓글작성한번 해봅니다~ 이거슨 대충 지은 텍스트로서..시라니아 바쇼에~ 보쿠와 이마스그 키미니 아이타이~ 카와라나이모노 사가시테이타~</div>
-								<div class="comment-id-area">ehatchu0527(눈내린아몬드) 2023-04-25 00:13:12 <button>수정</button><button>삭제</button> </div>
-							</div>
-							<div id="blank-97"></div>
-						</div>
-						<div class="comment">
-							<div class="comment-profile">
-								<img src="${root}/static/img/profile2.jpg" alt="">
-							</div>
-							<div>
-								<div class="comment-text-area">댓글작성한번 해봅니다~ 이거슨 대충 지은 텍스트로서..시라니아 바쇼에~ 보쿠와 이마스그 키미니 아이타이~ 카와라나이모노 사가시테이타~</div>
-								<div class="comment-id-area">ehatchu0527(눈내린아몬드) 2023-04-25 00:13:12 <button>수정</button><button>삭제</button> </div>
-							</div>
-							<div id="blank-97"></div>
-						</div>
-						<div class="comment">
-							<div class="comment-profile">
-								<img src="${root}/static/img/profile2.jpg" alt="">
-							</div>
-							<div>
-								<div class="comment-text-area">댓글작성한번 해봅니다~ 이거슨 대충 지은 텍스트로서..시라니아 바쇼에~ 보쿠와 이마스그 키미니 아이타이~ 카와라나이모노 사가시테이타~</div>
-								<div class="comment-id-area">ehatchu0527(눈내린아몬드) 2023-04-25 00:13:12 <button>수정</button><button>삭제</button> </div>
-							</div>
-							<div id="blank-97"></div>
 						</div>
 					</div>
 				</div>
