@@ -84,7 +84,8 @@ header{
         <a href="${root}/notice/travelReview">후기</a>
         
        	<c:if test="${empty loginMember }">
-	        <a href="#">로그인</a>
+	        <a href='${root}/member/login'>로그인</a>
+	        <a href='${root}/member/join'>회원가입</a>
        	</c:if>
        	<c:if test="${not empty loginMember}">
 			<div class="dropdown">
@@ -92,11 +93,27 @@ header{
 				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
 				</button>
 				<ul class="dropdown-menu">
+					 <li hidden>${loginMember.memberNo}</li>
+					
 				  <li><a class="dropdown-item" href="#">Action</a></li>
 				  <li><a class="dropdown-item" href="#">Another action</a></li>
-				  <li><a class="dropdown-item" href="#">Something else here</a></li>
+				  <li><a class="dropdown-item imgToProfile" href="">내 프로필</a></li>
 				</ul>
 			  </div>
        	</c:if>
     </div>
 </header>
+
+<script >
+let imgToProfile = document.querySelector('.imgToProfile');
+imgToProfile.addEventListener('click', function(e) {
+   const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
+   const width = 800;
+   const height = 1000;
+   const left = (screen.width / 2) - (width / 2);
+   const top = 0;
+   window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+});
+
+
+</script>
