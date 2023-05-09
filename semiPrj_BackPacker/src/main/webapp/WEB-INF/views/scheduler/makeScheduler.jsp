@@ -39,6 +39,8 @@
 		align-items: center;
 		box-sizing: border-box;
 		display: grid;
+
+		width: 250px;
 		
 		grid-template-columns: 1.3fr 4fr 1.3fr;
 		justify-items: center;
@@ -104,6 +106,7 @@
 		border-radius: 10px;
 		margin-top: 10px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		position: relative;
 	}
 	#place-img{
 		width: 100px;
@@ -114,7 +117,27 @@
 	input[name="placeName"]{
 		margin: 35px;
 	}
+	#p-area {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: 8px;
+		display: flex;
+		align-items: center;
+	}
 
+	#p-introduce {
+		margin-right: 5px;
+	}
+	.btnn{
+		width: 250px;
+		height: 70px;
+		padding: 5px;
+		margin-top: 15px;
+		border-radius: 10px;
+	}
+
+	
 
     
   
@@ -141,7 +164,7 @@
 
 				<div id="scheduler-date-area">
 					<div><a class="scheduler-date" href="">이전날</a></div>
-					<div class="scheduler-date" >2023.05.17 DAY 1</div>
+					<div class="scheduler-date" ><h4>2023.05.10 DAY 1</h4></div>
 					<div><a class="scheduler-date" href="">다음날</a></div>
 				</div>
 
@@ -167,6 +190,8 @@
 					</div>
 				</div>
 
+				<button class="btnn" >일정저장</button>
+
 
 			</div>
 	
@@ -185,11 +210,13 @@
 	        <div id="place-list-area">
 				
 				<h4>여행지 장소 리스트</h4>
+
+		
 				
 				<div id="place">
 					<img id="place-img" src="" alt="">
+					<div id="p-place">해운대</div>
 					<div id="p-area">
-						<div id="p-place">해운데</div>
 						<div id="p-introduce">i</div>
 						<div id="p-pick">+</div>
 					</div>
@@ -197,8 +224,8 @@
 				</div>
 				<div id="place">
 					<img id="place-img" src="" alt="">
+					<div id="p-place">해운대</div>
 					<div id="p-area">
-						<div id="p-place">해운데</div>
 						<div id="p-introduce">i</div>
 						<div id="p-pick">+</div>
 					</div>
@@ -206,8 +233,8 @@
 				</div>
 				<div id="place">
 					<img id="place-img" src="" alt="">
+					<div id="p-place">해운대</div>
 					<div id="p-area">
-						<div id="p-place">해운데</div>
 						<div id="p-introduce">i</div>
 						<div id="p-pick">+</div>
 					</div>
@@ -215,8 +242,8 @@
 				</div>
 				<div id="place">
 					<img id="place-img" src="" alt="">
+					<div id="p-place">해운대</div>
 					<div id="p-area">
-						<div id="p-place">해운데</div>
 						<div id="p-introduce">i</div>
 						<div id="p-pick">+</div>
 					</div>
@@ -264,6 +291,10 @@
 	        }
 	
 	        window.initMap = initMap;
+
+			function makeplace(){
+
+			}
 	
 	        </script>
 
