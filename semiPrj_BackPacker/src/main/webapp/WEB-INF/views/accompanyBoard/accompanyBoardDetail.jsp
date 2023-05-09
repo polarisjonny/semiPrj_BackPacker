@@ -22,6 +22,7 @@
 		grid-template-columns: 1.15fr 3fr 0.7fr 1.15fr;
 		
 	}
+	
 	/* main-area의 내용물이 가득차면 main-box의 길이에도 영향을 미치는지 */
 	#main-box > div {
 		height: 100%;
@@ -172,13 +173,10 @@
 		border-radius: 5px;
 	}
 	/* 큰버튼2개 연달아있는 에어리어 */
-	#sub-area > div:first-child{
-		margin-top: 10px;
-		color: #878787;
-		font-size: 12px;
-	}
+	
 /* 버튼에어리어 안에 버튼 */
-	#sub-area > button{
+	
+	#top-area > button{
 		width: 100%;
 		height: 80px;
 		border: none;
@@ -189,6 +187,14 @@
 		font-weight: 900;
 		color: white;
 	}
+	/*맨위로 가기 a태그 맨밑으로 넣는작업*/
+	#sub-area {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	
 	/* 가장큰 프로필 사진 */
 	#profile-box {
 		margin-bottom: 20px;
@@ -202,8 +208,8 @@
 	}
 	
 	.list-profile {
-		width: 70px;
-		height: 70px;
+		width: 60px;
+		height: 60px;
 		border-radius: 70%;
 	}
 	
@@ -219,6 +225,15 @@
 		color: gray;
 	}
 	/* 댓글 리스트 영역 끝 */
+	
+	/*상단에 마진주기*/
+	#main-area{
+		margin-top: 30px
+	}
+	
+	#sub-area {
+		margin-top: 30px
+	}
 </style>
 </head>
 <body>
@@ -438,11 +453,16 @@
 					</div>
 				</div>
 				<div id="sub-area">
-					<div>
-						<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
+					<div id="top-area">
+						<div>
+							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
+						</div>
+						<button class="btn-blue">동행신청하기</button>
+						<button class="btn-red">게시글신고하기</button>
 					</div>
-					<button class="btn-blue">동행신청하기</button>
-					<button class="btn-red">게시글신고하기</button>
+					<div id="bottom-area">
+						<a href="#">▲맨위로 올라가기</a>
+					</div>
 				</div>
 				<div id="blank2"></div>
 			</div>
