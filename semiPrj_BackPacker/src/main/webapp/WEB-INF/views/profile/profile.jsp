@@ -228,9 +228,9 @@
 		                     ${reviewList.giverNo}
 		                  </td>
                         <td class = "imgInput " rowspan="2"  >
-                           <button class="btnimg" onclick="imgClick(event)">
-								50*50
-                           </button>
+                          
+							<img width="50px" height="50px"  class="btnimg" src="${root}/static/img/profile/airplane.jpg" alt="" onclick="imgClick(event)">
+                          
 
                         </td>
                         <td class="comentContent" >${reviewList.content}</td>

@@ -52,10 +52,11 @@
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
    
-   <div>
-    <h1 style="font-size: 50px; margin-top: 200px;">"${loginMember.name}"님 환영합니다.</h1>
+   <div  style="font-size: 50px; margin-top: 200px; text-align: center;">
+    <h1>"${loginMember.name}"관리자님 환영합니다.</h1>
    <hr>
    </div>
+   <hr>
    <div id="adbtWrap">
    
         <div id="acb">

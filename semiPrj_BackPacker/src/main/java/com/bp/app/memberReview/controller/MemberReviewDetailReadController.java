@@ -42,7 +42,6 @@ public class MemberReviewDetailReadController extends HttpServlet{
 //         MemberReviewVo selevtMemberReview = gps.selectMemberReadReview(selectMemberNo);
          //화면
 //         if(selectMemberDetail != null ) {
-            System.out.println(selectMemberReviewlistDetail);
 //            req.getSession().setAttribute("selectMemberDetail", selectMemberDetail);
 //            req.getSession().setAttribute("selectMemberReviewlistDetail",  (Serializable)selectMemberReviewlistDetail);
             req.setAttribute("selectMemberReviewlistDetail", selectMemberReviewlistDetail);

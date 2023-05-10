@@ -16,7 +16,6 @@ import com.bp.app.memberReview.vo.MemberReviewVo;
 public class MemberReviewDao {
 
    public ChattingRoomVo checkCanWriteReview(Connection conn, String loginMemberNo, String selectMemberNo) throws Exception {
-	   System.out.println("dao");
       String sql = "SELECT CHATTING_ROOM_NO, CHATTING_USER_NO, CHATTING_USER2_NO, GUIDE_BOARD_NO, MATCHING_CHECK, MATCHING_CHECK2, CHATTING_STATUS ,M1.NICK AS NICK1,M2.NICK AS NICK2 FROM CHATTING_ROOM C JOIN MEMBER M1 ON C.CHATTING_USER_NO = M1.MEMBER_NO JOIN MEMBER M2 ON C.CHATTING_USER2_NO = M2.MEMBER_NO WHERE ((CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?) OR (CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?))AND MATCHING_CHECK = 'Y' AND MATCHING_CHECK2='Y'";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, loginMemberNo);
@@ -52,12 +51,10 @@ public class MemberReviewDao {
          vo.setChattingUserNick(chattingUserNick);
          vo.setChattingUser2Nick(chattingUser2Nick);
       }
-      System.out.println("dao2");
       
       //close
       JDBCTemplate.close(rs);
       JDBCTemplate.close(pstmt);
-      System.out.println(vo);
       return vo;
    }
 
