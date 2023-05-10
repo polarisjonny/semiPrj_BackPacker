@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,7 @@
         transition: background-color 0.3s ease;
 
     }
+ 
     
 
 
@@ -182,8 +184,10 @@
             </div>
 
 
-        </div>
 		
+        </div>
+        </div>
+        
 	
 	
 	</main>

@@ -1,11 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 일정 -->
+<script defer type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script defer type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script defer src="${pageContext.request.contextPath}/static/js/scheduler/makeScheduler.js"></script>
 </head>
 <style>
 	#wrap{
@@ -96,10 +104,12 @@
 		padding: 10px;
 		width: 100%;
 		margin-top: -5px;
+		overflow:auto;
+		height:550px
 	
 	}
 	#place{
-		width: 100%;
+		width: 300px;
 		height: 90px;
 		display: flex;
 		align-items: center;
@@ -233,14 +243,15 @@
 									<div class="time">소요시간 : 90분</div>
 									<div class="class-time">시작시간 : 11:00</div>
 								</div>
-								<div id="delete">X</div>
+								<div id="delete"><i class="bi bi-trash"></i></div>
 							</div>
 						</div>
 					
 					<button class="btnn" >일정저장하기</button>
 				</div>
 			
-		    </div>
+				
+		</div>
 			
 	
 	    <div id="map"></div>
@@ -265,37 +276,21 @@
 							<input type="text" name="time" placeholder="소요시간">
 						</div>
 					<div id="p-area">
-						<div id="p-pick">+</div>
+						<div id="p-pick"><i class="bi bi-plus-circle"></i></div>
 					</div>
-
 				</div>
-				<div id="place">
-					<img id="place-img" src="" alt="">
-					<div id="p-place">해운대</div>
-					<div id="p-area">
-						<div id="p-introduce">i</div>
-						<div id="p-pick">+</div>
+				
+				<c:forEach items="${placeList}" var="placeList">
+					<div id="place">
+						<img id="place-img" src="" alt="">
+						<div id="p-place">${placeList.placeName}</div>
+						<div id="p-area">
+							<div id="p-introduce"><i class="bi bi-info-circle"></i></div>
+							<div id="p-pick"><i class="bi bi-plus-circle"></i></div>
+						</div>
 					</div>
-
-				</div>
-				<div id="place">
-					<img id="place-img" src="" alt="">
-					<div id="p-place">해운대</div>
-					<div id="p-area">
-						<div id="p-introduce">i</div>
-						<div id="p-pick">+</div>
-					</div>
-
-				</div>
-				<div id="place">
-					<img id="place-img" src="" alt="">
-					<div id="p-place">해운대</div>
-					<div id="p-area">
-						<div id="p-introduce">i</div>
-						<div id="p-pick">+</div>
-					</div>
-
-				</div>
+				</c:forEach>
+				
 	           
 	        </div>
 	

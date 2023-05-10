@@ -18,5 +18,7 @@ public class SchedulerPick extends HttpServlet{
 		req.getRequestDispatcher("/WEB-INF/views/scheduler/pickScheduler.jsp").forward(req, resp);
 	
 	}
+	
+
 
 }
