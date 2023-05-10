@@ -1,4 +1,4 @@
-package com.bp.app.admin.memberManage.comtroller;
+package com.bp.app.admin.memberManage.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

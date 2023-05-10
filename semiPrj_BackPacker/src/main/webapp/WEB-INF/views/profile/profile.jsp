@@ -150,23 +150,20 @@
            width: 50px;
            text-align: right;
            vertical-align: top;
+           cursor: pointer;
        }
          
          #reviewTable{
          height : 150px
          }
          .btnimg{
+         cursor: pointer;
          	border: 0px;
-         	
+         	cursor: pointer;
          }
    </style>
 </head>
-<c:if test="${ not empty alertMsg }">
-   <script>
-      alert('${alertMsg}');
-      ${alertMsg = null};
-   </script>
-</c:if>
+
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="profileWrap">
@@ -285,25 +282,7 @@
       
    }
    
-   function goEditIntMsgProfile(){
-        const width = 800;
-       const height = 600;
-       const left = (screen.width / 2) - (width / 2);
-       const top = (screen.height / 2) - (height / 2);
-       window.resizeTo(width, height);
-       window.moveTo(left, top);
-      window.location.href = '${root}/click/profile/edit/intMsg'
-   }
-   
-   function goEditImgProfile(){
-        const width = 800;
-       const height = 600;
-       const left = (screen.width / 2) - (width / 2);
-       const top = (screen.height / 2) - (height / 2);
-       window.resizeTo(width, height);
-       window.moveTo(left, top);
-      window.location.href = '${root}/click/profile/edit/img'
-   }
+  
    
    
 </script>

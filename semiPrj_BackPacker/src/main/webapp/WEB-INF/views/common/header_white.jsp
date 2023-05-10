@@ -74,13 +74,13 @@ header{
 
 <header>
     <div class="logo">
-           <img width="212px" height="66px" src="${root}/static/img/logo/w_logo.png" alt="">
+           <img  width="212px" height="66px" src="${root}/static/img/logo/w_logo.png" alt="">
     </div>
     <div class="menu">
 		
 		<c:if test="${not empty loginMember}">
 			<div>
-				<i class="fa-regular fa-comments fa-2xl" style="color: #000000;"></i>
+				<i class="fa-regular fa-comments fa-2xl chat-logo" style="color: #000000;"></i>
 			</div>
 		</c:if>
         <a href="#">ABOUT</a>
@@ -106,9 +106,20 @@ header{
        	</c:if>
     </div>
 </header>
-
 <script >
-let imgToProfile = document.querySelector('.imgToProfile');
+let chatLogo ;
+chatLogo = document.querySelector('.chat-logo');
+chatLogo.addEventListener('click',()=>{
+	const width = 500;
+   const height = 800;
+   const left = (screen.width / 2) - (width / 2);
+   const top = 0;
+   window.open('${root}/chat/room/list', '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+})
+</script>
+<script>
+let imgToProfile;
+imgToProfile= document.querySelector('.imgToProfile');
 imgToProfile.addEventListener('click', function(e) {
    const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
    const width = 800;
@@ -117,6 +128,7 @@ imgToProfile.addEventListener('click', function(e) {
    const top = 0;
    window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 });
-
-
 </script>
+
+
+

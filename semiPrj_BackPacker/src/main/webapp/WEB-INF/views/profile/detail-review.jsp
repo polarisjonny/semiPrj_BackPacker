@@ -18,6 +18,8 @@
    
 
       .comentContent{
+   		    padding-left: 20px;
+    		vertical-align: baseline;
            font-size: 18px;
       }
       .dateIdNick{
@@ -33,6 +35,7 @@
           width: 50px;
           text-align: right;
           vertical-align: top;
+          cursor: pointer;
       }
       #detailTitle{
          padding :20px;
