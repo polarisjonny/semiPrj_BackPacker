@@ -14,18 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- include summernote css/js -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-  
-<!-- 일정 -->
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
 
 
@@ -43,6 +32,8 @@
 <meta charset="UTF-8">
 <script defer>
 $('.dropdown-toggle').dropdown();
+
+
 </script>
 
 <style>
@@ -63,16 +54,16 @@ $('.dropdown-toggle').dropdown();
 		
 		<c:if test="${not empty loginMember}">
 			<div id="gotoChat">
-				<i class="fa-regular fa-comments fa-2xl" style="color: #000000;"></i>
+				<i class="fa-regular fa-comments fa-2xl chat-logo" style="color: #000000;"></i>
 			</div>
 		</c:if>
         <a href="#">ABOUT</a>
         <a href="${root}/notice/travelInformation">여행정보</a>
         <a href="${root}/notice/travelReview">후기</a>
         
-       	<!-- <c:if test="${empty loginMember }">
+       	<c:if test="${empty loginMember }">
 	       <a href='${root}/member/login'>로그인</a>
-       	</c:if> -->
+       	</c:if>
        	<c:if test="${empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -89,7 +80,19 @@ $('.dropdown-toggle').dropdown();
     </div>
 </header>
 <script >
-let imgToProfile = document.querySelector('.imgToProfile');
+let chatLogo ;
+chatLogo = document.querySelector('.chat-logo');
+chatLogo.addEventListener('click',()=>{
+	const width = 500;
+   const height = 800;
+   const left = (screen.width / 2) - (width / 2);
+   const top = 0;
+   window.open('${root}/chat/room/list', '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+})
+</script>
+<script>
+let imgToProfile;
+imgToProfile= document.querySelector('.imgToProfile');
 imgToProfile.addEventListener('click', function(e) {
    const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
    const width = 800;
@@ -98,6 +101,4 @@ imgToProfile.addEventListener('click', function(e) {
    const top = 0;
    window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 });
-
-
 </script>

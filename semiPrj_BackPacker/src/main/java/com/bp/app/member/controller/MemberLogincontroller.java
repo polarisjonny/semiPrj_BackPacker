@@ -19,7 +19,6 @@ public class MemberLogincontroller extends HttpServlet {
 	//로그인
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		req.getRequestDispatcher("/WEB-INF/views/member/login-form.jsp").forward(req, resp);
 	}
 	
