@@ -21,10 +21,14 @@ body{
 margin: 0px;
 padding: 0px;
 }
+*{
+    margin: 0px;
+    padding: 0px;
+}
 header{
     margin: 0px;
     padding: 0px;
-    width: 100%;
+    width: 100vw;
     height: 66px;
     display: flex;
     justify-content: space-between;
@@ -40,7 +44,7 @@ header{
     display: flex;
     align-items: center;
     justify-content : space-evenly;
-    width : 24vw;
+    width : 25vw;
 	background-color: white;
 
 }
@@ -85,7 +89,6 @@ header{
         
        	<c:if test="${empty loginMember }">
 	        <a href='${root}/member/login'>로그인</a>
-	        <a href='${root}/member/join'>회원가입</a>
        	</c:if>
        	<c:if test="${not empty loginMember}">
 			<div class="dropdown">
