@@ -19,7 +19,7 @@
 	/* 영역나누기 */
 	#main-box {
 		display: grid;
-		grid-template-columns: 1.15fr 3fr 0.7fr 1.15fr;
+		grid-template-columns: 1.15fr 3fr 0.9fr 1.15fr;
 		
 	}
 	

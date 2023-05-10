@@ -26,10 +26,15 @@ public class MemberReviewWriteController extends HttpServlet{
          String loginMemberNo = req.getParameter("loginMemberNo");
          String selectMemberNo = req.getParameter("selectMemberNo");
          //데뭉
+         if (loginMemberNo.equals(selectMemberNo)) {
+        	 req.setAttribute("errorMsg", "자기 자신에게는 후기를 작성할 수 없습니다.");
+             String root = req.getContextPath();
+             req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
+             return;
+         }
          //서비스
-         System.out.println("crv만든다");
-         ChattingRoomVo crv = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
-         System.out.println(crv);
+         ChattingRoomVo crv = null;
+         crv = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
          if(crv != null) {
             req.setAttribute("loginMemberNo", loginMemberNo);
             req.setAttribute("selectMemberNo", selectMemberNo);

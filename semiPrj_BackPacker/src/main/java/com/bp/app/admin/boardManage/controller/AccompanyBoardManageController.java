@@ -12,7 +12,7 @@ public class AccompanyBoardManageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-
+		
 		req.getRequestDispatcher("/WEB-INF/views/admin/report/acb-report-list.jsp").forward(req, resp);
 		
 	}

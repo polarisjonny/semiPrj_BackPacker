@@ -13,14 +13,15 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<!--map  -->
+
+
+
+
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeCCPwGX5gzSzh6lXqgoGIy_bGEmX1S1E&callback=initMap"
     defer>
 </script>
+
 
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" href="${root}/static/css/header.css">
@@ -29,11 +30,17 @@
 <meta charset="UTF-8">
 <script defer>
 $('.dropdown-toggle').dropdown();
+
+
 </script>
 
 <style>
 	header {
 		background-color: white;
+	}
+	#profile-btn:focus, #profile-btn:active {
+		outline: none;
+		box-shadow: none;
 	}
 </style>
 
@@ -45,7 +52,7 @@ $('.dropdown-toggle').dropdown();
 		
 		<c:if test="${not empty loginMember}">
 			<div id="gotoChat">
-				<i class="fa-regular fa-comments fa-2xl" style="color: #000000;"></i>
+				<i class="fa-regular fa-comments fa-2xl chat-logo" style="color: #000000;"></i>
 			</div>
 		</c:if>
         <a href="#">ABOUT</a>
@@ -54,12 +61,11 @@ $('.dropdown-toggle').dropdown();
         
        	<c:if test="${empty loginMember }">
 	       <a href='${root}/member/login'>로그인</a>
-	        <a href='${root}/member/join'>회원가입</a>
        	</c:if>
-       	<c:if test="${not empty loginMember}">
+       	<c:if test="${empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
+				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
 				</button>
 				<ul class="dropdown-menu">
 				 <li hidden>${loginMember.memberNo}</li>
@@ -72,7 +78,19 @@ $('.dropdown-toggle').dropdown();
     </div>
 </header>
 <script >
-let imgToProfile = document.querySelector('.imgToProfile');
+let chatLogo ;
+chatLogo = document.querySelector('.chat-logo');
+chatLogo.addEventListener('click',()=>{
+	const width = 500;
+   const height = 800;
+   const left = (screen.width / 2) - (width / 2);
+   const top = 0;
+   window.open('${root}/chat/room/list', '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+})
+</script>
+<script>
+let imgToProfile;
+imgToProfile= document.querySelector('.imgToProfile');
 imgToProfile.addEventListener('click', function(e) {
    const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
    const width = 800;
@@ -81,6 +99,4 @@ imgToProfile.addEventListener('click', function(e) {
    const top = 0;
    window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 });
-
-
 </script>
