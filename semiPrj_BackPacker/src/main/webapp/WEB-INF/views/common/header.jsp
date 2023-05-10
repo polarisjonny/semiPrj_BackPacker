@@ -15,17 +15,26 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- include summernote css/js -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+  
 <!-- 일정 -->
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeCCPwGX5gzSzh6lXqgoGIy_bGEmX1S1E&callback=initMap"
     defer>
 </script>
+
 
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" href="${root}/static/css/header.css">
@@ -39,6 +48,10 @@ $('.dropdown-toggle').dropdown();
 <style>
 	header {
 		background-color: white;
+	}
+	#profile-btn:focus, #profile-btn:active {
+		outline: none;
+		box-shadow: none;
 	}
 </style>
 
@@ -57,14 +70,13 @@ $('.dropdown-toggle').dropdown();
         <a href="${root}/notice/travelInformation">여행정보</a>
         <a href="${root}/notice/travelReview">후기</a>
         
-       	<c:if test="${empty loginMember }">
+       	<!-- <c:if test="${empty loginMember }">
 	       <a href='${root}/member/login'>로그인</a>
-	        <a href='${root}/member/join'>회원가입</a>
-       	</c:if>
-       	<c:if test="${not empty loginMember}">
+       	</c:if> -->
+       	<c:if test="${empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
+				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
 				</button>
 				<ul class="dropdown-menu">
 				 <li hidden>${loginMember.memberNo}</li>

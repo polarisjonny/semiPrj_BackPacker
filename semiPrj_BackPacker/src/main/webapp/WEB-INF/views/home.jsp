@@ -37,7 +37,7 @@
 	
 	#left > img {
 		overflow: hidden;
-		align: 
+
 	}
 
 	#right{
