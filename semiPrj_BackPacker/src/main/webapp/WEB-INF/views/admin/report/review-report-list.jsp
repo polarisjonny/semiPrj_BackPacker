@@ -50,12 +50,12 @@
 }
 </style>
 </head>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
- <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <body>
 
 
    	 <div id="wrapt">
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+ <%@ include file="/WEB-INF/views/common/nav.jsp" %>
         <h1 id="th1">누적 신고 게시글 관리 페이지</h1>
         <hr>
         <div id="board1">

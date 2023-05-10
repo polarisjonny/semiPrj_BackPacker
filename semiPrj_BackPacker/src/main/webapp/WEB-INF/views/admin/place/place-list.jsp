@@ -18,7 +18,9 @@
 <style>
     #place-list-wrap{
         width: 400px;
-        margin: auto;
+        margin-top: 100px;
+        margin-left:auto;
+        margin-right:auto;
         height: 600px;
     }
     #place-list-title{
@@ -58,6 +60,7 @@
 </style>
 </head>
 <body>
+ <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	<div id="place-list-wrap">
         <div id="place-list-title"><h1>여행지 목록</h1></div>
    
