@@ -83,6 +83,13 @@
 		border-radius: 5px;
 		width: 550px;
 	}
+	#select{
+		border:0px;
+		background:rgba(148, 210, 230, 1);
+		color:white;
+		height: 30px;
+    	border-radius: 3px;
+	}
 	
 </style>
 <body>
@@ -285,7 +292,7 @@
 				
 				<div id="check">
 	
-					<select name="" id="">
+					<select name="" id="select">
 						<option value="">일정표를 참조하여 동행구하기</option>
 						<option value="">일정표를 참조하여 프패커구하기</option>
 						<option value="">일정표를 참조하여 백패커구하기</option>
