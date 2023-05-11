@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -119,7 +120,7 @@
         #nick {
             border: none;
             width: 50%;
-            height: 70%;
+            height: 80%;
         }
 
         #message {
@@ -200,6 +201,8 @@
     		margin-top: 10px;
     	}
     </style>
+     
+   
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -225,7 +228,7 @@
                 </div>
                 <br>
                 <div class="input-style">
-                    <input type="text" name="nick" id="nick" placeholder="닉네임을 입력하세요">
+                    <input type="text" name="nick" id="nick" placeholder="닉네임을 입력하세요(8자이내)">
                     <button id="checkNick">닉네임 중복 확인</button>
                 </div>
                 <br>
@@ -235,7 +238,11 @@
                 </div>
                 <br>
                 <div class="input-style">
-                    <input class="test-style" type="tel" name="phoneNumber" placeholder="핸드폰번호를 입력하세요">
+                    <input class="test-style" type="text" name="phoneNumber" placeholder="핸드폰번호를 입력하세요">
+                </div>
+                <br>
+                <div class="input-style">
+                	<input class="test-style" type="text" name="email" placeholder="이메일을 입력하세요">
                 </div>
                 <br>
                 <div class="input-style">
@@ -255,8 +262,8 @@
                 </div>
                 <div id="input-area">
                     <div id="gender-area">
-                        <label><input type="radio" name="gender" value="male">남</label>
-                        <label><input type="radio" name="gender" value="female">여</label>
+                        <label><input type="radio" name="gender" value="M">남</label>
+                        <label><input type="radio" name="gender" value="F">여</label>
                     </div>
                     <br>
                     <select id="age-box" name="age" id="age">
@@ -280,7 +287,7 @@
                 <p id="intro-message">앞으로 올리실 모든 글에 들어가는 자기소개입니다. 마이 페이지에서 수정 가능합니다.</p>
                 <br>
                 <label>
-                    <textarea style="resize: none;" name="introduce" id="introduce-message" cols="70" rows="20" placeholder="자기소개는 최대 4000자까지 작성 가능합니다." resize="none"></textarea>
+                    <textarea style="resize: none;" name="introMessage" id="introduce-message" cols="70" rows="20" placeholder="자기소개는 최대 4000자까지 작성 가능합니다." resize="none"></textarea>
                 </label>
             
                 <br>
@@ -293,5 +300,9 @@
     </form>
     </main>
 
+
+	<script>
+		
+	</script>
 </body>
 </html>
