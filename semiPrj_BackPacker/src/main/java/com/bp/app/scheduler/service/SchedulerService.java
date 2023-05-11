@@ -7,24 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.bp.app.common.db.JDBCTemplate;
+import com.bp.app.scheduler.vo.GuideBoardVo;
 import com.bp.app.scheduler.vo.PlaceVo;
 
 public class SchedulerService {
 
-	public List<PlaceVo> selectPlace() throws Exception {
+	public List<PlaceVo> selectPlace(HttpServletRequest req) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql = "SELECT * FROM PLACE";
+		String sql = "SELECT * FROM PLACE WHERE COUNTRY_NO=? AND LOCATION_NO=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, req.getParameter("countryNo"));
+		pstmt.setString(2, req.getParameter("locationNo"));
 		ResultSet rs = pstmt.executeQuery();
 		//tx
 		List<PlaceVo>list = new ArrayList<>();
 		while(rs.next()) {
 			String placeNo = rs.getString("PLACE_NO");
-			String placeCategoryNo = rs.getString("PLACE_CATEGORY_NO");
+			String placeCategoryNo = rs.getString("LOCATION_NO");
 			String countryNo = rs.getString("COUNTRY_NO");
 			String locationNo = rs.getString("LOCATION_NO");
 			String placeName = rs.getString("PLACE_NAME");
@@ -59,6 +64,34 @@ public class SchedulerService {
 		
 		
 		return list;
+	}
+
+	public int gbWrite(GuideBoardVo bgVo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,TITLE,CONTENT,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,1,?,?,?,SYSDATE)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bgVo.getGuideBoardCategoryNo());
+		pstmt.setString(2, bgVo.getTitle());
+		pstmt.setString(3, bgVo.getContent());
+		
+		System.out.println(bgVo.getTitle());
+		int result = pstmt.executeUpdate();
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		JDBCTemplate.close(pstmt);
+		
+		
+		return result;
 	}
 
 }
