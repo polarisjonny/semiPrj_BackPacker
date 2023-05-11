@@ -287,7 +287,7 @@
                 <p id="intro-message">앞으로 올리실 모든 글에 들어가는 자기소개입니다. 마이 페이지에서 수정 가능합니다.</p>
                 <br>
                 <label>
-                    <textarea style="resize: none;" name="introMessage" id="introduce-message" cols="70" rows="20" placeholder="자기소개는 최대 4000자까지 작성 가능합니다." resize="none"></textarea>
+                    <textarea style="resize: none;" name="introMessage" id="introduce-message" cols="70" rows="20" placeholder="자기소개는 최대 4000자까지 작성 가능합니다." resize="none" wrap="hard" ></textarea>
                 </label>
             
                 <br>
