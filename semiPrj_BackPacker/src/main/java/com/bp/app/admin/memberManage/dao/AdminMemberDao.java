@@ -71,8 +71,9 @@ public class AdminMemberDao {
       return mvo;
    }
 
-   public int editStatus(Connection conn, MemberVo vo, String status) throws Exception {
+   public int editStatus(Connection conn, MemberVo vo) throws Exception {
       String no = vo.getMemberNo();
+      String status = vo.getMemberStatus();
       String sql = "UPDATE MEMBER SET MEMBER_STATUS = ? WHERE MEMBER_NO = ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1,   status );
@@ -86,7 +87,7 @@ public class AdminMemberDao {
 
    public List<MemberVo> getMemberList(Connection conn) throws Exception {
 
-      String sql = "SELECT * FROM MEMBER ORDER BY MEMBER_STATUS DESC";
+      String sql = "SELECT * FROM MEMBER ORDER BY MEMBER_NO DESC";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       ResultSet rs = pstmt.executeQuery();
        List<MemberVo> voList = new ArrayList<>();
@@ -164,7 +165,7 @@ public class AdminMemberDao {
    }
 
    public List<MemberVo> getMemberList(Connection conn, PageVo pv) throws Exception {
-         String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER ORDER BY MEMBER_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?;";
+         String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER ORDER BY MEMBER_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
          PreparedStatement pstmt = conn.prepareStatement(sql);
          pstmt.setInt(1, pv.getBeginRow());
          pstmt.setInt(2, pv.getLastRow());
@@ -298,6 +299,24 @@ public class AdminMemberDao {
       
       return voList;
    }
+
+public int selectCnt(Connection conn) throws Exception {
+	String sql = "SELECT COUNT(*) FROM MEMBER";
+    PreparedStatement pstmt = conn.prepareStatement(sql);
+    ResultSet rs = pstmt.executeQuery();
+    
+    //tx || rs
+    int cnt = 0;
+    if(rs.next()) {
+       cnt = rs.getInt(1);
+    }
+    
+    //close
+    JDBCTemplate.close(rs);
+    JDBCTemplate.close(pstmt);
+    
+    return cnt;
+}
 
    
 

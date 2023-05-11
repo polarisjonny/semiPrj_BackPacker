@@ -20,11 +20,21 @@ public class AdminMemberManageController extends HttpServlet {
    
    
    @Override
-   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         try {
-            AdminMemberService ams = new AdminMemberService();
-            List<MemberVo> adminMemberVoList = ams.getMemberList();
+   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	   try {
+		   AdminMemberService ams = new AdminMemberService();
+        	 
+        	 int listCount = ams.selectCnt();
+             String page = req.getParameter("page");
+             if(page == null) page = "1";
+             int currentPage = Integer.parseInt(page);
+             int pageLimit = 5;
+             int boardLimit= 10;
+             PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+             
+            List<MemberVo> adminMemberVoList = ams.getMemberList(pv);
             req.setAttribute("adminMemberVoList", adminMemberVoList);
+            req.setAttribute("pv" , pv);
             req.getRequestDispatcher("/WEB-INF/views/admin/member/member-list.jsp").forward(req, resp);
          } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -37,6 +47,7 @@ public class AdminMemberManageController extends HttpServlet {
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       try {
          
+    	  
          List<MemberVo> adminMemberVoList = null;
          
          AdminMemberService ams = new AdminMemberService();

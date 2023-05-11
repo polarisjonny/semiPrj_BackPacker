@@ -14,14 +14,14 @@ public class AdminMemberService {
       //conn
       Connection conn = JDBCTemplate.getConnection();
       
-      String status = vo.getMemberStatus();
-      int result = dao.editStatus(conn,vo, status);
+   
+      int result = dao.editStatus(conn,vo);
       JDBCTemplate.close(conn);
       
       
       
       
-      return 0;
+      return result;
    }
    
    
@@ -84,6 +84,19 @@ public class AdminMemberService {
       // TODO Auto-generated method stub
       return voList;
    }
+
+
+
+
+public int selectCnt() throws Exception {
+	Connection conn = JDBCTemplate.getConnection();
+    
+    int cnt = dao.selectCnt(conn);
+    
+    JDBCTemplate.close(conn);
+    
+    return cnt;
+}
 
    
 }
