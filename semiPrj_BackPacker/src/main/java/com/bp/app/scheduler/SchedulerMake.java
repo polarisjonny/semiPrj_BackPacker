@@ -20,7 +20,7 @@ public class SchedulerMake extends HttpServlet{
 
 		try {
 			SchedulerService ss = new SchedulerService();
-			List<PlaceVo>placeList = ss.selectPlace();
+			List<PlaceVo>placeList = ss.selectPlace(req);
 			
 			req.setAttribute("placeList", placeList);
 			req.getRequestDispatcher("/WEB-INF/views/scheduler/makeScheduler.jsp").forward(req, resp);

@@ -104,6 +104,11 @@
     function resetImageSize(element) {
         element.style.transform = "scale(1)";
     }  
+
+    //a태그로 submit
+    function submitForm() {
+        document.getElementById('myForm').submit();
+    }
 </script>
 <body>
 
@@ -119,17 +124,27 @@
 
 
         <div id="country-pick">
-            <div class="country" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">한국</div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">일본</div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">중국</div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">싱가폴</div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">필리핀</div>
+            <div class="country" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+                한국
+            </div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+                일본
+            </div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+                중국
+            </div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+                싱가폴
+            </div>
+            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+                필리핀
+            </div>
         </div>
 
 
         <div id="place-location-area">
             <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
-                <a href="/semi/schedulermake">
+                <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
                     <div>JEJU</div>
                     <div class="place-location">
                             <img src="${root}/static/img/jeju000.jpg" alt="">
@@ -182,7 +197,7 @@
                     </div>
                 </a>
             </div>
-
+        
 
 		
         </div>

@@ -90,6 +90,27 @@
 		height: 30px;
     	border-radius: 3px;
 	}
+
+	#infoLabel{
+		cursor: pointer;
+		font-size:1.4em;
+		cursor: pointer;
+		font-size: 1.4em;
+		border: 1px solid gray;
+		width: 550px;
+		background-color: darkgray;
+		height: 200px;
+		margin-top: 30px;
+	}
+	
+	#imgFile{
+		visibility: hidden;
+		width:80px;
+	}
+	#ment{
+		position: relative;
+    	top: 79px;
+	}
 	
 </style>
 <body>
@@ -287,21 +308,26 @@
 	
 		<div id="board" class="text">
 
-			<form action="">
+			<form action="" method="post">
 				<div><h2>게시글 작성 할까요?</h2></div>
 				
 				<div id="check">
 	
-					<select name="" id="select">
-						<option value="">일정표를 참조하여 동행구하기</option>
-						<option value="">일정표를 참조하여 프패커구하기</option>
-						<option value="">일정표를 참조하여 백패커구하기</option>
+					<select name="category" id="select">
+						<option value="1">일정표를 참조하여 동행구하기</option>
+						<option value="1">일정표를 참조하여 프패커구하기</option>
+						<option value="1">일정표를 참조하여 백패커구하기</option>
 					</select>
 	
 				</div>
 
 				<div>
-					<input type="text" id="title" name="" placeholder="제목을 20자 이내로 적어주세요.">
+					<input type="text" id="title" name="title" placeholder="제목을 20자 이내로 적어주세요.">
+				</div>
+				<div id="file-area">
+					<label id="infoLabel" for="imgFile" name="f"><div id="ment">썸네일 올리기</div></label>
+					<input type="file" id="imgFile">
+
 				</div>
 	
 				<div>
@@ -311,7 +337,7 @@
 				</div>
 
 				<div>
-					<textarea name="" id="" cols="70" rows="20" 
+					<textarea name="content" id="" cols="70" rows="20" 
 					placeholder=
 					"1.구할 동행인원
 					

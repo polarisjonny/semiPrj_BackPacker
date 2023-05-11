@@ -41,7 +41,7 @@
 		flex-shrink: 0;
 		padding: 20px;
 		width: 100%;
-		margin-top: 50px;
+		
 	}
 
 	#scheduler-date-area{
@@ -197,6 +197,24 @@
 		position: relative;
 		top: 33px;
 	}
+
+	#test{
+		color: rgba(148, 210, 230, 1);
+		text-align: center;
+		position: relative;
+		top: 30px;
+		font-weight: bold;
+		font-size: 1.8em;
+	}
+	#test > button{
+		border: 0px;
+		background-color: rgba(148, 210, 230, 1);
+		color: white;
+		padding: 10px;
+		border-radius: 5px;
+		position: relative;
+		top: 40px;
+	}
 	
 
     
@@ -215,24 +233,32 @@
 	
 	
 	    <div id="sidebarLeft">
-	
-	        <div id="tripDate">
-	           기간선택 : &nbsp; <input type="text" name="daterange" value="" />
-	        </div>
 			
+			<div id="tripDate">
+				기간선택 : &nbsp; <input type="text" name="daterange" />
+				<input type="hidden" name="startDate" >
+				<input type="hidden" name="endDate" >
+			</div>
+
+			<div id="test">
+
+			</div>
+		
 			<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
 				여행기간을 설정하시오    
 			</div>
 		
 	
 			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
-		        <div id="scheduler-area">
+			<c:if test="">
+				<div id="scheduler-area">
 	
 					<div id="scheduler-date-area">
 						<div><a class="scheduler-date" href="">이전날</a></div>
 						<div class="scheduler-date" ><h4>2023.05.10 DAY 1</h4></div>
 						<div><a class="scheduler-date" href="">다음날</a></div>
 					</div>
+					<div id="test"></div>
 	
 					  <%-- 여행지을 가져 왔을때 생성 --%>
 						<div id="scheduler-place-area">
@@ -249,8 +275,8 @@
 					
 					<button class="btnn" >일정저장하기</button>
 				</div>
-			
 				
+			</c:if>
 		</div>
 			
 	
@@ -316,12 +342,25 @@
 	                applyLabel:'적용하기'
 	            }
 	          }, function(start, end, label) {
-	            console.log(start.format('YYYY-MM-DD'));
-	            console.log(end.format('YYYY-MM-DD'));
+				
+					const ddd = document.querySelector('#test');
+					ddd.innerHTML=start.format('YYYY-MM-DD')+"~"+end.format('YYYY-MM-DD');
+					ddd.innerHTML+="<form action=''>"
+					ddd.innerHTML+="<input id='start' type='hidden' value='"+start.format('YYYY-MM-DD')+"'>"
+					ddd.innerHTML+="<input is='end' type='hidden' value=''>"
+					ddd.innerHTML+="<button type='submit'>일정표 생성하기</button></form>";
+
+					console.log(start.format('YYYY-MM-DD'));
+					console.log(end.format('YYYY-MM-DD'));
 	
 	          });
 	        });
-	
+			
+
+		
+
+			
+
 	
 	        let map;
 	
