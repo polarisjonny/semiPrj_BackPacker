@@ -10,7 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.bp.app.common.db.JDBCTemplate;
-import com.bp.app.scheduler.vo.GuideBoardVo;
+import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.scheduler.vo.PlaceVo;
 
 public class SchedulerService {

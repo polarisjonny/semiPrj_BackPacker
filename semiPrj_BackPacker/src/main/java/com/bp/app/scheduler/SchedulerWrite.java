@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.scheduler.service.SchedulerService;
-import com.bp.app.scheduler.vo.GuideBoardVo;
 
 @WebServlet("/schedulerwrite")
 public class SchedulerWrite extends HttpServlet{

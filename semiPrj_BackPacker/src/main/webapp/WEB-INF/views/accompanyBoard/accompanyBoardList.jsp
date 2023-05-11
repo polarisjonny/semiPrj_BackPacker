@@ -211,135 +211,25 @@
                 
                 
                 <div id="main-area">
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
-                    <div class="content-box">
-                        <div class="top-content">
-                            <div class="left-img">
-                                <img class="profile" src="${root}/static/img/temp_profile.png" alt="">
-                            </div>
-                            <div class="right-text">
-                                <div class="small-text">yer5_27(눈내린아몬드)</div>
-                                <div class="small-text">20대여성</div>
-                                <div class="small-text">5월4일~5월7일</div>
-                            </div>
-                        </div>
-                        <div class="middle-content">
-                            <img class="middle-img" src="${root}/static/img/middle-img.png" alt="">
-                        </div>
-                        <div class="end-content">오사카로 같이 여행가실 20대 여성분 구합니다.</div>
-                    </div>
+                	<c:forEach items="${gbvoList}" var="vo">
+	                	<div class="content-box">
+	                        <div class="top-content">
+	                            <div class="left-img">
+	                                <img class="profile" src="${root}/static/img/member/profile/${vo.profile}" alt="">
+	                            </div>
+	                            <div class="right-text">
+	                                <div class="small-text">${vo.id}(${vo.nickName})</div>
+	                                <div class="small-text">${vo.age}대 ${vo.gender}</div>
+	                                <div class="small-text">${vo.startDate}~${vo.endDate}</div>
+	                            </div>
+	                        </div>
+	                        <div class="middle-content">
+	                            <img class="middle-img" src="${root}/static/img/accompany/${vo.changeName}" alt="">
+	                        </div>
+	                        <div class="end-content">${vo.title}</div>
+	                    </div>
+                	</c:forEach>
+                    
                 </div>
 
             </div>
@@ -355,6 +245,10 @@
             <a href="#">5</a>
             <a href="#">></a>
             <a href="#">>></a>
+        </div>
+        
+        <div id="voList">
+        	${gbvoList}
         </div>
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
