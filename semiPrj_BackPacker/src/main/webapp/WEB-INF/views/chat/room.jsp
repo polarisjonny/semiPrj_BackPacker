@@ -121,7 +121,7 @@
 	}
 	#writemsg{
 	    padding-left: 10px;
-	    width: 350px;
+	    width: 320px;
 	    height: 30px;
 	    border-radius: 10px;
 	    border: 1px solid black;
@@ -195,7 +195,7 @@
         <hr>
         <div style="text-align: end; "><button>매칭 확정</button></div>
         <br>
-        <div id="chatout"><button id="chatoutbtn">채팅방 나가기</button></div>
+        <div id="chatout"><button class="exit" id="chatoutbtn">채팅방 나가기</button></div>
         <br>
         <div style="margin-left: 10px;">
             <input type="text" placeholder="메시지를 입력하세요" id="writemsg">

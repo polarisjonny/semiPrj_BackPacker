@@ -13,11 +13,10 @@
 		height: 1100px; 
 	}
 	
-	#faq-mainImg-area{
-		position:relative;
-	}
+
 	
 	#faq-mainImg-area > img{
+		margin:auto;
 		width:100vw;
 		height:400px;
 	}
@@ -127,12 +126,13 @@
 </style>
 </head>
 <body>
-
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+ <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	
 		<main id="faq-main">
 		
-		<div id="faq-mainImg-area">
 		
+		<div id="faq-mainImg-area">
 			<img alt="" src="${root}/static/img/inquiry/inquiry-main.jpg">
 				
 		</div>

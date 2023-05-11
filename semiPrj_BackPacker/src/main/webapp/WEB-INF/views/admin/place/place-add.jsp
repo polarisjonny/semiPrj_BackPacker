@@ -19,7 +19,9 @@
 <style>
     #edit-place-wrap{
         width: 300px;
-        margin: auto;
+        margin-top : 100px;
+        margin-left:auto;
+        margin-right:auto;
         height: 600px;
     }
     #edit-place-img{
@@ -74,8 +76,10 @@
     }
 </style>
 <body>
-	<div id="edit-place-wrap">
 
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+ 		<%@ include file="/WEB-INF/views/common/nav.jsp" %>
+	<div id="edit-place-wrap">
         <div style="text-align:center;">
             <span ><h1>여행지 추가</h1></span>
         </div>
