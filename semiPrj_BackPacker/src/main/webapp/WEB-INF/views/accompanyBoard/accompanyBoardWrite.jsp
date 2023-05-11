@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!--  썸머노트를 사용하기 위한 제이쿼리 -->
-<!-- include libraries(jQuery, bootstrap) -->
+
+  
 
 <!DOCTYPE html>
 <html>
@@ -63,11 +63,15 @@
 <body>
 	<main>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<div id="main-box">
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">동행게시판 게시글 작성</div>
 			<form action="" method="post" enctype="multipart/form-data">
+			
 				<div id="imgUpload">
 					<label for="imgFile">
 						썸네일 사진 올리기
@@ -77,19 +81,23 @@
 				<div id="title-area">
 					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
-				<div id="text-area">
-					<textarea id="summernote" name="editordata"></textarea>
-					<script>
-						$(document).ready(function() {
-  							$('#summernote').summernote();
-						});
-
-						$('#summernote').summernote({
-  							height: 500,                 // set editor height
- 							focus: false                  // set focus to editable area after initializing summernote	
-						});
-					</script>
-				</div>
+				<div id="summernote"></div>
+			    <script>
+			      $('#summernote').summernote({
+			        placeholder: 'Hello stand alone ui',
+			        tabsize: 2,
+			        height: 120,
+			        toolbar: [
+			          ['style', ['style']],
+			          ['font', ['bold', 'underline', 'clear']],
+			          ['color', ['color']],
+			          ['para', ['ul', 'ol', 'paragraph']],
+			          ['table', ['table']],
+			          ['insert', ['link', 'picture', 'video']],
+			          ['view', ['fullscreen', 'codeview', 'help']]
+			        ]
+			      });
+			    </script>
 				<input id="submit" type="submit" value="작성완료">
 			</form>	
 		</div>
