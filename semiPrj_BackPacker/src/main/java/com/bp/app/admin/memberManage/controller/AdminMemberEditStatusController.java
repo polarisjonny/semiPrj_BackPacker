@@ -21,23 +21,22 @@ public class AdminMemberEditStatusController extends HttpServlet {
 
       try {
       //데꺼member
-      String status = req.getParameter("status");
+      String status = req.getParameter("memberStatus");
       String memberNo = req.getParameter("memberNo");
       //데뭉
       MemberVo vo = new MemberVo();
       vo.setMemberStatus(status);;
       vo.setMemberNo(memberNo);
-      System.out.println("edit 에서 vo");
       //서비스
       AdminMemberService ams = new AdminMemberService();
       int result = ams.editStatus(vo);
       
-      System.out.println("상태변경 1이면 성고 :: : " + result);
       
       //화면 == 문자열 내보내기
       PrintWriter out = resp.getWriter();
       if(result == 1) {
-         out.write("ok");
+    	String root = req.getContextPath();
+		resp.sendRedirect(root + "/admin/member");
       }
       
       }catch (Exception e) {
@@ -45,7 +44,7 @@ public class AdminMemberEditStatusController extends HttpServlet {
       e.printStackTrace();
       
       //view ~~~
-   }
+      }
          
    }      
    

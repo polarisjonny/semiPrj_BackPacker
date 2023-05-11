@@ -65,73 +65,7 @@
    }
 </style>
 </head>
-<script>
-   $(document).ready(function() {
-      $('form#stForm').on('submit', function(e){
-         var memberNo1 = $(this).closest('tr').find('td:first').text();
-            e.preventDefault();
-            var status = $('#selectMemberStatus').val();
-         var memberNo = e.target.parentNode.children[0].innerText;
-         console.log(memberNo);
-         console.log(status);
-         console.log(memberNo1);
-            $.ajax({
-                type: 'POST',
-                url: '${root}/admin/member/edit/status',
-                data: {
-                    status: status,
-                    memberNo: memberNo
-                },
-                success: (x)=>{
-            console.log(x);
-            if(x == 'ok'){
-               alert(" 상태 변경 성공!");
-               document.querySelector("select[name=memberStatus]").value = '';
-               // loadComment();
-            }else{
-               alert("상태 변경 실패...");
-            }
-         } ,
-         error : (x)=>{
-            console.log(x);
-         } ,
-            });
-        });
-    });
 
-
-    // function loadComment(){
-   //    const replyListArea = document.querySelector("#reply-list-area");
-      
-   //    $.ajax({
-   //       url : '${root}/notice/reply/list' ,
-   //       type : "GET" ,
-   //       data : {
-   //          noticeNo : '${vo.no}'
-   //       } ,
-   //       success : function(data){
-   //          console.log(data);
-   //          //JSON 형태로 받아서, 화면에 보여주기
-   //          const x = JSON.parse(data);
-   //          console.log(x);
-   //          const tbody = document.querySelector('#reply-list-area tbody');
-   //          tbody.innerHTML = "";
-   //          let str = "";
-   //          for(let i = 0; i < x.length; i++){
-   //             str += '<tr>';
-   //             str += '<td>' + x[i].content + '</td>';
-   //             str += '<td>' + x[i].writerNo + '</td>';
-   //             str += '<td>' + x[i].enrollDate + '</td>';
-   //             str += '</tr>';
-   //          }
-   //          tbody.innerHTML += str;
-   //       } ,
-   //       error : function(e){
-   //          console.log(e);
-   //       } ,
-   //    });
-   // }
-    </script>
 <body>
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
@@ -179,12 +113,14 @@
                        
                       <td>
                             <form id= "stForm" action="${root}/admin/member/edit/status" method="post">
+                            <input type="text" value="${adminMemberVoList.memberNo}" name="memberNo" hidden>
                                 <select name="memberStatus" id="selectMemberStatus">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
-                                <button type="submit" id="subbtnstForm">변경</button>
+                                <input type="submit"  id="subbtnstForm" value="변경">
+                                
                             </form>
                         </td>
 
@@ -197,18 +133,18 @@
             <br><br>
             <div id="page-area">
                <c:if test="${pv.currentPage > 1}">
-                  <a class="btn btn-primary btn-sm" href="${root}/board/list?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+                  <a class="btn btn-primary btn-sm" href="${root}/admin/member?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
                </c:if>
                   <c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
                      <c:if test="${pv.currentPage != i}">
-                        <a class="btn btn-primary btn-sm" href="${root}/board/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+                        <a class="btn btn-primary btn-sm" href="${root}/admin/member?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
                      </c:if>
                      <c:if test="${pv.currentPage == i}">
                         <a class="btn btn-primary btn-sm">${i}</a>
                      </c:if>
                   </c:forEach>
                <c:if test="${pv.currentPage < pv.maxPage}">
-                  <a class="btn btn-primary btn-sm" href="${root}/board/list?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+                  <a class="btn btn-primary btn-sm" href="${root}/admin/member?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
                </c:if>
             </div>
         </div>
@@ -216,6 +152,67 @@
    
 </body>
 </html>
+<script>
+    //    $(document).ready(function() {
+    //       $('form#stForm').on('submit', function(e){
+    //          var memberNo1 = $(this).closest('tr').find('td:first').text();
+    //             e.preventDefault();
+    //             var status = $('#selectMemberStatus').val();
+    //          var memberNo = e.target.parentNode.children[0].innerText;
+    //          console.log(memberNo);
+    //          console.log(status);
+    //          console.log(memberNo1);
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '${root}/admin/member/edit/status',
+    //                 data: {
+    //                     status: status,
+    //                     memberNo: memberNo
+    //                 },
+    //                 success: (x)=>{
+    //             console.log(x);
+    //             if(x == 'ok'){
+    //                alert(" 상태 변경 성공!");
+    //                document.querySelector("select[name=memberStatus]").value = '';
+    //                // loadComment();
+    //             }else{
+    //                alert("상태 변경 실패...");
+    //             }
+    //          } ,
+    //          error : (x)=>{
+    //             console.log(x);
+    //          } ,
+    //             });
+    //         });
+    //     });
+    // let changeStatus;
+    // changeStatus= document.querySelector('.changeStatus');
+    // changeStatus.addEventListener('click', function(e) {
+    //         let memberNo = ""; // 멤버 번호를 저장할 변수
+    //         let tdElement = "";
+    //         tdElement = $(event.target).closest('tr').find('td:first'); // 클릭한 버튼이 속한 행에서 첫 번째 td 요소 선택
+      
+    //         if (tdElement) {
+    //              memberNo = tdElement.innerText; // td 요소의 텍스트 가져오기
+    //         }
+          
+    //       $.ajax({
+    //          url : '${root}/admin/member/edit/status' ,
+    //          type : "GET" ,
+    //          data : {
+    //             memberNo : memberNo
+    //          } ,
+    //          success : function(x){
+                
+    //             console.log(x);
+               
+    //          } ,
+    //          error : function(e){
+    //             console.log(e);
+    //          } ,
+    //       });
+    //    });
+    // </script>
 <!-- 
     <script>
    const tbody = document.querySelector("tbody");
