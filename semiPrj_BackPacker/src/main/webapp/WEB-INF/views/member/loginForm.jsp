@@ -38,13 +38,11 @@
             height: 60%;
         }
 
-        
-
-   
-
+     
   label {
     font-size: 12px;
   }
+
 
   #login-btn {
     width: 100%;
@@ -53,7 +51,6 @@
     color: black;
     background-color: #94d2e6;
     border: none;
-    
   }
 
   #next-area {
@@ -103,7 +100,6 @@
             <input name="password" class="border-style" type="password" placeholder="비밀번호를 입력하세요">
             <div id="check-area">
                 <label><input id="saveId" type="checkbox" name="saveId" value="saveId">아이디 저장</label>
-                <label><input id="isGuide" type="checkbox" name="isGuide" value="isGuide">프패커로 로그인</label>
             </div>
             <br>
             <br>
