@@ -98,9 +98,9 @@ header{
 				<ul class="dropdown-menu">
 					 <li hidden>${loginMember.memberNo}</li>
 					
-				  <li><a class="dropdown-item" href="#">Action</a></li>
-				  <li><a class="dropdown-item" href="#">Another action</a></li>
-				  <li><a class="dropdown-item imgToProfile" href="">내 프로필</a></li>
+				<li><a class="dropdown-item" href="${root}/member/myPage">MY PAGE</a></li>
+				<li><a class="dropdown-item imgToProfile" href="${root}/click/profile">PROFILE</a></li>
+				<li><a class="dropdown-item " href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
 			  </div>
 			  <script>

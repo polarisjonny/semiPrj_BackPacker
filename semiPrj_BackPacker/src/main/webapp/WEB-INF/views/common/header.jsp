@@ -65,9 +65,9 @@
 				</button>
 				<ul class="dropdown-menu">
 				 <li hidden>${loginMember.memberNo}</li>
-				  <li><a class="dropdown-item" href="#">MY PAGE</a></li>
-				  <li><a class="dropdown-item" href="#">PROFILE</a></li>
-				 <li><a class="dropdown-item imgToProfile" href="">LOGOUT</a></li>
+				  <li><a class="dropdown-item" href="${root}/member/myPage">MY PAGE</a></li>
+				  <li><a class="dropdown-item imgToProfile" href="#">PROFILE</a></li>
+				 <li><a class="dropdown-item" href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
 			  </div>
 			  <script>
