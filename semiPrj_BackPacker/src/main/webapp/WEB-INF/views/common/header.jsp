@@ -41,7 +41,7 @@
 </style>
 
 <header>
-    <div>
+    <div class="logo">
            <img width="212px" height="66px" src="${root}/static/img/logo/b_logo.png" alt="">
     </div>
     <div class="menu">
