@@ -86,7 +86,7 @@
       height: 100%;
       display: block;
       object-fit : cover;
-     
+     z-index: 1;
       
    }
 	

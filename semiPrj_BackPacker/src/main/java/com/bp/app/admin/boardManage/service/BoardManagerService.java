@@ -14,7 +14,7 @@ public class BoardManagerService {
 		//conn
 			Connection conn = JDBCTemplate.getConnection();
 			
-			int cnt = dao.getBoardListCnt(conn, searchType, searchValue);
+			int cnt = dao.getAccompanyBoardListCnt(conn, searchType, searchValue);
 			
 			//close
 			
