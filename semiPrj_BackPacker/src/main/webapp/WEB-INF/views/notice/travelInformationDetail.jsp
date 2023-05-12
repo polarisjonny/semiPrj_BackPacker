@@ -116,7 +116,7 @@ main{
 			
 			<c:if test="${loginMember.id == 'ADMIN' }">
 				<div id="review-btn">
-						<a href="${root}/notice/infomationEdit?no=${vo.no}">수정하기</a>
+						<a href="${root}/notice/informationEdit?no=${vo.no}">수정하기</a>
 						<a href="${root}/notice/informationDelete?no=${vo.no}">삭제하기</a>
 				</div>
 			</c:if>

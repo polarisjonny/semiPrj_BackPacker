@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("notice/inquiryDelete")
+@WebServlet("/notice/inquiryDelete")
 public class InquiryDeleteController extends HttpServlet{
 
 	@Override
