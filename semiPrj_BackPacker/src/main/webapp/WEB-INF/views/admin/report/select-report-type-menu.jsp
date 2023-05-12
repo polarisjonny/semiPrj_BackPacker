@@ -64,7 +64,6 @@
    
    <div  style="font-size: 50px; margin-top: 200px; text-align: center;">
     <h1>"${loginMember.name}"관리자님 환영합니다.</h1>
-   <hr>
    </div>
    <hr>
    <div id="adbtWrap">

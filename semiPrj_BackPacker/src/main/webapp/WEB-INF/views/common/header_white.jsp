@@ -110,6 +110,15 @@ header{
     </div>
 </header>
 <script >
+let logo ;
+logo = document.querySelector('.logo');
+logo.addEventListener('click', ()=>{
+
+  window.location.href = `${root}/home`;
+
+});
+
+
 let chatLogo;
 chatLogo = document.querySelector('.chat-logo');
 chatLogo.addEventListener('click', () => {

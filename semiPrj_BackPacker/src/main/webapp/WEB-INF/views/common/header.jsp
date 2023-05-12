@@ -19,6 +19,7 @@
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeCCPwGX5gzSzh6lXqgoGIy_bGEmX1S1E&callback=initMap"
     defer>
+   
 </script>
 
 
@@ -76,6 +77,14 @@
     </div>
 </header>
 <script >
+let logo ;
+logo = document.querySelector('.logo');
+logo.addEventListener('click', ()=>{
+
+  window.location.href = `${root}/home`;
+
+});
+
 let chatLogo;
 chatLogo = document.querySelector('.chat-logo');
 chatLogo.addEventListener('click', () => {

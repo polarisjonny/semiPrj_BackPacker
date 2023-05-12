@@ -239,6 +239,12 @@ public class AdminMemberDao {
       }else if("memberStatus".equals(searchType)) {
          //SQL (카테고리 검색)
          sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM MEMBER WHERE MEMBER_STATUS = ?  ORDER BY MEMBER_NO) T) WHERE RNUM BETWEEN ? AND ?";
+      }else if("memberNick".equals(searchType)) {
+          //SQL (카테고리 검색)
+          sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM MEMBER WHERE NICK LIKE '%'||?||'%'  ORDER BY MEMBER_NO) T) WHERE RNUM BETWEEN ? AND ?";
+      }else if("memberScore".equals(searchType)) {
+           //SQL (카테고리 검색)
+           sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM MEMBER WHERE MEMBER_SCORE >= ?  ORDER BY MEMBER_NO) T) WHERE RNUM BETWEEN ? AND ?";
       }else {
          //값이 이상함 => 기본 목록 조회
          return getMemberList(conn, pv);
@@ -316,6 +322,39 @@ public int selectCnt(Connection conn) throws Exception {
     JDBCTemplate.close(pstmt);
     
     return cnt;
+}
+
+public int selectCnt(Connection conn, String searchType, String searchValue) throws Exception {
+	String sql = "SELECT COUNT(*) FROM ( SELECT MEMBER_NO, IS_GUIDE, MEMBER_STATUS AS MEMBERSTATUS, ID AS MEMBERID, PASSWORD, NAME AS MEMBERNAME, GENDER, AGE, ADDRESS, EMAIL, PHONE_NUMBER, NICK AS MEMBERNICK, PROFILE_IMAGE, ID_CARD, ENROLL_DATE, INTRO_MESSAGE, MEMBER_SCORE AS MEMBERSCORE FROM MEMBER) WHERE MEMBERID IS NOT NULL";
+
+	if("memberName".equals(searchType)){
+		sql += " AND " +searchType + " LIKE '%" + searchValue + "%'";
+		
+	}else if("memberId".equals(searchType)) {
+		sql += " AND " +searchType + " LIKE '%" + searchValue + "%'";
+		
+	}else if("memberStatus".equals(searchType)) {
+		sql += " AND " +searchType + " LIKE '%" + searchValue + "%'";
+		
+	}else if("memberScore".equals(searchType)){
+		sql += " AND " +searchType + " >= " + searchValue;
+		
+	}else if("memberNick".equals(searchType)){
+		sql += " AND " +searchType +" LIKE '%" + searchValue + "%'";
+	}
+		
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+	
+	//tx||rs
+	int cnt = 0;
+	if(rs.next()) {
+		cnt = rs.getInt(1);
+	}
+	JDBCTemplate.close(rs);
+	JDBCTemplate.close(pstmt);
+	
+	return cnt;
 }
 
    

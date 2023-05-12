@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.chat.room.vo.ChattingRoomVo;
+import com.bp.app.member.vo.MemberVo;
 import com.bp.app.memberReview.service.MemberReviewService;
 import com.bp.app.memberReview.vo.MemberReviewVo;
 @WebServlet("/click/profile/review")
@@ -73,8 +74,12 @@ public class MemberReviewWriteController extends HttpServlet{
          
          MemberReviewService mrs = new MemberReviewService();
          int result = mrs.writeReview(mrv);
+         MemberVo vo = new MemberVo();
+         vo = mrs.selectMemberGetScore(memberNo);
+         String originScore = vo.getMemberScore();
+         int result2 = mrs.plusScore(mrv,originScore);
          
-         if(result == 1) {
+         if(result == result2) {
             
             String root = req.getContextPath();
             resp.sendRedirect(root+"/click/profile?selectMemberNo="+memberNo);
