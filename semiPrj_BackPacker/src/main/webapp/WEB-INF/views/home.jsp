@@ -80,15 +80,27 @@
 	#right > div:last-child{
 		text-align: center;
 	}
+	
+	video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit : cover;
+     
+      
+   }
+	
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header_white.jsp" %>
 		<%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	<main>
-		<div id="left">
-			<img src="${root}/static/img/main_big_img.jpg" alt="">
-		</div>
+	<div id="left">
+       <video muted autoplay loop>
+          <source src="${root}/static/video/main_video.mp4" type="video/mp4">
+       </video>
+    </div>
 		<div class="box1"></div>
 		<div id="right">
 			<div id="big-text">백패커</div>
