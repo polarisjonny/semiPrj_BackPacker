@@ -79,8 +79,8 @@ header{
 				<i class="fa-regular fa-comments fa-2xl" style="color: #000000;"></i>
 			</div>
 		</c:if>
-        <a href="#">ABOUT</a>
-        <a href="#">여행정보</a>
+        <a href="${root}/notice/inquiry">ABOUT</a>
+        <a href="${root}/notice/travelInformation">여행정보</a>
         <a href="${root}/notice/travelReview">후기</a>
         
        	<c:if test="${empty loginMember }">

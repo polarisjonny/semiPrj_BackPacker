@@ -52,11 +52,13 @@ footer, header, hgroup, menu, nav, section {
 
     #mainContent{
         position: absolute;
-        top:10%;
-        left:65%;
+        display:flex;
+        flex-direction:column;
+        top:35%;
+        left:5%;
+        color:whitesmoke;
         font-weight: bold;
-        font-size: 2em;
-        color: rgb(247, 247, 247);
+        font-size: 2.5em;
     }
     
     
@@ -162,6 +164,8 @@ footer, header, hgroup, menu, nav, section {
 		z-index: 1;
   	}
   	
+  	
+  	
   		
 </style>
 </head>
@@ -176,8 +180,13 @@ footer, header, hgroup, menu, nav, section {
    
 
 		<div id="mainImg-area">
-	        <img id="mainImg" src="${root}/static/img/travelReview/travelReviewMain.jpg" alt="메인 이미지">
-	        <div id="mainContent">백팩커들의 솔직한 여행 이야기</div>
+	        <img id="mainImg" src="${root}/static/img/travelInformation/mainImg.jpg" alt="메인 이미지">
+	        <div id="mainContent">
+	        	<div>다양한</div>
+	        	<div>여행 정보를</div>
+	        	<div>만나볼 수 있는 곳,</div>
+	        	<div>맛집부터 액티비티까지</div>
+	        </div>
 		</div>
 		
 		<br>
@@ -199,7 +208,7 @@ footer, header, hgroup, menu, nav, section {
             </form>
             
 	         <div class="noticeBtn">
-		        <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
+		        <button onclick="location.href='${root}/notice/travelInformationWrite'">게시글 작성</button>
 	        </div>
         </div>
         
@@ -218,34 +227,34 @@ footer, header, hgroup, menu, nav, section {
 
       <div id="reviewList">
       
-        <div id="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelReview/JejuReview.jpg">
+        <div class="review-area">
+        	<img alt="서브 이미지" src="${root}/static/img/travelInformation/fireworks.jpg">
            	<div>
-            <a href="#">아름다운 제주도 투어 후기</a>
+            <a href="#">5.10~5.12 오사카 불꽃놀이 축제</a>
            	</div>
         </div>
         
 
 		<div class="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
+        	<img alt="서브 이미지" src="${root}/static/img/travelInformation/paris.jpg">
         	<div>
-           	 <a href="#">오사카 유니버셜 스튜디오 여행기</a>
+           	 <a href="#">10.1~11.4 파리 에펠탑 투어</a>
         	</div>
 		</div>
 
         
         
         <div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelReview/sanghiReview.jpg">
+            <img alt="서브 이미지" src="${root}/static/img/travelInformation/dokyo.jpg">
             <div>
-            <a href="#">상하이 건물이 진자 이쁘네요</a>
+            <a href="#">도쿄 맛집 총정리</a>
             </div>
         </div>
 
 		<div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">
+            <img alt="서브 이미지" src="${root}/static/img/travelInformation/jejudo.jpg">
 			<div>
-            <a href="#">상가포르 여행은 언제든 아름다워요</a>
+            <a href="#">제주도 액티비티 추천</a>
 			</div>
 		</div>		
       </div>  

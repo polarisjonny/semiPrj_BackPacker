@@ -55,6 +55,8 @@
 		border-radius: 5px;
 		width:90%;
 		margin-top:10px;
+		margin-bottom:10px;
+		height:30px;
 	}
 	
 	#content{
@@ -62,6 +64,10 @@
 		margin-top:10px;
 		width:90%;
 		height:450px;
+	}
+	
+	.panel{
+		width:90%;
 	}
 	
 	#subMit{
@@ -96,7 +102,8 @@
 				</div>
 						<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
 						<br>
-						<textarea id="content" name="content" style="resize:none;" ></textarea>
+						
+						<textarea class="summernote" name="editordata" style="resize:none;" ></textarea>
 						
 						<input id="subMit" type="submit" value="작성 완료">
 				</form>
@@ -109,6 +116,22 @@
 	
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		
+		 <script>
+               $('.summernote').summernote({
+                 placeholder: 'Hello stand alone ui',
+                 tabsize: 2,
+                 height: 450,
+                 toolbar: [
+                   ['style', ['style']],
+                   ['font', ['bold', 'underline', 'clear']],
+                   ['color', ['color']],
+                   ['para', ['ul', 'ol', 'paragraph']],
+                   ['table', ['table']],
+                   ['insert', ['link', 'picture', 'video']],
+                   ['view', ['fullscreen', 'codeview', 'help']]
+                 ]
+               });
+             </script>
 
 </body>
 </html>
