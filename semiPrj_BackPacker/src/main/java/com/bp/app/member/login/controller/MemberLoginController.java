@@ -36,7 +36,11 @@ public class MemberLoginController extends HttpServlet {
 			
 			
 			if(loginMember != null) {
+				if(loginMember.getProfileImage() == null) {
+					loginMember.setProfileImage("profile_default.jpg");
+				}
 				req.getSession().setAttribute("loginMember", loginMember);
+				
 				String root = req.getContextPath();
 				resp.sendRedirect(root+"/home");
 			} else {
@@ -50,4 +54,6 @@ public class MemberLoginController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}
+	
+
 }
