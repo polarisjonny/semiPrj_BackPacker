@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${root}/static/css/nav.css">
-<script defer src="${root}/static/js/nav.js"></script>
+<script defer src="${root}/static/js/common/nav.js"></script>
 
-<nav id="navBody">
+<nav id="navBody" onclick="toggleSidebar()" >
   <c:if test="${loginMember.id =='ADMIN'}">
-       <button class="navBody-menu-btn" onclick="toggleSidebar()" style="width: 20px">></button>
+       <button class="navBody-menu-btn" style="width: 20px">></button>
        <div class="navBody-sidebar">
            <ul class="navBody-menu-list">
              <li><a href="${root}/admin/member">회원관리</a></li>

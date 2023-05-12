@@ -5,6 +5,7 @@
     position: fixed;
     top: 100px;
     left: 0px;
+    z-index: 99;
 
 }
  .navBody-sidebar {
