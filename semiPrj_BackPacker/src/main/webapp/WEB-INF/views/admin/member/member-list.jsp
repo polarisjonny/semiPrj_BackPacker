@@ -110,7 +110,7 @@
                     <th>회원점수</th>
                     <th>회원상태</th>
                     
-                    <th>수정하기</th>
+                    <th>상태 수정하기</th>
                 </thead>
                 <tbody>
                     <c:forEach items="${ adminMemberVoList }" var="adminMemberVoList" >
@@ -164,73 +164,3 @@
    
 </body>
 </html>
-<script>
-    //    $(document).ready(function() {
-    //       $('form#stForm').on('submit', function(e){
-    //          var memberNo1 = $(this).closest('tr').find('td:first').text();
-    //             e.preventDefault();
-    //             var status = $('#selectMemberStatus').val();
-    //          var memberNo = e.target.parentNode.children[0].innerText;
-    //          console.log(memberNo);
-    //          console.log(status);
-    //          console.log(memberNo1);
-    //             $.ajax({
-    //                 type: 'POST',
-    //                 url: '${root}/admin/member/edit/status',
-    //                 data: {
-    //                     status: status,
-    //                     memberNo: memberNo
-    //                 },
-    //                 success: (x)=>{
-    //             console.log(x);
-    //             if(x == 'ok'){
-    //                alert(" 상태 변경 성공!");
-    //                document.querySelector("select[name=memberStatus]").value = '';
-    //                // loadComment();
-    //             }else{
-    //                alert("상태 변경 실패...");
-    //             }
-    //          } ,
-    //          error : (x)=>{
-    //             console.log(x);
-    //          } ,
-    //             });
-    //         });
-    //     });
-    // let changeStatus;
-    // changeStatus= document.querySelector('.changeStatus');
-    // changeStatus.addEventListener('click', function(e) {
-    //         let memberNo = ""; // 멤버 번호를 저장할 변수
-    //         let tdElement = "";
-    //         tdElement = $(event.target).closest('tr').find('td:first'); // 클릭한 버튼이 속한 행에서 첫 번째 td 요소 선택
-      
-    //         if (tdElement) {
-    //              memberNo = tdElement.innerText; // td 요소의 텍스트 가져오기
-    //         }
-          
-    //       $.ajax({
-    //          url : '${root}/admin/member/edit/status' ,
-    //          type : "GET" ,
-    //          data : {
-    //             memberNo : memberNo
-    //          } ,
-    //          success : function(x){
-                
-    //             console.log(x);
-               
-    //          } ,
-    //          error : function(e){
-    //             console.log(e);
-    //          } ,
-    //       });
-    //    });
-    // </script>
-<!-- 
-    <script>
-   const tbody = document.querySelector("tbody");
-   tbody.addEventListener("click" , function(e){
-      const no = e.target.parentNode.children[0].innerText;
-      location.href = "${pageContext.request.contextPath}/member/상태변경?no=" + no;
-   });
-</script>
- -->
