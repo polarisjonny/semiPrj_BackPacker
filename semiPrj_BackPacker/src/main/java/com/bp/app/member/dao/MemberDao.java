@@ -13,25 +13,48 @@ import com.bp.app.member.vo.MemberVo;
 public class MemberDao {
 
 	public int join(Connection conn, MemberVo vo) throws Exception {
-		//SQL
-		String sql = "INSERT INTO MEMBER( MEMBER_NO, IS_GUIDE, ID, PASSWORD, NAME, GENDER, AGE, ADDRESS, EMAIL, PHONE_NUMBER, NICK, PROFILE_IMAGE, ID_CARD, INTRO_MESSAGE ) VALUES(SEQ_MEMBER_NO.NEXTVAL , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
+		int result = 0;
 		
-		pstmt.setString(1, vo.getIsGuide());
-		pstmt.setString(2, vo.getId());
-		pstmt.setString(3, vo.getPassword());
-		pstmt.setString(4, vo.getName());
-		pstmt.setString(5, vo.getGender());
-		pstmt.setString(6, vo.getAge());
-		pstmt.setString(7, vo.getAddress());
-		pstmt.setString(8, vo.getEmail());
-		pstmt.setString(9, vo.getPhoneNumber());
-		pstmt.setString(10, vo.getNick());
-		pstmt.setString(11, vo.getProfileImage());
-		pstmt.setString(12, vo.getIdCard());
-		pstmt.setString(13, vo.getIntroMessage());
-		int result = pstmt.executeUpdate();
-		JDBCTemplate.close(pstmt);
+		//프로필 사진을 넣었을 경우
+		if(vo.getProfileImage() != null && !vo.getProfileImage().isEmpty()) {
+			String sql = "INSERT INTO MEMBER( MEMBER_NO, IS_GUIDE, ID, PASSWORD, NAME, GENDER, AGE, ADDRESS, EMAIL, PHONE_NUMBER, NICK, PROFILE_IMAGE, ID_CARD, INTRO_MESSAGE ) VALUES(SEQ_MEMBER_NO.NEXTVAL , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getIsGuide());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPassword());
+			pstmt.setString(4, vo.getName());
+			pstmt.setString(5, vo.getGender());
+			pstmt.setString(6, vo.getAge());
+			pstmt.setString(7, vo.getAddress());
+			pstmt.setString(8, vo.getEmail());
+			pstmt.setString(9, vo.getPhoneNumber());
+			pstmt.setString(10, vo.getNick());
+			pstmt.setString(11, vo.getProfileImage());
+			pstmt.setString(12, vo.getIdCard());
+			pstmt.setString(13, vo.getIntroMessage());
+			result = pstmt.executeUpdate();
+			JDBCTemplate.close(pstmt);
+		} else {
+			String sql = "INSERT INTO MEMBER( MEMBER_NO, IS_GUIDE, ID, PASSWORD, NAME, GENDER, AGE, ADDRESS, EMAIL, PHONE_NUMBER, NICK, ID_CARD, INTRO_MESSAGE ) VALUES(SEQ_MEMBER_NO.NEXTVAL , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getIsGuide());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPassword());
+			pstmt.setString(4, vo.getName());
+			pstmt.setString(5, vo.getGender());
+			pstmt.setString(6, vo.getAge());
+			pstmt.setString(7, vo.getAddress());
+			pstmt.setString(8, vo.getEmail());
+			pstmt.setString(9, vo.getPhoneNumber());
+			pstmt.setString(10, vo.getNick());
+			pstmt.setString(11, vo.getIdCard());
+			pstmt.setString(12, vo.getIntroMessage());
+			result = pstmt.executeUpdate();
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 

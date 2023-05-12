@@ -34,7 +34,11 @@ public class MemberJoinController extends HttpServlet {
 			//파일 처리
 			Part f = req.getPart("profileImage");
 			String path = req.getServletContext().getRealPath("/static/img/member/profile/");
-			AttachmentVo attachmentVo = FileUploader.saveFile(path, f);
+			AttachmentVo attachmentVo = null;
+			
+			if(f != null && f.getSize() > 0) {
+				attachmentVo = FileUploader.saveFile(path, f);
+			}
 			
 			
 			//데이터 꺼내기
@@ -61,7 +65,9 @@ public class MemberJoinController extends HttpServlet {
 			vo.setGender(gender);
 			vo.setAge(age);
 			vo.setIntroMessage(introMessage);
-			vo.setProfileImage(attachmentVo.getChangeName());
+			if (attachmentVo != null) {
+                vo.setProfileImage(attachmentVo.getChangeName());
+            }
 			
 			MemberService ms = new MemberService();
 			int result = ms.join(vo);
