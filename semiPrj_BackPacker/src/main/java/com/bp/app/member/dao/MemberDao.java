@@ -65,14 +65,14 @@ public class MemberDao {
 			String memberScore = rs.getString("MEMBER_SCORE");
 			
 			loginMember = new MemberVo();
-			loginMember.setMemberNo(memberNo);;
-			loginMember.setIsGuide(isGuide);;
-			loginMember.setMemberStatus(memberStatus);;
-			loginMember.setId(id);;
-			loginMember.setPassword(password);;
-			loginMember.setName(name);;
-			loginMember.setGender(gender);;
-			loginMember.setAge(age);;
+			loginMember.setMemberNo(memberNo);
+			loginMember.setIsGuide(isGuide);
+			loginMember.setMemberStatus(memberStatus);
+			loginMember.setId(id);
+			loginMember.setPassword(password);
+			loginMember.setName(name);
+			loginMember.setGender(gender);
+			loginMember.setAge(age);
 			loginMember.setAddress(address);
 			loginMember.setEmail(email);
 			loginMember.setPhoneNumber(phoneNumber);
