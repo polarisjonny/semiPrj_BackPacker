@@ -55,11 +55,20 @@
 		color: white;
 		font-size: 1.3em;
 		font-weight: 700;
-		
+		float: right;
+		margin-top: 10px;
 	}
 	textarea {
 		width: 100%;
 		height: 300px;
+	}
+	.travel-date-area {
+		display: grid;
+		grid-template-columns: 0.8fr 1.6fr 0.8fr 1.6fr;
+		
+	}
+	.travel-date-area > input:nth-child(2) {
+		width: 240px;
 	}
 	
 </style>
@@ -84,9 +93,15 @@
 					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
 				<div id="content-area">
-					<textarea name="content" placeholder="내용을 입력해주세요"></textarea>
-					<input id="submit-btn" type="submit" value="작성완료">				
+					<textarea name="content" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>		
 				</div>
+				<div class="travel-date-area">
+					<div>시작날짜</div>
+					<input type="date" name="startDate">
+					<div>종료날짜</div>
+					<input type="date" name="endDate">
+				</div>
+				<input id="submit-btn" type="submit" value="작성완료">	
 			</form>	
 		</div>
 		<div class="main-blank"></div>
