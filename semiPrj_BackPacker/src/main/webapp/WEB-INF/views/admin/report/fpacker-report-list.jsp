@@ -30,7 +30,7 @@
     border-collapse: collapse;
     border-spacing: 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     }
 
     #acbtable th{
@@ -61,7 +61,7 @@
         <div id="board1">
             <h2>프패커 게시판 신고 목록</h2>
             <table id="acbtable">
-                <!-- <thead>
+                 <thead>
                     <tr>
                         <th></th>
                         <th>글 제목</th>
@@ -69,7 +69,7 @@
                         <th>작성일시</th>
                         <th>신고수</th>
                     </tr>
-                </thead> -->
+                </thead> 
                 <tbody>
                     <tr>
                         <td>프패커게시판vo.글번호</td>

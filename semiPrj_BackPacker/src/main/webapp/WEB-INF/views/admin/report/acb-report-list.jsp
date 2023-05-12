@@ -48,6 +48,13 @@
       display: flex;
       justify-content: space-evenly; 
 }
+ 
+  #page-area{
+      width : 500px;
+      margin: auto;
+      display: flex;
+      justify-content: space-evenly; 
+   }
 </style>
 </head>
 <body>
@@ -56,122 +63,76 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">누적 신고 게시글 관리 페이지</h1>
+        <h1 id="th1">동행 게시판 신고 목록</h1>
         <hr>
+        <div id="search-area">
+                <form action="${root}/admin/acb" method="get">
+                    <input type="hidden" value="1" name="page">
+                    <select name="searchType" id="opt" >
+                        <option value="title" >제목</option>
+                        <option value="writerNick" >작성자 닉네임</option>
+                        <option value="writerId" >작성자 아이디</option>
+                        <option value="reportCnt">최소 신고수</option>
+                        
+                    </select>
+                    
+                   
+                    <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
+                    <select class = "searchValueElem" name="searchValue" >
+                        <option value="">신고수 없음</option>
+                        <option value="1">1 이상</option>
+                        <option value="10">10 이상</option>
+                        <option value="20">20 이상</option>
+                        <option value="50">50 이상</option>
+                        <option value="100">100 이상</option>
+                    </select>
+                    <input type="submit" value="검색">
+                    
+                </form>
+
+            </div>
         <div id="board1">
-            <h2>동행 게시판 신고 목록</h2>
+            
             <table id="acbtable">
-                <!-- <thead>
+                <thead>
                     <tr>
-                        <th></th>
-                        <th>글 제목</th>
+                        <th>글 번호</th>
+                        <th>제목</th>
                         <th>작성자 id</th>
-                        <th>작성일시</th>
+                        <th>작성자 nick</th>
                         <th>신고수</th>
                     </tr>
-                </thead> -->
-                <tbody>
-                    <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr>
-                    <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr> <tr>
-                        <td>동행게시판vo.글번호</td>
-                        <td>동행게시판vo.제목</td>
-                        <td>동행게시판vo.작성자</td>
-                        <td>동행게시판vo.작성일시</td>
-                        <td>신고수</td>
-
-                    </tr>
-
+                </thead>
+                 <tbody>
+                	<c:forEach items="${voList}" var="vo">
+	                    <tr>
+	                        <td>${vo.guideBoardNo}</td>
+	                        <td>${vo.title}</td>
+	                        <td>${vo.writerId}</td>
+	                        <td>${vo.writerNick}</td>
+	                        <td>${vo.reportCnt}</td>
+	                    </tr>        
+                	</c:forEach>
                 </tbody>
+                
             </table>
             <br><br>
-            <div id="page-area-acb">
-            
-               <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${pv.currentPage-1}">이전</a>
-            
-            
-               <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${i}">1</a>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${i}">2</a>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${i}">3</a>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${i}">4</a>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/신고게시글페이지/list?page=${i}">5</a>
-                 
-
-                    
-            
-            
-               <a class="btn btn-primary" href="${pageContext.request.contextPath}/notice/list?page=${pv.currentPage+1}">다음</a>
-            
-         </div>
+           <div id="page-area">
+            	<c:if test="${pv.currentPage >1}">
+	            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+            	</c:if>
+	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
+	           		<c:if test="${pv.currentPage != i}">
+		            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+	           		</c:if>
+	           		<c:if test="${pv.currentPage == i}">
+		            	<a class ="btn btn-outline-info" >${i}</a>
+	           		</c:if>
+	           	</c:forEach>
+	           	<c:if test="${pv.currentPage != pv.maxPage}">
+	            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	           	</c:if>
+            </div>
         </div>
     </div>
 </body>
@@ -179,6 +140,70 @@
 </body>
 </html>
 <script>
+	const searchType = '${searchVo.searchType}';
+	const searchValue = '${searchVo.searchValue}';
+	
+	const searchValueSelectTag = document.querySelector("select[name='searchValue']");
+	const searchValueInputTag = document.querySelector("input[name='searchValue']");
+	
+	
+	if( searchType.length > 1){
+		initSearchType();
+	};
+	
+	function initSearchType(){
+	    const x = document.querySelector('select > option[value="' + searchType + '"]');
+		x.selected = true;
+	
+	}
+	
+	//서치 타입 변경시 함수 실행
+	
+	const searchTypeTag = document.querySelector('select[name="searchType"]');
+	searchTypeTag.addEventListener("change", setSearchValueTag);
+	
+	function setSearchValueTag(){
+	    const searchType =  searchTypeTag.value;
+	    //현재 타입이 카테고리인지 확인 하고 맞으면 select 로 변경 아니면 원래 input 으로
+	    if(searchType == 'reportCnt'){
+	        setSearchValueTagSelect()
+	    }else{
+	        setSearchValueTagInput()
+	    }
+	}
+	
+	//검색값 영역을 select로 변경 (타입이 reportCnt일 때)
+	function setSearchValueTagSelect(){
+	    searchValueSelectTag.classList.add("active");
+	    searchValueSelectTag.disabled = false;
+	    searchValueInputTag.classList.remove("active");
+	    searchValueInputTag.disabled = true;
+	
+	    searchValueInputTag.value = '';
+	
+	    
+	}
+	//검색값 영역을 input 으로 변경 (타입이 reportCnt가 아닐 떄)
+	function setSearchValueTagInput(){
+	    searchValueInputTag.classList.add("active");
+	    searchValueInputTag.disabled = false;
+	    searchValueSelectTag.classList.remove("active");
+	    searchValueSelectTag.disabled = true;
+	}
+	//카테고리 검색 이후 값이 유지되도록
+	function initSearchValueSelect(){
+	    if(searchType !='reportCnt'){
+	        return;
+	    }
+	    const optionTag = document.querySelector("option[value = '" + searchValue  + "']");
+	    optionTag.selected = true;
+	}
+	setSearchValueTag();//첫화면부터 검색하ㅏ세요 보이게
+	initSearchValueSelect();
+
+
+
+
    const tbody = document.querySelector("tbody");
    tbody.addEventListener("click" , function(e){
       const no = e.target.parentNode.children[0].innerText;

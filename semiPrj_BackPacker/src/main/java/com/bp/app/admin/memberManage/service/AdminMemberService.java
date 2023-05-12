@@ -98,5 +98,20 @@ public int selectCnt() throws Exception {
     return cnt;
 }
 
+
+
+
+public int selectCnt(String searchType, String searchValue) throws Exception {
+	Connection conn = JDBCTemplate.getConnection();
+	
+	int cnt = dao.selectCnt(conn, searchType, searchValue);
+	
+	//close
+	
+	JDBCTemplate.close(conn);
+	
+	return cnt;
+}
+
    
 }

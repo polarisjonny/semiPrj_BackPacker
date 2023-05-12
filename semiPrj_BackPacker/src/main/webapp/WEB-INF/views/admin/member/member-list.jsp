@@ -78,28 +78,38 @@
 
                 회원상태 : 1은 정상 , 2는 경고 , 3은 정지
             </div>
-            <div>
-            <form action="${root}/admin/member" method="post"">
-                <input type="hidden" name="page" value="1">
-                <select name="searchType" id="selopt">
-                    <option value="memberName">회원 이름</option>
-                    <option value="memberId">회원 아이디</option>
-                    <option value="memberStatus">회원 상태</option>
-                </select>
-                <input type="text" name="searchValue" id="searchValue">
-                <input type="submit" value="검색">
+            <div id="search-area">
+            <form action="${root}/admin/member" method="get"">
+                <input type="hidden" value="1" name="page">
+                    <select name="searchType" id="opt" >
+                        <option value="memberName" >이름</option>
+                        <option value="memberId" >아이디</option>
+                        <option value="memberNick" >닉네임</option>
+                        <option value="memberStatus">회원상태</option>
+                        <option value="memberScore">최소점수</option>
+                        
+                    </select>
+                    
+               
+                    <input class = "searchValueElem " id="searchValue" type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
+                    
+                    <input type="submit" value="검색">
             </form>
             </div>
         </div>
         <br>
         <div id="adMemTable">
+         
             <table>
                 <thead>
                     <th>회원번호</th>
                     <th>이름</th>
                     <th>아이디</th>
+                    <th>닉네임</th>
                     <th>가입날짜</th>
+                    <th>회원점수</th>
                     <th>회원상태</th>
+                    
                     <th>수정하기</th>
                 </thead>
                 <tbody>
@@ -108,7 +118,9 @@
                         <td>${adminMemberVoList.memberNo}</td>
                         <td>${adminMemberVoList.name}</td>
                         <td>${adminMemberVoList.id}</td>
+                        <td>${adminMemberVoList.nick}</td>
                         <td>${adminMemberVoList.enrollDate}</td>
+                        <td>${adminMemberVoList.memberScore}</td>
                         <td> ${adminMemberVoList.memberStatus}</td>
                        
                       <td>

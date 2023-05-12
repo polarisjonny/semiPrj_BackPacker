@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
+
 import com.bp.app.chat.room.vo.ChattingRoomVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
@@ -73,6 +75,84 @@ public class MemberReviewDao {
       JDBCTemplate.close(pstmt);
       return result;
    }
+   
+   public int plusScore(Connection conn, MemberReviewVo mrv, String originScore) throws Exception {
+		
+		String sql = "UPDATE MEMBER SET MEMBER_SCORE = ? WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		int Score = Integer.parseInt(mrv.getScore());
+		int mScore = Integer.parseInt(originScore);
+		int plusScore = Score*10 + mScore;
+		String pScore = Integer.toString(plusScore);
+		pstmt.setString(1, pScore);
+		pstmt.setString(2, mrv.getMemberNo());
+		
+		int result = pstmt.executeUpdate();
+	     JDBCTemplate.close(pstmt);
+	     return result;
+		
+	}
+   
+   public MemberVo selectMemberGetScore(Connection conn, String memberNo) throws Exception {
+			
+	   String sql = "SELECT * FROM MEMBER WHERE MEMBER_NO =?";
+	   PreparedStatement pstmt = conn.prepareStatement(sql);
+	   pstmt.setString(1, memberNo);
+	   ResultSet rs = pstmt.executeQuery();
+	   MemberVo vo = null;
+	   
+	   if(rs.next()) {
+	         
+	         
+	         String mNo = rs.getString("MEMBER_NO");
+	         String isGuide = rs.getString("IS_GUIDE");
+	         String memberStatus = rs.getString("MEMBER_STATUS");
+	         String id = rs.getString("ID");
+	         String password = rs.getString("PASSWORD");
+	         String name = rs.getString("NAME");
+	         String gender = rs.getString("GENDER");
+	         String age = rs.getString("AGE");
+	         String address = rs.getString("ADDRESS");
+	         String email = rs.getString("EMAIL");
+	         String phoneNumber = rs.getString("PHONE_NUMBER");
+	         String nick = rs.getString("NICK");
+	         String profileImage = rs.getString("PROFILE_IMAGE");
+	         String idCard = rs.getString("ID_CARD");
+	         String enrollDate = rs.getString("ENROLL_DATE");
+	         String introMessage = rs.getString("INTRO_MESSAGE");
+	         String memberScore = rs.getString("MEMBER_SCORE");
+	         
+	         
+	         
+	         vo = new MemberVo();
+	         
+	         vo.setMemberNo(mNo);
+	         vo.setIsGuide(isGuide);
+	         vo.setMemberStatus(memberStatus);
+	         vo.setId(id);
+	         vo.setPassword(password);
+	         vo.setName(name);
+	         vo.setGender(gender);
+	         vo.setAge(age);
+	         vo.setAddress(address);
+	         vo.setEmail(email);
+	         vo.setPhoneNumber(phoneNumber);
+	         vo.setNick(nick);
+	         vo.setProfileImage(profileImage);
+	         vo.setIdCard(idCard);
+	         vo.setEnrollDate(enrollDate);
+	         vo.setIntroMessage(introMessage);
+	         vo.setMemberScore(memberScore);
+	         
+	      }
+	      
+	      //close
+	      JDBCTemplate.close(rs);
+	      JDBCTemplate.close(pstmt);
+	      
+	      return vo;
+	}
+
 
    public MemberVo selectMemberToProfile(Connection conn, String selectMemberNo) throws Exception {
       String sql = "SELECT MEMBER_NO, IS_GUIDE, MEMBER_STATUS, ID, PASSWORD, NAME, GENDER, AGE, ADDRESS, EMAIL, PHONE_NUMBER, NICK, PROFILE_IMAGE, ID_CARD, ENROLL_DATE, INTRO_MESSAGE, MEMBER_SCORE FROM MEMBER WHERE MEMBER_NO = ?";
@@ -204,5 +284,10 @@ public class MemberReviewDao {
       
       return cnt;
    }
+
+
+
+
+
 
 }

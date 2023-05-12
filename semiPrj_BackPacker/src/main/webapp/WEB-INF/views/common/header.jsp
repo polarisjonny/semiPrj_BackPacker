@@ -19,6 +19,7 @@
 <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeCCPwGX5gzSzh6lXqgoGIy_bGEmX1S1E&callback=initMap"
     defer>
+   
 </script>
 
 
@@ -57,7 +58,7 @@
        	<c:if test="${empty loginMember }">
 	       <a href='${root}/member/login'>로그인</a>
        	</c:if>
-       	<c:if test="${empty loginMember}">
+       	<c:if test="${not empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
@@ -76,6 +77,14 @@
     </div>
 </header>
 <script >
+let logo ;
+logo = document.querySelector('.logo');
+logo.addEventListener('click', ()=>{
+
+  window.location.href = `${root}/home`;
+
+});
+
 let chatLogo;
 chatLogo = document.querySelector('.chat-logo');
 chatLogo.addEventListener('click', () => {

@@ -80,5 +80,28 @@ public class MemberReviewService {
       
       return cnt;
    }
+public int plusScore(MemberReviewVo mrv, String originScore) throws Exception {
+	Connection conn = JDBCTemplate.getConnection();
+	
+	int result = dao.plusScore(conn , mrv, originScore);
+	
+	 if(result == 1) {
+         JDBCTemplate.commit(conn);
+      }else {
+         JDBCTemplate.rollback(conn);
+      }
+	 
+	return result;
+}
+public MemberVo selectMemberGetScore(String memberNo) throws Exception {
+	MemberVo vo = null;
+	Connection conn = JDBCTemplate.getConnection();
+    //update
+    
+	vo = dao.selectMemberGetScore(conn, memberNo);
+    
+	JDBCTemplate.close(conn);
+	return vo;
+}
 
 }
