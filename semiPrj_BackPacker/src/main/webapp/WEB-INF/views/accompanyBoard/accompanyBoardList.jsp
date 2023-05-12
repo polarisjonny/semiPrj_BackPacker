@@ -77,8 +77,8 @@
         margin-top: 20px;
         display: grid;
         grid-template-rows: 1fr 3fr 1fr;
-        box-shadow: 5px 5px 5px grey;
-        border: 0.5px solid #CBCBCB;
+        box-shadow: 0px 0px 8px grey;
+      
         border-radius: 25px;
     }
    
