@@ -76,20 +76,7 @@
             border-top: none;
         }
 
-        #checkId {
-            margin-left: 15%;
-            border: none;
-            color: white;
-            background-color: #94d2e6;
 
-        }
-
-        #checkNick {
-            margin-left: 15%;
-            border: none;
-            color: white;
-            background-color: #94d2e6;
-        }
 
 
         input {
@@ -109,13 +96,28 @@
             font-size: 12px;
         }
 
-        .input-style {
-            border: 1px solid lightgray;
-            border-left: none;
-            border-right: none;
-            border-top: none;
-            width: 100%;
-        }
+       .input-style {
+    display: flex;
+    align-items: center; /* Center the input and button vertically */
+    justify-content: space-between; /* Add space between input and button */
+    width: 100%;
+    border: 1px solid lightgray;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#checkId,
+#checkNick {
+    border: none;
+    color: white;
+    background-color: #94d2e6;
+    height: 70%; /* Adjust the height as needed */
+    margin-left: 10px; /* Add space between input and button */
+    padding: 5px 10px; /* Add padding to the button */
+    text-align: center;
+}
+       
 
         #nick {
             border: none;
@@ -190,7 +192,7 @@
   visibility: visible;
 }
     	.label-age {
-    		margin-top: 15px;
+    		margin-top: 10px;
     	}
     	
     	#gender-box {
@@ -200,6 +202,18 @@
     	#age-box {
     		margin-top: 10px;
     	}
+    	
+    	#file-input {
+    		display: none;
+    	}
+    	
+    	.button-text {
+    		display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    	}
+    	
     </style>
      
    
@@ -215,7 +229,7 @@
             <div id="first-area">
                 <div class="input-style">
                     <input type="text" name="id" id="id" placeholder="아이디를 입력하세요">
-                    <button id="checkId">아이디 중복 확인</button>
+                    <button type="button" id="checkId"><span class="button-text">아이디 중복 확인</span></button>
                 </div>
                 <span id="idWarning">아이디는 8~16자로, 영문과 숫자를 조합해야 합니다.</span>
                 <br>
@@ -228,8 +242,8 @@
                 </div>
                 <br>
                 <div class="input-style">
-                    <input type="text" name="nick" id="nick" placeholder="닉네임을 입력하세요(8자이내)">
-                    <button id="checkNick">닉네임 중복 확인</button>
+                    <input type="text" name="nick" id="nick" placeholder="닉네임(8자 이내)">
+                    <button type="button" id="checkNick"><span class="button-text">닉네임 중복 확인</span></button>
                 </div>
                 <br>
 
@@ -246,7 +260,7 @@
                 </div>
                 <br>
                 <div class="input-style">
-                    <input class="test-style" type="address" name="address" placeholder="주소를 입력하세요">
+                    <input class="test-style" type="text" name="address" placeholder="주소를 입력하세요">
                 </div>
                 <br>
                 <span id="message"><i class="fa-solid fa-circle-info" style="color: #808080;"></i> 아이디, 닉네임, 이름, 성별은 한번 입력되면 수정할 수 없습니다.</span>
@@ -258,7 +272,10 @@
                     <br>
                     <span class="label-age">나이</span>
                     <br>
-                    <span>프로필 사진</span>
+                    <label id="profile-area">
+                    	프로필 사진
+                    	<input id="file-input" type="file" name="profileImage">
+                    </label>
                 </div>
                 <div id="input-area">
                     <div id="gender-area">
@@ -273,10 +290,11 @@
                         <option value="50">50대</option>
                     </select>
                     <br>
+                    <div id="preview-area">
+                    	
+                    </div>
                 </div>
     
-                
-                <input type="file" name="profileImage">
                 
                     
                             
@@ -293,7 +311,7 @@
                 <br>
                 <br>
                 <br>
-                <p id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 가이더 등록은 가입후 마이페이지를 방문해 주세요</p>
+                <p id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 프패커 등록은 가입후 마이페이지를 방문해 주세요</p>
                 <input id="submit-btn" type="submit" value="가입하기">
             </div>
         </div>
@@ -302,7 +320,29 @@
 
 
 	<script>
-		
+		//사진 미리보기
+		const fileTag = document.querySelector("input[type=file]");
+		const previewArea = document.querySelector("#preview-area");
+		fileTag.onchange = function(e){
+			if(fileTag.files.length == 0) {
+				previewArea.innerHTML = '';
+				return;
+			}
+			
+			const fr = new FileReader();
+			
+			fr.readAsDataURL(fileTag.files[0]);
+			
+			fr.onload = function(e) {
+				const imgTag = document.createElement('img');
+				imgTag.src = e.target.result;
+				imgTag.alt = "미리보기 이미지 사진";
+				imgTag.width = 100;
+				imgTag.height = 100;
+				imgTag.style.borderRadius = "50%";
+				previewArea.appendChild(imgTag);
+			}
+		};
 	</script>
 </body>
 </html>

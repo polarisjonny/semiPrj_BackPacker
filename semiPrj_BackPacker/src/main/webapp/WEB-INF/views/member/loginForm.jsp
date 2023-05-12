@@ -92,19 +92,19 @@
         <img id="logo" src="${pageContext.request.contextPath}/static/img/logo/b_logo.png" alt="로고 사진">
     </div>
 
-    <form action="${pageContext.request.contextPath}/member/login}">
+    <form action="${pageContext.request.contextPath}/member/login" method="POST">
         <div id="login-area">
             <input name="id" class="border-style" type="text" placeholder="아이디를 입력하세요">
             <br>
             <br>
             <input name="password" class="border-style" type="password" placeholder="비밀번호를 입력하세요">
-            <div id="check-area">
-                <label><input id="saveId" type="checkbox" name="saveId" value="saveId">아이디 저장</label>
-            </div>
+            <br>
+            <br>
+            <br>
             <br>
             <br>
             <input id="login-btn" type="submit" value="로그인">
-
+			
 
             <div id="next-area" class="next-area">
                 <a id="join-btn" href="${pageContext.request.contextPath}/member/join">회원가입</a>
