@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.scheduler.service.SchedulerService;
+
 @WebServlet("/schedulerwrite")
 public class SchedulerWrite extends HttpServlet{
 	
@@ -16,7 +19,45 @@ public class SchedulerWrite extends HttpServlet{
 
 		req.getRequestDispatcher("/WEB-INF/views/scheduler/writeScheduler.jsp").forward(req, resp);
 	
-	}
+	}//get
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		
+		try {
+			
+			//데이터 꺼내기
+			String category = req.getParameter("category");
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			
+			//데이터 뭉치기
+			GuideBoardVo bgVo = new GuideBoardVo();
+			bgVo.setGuideBoardCategoryNo(category);
+			bgVo.setTitle(title);
+			bgVo.setContent(content);
+			
+			//서비스
+			SchedulerService ss = new SchedulerService();
+			int result = ss.gbWrite(bgVo);
+			
+			//화면
+			if(result==1) {
+				resp.sendRedirect("/semi/doPpacker/list");
+			}else {
+				throw new IllegalStateException("작성결과 1아님");
+			}
+			
+		} catch (Exception e) {
+
+			req.setAttribute("errorMsg", "동행 게시판 작성중 오류");
+			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
+		
+		}
+		
+	
+	}//post
 	
 
 	

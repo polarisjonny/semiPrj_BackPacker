@@ -37,7 +37,7 @@
 	
 	#left > img {
 		overflow: hidden;
-		align: 
+
 	}
 
 	#right{
@@ -84,6 +84,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header_white.jsp" %>
+		<%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	<main>
 		<div id="left">
 			<img src="${root}/static/img/main_big_img.jpg" alt="">

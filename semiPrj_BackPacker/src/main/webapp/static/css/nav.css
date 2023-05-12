@@ -1,0 +1,60 @@
+ #navBody{
+    
+    width: 120px;
+    height : 310px;
+    position: fixed;
+    top: 100px;
+    left: 0px;
+
+}
+ .navBody-sidebar {
+    
+ 
+   position: fixed;
+   top: 150px;
+   left: -150px; /* 왼쪽에서 숨긴 상태 */
+   width: 150px;
+   height: 310px;
+   background-color: #f8f8f8;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease-in-out;
+}
+
+.navBody-sidebar.active {
+   width: 120px;
+   height: 310px;
+   left: 0; /* 왼쪽에서 나타내는 상태 */
+   
+  
+}
+
+.navBody-menu-btn {
+   display: block;
+   width: 20px;
+  
+   background-color:  rgba(0, 174, 255, 0.438);
+   color: #fff;
+   border: none;
+   cursor: pointer;
+}
+
+.navBody-menu-list {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+.navBody-menu-list li {
+   der-bottom: 1px solid #ccc;
+}
+
+.navBody-menu-list li a {
+   display: block;
+   padding: 10px;
+   color: #333;
+   text-decoration: none;
+}
+
+.navBody-menu-list li a:hover {
+   background-color: #ddd;
+}   
