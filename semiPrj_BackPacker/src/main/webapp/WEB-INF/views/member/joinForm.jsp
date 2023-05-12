@@ -344,5 +344,34 @@
 			}
 		};
 	</script>
+	
+	<script>
+    // 아이디 중복 확인
+    const checkIdButton = document.querySelector("#checkId");
+    checkIdButton.addEventListener("click", checkId);
+
+    function checkId() {
+        const idInput = document.querySelector("#id");
+        const id = idInput.value.trim();
+
+        // 아이디 유효성 검사
+        if (!validateId(id)) {
+            alert("아이디는 8~16자로, 영문과 숫자를 조합해야 합니다.");
+            return;
+        }
+
+        // 아이디 중복 확인 요청 및 처리
+        // 여기에 서버와 통신하는 코드를 작성하면 됩니다.
+        // 예시로 alert 창에 결과를 표시하도록 작성하였습니다.
+        alert(`아이디 중복 확인 - 아이디: ${id}`);
+    }
+
+    // 아이디 유효성 검사 함수
+    function validateId(id) {
+        const idPattern = /^[a-zA-Z0-9]{8,16}$/;
+        return idPattern.test(id);
+    }
+</script>
+	
 </body>
 </html>
