@@ -48,7 +48,6 @@
       display: flex;
       justify-content: space-evenly; 
 }
- 
   #page-area{
       width : 500px;
       margin: auto;
@@ -63,10 +62,10 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">동행, 프페커 게시판 목록</h1>
+        <h1 id="th1">후기, 정보 게시판 목록</h1>
         <hr>
         <div id="search-area">
-                <form action="${root}/admin/guideBoard" method="get">
+                <form action="${root}/admin/infoReviewBoard" method="get">
                     <input type="hidden" value="1" name="page">
                     <select name="searchType" id="opt" >
                         <option value="category">게시판 이름</option>
@@ -109,7 +108,7 @@
                 	<c:forEach items="${voList}" var="vo">
 	                    <tr>
 	                        <td>${vo.categoryName}</td>
-	                        <td>${vo.guideBoardNo}</td>
+	                        <td>${vo.infoNo}</td>
 	                        <td>${vo.title}</td>
 	                        <td>${vo.writerId}</td>
 	                        <td>${vo.writerNick}</td>
@@ -122,24 +121,25 @@
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
             	</c:if>
 	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
 	           		<c:if test="${pv.currentPage != i}">
-		            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
 	           		</c:if>
 	           		<c:if test="${pv.currentPage == i}">
 		            	<a class ="btn btn-outline-info" >${i}</a>
 	           		</c:if>
 	           	</c:forEach>
 	           	<c:if test="${pv.currentPage != pv.maxPage}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
 	           	</c:if>
             </div>
         </div>
     </div>
 </body>
 
+</body>
 </html>
 <script>
 	const searchType = '${searchVo.searchType}';
@@ -202,13 +202,13 @@
 	}
 	setSearchValueTag();//첫화면부터 검색하ㅏ세요 보이게
 	initSearchValueSelect();
-
-
-
-
-   const tbody = document.querySelector("tbody");
-   tbody.addEventListener("click" , function(e){
-      const no = e.target.parentNode.children[0].innerText;
-      location.href = "${pageContext.request.contextPath}/accompany/detail?guideBoardNo=" + no;
-   });
+	
+	
+	
+	
+	const tbody = document.querySelector("tbody");
+	tbody.addEventListener("click" , function(e){
+	  const no = e.target.parentNode.children[0].innerText;
+	  location.href = "${pageContext.request.contextPath}/accompany/detail?guideBoardNo=" + no;
+	});
 </script>
