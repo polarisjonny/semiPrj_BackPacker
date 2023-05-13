@@ -1,6 +1,6 @@
 package com.bp.app.admin.boardManage.vo;
 
-public class AccompanyBoardVo {
+public class GuideBoardVo {
 	
 	private String guideBoardNo;
 	private String writerNo;
@@ -16,6 +16,7 @@ public class AccompanyBoardVo {
 	private String reportCnt;
 	private String writerId;
 	private String writerNick;
+	private String categoryName;
 	public String getGuideBoardNo() {
 		return guideBoardNo;
 	}
@@ -100,17 +101,23 @@ public class AccompanyBoardVo {
 	public void setWriterNick(String writerNick) {
 		this.writerNick = writerNick;
 	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	@Override
 	public String toString() {
-		return "AccompanyBoardVo [guideBoardNo=" + guideBoardNo + ", writerNo=" + writerNo + ", guideBoardCategoryNo="
+		return "GuideBoardVo [guideBoardNo=" + guideBoardNo + ", writerNo=" + writerNo + ", guideBoardCategoryNo="
 				+ guideBoardCategoryNo + ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate
 				+ ", modifyDate=" + modifyDate + ", hit=" + hit + ", matchingState=" + matchingState
 				+ ", travelExpense=" + travelExpense + ", deleteYn=" + deleteYn + ", reportCnt=" + reportCnt
-				+ ", writerId=" + writerId + ", writerNick=" + writerNick + "]";
+				+ ", writerId=" + writerId + ", writerNick=" + writerNick + ", categoryName=" + categoryName + "]";
 	}
-	public AccompanyBoardVo(String guideBoardNo, String writerNo, String guideBoardCategoryNo, String title,
-			String content, String enrollDate, String modifyDate, String hit, String matchingState,
-			String travelExpense, String deleteYn, String reportCnt, String writerId, String writerNick) {
+	public GuideBoardVo(String guideBoardNo, String writerNo, String guideBoardCategoryNo, String title, String content,
+			String enrollDate, String modifyDate, String hit, String matchingState, String travelExpense,
+			String deleteYn, String reportCnt, String writerId, String writerNick, String categoryName) {
 		super();
 		this.guideBoardNo = guideBoardNo;
 		this.writerNo = writerNo;
@@ -126,8 +133,9 @@ public class AccompanyBoardVo {
 		this.reportCnt = reportCnt;
 		this.writerId = writerId;
 		this.writerNick = writerNick;
+		this.categoryName = categoryName;
 	}
-	public AccompanyBoardVo() {
+	public GuideBoardVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -12,20 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManagerService;
-import com.bp.app.admin.boardManage.vo.AccompanyBoardVo;
+import com.bp.app.admin.boardManage.vo.GuideBoardVo;
 import com.bp.app.common.page.PageVo;
-@WebServlet("/admin/acb")
-public class AccompanyBoardManageController extends HttpServlet {
+@WebServlet("/admin/guideBoard")
+public class GuideBoardManageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
-			
 			BoardManagerService bs = new BoardManagerService();
 			//서비스
-			int cnt = bs.getAccompanyBoardListCnt(searchType, searchValue );
+			int cnt = bs.getGuideBoardListCnt(searchType, searchValue );
 			int page = 1;
 			if(req.getParameter("page") != null) {
 				
@@ -34,13 +33,13 @@ public class AccompanyBoardManageController extends HttpServlet {
 				page = 1;
 			}
 			PageVo pv = new PageVo(cnt, page, 5, 10);
-			List<AccompanyBoardVo> voList = null;
+			List<GuideBoardVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
-				voList = bs.getAccompanyBoardList(pv);
+				voList = bs.getGuideBoardList(pv);
 			}else {
 				
-				voList = bs.getAccompanyBoardList(pv,searchType, searchValue);
+				voList = bs.getGuideBoardList(pv,searchType, searchValue);
 			}
 			
 			Map<String, String> map = new HashMap<>();
@@ -50,7 +49,7 @@ public class AccompanyBoardManageController extends HttpServlet {
 			req.setAttribute("pv", pv);
 			req.setAttribute("voList", voList);
 			req.setAttribute("searchVo", map);
-			req.getRequestDispatcher("/WEB-INF/views/admin/report/acb-report-list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-list.jsp").forward(req, resp);
 		}catch(Exception e) {
 			System.out.println("[ERROR] 게시글 목록 조회에러");
 			e.printStackTrace();

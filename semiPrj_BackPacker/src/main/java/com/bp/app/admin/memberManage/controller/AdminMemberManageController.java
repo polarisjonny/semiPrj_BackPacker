@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManagerService;
-import com.bp.app.admin.boardManage.vo.AccompanyBoardVo;
+import com.bp.app.admin.boardManage.vo.GuideBoardVo;
 import com.bp.app.admin.memberManage.service.AdminMemberService;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.member.vo.MemberVo;
