@@ -71,14 +71,14 @@
    
         <div id="guideBoard">
             <div class="intext">
-                동행,프페커 <br>게시판
+                동행, 프페커 <br>게시판
             </div>
             
         </div>
         
         <div id="review">
             <div class="intext">
-                여행 후기 <br>게시판
+                후기, 정보 <br>게시판
             </div>
            
         </div>
@@ -96,6 +96,6 @@
    
 
     review.addEventListener("click" , function(c){
-        window.location.href = '${root}/admin/review'
+        window.location.href = '${root}/admin/infoReviewBoard'
         });
 </script>

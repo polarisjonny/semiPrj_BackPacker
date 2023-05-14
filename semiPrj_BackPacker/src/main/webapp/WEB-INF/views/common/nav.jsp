@@ -12,9 +12,8 @@
              <li><a href="${root}/admin/member">회원관리</a></li>
              <li><a href="${root}/admin/report">신고관리</a></li>
              <li><a href="${root}/admin/FAQ/write">FAQ수정</a></li>
-             <li><a href="${root}/admin/place/list">여행지목록</a></li>
-             <li><a href="${root}/admin/place/edit">여행지수정</a></li>
-             <li><a href="${root}/admin/place/add">여행지추가</a></li>
+             <li><a href="${root}/admin/place/list">여행지관리</a></li>
+             
              <li><a href="${root}/admin/infoBoard/write">여행정보작성</a></li>
            </ul>
          </div>
