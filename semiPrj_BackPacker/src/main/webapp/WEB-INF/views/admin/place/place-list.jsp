@@ -57,12 +57,25 @@
         display: flex;
         justify-content: space-evenly;
     }
+    
+    .place-btn{
+    	border: 0px;
+    	
+    }
 </style>
 </head>
 <body>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	<div id="place-list-wrap">
         <div id="place-list-title"><h1>여행지 목록</h1></div>
+        <button class="place-btn">
+        <a href="${root}/admin/place/edit">수정</a>
+        
+        </button>
+        <button class="place-btn">
+         <a href="${root}/admin/place/add">추가</a>
+        
+        </button>
    
         <div class="search" id="search-place-list">
             <form action="" method="get">

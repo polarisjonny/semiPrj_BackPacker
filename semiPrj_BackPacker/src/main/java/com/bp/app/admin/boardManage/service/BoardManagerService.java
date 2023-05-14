@@ -4,17 +4,18 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.bp.app.admin.boardManage.dao.BoardManagerDao;
-import com.bp.app.admin.boardManage.vo.AccompanyBoardVo;
+import com.bp.app.admin.boardManage.vo.GuideBoardVo;
+import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 
 public class BoardManagerService {
 	private BoardManagerDao dao = new BoardManagerDao();
-	public int getAccompanyBoardListCnt(String searchType, String searchValue) throws Exception {
+	public int getGuideBoardListCnt(String searchType, String searchValue) throws Exception {
 		//conn
 			Connection conn = JDBCTemplate.getConnection();
 			
-			int cnt = dao.getBoardListCnt(conn, searchType, searchValue);
+			int cnt = dao.getGuideBoardListCnt(conn, searchType, searchValue);
 			
 			//close
 			
@@ -22,10 +23,10 @@ public class BoardManagerService {
 			
 			return cnt;
 	}
-	public List<AccompanyBoardVo> getAccompanyBoardList(PageVo pv) throws Exception {
+	public List<GuideBoardVo> getGuideBoardList(PageVo pv) throws Exception {
 		//conn
 			Connection conn = JDBCTemplate.getConnection();
-			List<AccompanyBoardVo>voList = dao.getAccompanyBoardList(conn, pv);
+			List<GuideBoardVo>voList = dao.getGuideBoardList(conn, pv);
 			//sql
 
 			//close
@@ -34,11 +35,11 @@ public class BoardManagerService {
 			
 			return voList;
 	}
-	public List<AccompanyBoardVo> getAccompanyBoardList(PageVo pv, String searchType, String searchValue) throws Exception {
-		//conn
+	public List<GuideBoardVo> getGuideBoardList(PageVo pv, String searchType, String searchValue) throws Exception {
+			//conn
 			Connection conn = JDBCTemplate.getConnection();
 			
-			List<AccompanyBoardVo>voList = dao.getAccompanyBoardList(conn, pv, searchType, searchValue);
+			List<GuideBoardVo>voList = dao.getGuideBoardList(conn, pv, searchType, searchValue);
 			//sql
 
 			//close
@@ -46,6 +47,42 @@ public class BoardManagerService {
 			JDBCTemplate.close(conn);
 			
 			return voList;
+	}
+	public int getReviewInfoBoardListCnt(String searchType, String searchValue) throws Exception {
+			//conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			int cnt = dao.getReviewInfoBoardListCnt(conn, searchType, searchValue);
+			
+			//close
+			
+			JDBCTemplate.close(conn);
+			
+			return cnt;
+	}
+	public List<InfoBoardVo> getReviewInfoBoardList(PageVo pv) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		List<InfoBoardVo>voList = dao.getReviewInfoBoardList(conn, pv);
+		//sql
+
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return voList;
+	}
+	public List<InfoBoardVo> getReviewInfoBoardList(PageVo pv, String searchType, String searchValue) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InfoBoardVo>voList = dao.getReviewInfoBoardList(conn, pv, searchType, searchValue);
+		//sql
+
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return voList;
 	}
 
 }

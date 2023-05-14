@@ -1,26 +1,25 @@
 package com.bp.app.admin.boardManage.vo;
 
-public class AccompanyBoardVo {
+public class InfoBoardVo {
 	
-	private String guideBoardNo;
+	private String infoNo;
 	private String writerNo;
-	private String guideBoardCategoryNo;
+	private String infoCategoryNo;
 	private String title;
 	private String content;
 	private String enrollDate;
 	private String modifyDate;
 	private String hit;
-	private String matchingState;
-	private String travelExpense;
 	private String deleteYn;
 	private String reportCnt;
 	private String writerId;
 	private String writerNick;
-	public String getGuideBoardNo() {
-		return guideBoardNo;
+	private String categoryName;
+	public String getInfoNo() {
+		return infoNo;
 	}
-	public void setGuideBoardNo(String guideBoardNo) {
-		this.guideBoardNo = guideBoardNo;
+	public void setInfoNo(String infoNo) {
+		this.infoNo = infoNo;
 	}
 	public String getWriterNo() {
 		return writerNo;
@@ -28,11 +27,11 @@ public class AccompanyBoardVo {
 	public void setWriterNo(String writerNo) {
 		this.writerNo = writerNo;
 	}
-	public String getGuideBoardCategoryNo() {
-		return guideBoardCategoryNo;
+	public String getInfoCategoryNo() {
+		return infoCategoryNo;
 	}
-	public void setGuideBoardCategoryNo(String guideBoardCategoryNo) {
-		this.guideBoardCategoryNo = guideBoardCategoryNo;
+	public void setInfoCategoryNo(String infoCategoryNo) {
+		this.infoCategoryNo = infoCategoryNo;
 	}
 	public String getTitle() {
 		return title;
@@ -64,18 +63,6 @@ public class AccompanyBoardVo {
 	public void setHit(String hit) {
 		this.hit = hit;
 	}
-	public String getMatchingState() {
-		return matchingState;
-	}
-	public void setMatchingState(String matchingState) {
-		this.matchingState = matchingState;
-	}
-	public String getTravelExpense() {
-		return travelExpense;
-	}
-	public void setTravelExpense(String travelExpense) {
-		this.travelExpense = travelExpense;
-	}
 	public String getDeleteYn() {
 		return deleteYn;
 	}
@@ -100,37 +87,41 @@ public class AccompanyBoardVo {
 	public void setWriterNick(String writerNick) {
 		this.writerNick = writerNick;
 	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	@Override
 	public String toString() {
-		return "AccompanyBoardVo [guideBoardNo=" + guideBoardNo + ", writerNo=" + writerNo + ", guideBoardCategoryNo="
-				+ guideBoardCategoryNo + ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate
-				+ ", modifyDate=" + modifyDate + ", hit=" + hit + ", matchingState=" + matchingState
-				+ ", travelExpense=" + travelExpense + ", deleteYn=" + deleteYn + ", reportCnt=" + reportCnt
-				+ ", writerId=" + writerId + ", writerNick=" + writerNick + "]";
+		return "InfoBoardVo [infoNo=" + infoNo + ", writerNo=" + writerNo + ", infoCategoryNo=" + infoCategoryNo
+				+ ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate + ", modifyDate="
+				+ modifyDate + ", hit=" + hit + ", deleteYn=" + deleteYn + ", reportCnt=" + reportCnt + ", writerId="
+				+ writerId + ", writerNick=" + writerNick + ", categoryName=" + categoryName + "]";
 	}
-	public AccompanyBoardVo(String guideBoardNo, String writerNo, String guideBoardCategoryNo, String title,
-			String content, String enrollDate, String modifyDate, String hit, String matchingState,
-			String travelExpense, String deleteYn, String reportCnt, String writerId, String writerNick) {
+	public InfoBoardVo(String infoNo, String writerNo, String infoCategoryNo, String title, String content,
+			String enrollDate, String modifyDate, String hit, String deleteYn, String reportCnt, String writerId,
+			String writerNick, String categoryName) {
 		super();
-		this.guideBoardNo = guideBoardNo;
+		this.infoNo = infoNo;
 		this.writerNo = writerNo;
-		this.guideBoardCategoryNo = guideBoardCategoryNo;
+		this.infoCategoryNo = infoCategoryNo;
 		this.title = title;
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.hit = hit;
-		this.matchingState = matchingState;
-		this.travelExpense = travelExpense;
 		this.deleteYn = deleteYn;
 		this.reportCnt = reportCnt;
 		this.writerId = writerId;
 		this.writerNick = writerNick;
+		this.categoryName = categoryName;
 	}
-	public AccompanyBoardVo() {
+	public InfoBoardVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
+	
 }

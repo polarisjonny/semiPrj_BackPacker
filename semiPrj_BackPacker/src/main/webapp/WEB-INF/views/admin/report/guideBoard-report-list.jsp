@@ -63,12 +63,13 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">동행 게시판 신고 목록</h1>
+        <h1 id="th1">동행, 프페커 게시판 목록</h1>
         <hr>
         <div id="search-area">
-                <form action="${root}/admin/acb" method="get">
+                <form action="${root}/admin/guideBoard" method="get">
                     <input type="hidden" value="1" name="page">
                     <select name="searchType" id="opt" >
+                        <option value="category">게시판 이름</option>
                         <option value="title" >제목</option>
                         <option value="writerNick" >작성자 닉네임</option>
                         <option value="writerId" >작성자 아이디</option>
@@ -77,7 +78,6 @@
                     </select>
                     
                    
-                    <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
                     <select class = "searchValueElem" name="searchValue" >
                         <option value="">신고수 없음</option>
                         <option value="1">1 이상</option>
@@ -86,6 +86,7 @@
                         <option value="50">50 이상</option>
                         <option value="100">100 이상</option>
                     </select>
+                    <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
                     <input type="submit" value="검색">
                     
                 </form>
@@ -96,7 +97,8 @@
             <table id="acbtable">
                 <thead>
                     <tr>
-                        <th>글 번호</th>
+                        <th>게시판 이름</th>
+                        <th>게시판 번호</th>
                         <th>제목</th>
                         <th>작성자 id</th>
                         <th>작성자 nick</th>
@@ -106,6 +108,7 @@
                  <tbody>
                 	<c:forEach items="${voList}" var="vo">
 	                    <tr>
+	                        <td>${vo.categoryName}</td>
 	                        <td>${vo.guideBoardNo}</td>
 	                        <td>${vo.title}</td>
 	                        <td>${vo.writerId}</td>
@@ -119,25 +122,24 @@
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
             	</c:if>
 	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
 	           		<c:if test="${pv.currentPage != i}">
-		            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
 	           		</c:if>
 	           		<c:if test="${pv.currentPage == i}">
 		            	<a class ="btn btn-outline-info" >${i}</a>
 	           		</c:if>
 	           	</c:forEach>
 	           	<c:if test="${pv.currentPage != pv.maxPage}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/acb?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
 	           	</c:if>
             </div>
         </div>
     </div>
 </body>
 
-</body>
 </html>
 <script>
 	const searchType = '${searchVo.searchType}';
@@ -164,7 +166,7 @@
 	
 	function setSearchValueTag(){
 	    const searchType =  searchTypeTag.value;
-	    //현재 타입이 카테고리인지 확인 하고 맞으면 select 로 변경 아니면 원래 input 으로
+	    //현재 타입이 신고수인지 확인 하고 맞으면 select 로 변경 아니면 원래 input 으로
 	    if(searchType == 'reportCnt'){
 	        setSearchValueTagSelect()
 	    }else{
@@ -190,7 +192,7 @@
 	    searchValueSelectTag.classList.remove("active");
 	    searchValueSelectTag.disabled = true;
 	}
-	//카테고리 검색 이후 값이 유지되도록
+	//reportCnt 검색 이후 값이 유지되도록
 	function initSearchValueSelect(){
 	    if(searchType !='reportCnt'){
 	        return;
@@ -207,6 +209,6 @@
    const tbody = document.querySelector("tbody");
    tbody.addEventListener("click" , function(e){
       const no = e.target.parentNode.children[0].innerText;
-      location.href = "${pageContext.request.contextPath}/프페커,동행게시판/detail?no=" + no;
+      location.href = "${pageContext.request.contextPath}/accompany/detail?guideBoardNo=" + no;
    });
 </script>
