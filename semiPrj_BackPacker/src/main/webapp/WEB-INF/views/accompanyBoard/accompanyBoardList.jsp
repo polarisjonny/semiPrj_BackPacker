@@ -206,7 +206,7 @@
                 </div>
                 <div id="middle-area">
                     <span id="big-text">동행을 찾아보세요</span>
-                    <button id="write-btn">게시글 작성</button>
+                    <button id="write-btn" type="button" onclick="location.href='${root}/accompany/write'">게시글 작성</button>
                 </div>
                 
                 
@@ -215,10 +215,10 @@
 	                	<div class="content-box">
 	                        <div class="top-content">
 	                            <div class="left-img">
-	                                <img class="profile" src="${root}/static/img/member/profile/${vo.profile}" alt="">
+	                                <img class="profile" src="${root}/static/img/member/profile/${vo.profileImage}" alt="">
 	                            </div>
 	                            <div class="right-text">
-	                                <div class="small-text">${vo.id}(${vo.nickName})</div>
+	                                <div class="small-text">${vo.id}(${vo.nick})</div>
 	                                <div class="small-text">${vo.age}대 ${vo.gender}</div>
 	                                <div class="small-text">${vo.startDate}~${vo.endDate}</div>
 	                            </div>
@@ -236,20 +236,22 @@
             <div id="ca2"></div>
         </div>
         <div id="page-area">
-            <a href="#"><<</a>
-            <a href="#"><</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">></a>
-            <a href="#">>></a>
+        	<c:if test="${pv.currentPage >1}">
+	            <a href="/semi/accompany/list?page=1"><<</a>
+	            <a href="/semi/accompany/list?page=${pv.currentPage-1 }"><</a>
+        	</c:if>
+            
+            <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
+ 	           <a href="/semi/accompany/list?page=${i}">${i}</a>
+            </c:forEach>
+            
+            <c:if test="${pv.currentPage < pv.maxPage }">
+	            <a href="/semi/accompany/list?page=${pv.currentPage+1}">></a>
+	            <a href="/semi/accompany/list?page=${pv.maxPage}">>></a>            
+            </c:if>
         </div>
         
-        <div id="voList">
-        	${gbvoList}
-        </div>
+     
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>

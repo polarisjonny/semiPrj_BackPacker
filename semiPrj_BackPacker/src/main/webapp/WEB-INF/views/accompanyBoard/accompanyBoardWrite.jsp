@@ -17,9 +17,7 @@
 		grid-template-columns: 1.5fr 3fr 1.5fr;
 		height: 100%;
 	}
-	#imgFile {
-		visibility: hidden;
-	}
+	
 	#big-text {
 		font-size: 30px;
 		font-weight: 700;
@@ -32,9 +30,8 @@
 		height: 400px;
 		justify-content: center;
 		align-items: center;
-		background-color: lightgray;
+		
 	}
-
 	#title-area {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -70,27 +67,37 @@
 	.travel-date-area > input:nth-child(2) {
 		width: 240px;
 	}
-	
+	/* 썸네일 올리는 영역 css */
+	#imgFile {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	#imgFile > input {
+		display: none;
+	}
 </style>
 </head>
 <body>
-	<main>
+
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<main>
+	
 		
 	<div id="main-box">
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">동행게시판 게시글 작성</div>
-			<form action="" method="post" enctype="multipart/form-data">
-			
+			<form action="${root}/accompany/write" method="post" enctype="multipart/form-data">
 				<div id="imgUpload">
-					<label for="imgFile">
-						썸네일 사진 올리기
+					<label id="imgFile">
+						<div>썸네일 사진 올리기</div> 
+						<input type="file" id="imgFile" name="boardListThumbnail">
 					</label>
-					<input type="file" id="imgFile">
 				</div>
 				<div id="title-area">
-					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
+					<input type="text" name="title"placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
 				<div id="content-area">
 					<textarea name="content" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>		
@@ -98,6 +105,7 @@
 				<div class="travel-date-area">
 					<div>시작날짜</div>
 					<input type="date" name="startDate">
+					
 					<div>종료날짜</div>
 					<input type="date" name="endDate">
 				</div>
@@ -107,8 +115,25 @@
 		<div class="main-blank"></div>
 	</div>
 		
+	<script>
+		const fileTag = document.querySelector("input[type=file]");
+		const imgUpload = document.querySelector("#imgUpload");
+
+		fileTag.onchange = function(e){
+			const fr = new FileReader();
+			fr.readAsDataURL(fileTag.files[0]);
+
+			fr.onload = function(e){
+				imgUpload.setAttribute('background-image',url(e.target.result));
 	
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+
+			}
+		}
+
+	</script>
+	
 	</main>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
