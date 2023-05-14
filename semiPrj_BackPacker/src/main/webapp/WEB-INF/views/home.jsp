@@ -59,6 +59,7 @@
 	}
 	#packer-btn {
 		border: none;
+		width: 161.63px;
 		display: inline-block;
 		padding: 15px 30px;
 		border-radius: none;
@@ -105,7 +106,8 @@
 		<div id="right">
 			<div id="big-text">백패커</div>
 			<div id="btn-area">
-				<button id="packer-btn">프패커 게시판</button>
+			<!-- 임시로 동행게시판으로 만듦. -->
+				<button id="packer-btn" onclick="location.href='${root}/accompany/list?page=1'">동행게시판</button>
 				<button id="shedule-btn">일정짜기</button>
 			</div>
 			<div>

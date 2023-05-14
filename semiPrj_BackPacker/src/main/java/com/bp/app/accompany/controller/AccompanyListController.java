@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.service.GuideBoardService;
 import com.bp.app.gboard.vo.GuideBoardVo;
 
@@ -26,12 +27,18 @@ public class AccompanyListController extends HttpServlet{
 
 			//서비스
 			//가이드vo형식의 리스트를 담아서 모든 정보를 가지고 와서 session에 담아 전달...? session에 담아야할까?
-			
 			GuideBoardService gbs = new GuideBoardService();
-			List<GuideBoardVo> bvoList = gbs.getBoardList();
+			String currentPage_ = req.getParameter("page");
+			int currentPage = Integer.parseInt(currentPage_);
+			int cnt = gbs.countCnt();
+			
+			PageVo pvo = new PageVo(cnt, currentPage, 5, 8);
+			
+			List<GuideBoardVo> bvoList = gbs.getAccomList(pvo);
 			
 			
 			//화면
+			req.setAttribute("pv", pvo);
 			req.setAttribute("gbvoList", bvoList);
 			req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardList.jsp").forward(req, resp);
 		} catch (Exception e) {
