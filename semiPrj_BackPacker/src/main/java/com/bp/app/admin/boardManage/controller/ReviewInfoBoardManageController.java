@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManageService;
 import com.bp.app.admin.boardManage.vo.GuideBoardVo;
+import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.page.PageVo;
-@WebServlet("/admin/guideBoard")
-public class GuideBoardManageController extends HttpServlet {
+@WebServlet("/admin/infoReviewBoard")
+public class ReviewInfoBoardManageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
 		try {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
-			
 			BoardManageService bs = new BoardManageService();
 			//서비스
-			int cnt = bs.getGuideBoardListCnt(searchType, searchValue );
+			int cnt = bs.getReviewInfoBoardListCnt(searchType, searchValue );
 			int page = 1;
 			if(req.getParameter("page") != null) {
 				
@@ -34,13 +34,13 @@ public class GuideBoardManageController extends HttpServlet {
 				page = 1;
 			}
 			PageVo pv = new PageVo(cnt, page, 5, 10);
-			List<GuideBoardVo> voList = null;
+			List<InfoBoardVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
-				voList = bs.getGuideBoardList(pv);
+				voList = bs.getReviewInfoBoardList(pv);
 			}else {
 				
-				voList = bs.getGuideBoardList(pv,searchType, searchValue);
+				voList = bs.getReviewInfoBoardList(pv,searchType, searchValue);
 			}
 			
 			Map<String, String> map = new HashMap<>();
@@ -50,7 +50,7 @@ public class GuideBoardManageController extends HttpServlet {
 			req.setAttribute("pv", pv);
 			req.setAttribute("voList", voList);
 			req.setAttribute("searchVo", map);
-			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/admin/report/infoReviewBoard-report-list.jsp").forward(req, resp);
 		}catch(Exception e) {
 			System.out.println("[ERROR] 게시글 목록 조회에러");
 			e.printStackTrace();
@@ -59,7 +59,9 @@ public class GuideBoardManageController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		
+
 		
 		
 	}
+
 }

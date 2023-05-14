@@ -46,7 +46,6 @@ public class GoProfileController extends HttpServlet{
          if(selectMember != null) {
             // && (selectMemberNo.equals(selectMember.getMemberNo())) 
             req.getSession().setAttribute("selectMember", selectMember);
-//            req.getSession().setAttribute("selectMemberReviewlist",  (Serializable)selectMemberReviewlist);
             req.setAttribute("loginMember", loginMember);
             req.setAttribute("selectMemberReviewlist", selectMemberReviewlist);
 //            req.setAttribute("pv" , pv);

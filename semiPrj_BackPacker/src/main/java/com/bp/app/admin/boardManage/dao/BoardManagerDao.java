@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bp.app.admin.boardManage.vo.GuideBoardVo;
+import com.bp.app.admin.boardManage.vo.GuideReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
@@ -347,5 +348,140 @@ public class BoardManagerDao {
 		JDBCTemplate.close(pstmt);
 		return voList;
 	}
+
+	public int getGuideBoardReportDetailCnt(Connection conn, String searchType, String searchValue,String selectGuideBoardNo) throws Exception {
+		String sql = "SELECT COUNT(*) FROM (SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO ) WHERE GUIDE_BOARD_NO = ?";
+
+		if("content".equals(searchType)){
+			sql += "AND " +searchType + " LIKE '%" + searchValue + "%'";
+			
+		}else if("writerNick".equals(searchType)) {
+			sql += "AND " +searchType + " LIKE '%" + searchValue + "%'";
+			
+		}else if("writerId".equals(searchType)) {
+			sql += "AND " +searchType + " LIKE '%" + searchValue + "%'";
+			
+		}else if("writetName".equals(searchType)){
+			sql += "AND " +searchType + " LIKE '%" + searchValue + "%'";
+			
+		}
+		
+		
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, selectGuideBoardNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//tx||rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+	}
+
+	public List<GuideReportVo> getGuideBoardReportDetail(Connection conn, PageVo pv, String selectGuideBoardNo) throws Exception {
+
+		String sql = "SELECT *FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO WHERE B.GUIDE_BOARD_NO = ? ORDER BY R.REPORT_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, selectGuideBoardNo);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
+		ResultSet rs =  pstmt.executeQuery();
+		
+		List<GuideReportVo> voList = new ArrayList<>();
+		while(rs.next()) {
+			
+			String reportNo = rs.getString("REPORT_NO");
+			String memberNo = rs.getString("MEMBER_NO");
+			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
+			String reportContent= rs.getString("CONTENT");
+			String writerId = rs.getString("WRITERID");
+			String writerName = rs.getString("WRITERNAME");
+			String writerNick = rs.getString("WRITERNICK");
+			GuideReportVo vo = new GuideReportVo();
+		
+			vo.setReportNo(reportNo);
+			vo.setMemberNo(memberNo);
+			vo.setGuideBoardNo(guideBoardNo);
+			vo.setReportContent(reportContent);
+			vo.setWriterId(writerId);
+			vo.setWriterName(writerName);
+			vo.setWriterNick(writerNick);
+			voList.add(vo);
+			
+			
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return voList;
+	}
+
+	public List<GuideReportVo> getGuideBoardReportDetail(Connection conn, PageVo pv, String searchType, String searchValue, String selectGuideBoardNo) throws Exception {
+		String sql = "";
+		if("content".equals(searchType)) {
+			//sql(내용으로검색)
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO WHERE B.GUIDE_BOARD_NO = ? AND R.REPORT_CONTENT LIKE ('%'||?||'%') ORDER BY REPORT_NO DESC ) T )WHERE  RNUM BETWEEN ? AND ?";
+		}else if("writerNick".equals(searchType)) {
+			//sql(작성자로검색)
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO WHERE B.GUIDE_BOARD_NO = ? AND M.NICK LIKE ('%'||?||'%') ORDER BY REPORT_NO DESC ) T )WHERE  RNUM BETWEEN ? AND ?";
+			
+		}else if ("writerId".equals(searchType)) {
+			//sql(작성자아이디검색)
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO WHERE B.GUIDE_BOARD_NO = ? AND M.ID LIKE ('%'||?||'%') ORDER BY REPORT_NO DESC ) T )WHERE  RNUM BETWEEN ? AND ?";
+			
+		}else if ("writerName".equals(searchType)) {
+			//sql(작성자 이름)
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.REPORT_NO, R.MEMBER_NO, R.GUIDE_BOARD_NO, R.REPORT_CONTENT AS CONTENT, M.ID AS WRITERID , M.NICK AS WRITERNICK, M.NAME AS WRITERNAME FROM GUIDE_REPORT R JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = R.GUIDE_BOARD_NO JOIN MEMBER M ON M.MEMBER_NO = R.MEMBER_NO WHERE B.GUIDE_BOARD_NO = ? AND M.NAME LIKE ('%'||?||'%') ORDER BY REPORT_NO DESC ) T )WHERE  RNUM BETWEEN ? AND ?";
+			
+		}else {
+			getGuideBoardReportDetail(conn, pv, selectGuideBoardNo);
+		}
+		
+
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, selectGuideBoardNo);
+		pstmt.setString(2, searchValue);
+		pstmt.setInt(3, pv.getBeginRow());
+		pstmt.setInt(4, pv.getLastRow());
+		ResultSet rs =  pstmt.executeQuery();
+		//rs
+		List<GuideReportVo> voList = new ArrayList<>();
+		while(rs.next()) {
+			
+			String reportNo = rs.getString("REPORT_NO");
+			String memberNo = rs.getString("MEMBER_NO");
+			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
+			String reportContent= rs.getString("CONTENT");
+			String writerId = rs.getString("WRITERID");
+			String writerName = rs.getString("WRITERNAME");
+			String writerNick = rs.getString("WRITERNICK");
+			GuideReportVo vo = new GuideReportVo();
+		
+			vo.setReportNo(reportNo);
+			vo.setMemberNo(memberNo);
+			vo.setGuideBoardNo(guideBoardNo);
+			vo.setReportContent(reportContent);
+			vo.setWriterId(writerId);
+			vo.setWriterName(writerName);
+			vo.setWriterNick(writerNick);
+			
+			voList.add(vo);
+			
+			
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return voList;
+			
+		
+	}
+
+
 
 }
