@@ -78,12 +78,12 @@ public class MemberService {
 //		return updatedMember;
 //	}
 
-	public int quit(String no) throws Exception {
+	public int quit(MemberVo vo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//SQL
-		int result = dao.quit(conn , no);
+		int result = dao.quit(conn , vo);
 		
 		//tx || rs
 		if(result == 1) {
