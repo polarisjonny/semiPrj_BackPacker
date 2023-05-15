@@ -13,7 +13,7 @@
 
 	.scheduler{
 		width: 400px;
-		height: 290px;
+		height: 300px;
 		border: 1px solid #E7E6E6;
 		box-shadow: 5px 5px 5px #878787;
 	}
@@ -101,6 +101,8 @@
 		background-color: darkgray;
 		height: 200px;
 		margin-top: 30px;
+		margin-left: 80px;
+    	border-radius: 5px;
 	}
 	
 	#imgFile{
@@ -331,7 +333,7 @@
 				</div>
 	
 				<div>
-					<h3>
+					<h3 style="padding:20px">
 						게시글 내용을 작성해주세요
 					</h3>
 				</div>
