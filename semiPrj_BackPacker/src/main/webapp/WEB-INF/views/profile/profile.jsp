@@ -204,7 +204,7 @@
 
         <div class="profileMiddle">
             <div id="profileMidLeft">
-                 <img width="100px" height="100px" id="profile-border" src="${root}/static/img/temp_profile.png" alt="">
+                 <img width="100px" height="100px" id="profile-border" src="${root}/static/img/views/member/profile/${loginMember.profileImage}" alt="">
             </div>
             <div id="profileMidRightUp">
                 <div id="profileMidRightUpDistance">
@@ -242,7 +242,7 @@
 		                  </td>
                         <td class = "imgInput " rowspan="2"  >
                           
-							<img width="50px" height="50px"  class="btnimg" src="${root}/static/img/profile/airplane.jpg" alt="" onclick="imgClick(event)">
+							<img width="50px" height="50px"  class="btnimg" src="${root}/static/img/views/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)">
                           
 
                         </td>

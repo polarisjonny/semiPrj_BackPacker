@@ -14,6 +14,7 @@ public class MemberReviewVo {
    private String giverNick;
    private String boardTitle;
    private String state;
+   private String giverProfile;
 public String getNo() {
 	return no;
 }
@@ -80,18 +81,22 @@ public String getState() {
 public void setState(String state) {
 	this.state = state;
 }
+public String getGiverProfile() {
+	return giverProfile;
+}
+public void setGiverProfile(String giverProfile) {
+	this.giverProfile = giverProfile;
+}
 @Override
 public String toString() {
 	return "MemberReviewVo [no=" + no + ", giverNo=" + giverNo + ", memberNo=" + memberNo + ", chattingRoomNo="
 			+ chattingRoomNo + ", enrollDate=" + enrollDate + ", content=" + content + ", score=" + score + ", giverId="
-			+ giverId + ", giverNick=" + giverNick + ", boardTitle=" + boardTitle + ", state=" + state + "]";
-}
-public MemberReviewVo() {
-	super();
-	// TODO Auto-generated constructor stub
+			+ giverId + ", giverNick=" + giverNick + ", boardTitle=" + boardTitle + ", state=" + state
+			+ ", giverProfile=" + giverProfile + "]";
 }
 public MemberReviewVo(String no, String giverNo, String memberNo, String chattingRoomNo, String enrollDate,
-		String content, String score, String giverId, String giverNick, String boardTitle, String state) {
+		String content, String score, String giverId, String giverNick, String boardTitle, String state,
+		String giverProfile) {
 	super();
 	this.no = no;
 	this.giverNo = giverNo;
@@ -104,6 +109,12 @@ public MemberReviewVo(String no, String giverNo, String memberNo, String chattin
 	this.giverNick = giverNick;
 	this.boardTitle = boardTitle;
 	this.state = state;
+	this.giverProfile = giverProfile;
 }
+public MemberReviewVo() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
    
 }
