@@ -246,7 +246,7 @@
                           
 
                         </td>
-                        <td class="comentContent" >${reviewList.content}</td>
+                        <td class="comentContent" >${reviewList.boardTitle} <br> ${reviewList.content}</td>
                     </tr>
                     <tr>
                         
