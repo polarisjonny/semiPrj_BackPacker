@@ -54,6 +54,10 @@
       display: flex;
       justify-content: space-evenly; 
    }
+     tbody > tr:hover{
+    	background-color: rgba(176, 237, 241, 0.842);
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>

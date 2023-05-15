@@ -77,7 +77,7 @@ public class GoProfileDao {
 
    public List<MemberReviewVo> selectMemberReadReview(Connection conn, String selectMemberNo) throws Exception {
       //SQL
-      String sql = "SELECT NO, GIVER_NO, MR.MEMBER_NO, MR.CHATTING_ROOM_NO, MR.ENROLL_DATE AS ENROLL_DATE, MR.CONTENT, MR.SCORE ,M.ID AS ID, M.NICK AS NICK,  B.TITLE AS BOARDTITLE, B.MATCHING_STATE AS STATE FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER_REVIEW WHERE MEMBER_NO=? ORDER BY NO DESC ) T )MR JOIN MEMBER M ON MR.GIVER_NO = M.MEMBER_NO JOIN CHATTING_ROOM C ON MR.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = C.GUIDE_BOARD_NO ";
+      String sql = "SELECT NO, MR.GIVER_NO AS GIVER_NO, MR.MEMBER_NO, MR.CHATTING_ROOM_NO, MR.ENROLL_DATE AS ENROLL_DATE , MR.CONTENT, MR.SCORE ,M.ID AS ID, M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILE, B.TITLE AS BOARDTITLE, B.MATCHING_STATE AS STATE FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER_REVIEW WHERE MEMBER_NO=? ORDER BY NO DESC ) T )MR JOIN MEMBER M ON MR.GIVER_NO = M.MEMBER_NO JOIN CHATTING_ROOM C ON MR.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO JOIN GUIDE_BOARD B ON B.GUIDE_BOARD_NO = C.GUIDE_BOARD_NO ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, selectMemberNo);
       
@@ -98,6 +98,7 @@ public class GoProfileDao {
          String giverId = rs.getString("ID");
          String giverNick = rs.getString("NICK");
          String boardTitle = rs.getString("BOARDTITLE");
+         String giverProfile = rs.getString("PROFILE") ;
          
          //tx || rs
          MemberReviewVo vo = new MemberReviewVo();
@@ -112,6 +113,7 @@ public class GoProfileDao {
          vo.setContent(content);
          vo.setScore(score);;
          vo.setBoardTitle(boardTitle);
+         vo.setGiverProfile(giverProfile);
          MemberReviewVolist.add(vo);
          }
          

@@ -33,7 +33,7 @@ public class ReviewInfoBoardManageController extends HttpServlet {
 			}else {
 				page = 1;
 			}
-			PageVo pv = new PageVo(cnt, page, 5, 10);
+			PageVo pv = new PageVo(cnt, page, 10, 5);
 			List<InfoBoardVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				

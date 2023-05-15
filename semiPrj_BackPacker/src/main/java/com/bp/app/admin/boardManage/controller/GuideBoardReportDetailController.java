@@ -37,7 +37,7 @@ public class GuideBoardReportDetailController extends HttpServlet{
 			}else {
 				page = 1;
 			}
-			PageVo pv = new PageVo(cnt, page, 5, 10);
+			PageVo pv = new PageVo(cnt, page, 10, 3);
 			List<GuideReportVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
@@ -54,7 +54,7 @@ public class GuideBoardReportDetailController extends HttpServlet{
 			req.setAttribute("voList", voList);
 			req.setAttribute("searchVo", map);
 			req.setAttribute("selectGuideBoardNo", selectGuideBoardNo);
-			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-content.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-detail.jsp").forward(req, resp);
 		}catch(Exception e) {
 			System.out.println("[ERROR] 게시글 목록 조회에러");
 			e.printStackTrace();
