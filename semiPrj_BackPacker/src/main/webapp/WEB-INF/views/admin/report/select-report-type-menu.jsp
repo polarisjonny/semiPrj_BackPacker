@@ -36,6 +36,8 @@
         margin-top : 50px;
 		margin-left : auto;
 		margin-right : auto;
+		cursor: pointer;
+       	border: 0px;
     }
 
   
@@ -51,10 +53,15 @@
          margin-top : 50px;
        	margin-left : auto;
 		margin-right : auto;
+       	border: 0px;
+       	cursor: pointer;
         
     }
     .intext{
         margin-top: 33px;
+        cursor: pointer;
+       	border: 0px;
+         	
     }
 </style>
 <body>
@@ -96,6 +103,6 @@
    
 
     review.addEventListener("click" , function(c){
-        window.location.href = '${root}/admin/infoReviewBoard'
+        window.location.href = '${root}/admin/reviewInfoBoard'
         });
 </script>

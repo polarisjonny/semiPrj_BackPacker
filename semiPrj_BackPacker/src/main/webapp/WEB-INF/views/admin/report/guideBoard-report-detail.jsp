@@ -27,6 +27,7 @@
     }
     #acbtable {
     width: 800px;
+    
     border-collapse: collapse;
     border-spacing: 10px;
     text-align: center;
@@ -38,7 +39,8 @@
     border-bottom: 1px solid black;
     }
     #acbtable td{
-    padding-top: 10px; padding-bottom: 10px;
+    padding-top: 10px; 
+    padding-bottom: 10px;
     border-bottom: 1px solid black;
     }
 
@@ -63,7 +65,7 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">동행, 프페커 게시판 목록</h1>
+        <h1 id="th1">동행, 프페커 게시판 신고 내용</h1>
         <hr>
         <div id="search-area">
                 <form action="${root}/admin/guideBoard/report" method="get">
@@ -85,35 +87,36 @@
             </div>
         <div id="board1">
             
-            <table id="acbtable">
-                <thead>
-                    <tr>
-                        <th>신고자 아이디</th>
-                        <th>신고자 닉네임</th>
-                        <th>신고자 이름</th>
-                        
-                    </tr>
-                </thead>
-                 <tbody>
-                	<c:forEach items="${voList}" var="vo">
-	                    <tr style="border-bottom: 0px;">
-	                        <td hidden>${vo.reportNo}</td>
-	                        <td hidden>${vo.memberNo}</td>
-	                        <td hidden>${vo.guideBoardNo}</td>
-	                        <td style="border-bottom: 0px;">${vo.writerId}</td>
-	                        <td style="border-bottom: 0px;">${vo.writerNick}</td>
-	                        <td style="border-bottom: 0px;">${vo.writerName}</td>
-	                       
-	                    </tr>        
-	                    <tr style="border-top: 0px;">
-	                    
-	                  
-	                        <td colspan="4" style="border-top: 0px; text-align: left; overflow: auto;"> <strong>내용 : </strong>  ${vo.reportContent}</td>
+	            <table id="acbtable">
+	                <thead>
+	                    <tr>
+	                        <th>신고자 아이디</th>
+	                        <th>신고자 닉네임</th>
+	                        <th>신고자 이름</th>
+	                        
 	                    </tr>
-                	</c:forEach>
-                </tbody>
-                
-            </table>
+	                </thead>
+	                 <tbody>
+	                	<c:forEach items="${voList}" var="vo">
+		                    <tr style="border-bottom: 0px;">
+		                        <td hidden>${vo.reportNo}</td>
+		                        <td hidden>${vo.memberNo}</td>
+		                        <td hidden>${vo.guideBoardNo}</td>
+		                        <td style="border-bottom: 0px;">${vo.writerId}</td>
+		                        <td style="border-bottom: 0px;">${vo.writerNick}</td>
+		                        <td style="border-bottom: 0px;">${vo.writerName}</td>
+		                       
+		                    </tr>        
+		                    <tr style="border-top: 0px;">
+		                    
+		                  
+		                        <td colspan="4" style="border-top: 0px; text-align: left; overflow: auto;"> <strong>내용 : </strong>  ${vo.reportContent}</td>
+		                    </tr>
+	                	</c:forEach>
+	                </tbody>
+	                
+	            </table>
+           
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">

@@ -27,6 +27,7 @@
     }
     #acbtable {
     width: 800px;
+    height : 450px;
     border-collapse: collapse;
     border-spacing: 10px;
     text-align: center;
@@ -38,7 +39,8 @@
     border-bottom: 1px solid black;
     }
     #acbtable td{
-    padding-top: 10px; padding-bottom: 10px;
+    padding-top: 10px;
+     padding-bottom: 10px;
     border-bottom: 1px solid black;
     }
 

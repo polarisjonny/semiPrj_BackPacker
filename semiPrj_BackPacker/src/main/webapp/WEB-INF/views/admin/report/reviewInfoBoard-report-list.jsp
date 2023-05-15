@@ -27,6 +27,7 @@
     }
     #acbtable {
     width: 800px;
+    height : 450px;
     border-collapse: collapse;
     border-spacing: 10px;
     text-align: center;
@@ -38,7 +39,8 @@
     border-bottom: 1px solid black;
     }
     #acbtable td{
-    padding-top: 10px; padding-bottom: 10px;
+    padding-top: 10px; 
+    padding-bottom: 10px;
     border-bottom: 1px solid black;
     }
 
@@ -69,7 +71,7 @@
         <h1 id="th1">후기, 정보 게시판 목록</h1>
         <hr>
         <div id="search-area">
-                <form action="${root}/admin/infoReviewBoard" method="get">
+                <form action="${root}/admin/reviewInfoBoard" method="get">
                     <input type="hidden" value="1" name="page">
                     <select name="searchType" id="opt" >
                         <option value="category">게시판 이름</option>
@@ -106,6 +108,7 @@
                         <th>작성자 id</th>
                         <th>작성자 nick</th>
                         <th>신고수</th>
+                         <th>신고내용</th>
                     </tr>
                 </thead>
                  <tbody>
@@ -117,6 +120,13 @@
 	                        <td>${vo.writerId}</td>
 	                        <td>${vo.writerNick}</td>
 	                        <td>${vo.reportCnt}</td>
+	                         <td>
+	                        	<form action="${root}/admin/reviewInfoBoard/report" method="get">
+                                    <input type="hidden" value="${vo.infoNo}" name="selectReviewInfoBoardNo">
+                                    <input type="submit" value="신고내용">
+
+                                </form>
+	                        </td>
 	                    </tr>        
                 	</c:forEach>
                 </tbody>
@@ -125,18 +135,18 @@
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
             	</c:if>
 	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
 	           		<c:if test="${pv.currentPage != i}">
-		            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
 	           		</c:if>
 	           		<c:if test="${pv.currentPage == i}">
 		            	<a class ="btn btn-outline-info" >${i}</a>
 	           		</c:if>
 	           	</c:forEach>
 	           	<c:if test="${pv.currentPage != pv.maxPage}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/infoReviewBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
 	           	</c:if>
             </div>
         </div>
@@ -213,6 +223,6 @@
 	const tbody = document.querySelector("tbody");
 	tbody.addEventListener("click" , function(e){
 	  const no = e.target.parentNode.children[0].innerText;
-	  location.href = "${pageContext.request.contextPath}/accompany/detail?guideBoardNo=" + no;
+	  location.href = "${pageContext.request.contextPath}/accompany/detail?infoBoardNo=" + no;
 	});
 </script>

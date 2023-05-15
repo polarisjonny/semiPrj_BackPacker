@@ -47,6 +47,10 @@
       #detailWrap tr{
       height : 50px;
       }
+      
+       .profile-border{
+         border-radius : 50px;
+         }
 </style>
 </head>
 
@@ -67,7 +71,7 @@
                         ${reviewListDetail.giverNo}
                     </td>
                     <td class = "imgInput " rowspan="2">
-                      <img width="50px" height="50px"  class="btnimg" src="${root}/static/img/profile/airplane.jpg" alt="" onclick="imgClick(event)">
+                      <img width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewListDetail.giverProfile}" alt="" onclick="imgClick(event)">
                     </td>
                     <td class="comentContent" >${reviewListDetail.content}</td>
                 </tr>

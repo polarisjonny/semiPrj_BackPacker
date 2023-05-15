@@ -14,10 +14,16 @@
             height: 800px;
         }
         #profileStarTop{
+        	display : grid;
             margin: auto;
             width: 300px;
             height: 110px;
             text-align: left;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+           
+           
         }
         #profileStarForm{
             
@@ -25,7 +31,7 @@
             height: 80%;
         }
         #profileText{
-            text-align: center;
+        	text-align: center;
             margin: auto;
        }
         .star-rating {
@@ -85,19 +91,44 @@
             height: 150px;
             resize: none;
         }
-      
+         .profile-border{
+         border-radius : 50px;
+         }
+      .gcon{
+      	text-align: center;
+      }
+       .btnimg{
+         cursor: pointer;
+         	border: 0px;
+         	cursor: pointer;
+         }
     </style>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="profileStarWrap">
         <div id="profileStarTop">
-            ${loginMember.nick} 
-			<br>
+            
+        		<div class="gcon">${crv.chattingUserNick} </div>
+        		<div class="gcon"> ${crv.chattingUser2Nick} </div>
+       			<div class="gcon">
+       				<div hidden > ${loginMember.memberNo}</div>
+       				<img width="100px" height="100px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" onclick="imgClick(event)">
+       			</div>
+       		
+       			<div class="gcon">
+       				<div hidden > ${selectMember.memberNo}</div>
+       				<img width="100px" height="100px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${selectMember.profileImage}" onclick="imgClick(event)">
+       			</div>
+	        	
+	        	
+	       
         </div>
         <br>
         <div id="profileText">
-            ${crv.chattingUserNick}님  ${crv.chattingUser2Nick}님과의 여행은 어떠셨나요?
+        	${crv.chattingUserNick}님 ${crv.chattingUser2Nick}님과의 여행은 어떠셨나요?
+	       
+	        	
         </div>
         <br>
         <div id="profileStarForm">
@@ -120,8 +151,8 @@
                 </div>
                 <div class="tArea">
                     <textarea name="reviewContent" class="tArea"  ></textarea>
-                     <input type="hidden" name="selectMemberNo" value="${selectMemberNo}">
-                  <input type="hidden" name="loginMemberNo" value="${loginMemberNo}">
+                     <input type="hidden" name="selectMemberNo" value="${selectMember.memberNo}">
+                  <input type="hidden" name="loginMemberNo" value="${loginMember.memberNo}">
                        <input type="hidden" name="chattingRoomNo" value="${crv.chattingRoomNo}">
                 </div>
                 <br>
@@ -133,3 +164,14 @@
     </div>
 </body>
 </html>
+<script>
+   function imgClick(e) {
+      const no = e.target.parentNode.children[0].innerText; //게시글 작성자 번호
+      const width = 800;
+      const height = 1000;
+      const left = (screen.width / 2) - (width / 2);
+      const top = 0;
+      window.location.href ='${root}/click/profile?selectMemberNo='+no;
+   }
+   
+ </script>
