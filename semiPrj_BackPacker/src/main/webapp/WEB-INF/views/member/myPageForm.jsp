@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지</title>
+<script>https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style>
         #my-page-title-area {
             margin: auto;
@@ -159,7 +161,25 @@
             flex-direction: column;
             align-items: center;
         }
+        
+        
+        #quit-btn {
+        	margin-left: 65%;
+        	background-color: #94d2e6;
+        	border: none;
+        	width: 6%;
+        	color: white;
+        }
 
+		#final-quit-btn {
+			background-color: #94d2e6;
+			border: none;
+		}
+		
+		#close-btn {
+			background-color: lightgray;
+			border: none;
+		}
 
     </style>
 </head>
@@ -294,9 +314,66 @@
                 <span>yer5_27</span>
             </div>
         </div>
-            
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+    	
+    	<div id="quit-area">
+    		<button id="quit-btn" data-bs-toggle="modal" data-bs-target=".modal">탈퇴하기</button>
+    	</div>
+		<div class="modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">탈퇴하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>탈퇴하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+      	<input id="idVal" type="hidden" name="id" value="${loginMember.id}">
+        <button id="final-quit-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">탈퇴하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
     </main>
     
+    
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    
+    
+    
+    <script>
+    	const id = document.querySelector("#idVal").value;
+    	
+   	 	document.addEventListener("DOMContentLoaded", function() {
+    	    var myModal = new bootstrap.Modal(document.querySelector(".modal"));
+    	});
+   	 	
+   	 	const finalQuitBtn = document.querySelector("#final-quit-btn");
+   	 	
+   	 	finalQuitBtn.addEventListener("click", function(){
+   	 		$.ajax({
+   	 			url: '${root}/member/quit',
+   	 			data : {id: id},
+   	 			method : 'post',
+   	 			success: function(x) {
+   	 				console.log("데이터 송신 성공");
+   	 			}, 
+   	 			error : function() {
+   	 				console.log("데이터 송신 실패...");
+   	 			}
+   	 			
+   	 		});
+   	 	});
+</script>
+    
 </body>
 </html>
+    

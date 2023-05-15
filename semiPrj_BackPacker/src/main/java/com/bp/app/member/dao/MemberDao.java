@@ -163,11 +163,11 @@ public class MemberDao {
 //		return vo;
 //	}
 
-	public int quit(Connection conn, String no) throws Exception {
+	public int quit(Connection conn, MemberVo vo) throws Exception {
 		
-		String sql = "UPDATE MEMBER SET MEMBER_STATUS = '2' WHERE MEMBER_NO = ?";
+		String sql = "UPDATE MEMBER SET MEMBER_STATUS = '3' WHERE ID = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, no);
+		pstmt.setString(1, vo.getId());
 		int result = pstmt.executeUpdate();
 		
 		JDBCTemplate.close(pstmt);
