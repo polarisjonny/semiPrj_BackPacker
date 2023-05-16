@@ -44,7 +44,7 @@ public class AccompanyListController extends HttpServlet{
 		} catch (Exception e) {
 			System.out.println("동행게시판 리스트 보여주는 메소드에서 발생");
 			e.printStackTrace();
-			
+			req.setAttribute("errorMsg", "동행게시판 리스트 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 			
 		}
