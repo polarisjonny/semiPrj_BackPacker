@@ -212,7 +212,7 @@
                 
                 <div id="main-area">
                 	<c:forEach items="${gbvoList}" var="vo">
-	                	<div class="content-box">
+	                	<div class="content-box" onclick="location.href ='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
 	                        <div class="top-content">
 	                            <div class="left-img">
 	                                <img class="profile" src="${root}/static/img/member/profile/${vo.profileImage}" alt="">

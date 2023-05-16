@@ -2,6 +2,7 @@ package com.bp.app.gboard.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bp.app.common.db.JDBCTemplate;
@@ -42,6 +43,74 @@ public class GuideBoardDao {
 		JDBCTemplate.close(pstmt);
 
 		return result;
+	}
+
+	public MemberVo selectMemberByNo(Connection conn, GuideBoardVo bvo) throws Exception {
+		//sql
+		String sql = "SELECT NICK,ID,PROFILE_IMAGE,INTRO_MESSAGE FROM MEMBER WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bvo.getWriterNo());
+		ResultSet rs =  pstmt.executeQuery();
+		
+		//rs
+		MemberVo writerMember = null;
+		if(rs.next()) {
+			String nick = rs.getString("NICK");
+			String id = rs.getString("ID");
+			String profileImage = rs.getString("PROFILE_IMAGE");
+			String introMessage = rs.getString("INTRO_MESSAGE");
+			System.out.println(nick);
+			
+			writerMember = new MemberVo();
+			writerMember.setMemberNo(bvo.getWriterNo());
+			writerMember.setNick(nick);;
+			System.out.println(writerMember.getNick());
+			writerMember.setId(id);
+			writerMember.setProfileImage(profileImage);
+			writerMember.setIntroMessage(introMessage);
+		}
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return writerMember;
+	}
+
+	public GuideBoardVo selectOneByNo(Connection conn, GuideBoardVo bvo) throws Exception {
+		//sql
+		String sql ="SELECT TITLE,CONTENT,ENROLL_DATE,MODIFY_DATE,HIT,MATCHING_STATE,SCHEDULER_NO FROM GUIDE_BOARD WHERE GUIDE_BOARD_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bvo.getGuideBoardNo());
+		ResultSet rs = pstmt.executeQuery();
+				
+		//rs
+		GuideBoardVo selectedBvo = null; 
+		if(rs.next()) {
+			String title =rs.getString("TITLE");
+			String content =rs.getString("CONTENT");
+			String enrollDate =rs.getString("ENROLL_DATE");
+			String modifyDate =rs.getString("MODIFY_DATE");
+			String hit =rs.getString("HIT");
+			String matchingState =rs.getString("MATCHING_STATE");
+			String schedulerNo =rs.getString("SCHEDULER_NO");
+			
+			selectedBvo = new GuideBoardVo();
+			selectedBvo.setTitle(title);
+			selectedBvo.setContent(content);
+			selectedBvo.setEnrollDate(enrollDate);
+			selectedBvo.setModifyDate(modifyDate);
+			selectedBvo.setHit(hit);
+			selectedBvo.setMatchingState(matchingState);
+			selectedBvo.setSchedulerNo(schedulerNo);
+			
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return selectedBvo;
 	}
 
 }

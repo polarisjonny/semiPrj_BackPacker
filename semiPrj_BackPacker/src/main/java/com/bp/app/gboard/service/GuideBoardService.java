@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.dao.GuideBoardDao;
@@ -53,7 +54,7 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER, L.CHANGE_NAME, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN GUIDE_BOARD_IMG_LIST L ON (L.GUIDE_BOARD_NO= GB.GUIDE_BOARD_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
+		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER, L.CHANGE_NAME, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN GUIDE_BOARD_IMG_LIST L ON (L.GUIDE_BOARD_NO= GB.GUIDE_BOARD_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getBeginRow());
 		pstmt.setInt(2, pvo.getLastRow() );
@@ -69,6 +70,7 @@ public class GuideBoardService {
 			String age = rs.getString("AGE");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String gender = rs.getString("GENDER");
+			String writerNo = rs.getString("WRITER_NO");
 			if(gender=="M") {
 				gender="남성";
 			}else {
@@ -86,7 +88,7 @@ public class GuideBoardService {
 			bvo.setNick(nick);
 			bvo.setAge(age);
 			bvo.setProfileImage(profileImage);
-			
+			bvo.setWriterNo(writerNo);
 			
 			bvo.setGender(gender);
 			bvo.setChangeName(changeName);
@@ -136,6 +138,30 @@ public class GuideBoardService {
 		JDBCTemplate.close(conn);
 		
 		return cnt;
+	}
+
+
+	public MemberVo selectMemberByNo(GuideBoardVo bvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberVo writerMember = dao.selectMemberByNo(conn,bvo);
+		
+		JDBCTemplate.close(conn);
+		
+		return writerMember;
+	}
+
+
+	public GuideBoardVo selectOneByNo(GuideBoardVo bvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+			
+		GuideBoardVo selectedBvo =  dao.selectOneByNo(conn,bvo);
+		
+		JDBCTemplate.close(conn);
+		return selectedBvo;
+		
 	}
 
 }

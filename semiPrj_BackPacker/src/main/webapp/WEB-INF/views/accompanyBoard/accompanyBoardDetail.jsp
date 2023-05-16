@@ -234,6 +234,7 @@
 	#sub-area {
 		margin-top: 30px
 	}
+	
 </style>
 </head>
 <body>
@@ -245,32 +246,23 @@
 			<div id="main-box">
 				<div id="blank1"></div>
 				<div id="main-area">
-					<div id="title">오르비스 같이 여행가실 동행한명 구해요.</div>
+					<div id="title">${gbvo.title}</div>
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>
-						<div class="content-text">
-							저는 엘나스에 거주하고 있는 김밥이 좋더라입니다. 면허있구요 엘나스행 비행기표 있습니다. <br>
-							저는 피아노를 전공했구요.. 프패커랑 가이드게시판 으음.. 모르겠습니다.. <br>
-							안녕하세요. 여행다니는걸 🥰좋아하는 20대 여성입니다. 저는 차 운전하는거 좋아합니다. <br>
- 							일본어 잘하구요.👌 일본에서 3년간 유학했던 유학생입니다. <br>
-
-							저는 코골이 이갈이에 예민하구용 <br>
-							벌레 잘 못잡습니다. 벌레는 살려둬야죠.. 🤣  <br>
-							유럽쪽에 여행 많이 다녀보고 싶어요. <br>
-							저는 사진찍는걸 좋아합니다. <br>
-
-							예술공연 보러가는 것도 좋아해요 오케스트라 공연 보고싶어요 <br>
-
-							술은 잘 못먹습니다 ㅠㅠ 주량은 소주 반잔 맥주 한병입니다!! <br>
+						<div id="content-text">
+							${writerMember.introMessage}
 						</div>
+						
+						<textarea id="content-text">${writerMember.introMessage}</textarea>
 					</div>
 					<div id="content-area">
 						<div class="bold-text">게시글 내용</div>
 						<div class="content-text">
-							오르비스로 여행가실 30대 여성분 구합니다. 저도 여자구요, 저는 오르비스에 거주한적이 있어서 <br> 
-							해당 지역의 언어 잘 합니다. 면허도 있구요 코콜이 안하시는분만 동행 신청하기를 눌러주세요 
+							${gbvo.content}
 						</div>
 					</div>
+				
+					<c:if test="${not empty tvo}">
 					<div id="shedule-area">
 						<div class="bold-text big-text">일정표</div>
 						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -417,14 +409,15 @@
 							</button>
 						  </div>
 					</div>
+					</c:if>
 					<div id="profile-box">
 						 <div id="profile-area" class="profile">
-							<img src="${root}/static/img/temp_profile.png" alt="">
+							<img src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
 						 </div>
 						 <div id="info-box">
 							<div id="blank-98"></div>
 							<div id="id-area">
-								<div id="name-area">김민규(manku07)</div>
+								<div id="name-area">${writerMember.nick}(${writerMember.id})</div>
 								<div id="btn-area">
 									<button class="s-btn btn-blue">수정</button>
 									<button class="s-btn btn-red">삭제</button>
@@ -466,6 +459,7 @@
 				</div>
 				<div id="blank2"></div>
 			</div>
+					
 		</main>
 
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
