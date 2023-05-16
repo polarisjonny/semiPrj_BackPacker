@@ -80,7 +80,7 @@
 					<input type="file" id="imgFile">
 				</div>
 				<div id="title-area">
-					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
+					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요." >
 				</div>
 				<div id="summernote"></div>
 			    <script>
