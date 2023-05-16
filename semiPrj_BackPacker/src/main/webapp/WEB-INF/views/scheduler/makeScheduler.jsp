@@ -36,11 +36,12 @@
 	#scheduler-area{
 		align-items: center;
 		box-sizing: border-box;
-		display: flex;
+		display: none;
 		flex-direction: column;
 		flex-shrink: 0;
 		padding: 20px;
 		width: 100%;
+		margin-top: 20px
 		
 	}
 
@@ -68,6 +69,7 @@
 		border-radius: 10px;
 		margin-top: 20px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		font-size: 0.8em;
 	}
 
 	#sc-img {
@@ -76,6 +78,14 @@
 
 	#area {
 		margin-left: 10px;
+	}
+
+	.time>input{
+		width:80px;
+		height: 23px;
+	}
+	.scheduler-date{
+		text-align: center;
 	}
 
 
@@ -216,7 +226,62 @@
 		top: 40px;
 	}
 	
+	#tripDate>input[name='daterange']{
+		width: 194px;
+	}
 
+
+	#modal-area{
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		z-index: 9999;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: none;
+  		justify-content: center;
+ 		align-items: center;
+	}
+	#box{
+		width: 55vw;
+  		height: 40vh;
+		background-color: white;
+		display: grid;
+		grid-template-columns: 60% 35% 5% ;
+	}
+	#modal-in{
+		display: flex;
+		padding: 10px;
+		justify-content: center;
+		flex-direction: column;
+
+	}
+	#modal-btn{
+		display: flex;
+   		flex-direction: column;
+	}
+	#modal-btn>button{
+		border: 0px;
+    	background-color: white;
+
+	}
+	#modal-tro{
+		display: flex;
+    	flex-direction: column;
+	}
+	#modal-tro>div{
+		border: 1px solid gray;
+		border-radius: 5px;
+		height: 100px;
+		overflow: auto;
+  		word-wrap: break-word;
+		padding: 5px;
+		color: darkblue;
+
+	}
     
   
     
@@ -229,7 +294,7 @@
 	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
-		<div id="wrap">
+	<div id="wrap">
 	
 	
 	    <div id="sidebarLeft">
@@ -240,43 +305,44 @@
 				<input type="hidden" name="endDate" >
 			</div>
 
-			<div id="test">
-
-			</div>
-		
-			<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
-				여행기간을 설정하시오    
-			</div>
+				<div id="test">
+				</div>
+			
+				
+				<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
+					여행기간을 설정하시오   
+				</div>
+				
 		
 	
 			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
-			<c:if test="">
-				<div id="scheduler-area">
-	
-					<div id="scheduler-date-area">
-						<div><a class="scheduler-date" href="">이전날</a></div>
-						<div class="scheduler-date" ><h4>2023.05.10 DAY 1</h4></div>
-						<div><a class="scheduler-date" href="">다음날</a></div>
-					</div>
-					<div id="test"></div>
-	
-					  <%-- 여행지을 가져 왔을때 생성 --%>
-						<div id="scheduler-place-area">
-							<div id="scheduler-place">
-								<img id="sc-img" height="80px" width="80px" src="" alt="">
-								<div id="area">
-									<div class="place">장소명 : 해운대</div>
-									<div class="time">소요시간 : 90분</div>
-									<div class="class-time">시작시간 : 11:00</div>
-								</div>
-								<div id="delete"><i class="bi bi-trash"></i></div>
-							</div>
-						</div>
-					
-					<button class="btnn" >일정저장하기</button>
+			
+			<div id="scheduler-area">
+
+				<div id="scheduler-date-area">
+					<div><a class="scheduler-date" href="">이전날</a></div>
+					<div class="scheduler-date" ><h4> DAY 1</h4></div>
+					<div><a class="scheduler-date" href="">다음날</a></div>
 				</div>
+				<div id="test"></div>
+
+					<%-- 여행지을 가져 왔을때 생성 --%>
+					<div id="scheduler-place-area">
+						<div id="scheduler-place">
+							<img id="sc-img" height="80px" width="80px" src="" alt="">
+							<div id="area">
+								<div class="place">장소명 : 해운대</div>
+								<div class="time">소요시간 : <input type="text" value="90">분</div>
+								<div class="class-time">시작시간 : <input type="time" value="10:00"></div>
+							</div>
+							<div id="delete"><i class="bi bi-trash"></i></div>
+						</div>
+					</div>
 				
-			</c:if>
+				<button class="btnn" >일정저장하기</button>
+			</div>
+				
+			
 		</div>
 			
 	
@@ -306,22 +372,64 @@
 					</div>
 				</div>
 				
-				<c:forEach items="${placeList}" var="placeList">
+				<c:forEach items="${placeList}" var="place">
 					<div id="place">
 						<img id="place-img" src="" alt="">
-						<div id="p-place">${placeList.placeName}</div>
+						<div id="p-place">${place.placeName}</div>
 						<div id="p-area">
-							<div id="p-introduce"><i class="bi bi-info-circle"></i></div>
-							<div id="p-pick"><i class="bi bi-plus-circle"></i></div>
+							<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>
+							<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="${place.placeNo}" ></i></div>
+						</div>
+					</div>
+					<div id="modal-area" class="modal-area">
+						<div id="box">
+							<div id="modal-img">
+								<img src="" alt="">
+							</div>
+							<div id="modal-in">
+								<div id="modal-name" style="padding-bottom: 10px; font-size: large;">
+									${place.placeName}
+								</div>
+								<div id="modal-tro">
+									여행지소개
+									<div>
+										${place.placeIntroduce}
+									</div>
+								</div>
+							</div>
+							<div id="modal-btn">
+								<button id="close" class="close">X</button>
+							</div>
+				
 						</div>
 					</div>
 				</c:forEach>
+					<script>
+						var openModals = document.querySelectorAll('.bi-info-circle');
+						var closeModals = document.querySelectorAll('.close');
+						var modals = document.querySelectorAll('.modal-area');
+
+						openModals.forEach(function(openModal, index) {
+							openModal.addEventListener('click', function() {
+							modals[index].style.display = 'flex';
+							});
+						});
+
+						closeModals.forEach(function(closeModal, index) {
+							closeModal.addEventListener('click', function() {
+							modals[index].style.display = 'none';
+							});
+						});
+
+					</script>
 				
 	           
 	        </div>
 	
 	    </div>
 	</div>
+
+	
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
@@ -331,31 +439,107 @@
 	
 	
 	    <script defer>
+			var startDate;
+			var endDate;
+			var pick =true;
+			var intro = document.querySelector('#intro');
+			var timetable = document.querySelector('maketimetable');
+			
+
+			
 	        $(function() {
-	          $('input[name="daterange"]').daterangepicker({
-	            opens: 'left',
+				$('input[name="daterange"]').daterangepicker({
+					opens: 'left',
 	            locale: {
-	                format: 'YYYY-MM-DD',
+					format: 'YYYY-MM-DD',
 	                daysOfWeek: ['일', '월', '화', '수', '목', '금', '토'],
 	                monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 	                cancelLabel:'취소',
 	                applyLabel:'적용하기'
 	            }
-	          }, function(start, end, label) {
+			}, function(start, end, label) {
 				
 					const ddd = document.querySelector('#test');
 					ddd.innerHTML=start.format('YYYY-MM-DD')+"~"+end.format('YYYY-MM-DD');
-					ddd.innerHTML+="<form action=''>"
-					ddd.innerHTML+="<input id='start' type='hidden' value='"+start.format('YYYY-MM-DD')+"'>"
-					ddd.innerHTML+="<input is='end' type='hidden' value=''>"
-					ddd.innerHTML+="<button type='submit'>일정표 생성하기</button></form>";
-
-					console.log(start.format('YYYY-MM-DD'));
-					console.log(end.format('YYYY-MM-DD'));
-	
-	          });
+					ddd.innerHTML+="<input name='starDt' type='hidden' value='"+start.format('YYYY-MM-DD')+"'>"
+					ddd.innerHTML+="<input type='hidden' value=''>"
+					ddd.innerHTML+="<input type='button' id='maketimetable'  value='일정표 생성하기'>";
+					
+					$('#intro').hide();
+					
+					startDate = start.format('YYYY-MM-DD');
+					endDate = end.format('YYYY-MM-DD');
+					
+					$('#maketimetable').on('click',function(){
+						setScheduler();
+						$('#maketimetable').hide();
+						$('#scheduler-area').show();
+					})
+				});
+				
+				
+				$('.bi-plus-circle').on('click', function () {
+					setTimeTable($(this).data('placeno'));
+				});
 	        });
 			
+			function setScheduler(){
+
+				$.ajax({
+					type:'post',
+					url: '${root}/schedulermake/setScheduler',
+					data: { 
+						startDate: startDate,
+						endDate: endDate
+					},
+					success : function(x) { 
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+
+			};
+			
+			function setTimeTable(placeno){
+				$.ajax({
+					type:'post',
+					url: '${root}/schedulermake/setTimetable',
+					data: { 
+						placeNo: placeno,
+						schedulerNo: '1',
+						timetableDate: startDate,
+					},
+					success : function(data) { 
+						console.log(data);
+						
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+				
+			};
+			
+			function getTimetable(){
+				$.ajax({
+					url: '${root}/schedulermake/getTimetable',
+					type:'GET',
+					data: { 
+						
+					},
+					success : function(data) { 
+						console.log(data);
+
+						const x = JSON.parse(data);
+						console.log(x);
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+			};
+			getTimetable();
 
 		
 
@@ -366,8 +550,8 @@
 	
 	        function initMap() {
 	        map = new google.maps.Map(document.getElementById("map"), {
-	            center: { lat: 33.25108891517714, lng:126.62252603069803 },
-	            zoom: 15,
+	            center: { lat: 33.4996213, lng:126.5311884},
+	            zoom: 10,
 	        });
 	        }
 	

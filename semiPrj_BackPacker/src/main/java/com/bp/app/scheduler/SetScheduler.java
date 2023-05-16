@@ -1,0 +1,49 @@
+package com.bp.app.scheduler;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bp.app.scheduler.service.SchedulerService;
+import com.bp.app.scheduler.vo.SchedulerVo;
+
+@WebServlet("/schedulermake/setScheduler")
+public class SetScheduler extends HttpServlet{
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			//데이터 꺼내기 
+			String startDate = req.getParameter("startDate");
+			String endDate = req.getParameter("endDate");
+			
+			//데이터 뭉치기
+			SchedulerVo sVo = new SchedulerVo();
+			sVo.setStartDate(startDate);
+			sVo.setEndDate(endDate);
+			
+			//서비스 
+			SchedulerService ss = new SchedulerService();
+			int result = ss.setScheduler(sVo);
+			
+			
+			
+			req.getSession().setAttribute("sVo", sVo);
+			//화면
+			
+		} catch (Exception e) {
+			System.out.println("error setScheduler 에러");
+			e.printStackTrace();
+		
+		}
+		
+		
+	
+	
+	}
+}
