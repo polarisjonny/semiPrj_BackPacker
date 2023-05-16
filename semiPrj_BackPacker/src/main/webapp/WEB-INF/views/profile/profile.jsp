@@ -175,7 +175,7 @@
          	border: 0px;
          	cursor: pointer;
          }
-         #profile-border{
+         .profile-border{
          border-radius : 50px;
          }
    </style>
@@ -204,7 +204,7 @@
 
         <div class="profileMiddle">
             <div id="profileMidLeft">
-                 <img width="100px" height="100px" id="profile-border" src="${root}/static/img/views/member/profile/${loginMember.profileImage}" alt="">
+                 <img width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" alt="">
             </div>
             <div id="profileMidRightUp">
                 <div id="profileMidRightUpDistance">
@@ -234,7 +234,7 @@
             </div>
             <br>
             <div>
-               <c:forEach items="${ selectMemberReviewlist }" var="reviewList" end="1">
+               <c:forEach items="${ selectMemberReviewlist }" var="reviewList" end="3">
                 <table id="reviewTable">
                     <tr>
 		                  <td hidden>
@@ -242,7 +242,7 @@
 		                  </td>
                         <td class = "imgInput " rowspan="2"  >
                           
-							<img width="50px" height="50px"  class="btnimg" src="${root}/static/img/views/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)">
+							<img width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)">
                           
 
                         </td>

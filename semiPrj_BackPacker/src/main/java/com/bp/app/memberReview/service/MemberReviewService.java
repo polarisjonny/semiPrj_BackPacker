@@ -103,5 +103,15 @@ public MemberVo selectMemberGetScore(String memberNo) throws Exception {
 	JDBCTemplate.close(conn);
 	return vo;
 }
+public MemberVo getSelectMemberVo(String selectMemberNo) throws Exception {
+	MemberVo vo = null;
+	Connection conn = JDBCTemplate.getConnection();
+    //update
+    
+	vo = dao.getSelectMemberVo(conn, selectMemberNo);
+    
+	JDBCTemplate.close(conn);
+	return vo;
+}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.bp.app.admin.boardManage.dao.BoardManagerDao;
 import com.bp.app.admin.boardManage.vo.GuideBoardVo;
 import com.bp.app.admin.boardManage.vo.GuideReportVo;
+import com.bp.app.admin.boardManage.vo.InfoBoardReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
@@ -117,6 +118,44 @@ public class BoardManageService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		List<GuideReportVo>voList = dao.getGuideBoardReportDetail(conn, pv, searchType, searchValue, selectGuideBoardNo);
+		//sql
+
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return voList;
+	}
+	public int getReviewInfoBoardReportDetailCnt(String searchType, String searchValue,String selectReviewInfoBoardNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int cnt = dao.getReviewInfoBoardReportDetailCnt(conn, searchType, searchValue ,selectReviewInfoBoardNo);
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+	}
+	public List<InfoBoardReportVo> getReviewInfoBoardReportDetail(PageVo pv, String selectReviewInfoBoardNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InfoBoardReportVo>voList = dao.getReviewInfoBoardReportDetail(conn, pv,selectReviewInfoBoardNo);
+		//sql
+
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return voList;
+		
+	}
+	public List<InfoBoardReportVo> getReviewInfoBoardReportDetail(PageVo pv, String searchType, String searchValue, String selectReviewInfoBoardNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InfoBoardReportVo>voList = dao.getReviewInfoBoardReportDetail(conn, pv, searchType, searchValue, selectReviewInfoBoardNo);
 		//sql
 
 		//close

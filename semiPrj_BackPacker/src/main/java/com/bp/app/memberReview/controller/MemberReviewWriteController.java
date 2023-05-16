@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bp.app.chat.room.vo.ChattingRoomVo;
 import com.bp.app.member.vo.MemberVo;
@@ -35,10 +36,13 @@ public class MemberReviewWriteController extends HttpServlet{
          }
          //서비스
          ChattingRoomVo crv = null;
+         MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
+         MemberVo selectMember = mrs.getSelectMemberVo(selectMemberNo);
          crv = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
+
          if(crv != null) {
-            req.setAttribute("loginMemberNo", loginMemberNo);
-            req.setAttribute("selectMemberNo", selectMemberNo);
+            req.setAttribute("loginMember", loginMember);
+            req.setAttribute("selectMember", selectMember);
             req.setAttribute("crv", crv);
             req.getRequestDispatcher("/WEB-INF/views/profile/write-review.jsp").forward(req, resp);
          }else {

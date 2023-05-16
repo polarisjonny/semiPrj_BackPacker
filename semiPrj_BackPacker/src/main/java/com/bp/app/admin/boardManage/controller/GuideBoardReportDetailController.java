@@ -37,7 +37,7 @@ public class GuideBoardReportDetailController extends HttpServlet{
 			}else {
 				page = 1;
 			}
-			PageVo pv = new PageVo(cnt, page, 10, 3);
+			PageVo pv = new PageVo(cnt, page, 10, 5);
 			List<GuideReportVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				

@@ -27,7 +27,7 @@
     }
     #acbtable {
     width: 800px;
-    
+    height : 450px;
     border-collapse: collapse;
     border-spacing: 10px;
     text-align: center;
@@ -50,13 +50,16 @@
       display: flex;
       justify-content: space-evenly; 
 }
- 
   #page-area{
       width : 500px;
       margin: auto;
       display: flex;
       justify-content: space-evenly; 
    }
+     tbody > tr:hover{
+    	background-color: rgba(176, 237, 241, 0.842);
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -65,83 +68,94 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">동행, 프페커 게시판 신고 내용</h1>
+        <h1 id="th1">후기, 정보 게시판 목록</h1>
         <hr>
         <div id="search-area">
-                <form action="${root}/admin/guideBoard/report" method="get">
+                <form action="${root}/admin/reviewInfoBoard" method="get">
                     <input type="hidden" value="1" name="page">
                     <select name="searchType" id="opt" >
-                    	
-                        <option value="writerName">작성자 이름</option>
+                        <option value="category">게시판 이름</option>
+                        <option value="title" >제목</option>
                         <option value="writerNick" >작성자 닉네임</option>
                         <option value="writerId" >작성자 아이디</option>
-                        <option value="content">신고내용</option>
+                        <option value="reportCnt">최소 신고수</option>
                         
                     </select>
-                    <input type="hidden"  value="${selectGuideBoardNo}" name = "selectGuideBoardNo">
+                    
+                   
+                    <select class = "searchValueElem" name="searchValue" >
+                        <option value="">신고수 없음</option>
+                        <option value="1">1 이상</option>
+                        <option value="10">10 이상</option>
+                        <option value="20">20 이상</option>
+                        <option value="50">50 이상</option>
+                        <option value="100">100 이상</option>
+                    </select>
                     <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
-                    <input type="submit">
+                    <input type="submit" value="검색">
                     
                 </form>
 
             </div>
         <div id="board1">
             
-	            <table id="acbtable">
-	                <thead>
+            <table id="acbtable">
+                <thead>
+                    <tr>
+                        <th>게시판 이름</th>
+                        <th>게시판 번호</th>
+                        <th>제목</th>
+                        <th>작성자 id</th>
+                        <th>작성자 nick</th>
+                        <th>신고수</th>
+                         <th>신고내용</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                	<c:forEach items="${voList}" var="vo">
 	                    <tr>
-	                        <th>신고자 아이디</th>
-	                        <th>신고자 닉네임</th>
-	                        <th>신고자 이름</th>
-	                        
-	                    </tr>
-	                </thead>
-	                 <tbody>
-	                	<c:forEach items="${voList}" var="vo">
-		                    <tr style="border-bottom: 0px;">
-		                        <td hidden>${vo.reportNo}</td>
-		                        <td hidden>${vo.memberNo}</td>
-		                        <td hidden>${vo.guideBoardNo}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerId}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerNick}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerName}</td>
-		                       
-		                    </tr>        
-		                    <tr style="border-top: 0px;">
-		                    
-		                  
-		                        <td colspan="4" style="border-top: 0px; text-align: left; overflow: auto;"> <strong>내용 : </strong>  ${vo.reportContent}</td>
-		                    </tr>
-	                	</c:forEach>
-	                </tbody>
-	                
-	            </table>
-           
+	                        <td>${vo.categoryName}</td>
+	                        <td>${vo.infoNo}</td>
+	                        <td>${vo.title}</td>
+	                        <td>${vo.writerId}</td>
+	                        <td>${vo.writerNick}</td>
+	                        <td>${vo.reportCnt}</td>
+	                         <td>
+	                        	<form action="${root}/admin/reviewInfoBoard/report" method="get">
+                                    <input type="hidden" value="${vo.infoNo}" name="selectReviewInfoBoardNo">
+                                    <input type="submit" value="신고내용">
+
+                                </form>
+	                        </td>
+	                    </tr>        
+                	</c:forEach>
+                </tbody>
+                
+            </table>
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
             	</c:if>
 	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
 	           		<c:if test="${pv.currentPage != i}">
-		            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
 	           		</c:if>
 	           		<c:if test="${pv.currentPage == i}">
 		            	<a class ="btn btn-outline-info" >${i}</a>
 	           		</c:if>
 	           	</c:forEach>
 	           	<c:if test="${pv.currentPage != pv.maxPage}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/reviewInfoBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
 	           	</c:if>
             </div>
         </div>
     </div>
 </body>
 
+</body>
 </html>
 <script>
-
-
 	const searchType = '${searchVo.searchType}';
 	const searchValue = '${searchVo.searchValue}';
 	
@@ -202,9 +216,13 @@
 	}
 	setSearchValueTag();//첫화면부터 검색하ㅏ세요 보이게
 	initSearchValueSelect();
-
-
-
-
-   
+	
+	
+	
+	
+	const tbody = document.querySelector("tbody");
+	tbody.addEventListener("click" , function(e){
+	  const no = e.target.parentNode.children[0].innerText;
+	  location.href = "${pageContext.request.contextPath}/accompany/detail?infoBoardNo=" + no;
+	});
 </script>

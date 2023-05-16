@@ -215,7 +215,7 @@ public class MemberReviewDao {
    }
 
    public List<MemberReviewVo> selectMemberReviewDetail(Connection conn, String selectMemberNo, PageVo pv) throws Exception {
-      String sql = "SELECT NO, GIVER_NO, MR.MEMBER_NO, CHATTING_ROOM_NO, MR.ENROLL_DATE AS ENROLL_DATE, CONTENT, SCORE ,M.ID AS ID, M.NICK AS NICK FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER_REVIEW WHERE MEMBER_NO=? ORDER BY NO DESC ) T )MR JOIN MEMBER M ON MR.GIVER_NO = M.MEMBER_NO WHERE RNUM BETWEEN ? AND ? ";
+      String sql = "SELECT NO, GIVER_NO, MR.MEMBER_NO, CHATTING_ROOM_NO, MR.ENROLL_DATE AS ENROLL_DATE, CONTENT, SCORE ,M.ID AS ID, M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILEIMAGE FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT * FROM MEMBER_REVIEW WHERE MEMBER_NO=? ORDER BY NO DESC ) T )MR JOIN MEMBER M ON MR.GIVER_NO = M.MEMBER_NO WHERE RNUM BETWEEN ? AND ? ";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, selectMemberNo);
       pstmt.setInt(2, pv.getBeginRow());
@@ -237,7 +237,7 @@ public class MemberReviewDao {
          String score = rs.getString("SCORE");
          String giverId = rs.getString("ID");
          String giverNick = rs.getString("NICK");
-         
+         String profileImage = rs.getString("PROFILEIMAGE");
          //tx || rs
          MemberReviewVo vo = new MemberReviewVo();
          vo = new MemberReviewVo();
@@ -250,6 +250,7 @@ public class MemberReviewDao {
          vo.setEnrollDate(enrollDate);
          vo.setContent(content);
          vo.setScore(score);;
+         vo.setGiverProfile(profileImage);
          MemberReviewVolist.add(vo);
          }
          
@@ -284,6 +285,65 @@ public class MemberReviewDao {
       
       return cnt;
    }
+
+public MemberVo getSelectMemberVo(Connection conn, String selectMemberNo) throws Exception {
+	String sql = "SELECT * FROM MEMBER WHERE MEMBER_NO =?";
+	   PreparedStatement pstmt = conn.prepareStatement(sql);
+	   pstmt.setString(1, selectMemberNo);
+	   ResultSet rs = pstmt.executeQuery();
+	   MemberVo vo = null;
+	   
+	   if(rs.next()) {
+	         
+	         
+	         String mNo = rs.getString("MEMBER_NO");
+	         String isGuide = rs.getString("IS_GUIDE");
+	         String memberStatus = rs.getString("MEMBER_STATUS");
+	         String id = rs.getString("ID");
+	         String password = rs.getString("PASSWORD");
+	         String name = rs.getString("NAME");
+	         String gender = rs.getString("GENDER");
+	         String age = rs.getString("AGE");
+	         String address = rs.getString("ADDRESS");
+	         String email = rs.getString("EMAIL");
+	         String phoneNumber = rs.getString("PHONE_NUMBER");
+	         String nick = rs.getString("NICK");
+	         String profileImage = rs.getString("PROFILE_IMAGE");
+	         String idCard = rs.getString("ID_CARD");
+	         String enrollDate = rs.getString("ENROLL_DATE");
+	         String introMessage = rs.getString("INTRO_MESSAGE");
+	         String memberScore = rs.getString("MEMBER_SCORE");
+	         
+	         
+	         
+	         vo = new MemberVo();
+	         
+	         vo.setMemberNo(mNo);
+	         vo.setIsGuide(isGuide);
+	         vo.setMemberStatus(memberStatus);
+	         vo.setId(id);
+	         vo.setPassword(password);
+	         vo.setName(name);
+	         vo.setGender(gender);
+	         vo.setAge(age);
+	         vo.setAddress(address);
+	         vo.setEmail(email);
+	         vo.setPhoneNumber(phoneNumber);
+	         vo.setNick(nick);
+	         vo.setProfileImage(profileImage);
+	         vo.setIdCard(idCard);
+	         vo.setEnrollDate(enrollDate);
+	         vo.setIntroMessage(introMessage);
+	         vo.setMemberScore(memberScore);
+	         
+	      }
+	      
+	      //close
+	      JDBCTemplate.close(rs);
+	      JDBCTemplate.close(pstmt);
+	      
+	      return vo;
+}
 
 
 
