@@ -77,10 +77,39 @@
         
         </button>
    
-        <div class="search" id="search-place-list">
-            <form action="" method="get">
+                    <select name="searchType" id="opt" >
+                        <option value="category">게시판 이름</option>
+                        <option value="title" >제목</option>
+                        <option value="writerNick" >작성자 닉네임</option>
+                        <option value="writerId" >작성자 아이디</option>
+                        <option value="reportCnt">최소 신고수</option>
+                        
+                    </select>
+                    
+                   
+                    <select class = "searchValueElem" name="searchValue" >
+                        <option value="">신고수 없음</option>
+                        <option value="1">1 이상</option>
+                        <option value="10">10 이상</option>
+                        <option value="20">20 이상</option>
+                        <option value="50">50 이상</option>
+                        <option value="100">100 이상</option>
+                    </select>
+                    <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
+                    <input type="submit" value="검색">
+                    
 
-                <input type="text" id="input1" name="search" placeholder="검색어 입력">
+        <div class="search" id="search-place-list">
+            <form action="${root}/admin/guideBoard" method="get">
+				 <input type="hidden" value="1" name="page">
+				 <select name="searchType" id="opt" >
+                        <option value="countryCategory">국가</option>
+                        <option value="locationCategory" >지역</option>
+                        <option value="placeCategory" >여행지</option>
+                        <option value="name" >여행지 이름</option>
+                        
+                    </select>
+                <input type="text" id="input1" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색어 입력">
                 <input type="image" id="img1" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="Submit" />
             </form>
             
@@ -89,34 +118,25 @@
         
         <div id="place-list">
             <table id="place-list-table">
-                <tr>
-                    <span>[일본]</span><span>[오사카]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
-                <tr>
-                    <span>[일본]</span><span>[교토]</span><span>[도톤보리]</span>
-                </tr>
-                <hr>
+             <thead>
+                    <tr>
+                        <th>게시판 이름</th>
+                        <th>게시판 번호</th>
+                        <th>제목</th>
+                        <th>작성자 id</th>
+                        <th>작성자 nick</th>
+                        <th>신고수</th>
+                        <th>신고내용</th>
+                    </tr>
+                </thead>
+           	 	<c:forEach items="${voList}" var="vo">
+           		 <tbody>
+	                <tr>
+	                    <span>${vo.categoryName}</span><span>${vo.categoryName}</span><span>${vo.categoryName}</span>
+	                </tr>
+	                <hr>
+	                </tbody>
+               </c:forEach>
                
 
             </table>

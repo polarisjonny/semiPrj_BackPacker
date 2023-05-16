@@ -1,4 +1,4 @@
-package com.bp.app.admin.boardManage.controller;
+package com.bp.app.admin.placeManage.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManageService;
+import com.bp.app.admin.placeManage.service.PlaceManageService;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.vo.GuideBoardVo;
-@WebServlet("/admin/guideBoard")
-public class GuideBoardManageController extends HttpServlet {
+import com.bp.app.scheduler.vo.PlaceVo;
+@WebServlet("/admin/place/list")
+public class PlaceListController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -23,9 +25,9 @@ public class GuideBoardManageController extends HttpServlet {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			
-			BoardManageService bs = new BoardManageService();
+			PlaceManageService ps = new PlaceManageService();
 			//서비스
-			int cnt = bs.getGuideBoardListCnt(searchType, searchValue );
+			int cnt = ps.getPlaceListCnt(searchType, searchValue );
 			int page = 1;
 			if(req.getParameter("page") != null) {
 				
@@ -34,13 +36,13 @@ public class GuideBoardManageController extends HttpServlet {
 				page = 1;
 			}
 			PageVo pv = new PageVo(cnt, page, 10, 5);
-			List<GuideBoardVo> voList = null;
+			List<PlaceVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
-				voList = bs.getGuideBoardList(pv);
+				voList = ps.getPlaceList(pv);
 			}else {
 				
-				voList = bs.getGuideBoardList(pv,searchType, searchValue);
+				voList = ps.getPlaceList(pv,searchType, searchValue);
 			}
 			
 			Map<String, String> map = new HashMap<>();
@@ -50,7 +52,7 @@ public class GuideBoardManageController extends HttpServlet {
 			req.setAttribute("pv", pv);
 			req.setAttribute("voList", voList);
 			req.setAttribute("searchVo", map);
-			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/admin/place/place-list.jsp").forward(req, resp);
 		}catch(Exception e) {
 			System.out.println("[ERROR] 게시글 목록 조회에러");
 			e.printStackTrace();
@@ -58,8 +60,6 @@ public class GuideBoardManageController extends HttpServlet {
 			req.setAttribute("errorMsg", "목록조회실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
-		
-		
 		
 	}
 }

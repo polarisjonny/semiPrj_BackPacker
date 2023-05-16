@@ -15,6 +15,11 @@ public class GuideBoardVo {
 	private String travelExpense;
 	private String deleteYn;
 	private String reportCnt;
+	
+	//민규가 추가
+	private String writerId;
+	private String writerNick;
+	private String categoryName;
 
 	//멤버
 	private String id;
@@ -107,6 +112,24 @@ public class GuideBoardVo {
 	public void setReportCnt(String reportCnt) {
 		this.reportCnt = reportCnt;
 	}
+	public String getWriterId() {
+		return writerId;
+	}
+	public void setWriterId(String writerId) {
+		this.writerId = writerId;
+	}
+	public String getWriterNick() {
+		return writerNick;
+	}
+	public void setWriterNick(String writerNick) {
+		this.writerNick = writerNick;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public String getId() {
 		return id;
 	}
@@ -161,14 +184,15 @@ public class GuideBoardVo {
 				+ guideBoardCategoryNo + ", schedulerNo=" + schedulerNo + ", title=" + title + ", content=" + content
 				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", hit=" + hit + ", matchingState="
 				+ matchingState + ", travelExpense=" + travelExpense + ", deleteYn=" + deleteYn + ", reportCnt="
-				+ reportCnt + ", id=" + id + ", nick=" + nick + ", age=" + age + ", profileImage=" + profileImage
-				+ ", gender=" + gender + ", changeName=" + changeName + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+				+ reportCnt + ", writerId=" + writerId + ", writerNick=" + writerNick + ", categoryName=" + categoryName
+				+ ", id=" + id + ", nick=" + nick + ", age=" + age + ", profileImage=" + profileImage + ", gender="
+				+ gender + ", changeName=" + changeName + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 	public GuideBoardVo(String guideBoardNo, String writerNo, String guideBoardCategoryNo, String schedulerNo,
 			String title, String content, String enrollDate, String modifyDate, String hit, String matchingState,
-			String travelExpense, String deleteYn, String reportCnt, String id, String nick, String age,
-			String profileImage, String gender, String changeName, String startDate, String endDate) {
+			String travelExpense, String deleteYn, String reportCnt, String writerId, String writerNick,
+			String categoryName, String id, String nick, String age, String profileImage, String gender,
+			String changeName, String startDate, String endDate) {
 		super();
 		this.guideBoardNo = guideBoardNo;
 		this.writerNo = writerNo;
@@ -183,6 +207,9 @@ public class GuideBoardVo {
 		this.travelExpense = travelExpense;
 		this.deleteYn = deleteYn;
 		this.reportCnt = reportCnt;
+		this.writerId = writerId;
+		this.writerNick = writerNick;
+		this.categoryName = categoryName;
 		this.id = id;
 		this.nick = nick;
 		this.age = age;

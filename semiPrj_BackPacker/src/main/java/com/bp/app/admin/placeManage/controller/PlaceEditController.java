@@ -1,4 +1,4 @@
-package com.bp.app.admin.placeManage.service;
+package com.bp.app.admin.placeManage.controller;
 
 import java.io.IOException;
 
@@ -7,11 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/admin/place/list")
-public class PlaceListController extends HttpServlet {
+@WebServlet("/admin/place/edit")
+public class PlaceEditController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		req.getRequestDispatcher("/WEB-INF/views/admin/place/place-list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/place/place-edit.jsp").forward(req, resp);
 	}
 }

@@ -13,6 +13,11 @@ public class PlaceVo {
 	private String placeLng;
 	private String placeTime;
 	private String placeExpense;
+	
+	//민규
+	private String placeCategory;
+	private String locationCategory;
+	private String countryCategory;
 	public String getPlaceNo() {
 		return placeNo;
 	}
@@ -79,16 +84,35 @@ public class PlaceVo {
 	public void setPlaceExpense(String placeExpense) {
 		this.placeExpense = placeExpense;
 	}
+	public String getPlaceCategory() {
+		return placeCategory;
+	}
+	public void setPlaceCategory(String placeCategory) {
+		this.placeCategory = placeCategory;
+	}
+	public String getLocationCategory() {
+		return locationCategory;
+	}
+	public void setLocationCategory(String locationCategory) {
+		this.locationCategory = locationCategory;
+	}
+	public String getCountryCategory() {
+		return countryCategory;
+	}
+	public void setCountryCategory(String countryCategory) {
+		this.countryCategory = countryCategory;
+	}
 	@Override
 	public String toString() {
 		return "PlaceVo [placeNo=" + placeNo + ", placeCategoryNo=" + placeCategoryNo + ", countryNo=" + countryNo
 				+ ", locationNo=" + locationNo + ", placeName=" + placeName + ", placeIntroduce=" + placeIntroduce
 				+ ", placeImage=" + placeImage + ", placeLat=" + placeLat + ", placeLng=" + placeLng + ", placeTime="
-				+ placeTime + ", placeExpense=" + placeExpense + "]";
+				+ placeTime + ", placeExpense=" + placeExpense + ", placeCategory=" + placeCategory
+				+ ", locationCategory=" + locationCategory + ", countryCategory=" + countryCategory + "]";
 	}
 	public PlaceVo(String placeNo, String placeCategoryNo, String countryNo, String locationNo, String placeName,
 			String placeIntroduce, String placeImage, String placeLat, String placeLng, String placeTime,
-			String placeExpense) {
+			String placeExpense, String placeCategory, String locationCategory, String countryCategory) {
 		super();
 		this.placeNo = placeNo;
 		this.placeCategoryNo = placeCategoryNo;
@@ -101,6 +125,9 @@ public class PlaceVo {
 		this.placeLng = placeLng;
 		this.placeTime = placeTime;
 		this.placeExpense = placeExpense;
+		this.placeCategory = placeCategory;
+		this.locationCategory = locationCategory;
+		this.countryCategory = countryCategory;
 	}
 	public PlaceVo() {
 		super();
