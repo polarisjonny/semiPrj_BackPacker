@@ -30,7 +30,6 @@ public class MemberQuitController extends HttpServlet{
 			
 			if(result == 1) {
 				req.getSession().invalidate();
-				resp.sendRedirect(req.getContextPath()+"/home");
 			} else {
 				throw new Exception("[ERROR] 회원탈퇴 실패");
 			}

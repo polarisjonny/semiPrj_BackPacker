@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>아이디 찾기 페이지</title>
 <style>
         #findId-title {
@@ -33,6 +34,7 @@
 
         #name, #phone {
             border:none;
+            width: 100%;
         }
 
         #name {
@@ -73,12 +75,12 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <h1 id="findId-title">아이디 찾기</h1> 
-    <form action=""${pageContext.request.contextPath}/member/findId}">
+    <form action="${pageContext.request.contextPath}/member/find/id" method="POST">
         <div id="findId-area">
              <div id="name-area">
                 <span id="span-name">이름</span>
                 <div class="border-style">
-                    <input id="name" type="text" placeholder="이름을 입력하세요" name="id">
+                    <input id="name" type="text" placeholder="이름을 입력하세요" name="name">
                 </div>
                
              </div>
@@ -87,26 +89,38 @@
              <div id="phone-area">
                 <span>핸드폰 번호</span>
                 <div class="border-style">
-                    <input name="phoneNumber" id="phone" type="tel" placeholder="핸드폰 번호를 입력하세요">
+                    <input name="phoneNumber" id="phone" type="text" placeholder="핸드폰 번호를 입력하세요" name="phoneNumber">
                 </div>
                 
              </div>
              <br>
              <br>
 
-             <input id="submit-btn" type="submit" value="찾기">
+             <input id="submit-btn" type="submit" onclick="return checkCorrectMember();" value="찾기">
         </div>
         <br>
         <br>
         <br>
         <br>
         <br>
-        <div id="check-id-area">
-            <div>jonny님의 아이디는 jju9705 입니다.</div>
-        </div>
             
     </form>
     </main>
     
+    <script type="text/javascript">
+    	function checkCorrectMember() {
+    		 if() {
+				Swal.fire({
+					  title: '${loginMember.nick}님의 아이디는 ${loginMember.id}입니다.',
+					  icon: 'success',
+					  confirmButtonColor: '#94d2e6',
+					  confirmButtonText: '확인'
+					});
+				return true;
+			}
+			
+			return false;
+    	}
+    </script>
 </body>
 </html>
