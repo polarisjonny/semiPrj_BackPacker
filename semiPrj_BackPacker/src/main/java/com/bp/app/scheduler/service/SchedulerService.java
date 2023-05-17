@@ -238,5 +238,42 @@ public class SchedulerService {
 		return sList;
 
 	}
+	
+	//예린추가 : 넘버로 스케쥴 따오기 =>게시글 상세조회시
+	public TimetableVo getTimetable(String schedulerNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql="SELECT * FROM TIMETABLE WHERE SCHEDULER_NO =?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, schedulerNo);
+		ResultSet rs = pstmt.executeQuery();
+		//rs
+		TimetableVo tVo = null;
+		while(rs.next()) {
+			String timetableNo= rs.getString("TIMETABLE_NO");
+			String placeNo =rs.getString("PLACE_NO");
+			String timetableDate= rs.getString("TIMETABLE_DATE");
+			String bespokePlace= rs.getString("BESPOKE_PLACE");
+			String timetableStartTime= rs.getString("TIMETABLE_START_TIME");
+			String bespokeTime= rs.getString("BESPOKE_TIME");
+			
+			tVo = new TimetableVo();
+			tVo.setTimetableNo(timetableNo);
+			tVo.setPlaceNo(placeNo);
+			tVo.setSchedulerNo(schedulerNo);
+			tVo.setTimetableDate(timetableDate);
+			tVo.setBespokePlace(bespokePlace);
+			tVo.setTimetableStartTime(timetableStartTime);
+			tVo.setBespokeTime(bespokeTime);
+			
+		}
+		//close
+		JDBCTemplate.close(conn);
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+	
+		return tVo;
+}
 
 }
