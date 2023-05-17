@@ -51,5 +51,69 @@ public class PlaceManageService {
 			
 		return voList;
 	}
+	public PlaceVo getPlaceOneByNo(String placeNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PlaceVo vo = dao.getPlaceOneByNo(conn, placeNo);
+		//sql
+
+		//close
+		
+		JDBCTemplate.close(conn);
+			
+		return vo;
+	}
+	public int deletePlace(String placeNo) throws Exception {
+		//conn
+
+		Connection conn = JDBCTemplate.getConnection();
+		PlaceVo vo = new PlaceVo();
+		int result = dao.deletePlace(conn, placeNo);
+		
+		
+		
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	public int addPlace(PlaceVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.addPlace(conn , vo);
+		
+		//tx || rs
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	public int editPlace(PlaceVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.editPlace(conn , vo);
+		
+		//tx || rs
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 
 }

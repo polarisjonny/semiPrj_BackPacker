@@ -17,11 +17,11 @@
 <title>Insert title here</title>
 <style>
     #place-list-wrap{
-        width: 400px;
+        width: 800px;
         margin-top: 100px;
         margin-left:auto;
         margin-right:auto;
-        height: 600px;
+        height: 800px;
     }
     #place-list-title{
         margin: auto;
@@ -29,15 +29,22 @@
         color: rgb(179, 233, 247);
     }
     #search-place-list{
-        text-align: right;
+    	
+    	
+    
+      
     }
     .search {
-    position: relative;
-    width: 300px;
+	    position: relative;
+	    width: 800px;
+	    display : grid;
+        grid-template-columns: 1fr 1fr 1fr;  
+        justify-content: center;
+        align-items: center;
     }
 
     #input1 {
-    margin-left: 180px;
+    margin-left: 50px;
     width: 70%;
     border: 1px solid #bbb;
     border-radius: 8px;
@@ -49,7 +56,7 @@
     position : absolute;
     width: 17px;
     top: 14px;
-    left: 350px;
+    left: 560px;
     
     margin: 0;
     }
@@ -62,55 +69,65 @@
     	border: 0px;
     	
     }
+    #place-list-table {
+    width: 800px;
+    height : 80px;
+    border-collapse: collapse;
+    border-spacing: 10px;
+    text-align: center;
+    font-size: 18px;
+    }
+
+   #place-list-table th{
+    
+    border-bottom: 1px solid black;
+    }
+    #place-list-table td{
+    padding-top: 10px;
+     padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    }
+    #opt{
+    	width : 150px;
+    }
+  	#editbtn{
+  		border : 0px;
+  	}
+  	#deletebtn{
+  		border : 0px;
+  	}
 </style>
 </head>
 <body>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 	<div id="place-list-wrap">
         <div id="place-list-title"><h1>여행지 목록</h1></div>
-        <button class="place-btn">
-        <a href="${root}/admin/place/edit">수정</a>
+        <br>
         
-        </button>
-        <button class="place-btn">
-         <a href="${root}/admin/place/add">추가</a>
-        
-        </button>
    
-                    <select name="searchType" id="opt" >
-                        <option value="category">게시판 이름</option>
-                        <option value="title" >제목</option>
-                        <option value="writerNick" >작성자 닉네임</option>
-                        <option value="writerId" >작성자 아이디</option>
-                        <option value="reportCnt">최소 신고수</option>
-                        
-                    </select>
-                    
-                   
-                    <select class = "searchValueElem" name="searchValue" >
-                        <option value="">신고수 없음</option>
-                        <option value="1">1 이상</option>
-                        <option value="10">10 이상</option>
-                        <option value="20">20 이상</option>
-                        <option value="50">50 이상</option>
-                        <option value="100">100 이상</option>
-                    </select>
-                    <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
-                    <input type="submit" value="검색">
+              
                     
 
-        <div class="search" id="search-place-list">
-            <form action="${root}/admin/guideBoard" method="get">
+        <div id="search-place-list">
+            <form class="search" action="${root}/admin/place/list" method="get">
 				 <input type="hidden" value="1" name="page">
-				 <select name="searchType" id="opt" >
-                        <option value="countryCategory">국가</option>
-                        <option value="locationCategory" >지역</option>
-                        <option value="placeCategory" >여행지</option>
-                        <option value="name" >여행지 이름</option>
-                        
-                    </select>
-                <input type="text" id="input1" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색어 입력">
-                <input type="image" id="img1" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="Submit" />
+				<div style="justify-content: space-between;">
+        			<button class="place-btn"> <a href="${root}/admin/place/add">추가</a></button>
+        		</div>
+        		<div>
+	        		<select name="searchType" id="opt" style="margin-right: 0px;" >
+	                        <option value="countryCategory">국가</option>
+	                        <option value="locationCategory" >지역</option>
+	                        <option value="placeCategory" >카테고리</option>
+	                        <option value="name" >여행지 이름</option>
+	                        
+	                  </select>
+                  </div>
+                  <div>
+	                <input type="text" id="input1" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색어 입력">
+	                <input type="image" id="img1" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="Submit" />
+                </div>
+                 
             </form>
             
         </div>
@@ -120,35 +137,42 @@
             <table id="place-list-table">
              <thead>
                     <tr>
-                        <th>게시판 이름</th>
-                        <th>게시판 번호</th>
-                        <th>제목</th>
-                        <th>작성자 id</th>
-                        <th>작성자 nick</th>
-                        <th>신고수</th>
-                        <th>신고내용</th>
-                    </tr>
-                </thead>
-           	 	<c:forEach items="${voList}" var="vo">
-           		 <tbody>
-	                <tr>
-	                    <span>${vo.categoryName}</span><span>${vo.categoryName}</span><span>${vo.categoryName}</span>
-	                </tr>
-	                <hr>
-	                </tbody>
-               </c:forEach>
+                        <th>여행지 번호</th>
+                        <th>국가</th>
+                        <th>지역</th>
+                        <th>카테고리</th>
+                        <th>여행지 이름</th>
+                        <th>수정하기</th>
+                        <th>삭제하기</th>
+                   </tr>
+            </thead>
+         	<tbody>
+           	 		<c:forEach items="${voList}" var="vo">
+	           	 		<tr>
+			                <td>${vo.placeNo}</td>
+			                <td>  ${vo.countryCategory}</td>
+			                <td>${vo.locationCategory} </td>
+			                <td> ${vo.placeCategory} </td>
+			                <td> ${vo.placeName}</td>
+			                <td> <button id="editbtn" ><a href="${root}/admin/place/edit?placeNo=${vo.placeNo}">수정</a></button></td>
+			                <td> <button id="deletebtn">삭제</a></button></td>
+		                </tr>
+	                
+            	   </c:forEach>
+               </tbody>
                
 
             </table>
+            <br><br>
             <div id="page-area">
                 <c:if test="${ pv.currentPage > 1 }">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/?page=${pv.currentPage-1}">이전</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage-1}">이전</a>
                 </c:if>
                 <c:forEach begin="${pv.startPage}" end="${pv.endPage}" var="i">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/?page=${i}">${i}</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${i}">${i}</a>
                 </c:forEach>
                 <c:if test="${ pv.currentPage < pv.maxPage }">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/?page=${pv.currentPage+1}">다음</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage+1}">다음</a>
                 </c:if>
              </div>
         </div>
@@ -156,3 +180,57 @@
     </div>
 </body>
 </html>
+<script>
+		
+		const deletebtn = document.querySelector("#deletebtn");
+		deletebtn.addEventListener("click", function(e){
+		    e.preventDefault(); // 기본 동작인 링크 이동을 중지
+		
+		    if (confirm("정말로 삭제하시겠습니까?")) {
+		    	
+		    	const no = e.target.parentNode.parentNode.children[0].innerText;
+			    var link = "${root}/admin/place/delete?placeNo="+no;
+		    	window.location.href = link; // 링크로 이동
+			}
+		});
+
+
+
+		const openModals = document.querySelectorAll('.bi-info-circle');
+		const closeModals = document.querySelectorAll('.close');
+		const modals = document.querySelectorAll('.modal-area');
+		
+		openModals.forEach(function(openModal, index) {
+			openModal.addEventListener('click', function() {
+			modals[index].style.display = 'flex';
+			});
+		});
+		
+		closeModals.forEach(function(closeModal, index) {
+			closeModal.addEventListener('click', function() {
+			modals[index].style.display = 'none';
+			});
+		});
+
+
+		const searchType = '${searchVo.searchType}';
+		const searchValue = '${searchVo.searchValue}';
+		
+		const searchValueSelectTag = document.querySelector("select[name='searchValue']");
+		const searchValueInputTag = document.querySelector("input[name='searchValue']");
+		
+		
+		if( searchType.length > 1){
+			initSearchType();
+		};
+		
+		function initSearchType(){
+		    const x = document.querySelector('select > option[value="' + searchType + '"]');
+			x.selected = true;
+		
+		}
+		
+		
+		
+
+</script>

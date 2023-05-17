@@ -15,7 +15,7 @@
    top: 150px;
    left: -150px; /* 왼쪽에서 숨긴 상태 */
    width: 150px;
-   height: 220px;
+   height: 270px;
    background-color: #f8f8f8;
    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
    transition: all 0.3s ease-in-out;
@@ -23,7 +23,7 @@
 
 .navBody-sidebar.active {
    width: 120px;
-   height: 220px;
+   height: 270px;
    left: 0; /* 왼쪽에서 나타내는 상태 */
    
   
