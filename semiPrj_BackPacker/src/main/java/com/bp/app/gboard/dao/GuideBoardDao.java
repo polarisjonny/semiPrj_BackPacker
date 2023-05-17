@@ -59,12 +59,10 @@ public class GuideBoardDao {
 			String id = rs.getString("ID");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String introMessage = rs.getString("INTRO_MESSAGE");
-			System.out.println(nick);
 			
 			writerMember = new MemberVo();
 			writerMember.setMemberNo(bvo.getWriterNo());
 			writerMember.setNick(nick);;
-			System.out.println(writerMember.getNick());
 			writerMember.setId(id);
 			writerMember.setProfileImage(profileImage);
 			writerMember.setIntroMessage(introMessage);
@@ -103,6 +101,7 @@ public class GuideBoardDao {
 			selectedBvo.setHit(hit);
 			selectedBvo.setMatchingState(matchingState);
 			selectedBvo.setSchedulerNo(schedulerNo);
+			selectedBvo.setGuideBoardNo(bvo.getGuideBoardNo());
 			
 		}
 		

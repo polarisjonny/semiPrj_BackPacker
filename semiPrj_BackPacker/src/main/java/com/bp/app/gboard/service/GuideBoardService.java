@@ -15,6 +15,7 @@ import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.dao.GuideBoardDao;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.dao.MemberDao;
 import com.bp.app.member.vo.MemberVo;
 
@@ -162,6 +163,71 @@ public class GuideBoardService {
 		JDBCTemplate.close(conn);
 		return selectedBvo;
 		
+	}
+
+
+	public int replyWrite(GuideReplyVo rvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql = "INSERT INTO GUIDE_REPLY(GUIDE_REPLY_NO, WRITER_NO, GUIDE_BOARD_NO,CONTENT) VALUES(SEQ_GUIDE_REPLY_NO.NEXTVAL, ? ,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, rvo.getWriterNo());
+		pstmt.setString(2, rvo.getGuideBoardNo());
+		pstmt.setString(3, rvo.getContent());
+		int result = pstmt.executeUpdate();
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		//close
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+
+	public List<GuideReplyVo> selectReplyList(String accomNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql = "SELECT * FROM GUIDE_REPLY WHERE GUIDE_BOARD_NO = ? ORDER BY ENROLL_DATE desc";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, accomNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rx
+		List<GuideReplyVo> list = new ArrayList<>();
+		if(rs.next()) {
+			String guideReplyNo = rs.getString("GUIDE_REPLY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			
+			GuideReplyVo rvo = new GuideReplyVo();
+			rvo.setGuideReplyNo(guideReplyNo);
+			rvo.setWriterNo(writerNo);
+			rvo.setGuideBoardNo(guideBoardNo);
+			rvo.setContent(content);
+			rvo.setEnrollDate(enrollDate);
+			rvo.setDeleteYn(deleteYn);
+			
+			list.add(rvo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		//close
+		
+		return list;
 	}
 
 }

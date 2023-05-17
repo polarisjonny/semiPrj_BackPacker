@@ -23,9 +23,7 @@ public class AccompanyDetailController extends HttpServlet{
 			//데꺼
 			String boardNo = req.getParameter("no");
 			String writerNo = req.getParameter("writerNo");
-			System.out.println(writerNo);
-			System.out.println(boardNo);
-			System.out.println(writerNo);
+	
 			//데뭉
 			GuideBoardVo bvo = new GuideBoardVo();
 			bvo.setGuideBoardNo(boardNo);
@@ -36,10 +34,8 @@ public class AccompanyDetailController extends HttpServlet{
 			SchedulerService ss = new SchedulerService();
 			
 			MemberVo writerMember = gbs.selectMemberByNo(bvo);
-			System.out.println("writerMember: "+writerMember);
 			GuideBoardVo gbvo =  gbs.selectOneByNo(bvo);
 			TimetableVo tvo = ss.getTimetable(gbvo.getSchedulerNo());
-			
 			
 			//화면
 			if(writerMember!=null&&gbvo!=null) {
