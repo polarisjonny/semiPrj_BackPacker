@@ -431,8 +431,8 @@
 					</div>
 					<div id="comment-write-area">
 						<div id="comment-text">댓글</div>
-						<textarea name="commentWrite" id="comment-area" cols="20" rows="2" placeholder="댓글은 50자 이내로 작성해주세요. &#10;상대방을 비방하는 댓글은 자제해주세요."></textarea>
-						<button>댓글작성</button>
+						<textarea name="comment" cols="20" rows="2" placeholder="댓글은 50자 이내로 작성해주세요. &#10;상대방을 비방하는 댓글은 자제해주세요."></textarea>
+						<input type="button" value="댓글작성" onclick="writeComment();">
 					</div>
 					<div id="comment-list-area">
 						<div class="comment">
@@ -464,5 +464,59 @@
 
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>
+	
 </body>
 </html>
+
+<script>
+		//댓글작성
+		function writeComment(){
+			const comment = document.querySelector("textarea[name=comment]").value;
+			$.ajax({
+				url : "${root}/accompany/reply/write",
+				type : "POST",
+				data : {
+					accomNo : '${gbvo.guideBoardNo}',
+					content : comment ,
+				},
+				success: (x)=>{
+					console.log(x);
+					if(x == 'ok'){
+						alert("댓글작성 성공!");
+						
+					}
+				},
+				error: ()=>{
+					console.log("댓글작성실패...");
+				} ,
+			});
+		}
+
+		// <div><img class="list-profile" src="${root}/static/img/profile2.jpg" alt=""></div>
+		// 					<div class="comment-list-text">
+		// 						<div class="comment-list-id">두둥탁</div>
+		// 						<div class="comment-list-content">ㅋㅋㅋㅋ라라라라ㅏ라라라라ㅏ라라라ㅏ라라라ㅏ랄와라라라라라라라라ㅏ라랄길어져라얍!ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋsidsidsid냥냥봍쿠라~ 스즈메의 문단속~ 바카나이떼~ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div>
+		// 						<div class="comment-list-day">2023-04-25 13:00:03</div> 
+		// 					</div>
+		//댓글불러오기///
+		$.ajax({
+			url : '${root}/accompany/reply/list',
+			type: "GET" ,
+			data : {
+				accomNo : '${gbvo.guideBoardNo}'
+			},
+			success : function(data){
+				const x  = JSON.parse(data);
+				const commentArea = document.querySelector(".comment");
+				for(let i=0; i<x.length; i++){
+					console.log(x[i]);
+				}
+			},
+			error : function(e){
+				console.log(e);
+			},
+
+		});
+
+		loadComment();
+</script>
