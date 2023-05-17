@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bp.app.scheduler.service.SchedulerService;
 import com.bp.app.scheduler.vo.SchedulerVo;
@@ -22,6 +23,12 @@ public class SetScheduler extends HttpServlet{
 			String startDate = req.getParameter("startDate");
 			String endDate = req.getParameter("endDate");
 			
+//			HttpSession session = req.getSession();
+//			LoginMember loginMember = session.getAttribute("loginMember");
+//			String memberNo = loginMember.getNo(); 
+			
+			//세션에서 로그인 멤버 가져오기
+			
 			//데이터 뭉치기
 			SchedulerVo sVo = new SchedulerVo();
 			sVo.setStartDate(startDate);
@@ -33,7 +40,7 @@ public class SetScheduler extends HttpServlet{
 			
 			
 			
-			req.getSession().setAttribute("sVo", sVo);
+			//req.getSession().setAttribute("sVo", sVo);
 			//화면
 			
 		} catch (Exception e) {
