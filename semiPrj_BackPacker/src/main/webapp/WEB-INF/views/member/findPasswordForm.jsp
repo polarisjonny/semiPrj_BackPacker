@@ -87,24 +87,24 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	 <main>
         <h1 id="findPassword-title">비밀번호 찾기</h1> 
-    <form action="${pageContext.request.contextPath}/member/findPassword}">
+    <form action="${pageContext.request.contextPath}/member/find/password" method="POST">
         <div id="findPassword-area">
             <div id="id-area">
                 <span id="span-id">아이디</span>
                 <div class="border-style">
-                    <input name="name" id="id" type="text" placeholder="아이디를 입력하세요">
+                    <input name="id" id="id" type="text" placeholder="아이디를 입력하세요">
                 </div>
             </div>
             <div id="phone-area">
                 <span id="span-phone">핸드폰 번호</span>
                 <div class="border-style">
-                    <input name="phoneNumber" id="phone" type="tel" placeholder="핸드폰 번호를 입력하세요">
+                    <input name="phoneNumber" id="phone" type="text" placeholder="핸드폰 번호를 입력하세요">
                 </div>
             </div>
             <div id="email-area">
                 <span id="span-email">이메일</span>
                 <div class="border-style">
-                    <input type="email" id="email" placeholder="이메일을 입력하세요">
+                    <input name="email" type="email" id="email" placeholder="이메일을 입력하세요">
                 </div>
             </div>
 
@@ -116,9 +116,6 @@
         <br>
         <br>
         <br>
-        <div id="check-password-area">
-            <div>jonny님의 비밀번호는 susu1234 입니다.</div>
-        </div>
     </form>
     </main>
     

@@ -1,6 +1,7 @@
 package com.bp.app.member.findInfo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.bp.app.member.service.MemberService;
 import com.bp.app.member.vo.MemberVo;
+
+
+
 
 @WebServlet("/member/find/id")
 public class MemberFindIdController extends HttpServlet {
@@ -26,24 +30,21 @@ public class MemberFindIdController extends HttpServlet {
 			String name = req.getParameter("name");
 			String phoneNumber = req.getParameter("phoneNumber");
 			
-			HttpSession session = req.getSession();
-			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-			String no = loginMember.getMemberNo();
-			String loginName = loginMember.getName();
-			String loginPhoneNumber = loginMember.getPhoneNumber();
+			MemberService ms = new MemberService();
+			MemberVo tempMember = ms.findId(name, phoneNumber);
+			System.out.println(tempMember.getId());
+			System.out.println(tempMember.getNick());
 			
-			
-			if(!name.equals(loginName) || !phoneNumber.equals(loginPhoneNumber)) {
-				req.getSession().setAttribute("errorMsg", "아이디 찾기 실패");
-				req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
-				
-				return;
+			if(tempMember != null) {
+				req.getSession().setAttribute("tempMember", tempMember);
+				req.getRequestDispatcher("/WEB-INF/views/member/findIdResult.jsp").forward(req, resp);
 			}
-			
-			
 		} catch(Exception e) {
+			System.out.println("[ERROR] 아이디 찾기 실패");
+			e.printStackTrace();
 			
-		}
+			req.getRequestDispatcher("/WEB-INF/views/member/findIdResult.jsp").forward(req, resp);
 		
+		}
 	}
 }

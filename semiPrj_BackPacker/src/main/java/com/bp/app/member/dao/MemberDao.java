@@ -274,6 +274,9 @@ public class MemberDao {
 			
 		}
 		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
 		return updatedMember;
  	}
 
@@ -285,6 +288,65 @@ public class MemberDao {
 		pstmt.setString(2, memberNo);
 		int result = pstmt.executeUpdate();
 		
+		JDBCTemplate.close(pstmt);
+		
 		return result;
+	}
+
+	public MemberVo findId(Connection conn, String name, String phoneNumber) throws Exception {
+		String sql = "SELECT ID, NICK FROM MEMBER WHERE NAME = ? AND PHONE_NUMBER = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, name);
+		pstmt.setString(2, phoneNumber);
+		ResultSet rs = pstmt.executeQuery();
+		
+		MemberVo tempMember = null;
+		
+		if(rs.next()) {
+			String id = rs.getString("ID");
+			String nick = rs.getString("NICK");
+			
+			tempMember = new MemberVo();
+			tempMember.setId(id);
+			tempMember.setNick(nick);
+			tempMember.setName(name);
+			tempMember.setPhoneNumber(phoneNumber);
+		} else {
+			throw new Exception("[ERROR]찾으시는 정보가 없습니다.");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return tempMember;
+	}
+
+	public MemberVo findPassword(Connection conn, String id, String phoneNumber, String email) throws Exception {
+		String sql = "SELECT PASSWORD, NICK FROM MEMBER WHERE ID = ? AND PHONE_NUMBER = ? AND EMAIL = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, phoneNumber);
+		pstmt.setString(3,  email);
+		ResultSet rs = pstmt.executeQuery();
+		
+		MemberVo tempMember = null;
+		
+		if(rs.next()) {
+			String password = rs.getString("PASSWORD");
+			String nick = rs.getString("NICK");
+			
+			tempMember = new MemberVo();
+			tempMember.setPassword(password);
+			tempMember.setNick(nick);
+			tempMember.setEmail(email);
+			tempMember.setPhoneNumber(phoneNumber);
+		} else {
+			throw new Exception("[ERROR]찾으시는 정보가 없습니다.");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return tempMember;
 	}
 }//class
