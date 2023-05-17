@@ -20,16 +20,20 @@ public class SetTimetable extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+			
+			
 			//데꺼
 			String placeNo = req.getParameter("placeNo");
 			String SchedulerNo = req.getParameter("schedulerNo");
 			String timetableDate = req.getParameter("timetableDate");
+			String timetableStartTime = req.getParameter("timetableStartTime");
 			
 			//데뭉
 			TimetableVo tVo = new TimetableVo();
 			tVo.setPlaceNo(placeNo);
 			tVo.setSchedulerNo(SchedulerNo);
 			tVo.setTimetableDate(timetableDate);
+			tVo.setTimetableStartTime(timetableStartTime);
 			
 			//서비스
 			

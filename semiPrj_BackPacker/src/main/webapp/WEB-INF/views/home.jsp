@@ -108,7 +108,7 @@
 			<div id="btn-area">
 			<!-- 임시로 동행게시판으로 만듦. -->
 				<button id="packer-btn" onclick="location.href='${root}/accompany/list?page=1'">동행게시판</button>
-				<button id="shedule-btn">일정짜기</button>
+				<button id="shedule-btn" onclick="location.href='${root}/schedulerpick'">일정짜기</button>
 			</div>
 			<div>
 				프패커란? <br>

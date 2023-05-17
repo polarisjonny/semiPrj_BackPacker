@@ -282,6 +282,11 @@
 		color: darkblue;
 
 	}
+
+	#over{
+		overflow: auto;
+    	height: 400px;
+	}
     
   
     
@@ -316,33 +321,30 @@
 		
 	
 			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
-			
 			<div id="scheduler-area">
+			<div id="over">
 
-				<div id="scheduler-date-area">
-					<div><a class="scheduler-date" href="">이전날</a></div>
-					<div class="scheduler-date" ><h4> DAY 1</h4></div>
-					<div><a class="scheduler-date" href="">다음날</a></div>
+				<div id="scheduler-date-area" >
+					
+
 				</div>
-				<div id="test"></div>
+					<div id="test"></div>
 
 					<%-- 여행지을 가져 왔을때 생성 --%>
-					<div id="scheduler-place-area">
-						<div id="scheduler-place">
-							<img id="sc-img" height="80px" width="80px" src="" alt="">
-							<div id="area">
-								<div class="place">장소명 : 해운대</div>
-								<div class="time">소요시간 : <input type="text" value="90">분</div>
-								<div class="class-time">시작시간 : <input type="time" value="10:00"></div>
-							</div>
-							<div id="delete"><i class="bi bi-trash"></i></div>
-						</div>
+
+					<div id="placejson">
+					
+
 					</div>
+					
+						
+					
+					
+				
+			</div>
 				
 				<button class="btnn" >일정저장하기</button>
 			</div>
-				
-			
 		</div>
 			
 	
@@ -443,7 +445,6 @@
 			var endDate;
 			var pick =true;
 			var intro = document.querySelector('#intro');
-			var timetable = document.querySelector('maketimetable');
 			
 
 			
@@ -469,20 +470,26 @@
 					
 					startDate = start.format('YYYY-MM-DD');
 					endDate = end.format('YYYY-MM-DD');
+
+					console.log(startDate);
 					
 					$('#maketimetable').on('click',function(){
 						setScheduler();
 						$('#maketimetable').hide();
 						$('#scheduler-area').show();
+						getScheduler();
 					})
 				});
 				
 				
 				$('.bi-plus-circle').on('click', function () {
 					setTimeTable($(this).data('placeno'));
+					getTimetable();
+
 				});
 	        });
 			
+			/////////////////////////////////////////////////////////////
 			function setScheduler(){
 
 				$.ajax({
@@ -500,6 +507,42 @@
 				});
 
 			};
+			function getScheduler(){
+
+				$.ajax({
+					type:'post',
+					url: '${root}/schedulermake/getScheduler',
+					data: { 
+						startDate: startDate,
+						memberNo:'1'
+					},
+					success : function(data) { 
+						console.log(data);
+
+						const x = JSON.parse(data);
+						console.log(x);
+
+						const sdiv = document.querySelector("#scheduler-date-area");
+						sdiv.innerHTML="";
+
+						let str="";
+						for(let i =1 ; i<=x[0].totalDay; i++){
+							str+='<div><a class="scheduler-date" href="">이전날</a></div>'
+							str+='<div class="scheduler-date" ><h4> DAY'+i+'</h4></div>'
+							str+='<div><a class="scheduler-date" href="">다음날</a></div>'
+						}
+						sdiv.innerHTML+=str;
+
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+
+			};
+
+
+			///////////////////////////////////////////////////////////////
 			
 			function setTimeTable(placeno){
 				$.ajax({
@@ -507,8 +550,9 @@
 					url: '${root}/schedulermake/setTimetable',
 					data: { 
 						placeNo: placeno,
-						schedulerNo: '1',
-						timetableDate: startDate,
+						schedulerNo: '5',
+						timetableDate: startDate, //받아와야함 +1+1
+						timetableStartTime : startDate 
 					},
 					success : function(data) { 
 						console.log(data);
@@ -523,24 +567,69 @@
 			
 			function getTimetable(){
 				$.ajax({
-					url: '${root}/schedulermake/getTimetable',
+					url: '/semi/schedulermake/getTimetable',
 					type:'GET',
 					data: { 
-						
+						schedulerNo:'5',
 					},
 					success : function(data) { 
 						console.log(data);
 
 						const x = JSON.parse(data);
 						console.log(x);
+
+						const pdiv = document.querySelector("#placejson");
+						pdiv.innerHTML="";
+
+						let str="";
+						for(let i =0 ; i<x.length ; i++){
+							str+='<div id="scheduler-place-area">';
+							str+='<div id="scheduler-place">';
+							str+='	<img id="sc-img" height="80px" width="80px" src="" alt="">';
+							str+=	'<div id="area">';
+								str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
+								str+=		'<div class="time">소요시간 : <input type="text" value="'+x[i].placeTime+'">분</div>';
+								str+=	'<div class="class-time">시작시간 : <input type="time" value="10:00"></div>';
+								str+=	'</div>';
+								str+=	'<div id="delete"><i class="bi bi-trash"></i></div>';
+								str+= '</div>';
+								str+='</div>';
+						}
+						pdiv.innerHTML+=str;
+
+
+
+
+
 					},
 					error : function(error) { 
 						console.log(error)
 					}
 				});
-			};
-			getTimetable();
 
+			};
+
+			
+
+			///////////////////////////////////////////////////
+			// function plusScheduler(){
+			// 	$.ajax({
+			// 		type:'post',
+			// 		url: '${root}/schedulermake/plusTimetable',
+			// 		data: { 
+			// 			schedulerNo: '1',
+			// 			timetableDate: startDate, //받아와야함
+			// 		},
+			// 		success : function(data) { 
+			// 			console.log(data);
+						
+			// 		},
+			// 		error : function(error) { 
+			// 			console.log(error)
+			// 		}
+			// 	});
+
+			// }
 		
 
 			

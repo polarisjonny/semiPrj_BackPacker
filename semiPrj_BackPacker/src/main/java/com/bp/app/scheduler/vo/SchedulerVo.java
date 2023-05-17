@@ -8,49 +8,75 @@ public class SchedulerVo {
 	private String startDate;
 	private String endDate;
 	private String totalExpense;
+	
+	//여행날수
+	private String totalDay;
+
 	public String getSchedulerNo() {
 		return schedulerNo;
 	}
+
 	public void setSchedulerNo(String schedulerNo) {
 		this.schedulerNo = schedulerNo;
 	}
+
 	public String getMemberNo() {
 		return memberNo;
 	}
+
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
+
 	public String getTourTypeNo() {
 		return tourTypeNo;
 	}
+
 	public void setTourTypeNo(String tourTypeNo) {
 		this.tourTypeNo = tourTypeNo;
 	}
+
 	public String getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
+
 	public String getEndDate() {
 		return endDate;
 	}
+
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
 	public String getTotalExpense() {
 		return totalExpense;
 	}
+
 	public void setTotalExpense(String totalExpense) {
 		this.totalExpense = totalExpense;
 	}
+
+	public String getTotalDay() {
+		return totalDay;
+	}
+
+	public void setTotalDay(String totalDay) {
+		this.totalDay = totalDay;
+	}
+
 	@Override
 	public String toString() {
 		return "SchedulerVo [schedulerNo=" + schedulerNo + ", memberNo=" + memberNo + ", tourTypeNo=" + tourTypeNo
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", totalExpense=" + totalExpense + "]";
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", totalExpense=" + totalExpense + ", totalDay="
+				+ totalDay + "]";
 	}
+
 	public SchedulerVo(String schedulerNo, String memberNo, String tourTypeNo, String startDate, String endDate,
-			String totalExpense) {
+			String totalExpense, String totalDay) {
 		super();
 		this.schedulerNo = schedulerNo;
 		this.memberNo = memberNo;
@@ -58,11 +84,16 @@ public class SchedulerVo {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.totalExpense = totalExpense;
+		this.totalDay = totalDay;
 	}
+
 	public SchedulerVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 
 }
