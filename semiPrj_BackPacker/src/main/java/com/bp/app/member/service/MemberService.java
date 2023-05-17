@@ -158,6 +158,27 @@ public class MemberService {
 		
 		
 		return updatedMember;
+	}
+
+	public MemberVo findId(String name, String phoneNumber) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		MemberVo tempMember = dao.findId(conn, name, phoneNumber);
+		
+		return tempMember;
+		
+	}
+
+	public MemberVo findPassword(String id, String phoneNumber, String email) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		MemberVo tempMember = dao.findPassword(conn, id, phoneNumber, email);
+		
+		JDBCTemplate.close(conn);
+		
+		return tempMember;
 	} 
 	
 
