@@ -3,16 +3,17 @@ package com.bp.app.admin.boardManage.service;
 import java.sql.Connection;
 import java.util.List;
 
-import com.bp.app.admin.boardManage.dao.BoardManagerDao;
-import com.bp.app.admin.boardManage.vo.GuideBoardVo;
+import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.admin.boardManage.vo.GuideReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardVo;
+import com.bp.app.admin.boardManage.vo.QnaBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
+import com.bp.app.gboard.vo.GuideBoardVo;
 
 public class BoardManageService {
-	private BoardManagerDao dao = new BoardManagerDao();
+	private BoardManageDao dao = new BoardManageDao();
 	public int getGuideBoardListCnt(String searchType, String searchValue) throws Exception {
 		
 		//conn
@@ -163,6 +164,22 @@ public class BoardManageService {
 		JDBCTemplate.close(conn);
 		
 		return voList;
+	}
+	public int writeQnaBoard(QnaBoardVo qvo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.writeQnaBoard(conn, qvo);
+		
+		if (result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+				
 	}
 	
 

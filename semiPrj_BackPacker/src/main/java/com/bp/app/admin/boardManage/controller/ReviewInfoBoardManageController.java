@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManageService;
-import com.bp.app.admin.boardManage.vo.GuideBoardVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.page.PageVo;
 @WebServlet("/admin/reviewInfoBoard")

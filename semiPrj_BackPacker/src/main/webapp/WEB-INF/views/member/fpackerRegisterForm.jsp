@@ -100,10 +100,6 @@
         </p>
     </div>
     <br>
-    <div id="check-area">
-        <input type="checkbox">
-        <label>개인정보 처리 방침을 확인했으며, 이에 동의합니다.</label>
-    </div>
 
     <br>
     <br>
@@ -112,7 +108,7 @@
     <h2 id="id-card-title">신분증 등록</h2>
     <br>
     <br>
-    <form action="${pageContext.request.contextPath}/member/fpackerRegister}">
+    <form action="${pageContext.request.contextPath}/member/join/fpacker" method="post"  enctype="multipart/form-data">
         <div id="file-area">
             <input type="file" name="idCard">
             <br>

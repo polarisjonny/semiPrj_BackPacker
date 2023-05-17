@@ -1,9 +1,12 @@
+<%@page import="com.bp.app.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>아이디 찾기 페이지</title>
 <style>
         #findId-title {
@@ -33,6 +36,7 @@
 
         #name, #phone {
             border:none;
+            width: 100%;
         }
 
         #name {
@@ -68,17 +72,18 @@
             text-align: center;
         }
     </style>
+    
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <h1 id="findId-title">아이디 찾기</h1> 
-    <form action=""${pageContext.request.contextPath}/member/findId}">
+    <form action="${root}/member/find/id" method="POST">
         <div id="findId-area">
              <div id="name-area">
                 <span id="span-name">이름</span>
                 <div class="border-style">
-                    <input id="name" type="text" placeholder="이름을 입력하세요" name="id">
+                    <input id="name" type="text" placeholder="이름을 입력하세요" name="name">
                 </div>
                
              </div>
@@ -87,7 +92,7 @@
              <div id="phone-area">
                 <span>핸드폰 번호</span>
                 <div class="border-style">
-                    <input name="phoneNumber" id="phone" type="tel" placeholder="핸드폰 번호를 입력하세요">
+                    <input name="phoneNumber" id="phone" type="text" placeholder="핸드폰 번호를 입력하세요">
                 </div>
                 
              </div>
@@ -100,13 +105,18 @@
         <br>
         <br>
         <br>
-        <br>
-        <div id="check-id-area">
-            <div>jonny님의 아이디는 jju9705 입니다.</div>
-        </div>
-            
+        <br>    
     </form>
-    </main>
     
+    
+    <div id="check-id-area">
+    </div>
+    </main>
+    	
+    
+    
+    <script>
+    	
+	</script>
 </body>
 </html>

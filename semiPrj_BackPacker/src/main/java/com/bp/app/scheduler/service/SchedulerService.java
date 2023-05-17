@@ -204,6 +204,7 @@ public class SchedulerService {
 		return list;
 	}
 
+
 	public List<SchedulerVo> getScheduler(SchedulerVo sVo) throws Exception {
 
 		
@@ -235,6 +236,7 @@ public class SchedulerService {
 	
 		
 		return sList;
+
 	}
 
 }

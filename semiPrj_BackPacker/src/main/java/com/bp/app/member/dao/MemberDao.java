@@ -174,8 +174,179 @@ public class MemberDao {
 		
 		return result;
 	}
-	
-	
-	
 
+	
+	
+	public int registerFpacker(String idChangeName, String memberNo, Connection conn) throws Exception {
+		//SQL
+		String sql = "UPDATE MEMBER SET IS_GUIDE = 'O', ID_CARD = ? WHERE MEMBER_NO = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, idChangeName);
+		pstmt.setInt(2,  Integer.parseInt(memberNo));
+		
+		int result = pstmt.executeUpdate();
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		
+		
+		//result
+		return result;
+		
+	}
+
+	public int editMemberInfo(Connection conn, MemberVo vo) throws Exception {
+		String sql = "UPDATE MEMBER SET PHONE_NUMBER = ?, EMAIL = ?, ADDRESS = ?, AGE = ?, PROFILE_IMAGE = ?, INTRO_MESSAGE = ? WHERE MEMBER_NO = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, vo.getPhoneNumber());
+		pstmt.setString(2,  vo.getEmail());
+		pstmt.setString(3,  vo.getAddress());
+		pstmt.setString(4,  vo.getAge());
+		pstmt.setString(5,  vo.getProfileImage());
+		pstmt.setString(6,  vo.getIntroMessage());
+		pstmt.setInt(7,  Integer.parseInt(vo.getMemberNo()));
+		
+		int result = pstmt.executeUpdate();
+		
+		
+		JDBCTemplate.close(pstmt);
+		
+		
+		return result;
+	}
+
+	public MemberVo selectOneByNo(Connection conn, String memberNo) throws Exception {
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_NO = ? AND MEMBER_STATUS = '1'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1,  Integer.parseInt(memberNo));
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		MemberVo updatedMember = null;
+		if(rs.next()) {
+			String no = rs.getString("MEMBER_NO");
+			String isGuide = rs.getString("IS_GUIDE");
+			String memberStatus = rs.getString("MEMBER_STATUS");
+			String id = rs.getString("ID");
+			String password = rs.getString("PASSWORD");
+			String name = rs.getString("NAME");
+			String gender = rs.getString("GENDER");
+			String age = rs.getString("AGE");
+			String address = rs.getString("ADDRESS");
+			String email = rs.getString("EMAIL");
+			String phoneNumber = rs.getString("PHONE_NUMBER");
+			String nick = rs.getString("NICK");
+			String profileImage = rs.getString("PROFILE_IMAGE");
+			String idCard = rs.getString("ID_CARD");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String introMessage = rs.getString("INTRO_MESSAGE");
+			String memberScore = rs.getString("MEMBER_SCORE");
+			
+			updatedMember = new MemberVo();
+			
+			
+			updatedMember.setMemberNo(no);
+			updatedMember.setIsGuide(isGuide);
+			updatedMember.setMemberStatus(memberStatus);
+			updatedMember.setId(id);
+			updatedMember.setPassword(password);
+			updatedMember.setName(name);
+			updatedMember.setGender(gender);
+			updatedMember.setAge(age);
+			updatedMember.setAddress(address);
+			updatedMember.setEmail(email);
+			updatedMember.setPhoneNumber(phoneNumber);
+			updatedMember.setIdCard(idCard);
+			updatedMember.setNick(nick);
+			updatedMember.setProfileImage(profileImage);
+			updatedMember.setEnrollDate(enrollDate);
+			updatedMember.setIntroMessage(introMessage);
+			updatedMember.setMemberScore(memberScore);
+			
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return updatedMember;
+ 	}
+
+	public int changePassword(Connection conn, String memberNo, String password) throws Exception {
+		String sql = "UPDATE MEMBER SET PASSWORD = ? WHERE MEMBER_NO = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, password);
+		pstmt.setString(2, memberNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	public MemberVo findId(Connection conn, String name, String phoneNumber) throws Exception {
+		String sql = "SELECT ID, NICK FROM MEMBER WHERE NAME = ? AND PHONE_NUMBER = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, name);
+		pstmt.setString(2, phoneNumber);
+		ResultSet rs = pstmt.executeQuery();
+		
+		MemberVo tempMember = null;
+		
+		if(rs.next()) {
+			String id = rs.getString("ID");
+			String nick = rs.getString("NICK");
+			
+			tempMember = new MemberVo();
+			tempMember.setId(id);
+			tempMember.setNick(nick);
+			tempMember.setName(name);
+			tempMember.setPhoneNumber(phoneNumber);
+		} else {
+			throw new Exception("[ERROR]찾으시는 정보가 없습니다.");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return tempMember;
+	}
+
+	public MemberVo findPassword(Connection conn, String id, String phoneNumber, String email) throws Exception {
+		String sql = "SELECT PASSWORD, NICK FROM MEMBER WHERE ID = ? AND PHONE_NUMBER = ? AND EMAIL = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		pstmt.setString(2, phoneNumber);
+		pstmt.setString(3,  email);
+		ResultSet rs = pstmt.executeQuery();
+		
+		MemberVo tempMember = null;
+		
+		if(rs.next()) {
+			String password = rs.getString("PASSWORD");
+			String nick = rs.getString("NICK");
+			
+			tempMember = new MemberVo();
+			tempMember.setPassword(password);
+			tempMember.setNick(nick);
+			tempMember.setEmail(email);
+			tempMember.setPhoneNumber(phoneNumber);
+		} else {
+			throw new Exception("[ERROR]찾으시는 정보가 없습니다.");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return tempMember;
+	}
 }//class

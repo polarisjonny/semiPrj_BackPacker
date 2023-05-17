@@ -108,8 +108,8 @@
 
             <div id="next-area" class="next-area">
                 <a id="join-btn" href="${pageContext.request.contextPath}/member/join">회원가입</a>
-                <a id="id-btn" href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a>
-                <a id="password-btn" href="${pageContext.request.contextPath}/member/findPassword">비밀번호 찾기</a>
+                <a id="id-btn" href="${pageContext.request.contextPath}/member/find/id">아이디 찾기</a>
+                <a id="password-btn" href="${pageContext.request.contextPath}/member/find/password">비밀번호 찾기</a>
             </div>
 
         </div>

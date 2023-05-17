@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.dao.GuideBoardDao;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.dao.MemberDao;
 import com.bp.app.member.vo.MemberVo;
 
@@ -53,7 +55,7 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER, L.CHANGE_NAME, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN GUIDE_BOARD_IMG_LIST L ON (L.GUIDE_BOARD_NO= GB.GUIDE_BOARD_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
+		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER, L.CHANGE_NAME, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN GUIDE_BOARD_IMG_LIST L ON (L.GUIDE_BOARD_NO= GB.GUIDE_BOARD_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getBeginRow());
 		pstmt.setInt(2, pvo.getLastRow() );
@@ -69,6 +71,7 @@ public class GuideBoardService {
 			String age = rs.getString("AGE");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String gender = rs.getString("GENDER");
+			String writerNo = rs.getString("WRITER_NO");
 			if(gender=="M") {
 				gender="남성";
 			}else {
@@ -86,7 +89,7 @@ public class GuideBoardService {
 			bvo.setNick(nick);
 			bvo.setAge(age);
 			bvo.setProfileImage(profileImage);
-			
+			bvo.setWriterNo(writerNo);
 			
 			bvo.setGender(gender);
 			bvo.setChangeName(changeName);
@@ -136,6 +139,95 @@ public class GuideBoardService {
 		JDBCTemplate.close(conn);
 		
 		return cnt;
+	}
+
+
+	public MemberVo selectMemberByNo(GuideBoardVo bvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberVo writerMember = dao.selectMemberByNo(conn,bvo);
+		
+		JDBCTemplate.close(conn);
+		
+		return writerMember;
+	}
+
+
+	public GuideBoardVo selectOneByNo(GuideBoardVo bvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+			
+		GuideBoardVo selectedBvo =  dao.selectOneByNo(conn,bvo);
+		
+		JDBCTemplate.close(conn);
+		return selectedBvo;
+		
+	}
+
+
+	public int replyWrite(GuideReplyVo rvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql = "INSERT INTO GUIDE_REPLY(GUIDE_REPLY_NO, WRITER_NO, GUIDE_BOARD_NO,CONTENT) VALUES(SEQ_GUIDE_REPLY_NO.NEXTVAL, ? ,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, rvo.getWriterNo());
+		pstmt.setString(2, rvo.getGuideBoardNo());
+		pstmt.setString(3, rvo.getContent());
+		int result = pstmt.executeUpdate();
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		//close
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+
+	public List<GuideReplyVo> selectReplyList(String accomNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql = "SELECT * FROM GUIDE_REPLY WHERE GUIDE_BOARD_NO = ? ORDER BY ENROLL_DATE desc";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, accomNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rx
+		List<GuideReplyVo> list = new ArrayList<>();
+		if(rs.next()) {
+			String guideReplyNo = rs.getString("GUIDE_REPLY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			
+			GuideReplyVo rvo = new GuideReplyVo();
+			rvo.setGuideReplyNo(guideReplyNo);
+			rvo.setWriterNo(writerNo);
+			rvo.setGuideBoardNo(guideBoardNo);
+			rvo.setContent(content);
+			rvo.setEnrollDate(enrollDate);
+			rvo.setDeleteYn(deleteYn);
+			
+			list.add(rvo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		//close
+		
+		return list;
 	}
 
 }

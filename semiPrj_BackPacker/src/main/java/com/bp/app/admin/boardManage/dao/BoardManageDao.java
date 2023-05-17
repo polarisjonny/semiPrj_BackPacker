@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bp.app.admin.boardManage.vo.GuideBoardVo;
 import com.bp.app.admin.boardManage.vo.GuideReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardVo;
+import com.bp.app.admin.boardManage.vo.QnaBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
+import com.bp.app.gboard.vo.GuideBoardVo;
 
-public class BoardManagerDao {
+public class BoardManageDao {
 
 	public int getGuideBoardListCnt(Connection conn, String searchType, String searchValue) throws Exception {
 		String sql = "SELECT COUNT(*) FROM ( SELECT B.GUIDE_BOARD_NO, B.WRITER_NO, B.GUIDE_BOARD_CATEGORY_NO, B.TITLE, B.CONTENT, B.ENROLL_DATE, B.MODIFY_DATE, B.HIT, B.MATCHING_STATE, B.TRAVEL_EXPENSE, B.DELETE_YN, B.REPORT_CNT AS REPORTCNT, M.NICK AS WRITERNICK, M.ID AS WRITERID, C.CATEGORY_NAME AS CATEGORY FROM GUIDE_BOARD B JOIN MEMBER M ON B.WRITER_NO = M.MEMBER_NO JOIN GUIDE_BOARD_CATEGORY  C ON B.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO ) WHERE DELETE_YN = 'N'";
@@ -613,6 +614,25 @@ public class BoardManagerDao {
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
 		return voList;
+	}
+
+	public int writeQnaBoard(Connection conn, QnaBoardVo qvo) throws Exception {
+		String sql = "INSERT INTO QNA_BOARD (QNA_NO , WRITER_NO , QNA_CATEGORY_NO , TITLE , CONTENT) VALUES (SEQ_QNA_BOARD_NO.NEXTVAL ,?  , ? , ? , ?)"	;
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, qvo.getWriterNo());
+		pstmt.setString(2, qvo.getQnaCategoryNo());
+		pstmt.setString(3, qvo.getTitle());
+		pstmt.setString(4, qvo.getContent());
+		
+		int result = pstmt.executeUpdate();
+		//tx||rs
+		
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	
 	}
 
 

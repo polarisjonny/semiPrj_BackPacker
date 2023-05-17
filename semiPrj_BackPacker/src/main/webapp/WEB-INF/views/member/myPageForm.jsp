@@ -28,7 +28,7 @@
             color: white;
             background-color: #94d2e6;
             border: none;
-            width: 10%;
+            width: 100px;
             height: 40px;
             float: right;
             border-radius: 5px;
@@ -86,9 +86,12 @@
             background-color: #94d2e6;
             border: none;
             border-radius: 5px;
-            width: 30%;
+            width: 120px;
             height: 30px;
             margin: 4px;
+            flex-grow: 1;
+             align-items: center;
+  			justify-content: center;
         }
 
         #my-article-list-title {
@@ -180,6 +183,12 @@
 			background-color: lightgray;
 			border: none;
 		}
+		
+		#button-area {
+			display: flex;
+			align-items: center; /* Adjust vertical alignment as needed */
+ 			 justify-content: flex-end; 
+		}
 
     </style>
 </head>
@@ -197,29 +206,33 @@
          <div id="data-area">
            <div id="personal-data-area">
                 <div>이름</div>
-                <div>김민규</div>
+                <div>${loginMember.name}</div>
                 <div>연령대</div>
-                <div>30대</div>
+                <div>${loginMember.age}대</div>
                 <div>이메일</div>
-                <div>mankyu119@naver.com</div>
+                <div>${loginMember.email}</div>
                 <div>핸드폰번호</div>
-                <div>01086319999</div>
+                <div>${loginMember.phoneNumber}</div>
                 <div>주소</div>
-                <div>경기도 성남시 분당구 정자동 KH아파트 101동 1408호</div>
+                <div>${loginMember.address}</div>
             </div>
     
             <div id="fpacker-area">
-                <div>이름</div>
-                <div>김땡땡</div>
-                <div>신분증 등록</div>
-                <div><img id="id-card-img" src="${root}/static/img/memberExample/sample_idcard.png" alt="신분증 사진"></div>
+                <c:if test="${loginMember.isGuide == 'O'}">
+                	<div>이름</div>
+                	<div>${loginMember.name}</div>
+                	<div>신분증 등록</div>
+                	<div><img id="id-card-img" src="${root}/static/img/member/idCard/${loginMember.idCard}" alt="신분증 사진"></div>
+                </c:if>
                         
                 
                 <div id="button-area">
-                    <div id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 이미 프패커로 등록된 유저입니다.</div>
-                    <button class="mypage-button">프패커 등록</button>
-                    <button class="mypage-button">개인정보 수정</button>
-                    <button class="mypage-button">비밀번호 수정</button>
+                    <c:if test="${loginMember.isGuide == 'X'}">
+                    	<div id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 이미 프패커로 등록된 유저입니다.</div>
+                    </c:if>
+                    <button id="register-btn" class="mypage-button">프패커 등록</button>
+                    <button id="edit-info-btn" class="mypage-button">개인정보 수정</button>
+                    <button id="password-edit-btn" class="mypage-button">비밀번호 수정</button>
                 </div>
                 
              </div>
@@ -365,12 +378,28 @@
    	 			method : 'post',
    	 			success: function(x) {
    	 				console.log("데이터 송신 성공");
+   	 				location.href='${root}/home';
    	 			}, 
    	 			error : function() {
    	 				console.log("데이터 송신 실패...");
    	 			}
    	 			
    	 		});
+   	 	});
+   	 	
+   	 	const registerBtn = document.querySelector("#register-btn");
+   	 	registerBtn.addEventListener("click", function(){
+   	 		location.href = "${root}/member/join/fpacker";
+   	 	});
+   	 	
+   	 	const editInfoBtn = document.querySelector("#edit-info-btn");
+   	 	editInfoBtn.addEventListener("click", function(){
+   	 		location.href = "${root}/member/modify/myPage";
+   	 	});
+   	 	
+   	 	const passwordEditBtn = document.querySelector("#password-edit-btn");
+   	 	passwordEditBtn.addEventListener("click", function(){
+   	 		location.href = "${root}/member/modify/password";
    	 	});
 </script>
     

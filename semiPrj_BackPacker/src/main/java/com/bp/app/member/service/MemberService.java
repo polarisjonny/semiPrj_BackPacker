@@ -97,4 +97,89 @@ public class MemberService {
 		return result;
 	}
 
+	public int registerFpacker(String idChangeName, String memberNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		int result = dao.registerFpacker(idChangeName, memberNo, conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+	public MemberVo editMemberInfo(MemberVo vo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberVo updatedMember = null;
+		
+		MemberDao dao = new MemberDao();
+		
+		try {			
+			int result = dao.editMemberInfo(conn, vo);
+			if(result == 1) {
+				updatedMember = dao.selectOneByNo(conn, vo.getMemberNo());
+				if(updatedMember == null) {
+					throw new Exception();
+				}
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} finally {			
+			JDBCTemplate.close(conn);
+		}
+		
+		return updatedMember;
+	}
+
+	public MemberVo changePassword(String memberNo, String password) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		
+		
+		MemberVo updatedMember = null;
+		try {
+			int result = dao.changePassword(conn, memberNo, password);
+			
+			if(result == 1) {
+				updatedMember = dao.selectOneByNo(conn, memberNo);
+				if(updatedMember == null) {
+					throw new Exception();
+				}
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		
+		return updatedMember;
+	}
+
+	public MemberVo findId(String name, String phoneNumber) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		MemberVo tempMember = dao.findId(conn, name, phoneNumber);
+		
+		return tempMember;
+		
+	}
+
+	public MemberVo findPassword(String id, String phoneNumber, String email) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		MemberVo tempMember = dao.findPassword(conn, id, phoneNumber, email);
+		
+		JDBCTemplate.close(conn);
+		
+		return tempMember;
+	} 
+	
+
 }//class
