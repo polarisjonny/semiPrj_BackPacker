@@ -13,6 +13,7 @@ public class PlaceVo {
 	private String placeLng;
 	private String placeTime;
 	private String placeExpense;
+	private String placeDeleteYn;
 	
 	//민규
 	private String placeCategory;
@@ -84,6 +85,12 @@ public class PlaceVo {
 	public void setPlaceExpense(String placeExpense) {
 		this.placeExpense = placeExpense;
 	}
+	public String getPlaceDeleteYn() {
+		return placeDeleteYn;
+	}
+	public void setPlaceDeleteYn(String placeDeleteYn) {
+		this.placeDeleteYn = placeDeleteYn;
+	}
 	public String getPlaceCategory() {
 		return placeCategory;
 	}
@@ -107,12 +114,14 @@ public class PlaceVo {
 		return "PlaceVo [placeNo=" + placeNo + ", placeCategoryNo=" + placeCategoryNo + ", countryNo=" + countryNo
 				+ ", locationNo=" + locationNo + ", placeName=" + placeName + ", placeIntroduce=" + placeIntroduce
 				+ ", placeImage=" + placeImage + ", placeLat=" + placeLat + ", placeLng=" + placeLng + ", placeTime="
-				+ placeTime + ", placeExpense=" + placeExpense + ", placeCategory=" + placeCategory
-				+ ", locationCategory=" + locationCategory + ", countryCategory=" + countryCategory + "]";
+				+ placeTime + ", placeExpense=" + placeExpense + ", placeDeleteYn=" + placeDeleteYn + ", placeCategory="
+				+ placeCategory + ", locationCategory=" + locationCategory + ", countryCategory=" + countryCategory
+				+ "]";
 	}
 	public PlaceVo(String placeNo, String placeCategoryNo, String countryNo, String locationNo, String placeName,
 			String placeIntroduce, String placeImage, String placeLat, String placeLng, String placeTime,
-			String placeExpense, String placeCategory, String locationCategory, String countryCategory) {
+			String placeExpense, String placeDeleteYn, String placeCategory, String locationCategory,
+			String countryCategory) {
 		super();
 		this.placeNo = placeNo;
 		this.placeCategoryNo = placeCategoryNo;
@@ -125,6 +134,7 @@ public class PlaceVo {
 		this.placeLng = placeLng;
 		this.placeTime = placeTime;
 		this.placeExpense = placeExpense;
+		this.placeDeleteYn = placeDeleteYn;
 		this.placeCategory = placeCategory;
 		this.locationCategory = locationCategory;
 		this.countryCategory = countryCategory;

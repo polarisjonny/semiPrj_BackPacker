@@ -84,7 +84,7 @@
                     
                    
                     <select class = "searchValueElem" name="searchValue" >
-                        <option value="">신고수 없음</option>
+                        <option value="0">전부</option>
                         <option value="1">1 이상</option>
                         <option value="10">10 이상</option>
                         <option value="20">20 이상</option>

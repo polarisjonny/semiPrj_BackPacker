@@ -39,7 +39,7 @@ public class WriteQnaBoardController extends HttpServlet{
 					
 			if(result == 1) {
 				String root = req.getContextPath();
-				resp.sendRedirect(root+"/문의게시판 목록으로");
+				resp.sendRedirect(root+"/notice/inquiry");
 			} else {
 				throw new Exception("[ERROR] 문의게시판 작성 중 에러 발생");
 			}

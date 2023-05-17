@@ -161,47 +161,7 @@
 	
 	//서치 타입 변경시 함수 실행
 	
-	const searchTypeTag = document.querySelector('select[name="searchType"]');
-	searchTypeTag.addEventListener("change", setSearchValueTag);
 	
-	function setSearchValueTag(){
-	    const searchType =  searchTypeTag.value;
-	    //현재 타입이 신고수인지 확인 하고 맞으면 select 로 변경 아니면 원래 input 으로
-	    if(searchType == 'reportCnt'){
-	        setSearchValueTagSelect()
-	    }else{
-	        setSearchValueTagInput()
-	    }
-	}
-	
-	//검색값 영역을 select로 변경 (타입이 reportCnt일 때)
-	function setSearchValueTagSelect(){
-	    searchValueSelectTag.classList.add("active");
-	    searchValueSelectTag.disabled = false;
-	    searchValueInputTag.classList.remove("active");
-	    searchValueInputTag.disabled = true;
-	
-	    searchValueInputTag.value = '';
-	
-	    
-	}
-	//검색값 영역을 input 으로 변경 (타입이 reportCnt가 아닐 떄)
-	function setSearchValueTagInput(){
-	    searchValueInputTag.classList.add("active");
-	    searchValueInputTag.disabled = false;
-	    searchValueSelectTag.classList.remove("active");
-	    searchValueSelectTag.disabled = true;
-	}
-	//reportCnt 검색 이후 값이 유지되도록
-	function initSearchValueSelect(){
-	    if(searchType !='reportCnt'){
-	        return;
-	    }
-	    const optionTag = document.querySelector("option[value = '" + searchValue  + "']");
-	    optionTag.selected = true;
-	}
-	setSearchValueTag();//첫화면부터 검색하ㅏ세요 보이게
-	initSearchValueSelect();
 
 
 

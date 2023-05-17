@@ -1,14 +1,12 @@
 package com.bp.app.admin.memberManage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bp.app.admin.memberManage.service.AdminMemberService;
 import com.bp.app.member.vo.MemberVo;
@@ -17,8 +15,8 @@ public class AdminMemberEditStatusController extends HttpServlet {
 
    
    @Override
-   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	   
       try {
       //데꺼member
       String status = req.getParameter("memberStatus");
@@ -33,7 +31,6 @@ public class AdminMemberEditStatusController extends HttpServlet {
       
       
       //화면 == 문자열 내보내기
-      PrintWriter out = resp.getWriter();
       if(result == 1) {
     	String root = req.getContextPath();
 		resp.sendRedirect(root + "/admin/member");
