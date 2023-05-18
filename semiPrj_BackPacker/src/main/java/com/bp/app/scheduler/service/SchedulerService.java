@@ -159,9 +159,10 @@ public class SchedulerService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=?";
+		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, req.getParameter("schedulerNo"));
+		pstmt.setString(2,req.getParameter("timetableDate"));
 		ResultSet rs = pstmt.executeQuery();
 		//rs
 		List<TimetableVo> list = new ArrayList<>();
@@ -205,15 +206,15 @@ public class SchedulerService {
 	}
 
 
-	public List<SchedulerVo> getScheduler(SchedulerVo sVo) throws Exception {
+	public List<SchedulerVo> getScheduler(HttpServletRequest req) throws Exception {
 
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		String sql="SELECT SCHEDULER_NO ,MEMBER_NO ,START_DATE ,END_DATE ,TOTAL_EXPENSE ,TO_CHAR(CAST(EXTRACT(DAY FROM (END_DATE - START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE FROM SCHEDULER WHERE MEMBER_NO=? AND START_DATE = TO_TIMESTAMP(?, 'YYYY-MM-DD')";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, sVo.getMemberNo());
-		pstmt.setString(2, sVo.getStartDate());
+		pstmt.setString(1,req.getParameter("memberNo"));
+		pstmt.setString(2,req.getParameter("startDate"));
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<SchedulerVo> sList = new ArrayList<>();
@@ -224,6 +225,7 @@ public class SchedulerService {
 			String endDate =rs.getString("END_DATE");
 			String totalDay = rs.getString("TOTAL_DATE");
 			
+			SchedulerVo sVo = new SchedulerVo();
 			sVo.setSchedulerNo(schedulerNo);
 			sVo.setMemberNo(memberNo);
 			sVo.setStartDate(startDate);
@@ -233,7 +235,10 @@ public class SchedulerService {
 			sList.add(sVo);
 			
 		}
-	
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
 		
 		return sList;
 
@@ -275,5 +280,31 @@ public class SchedulerService {
 	
 		return tVo;
 }
+
+	public int deTimetable(TimetableVo vo) throws Exception {
+	
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String sql="DELETE FROM TIMETABLE WHERE PLACE_NO = ? AND SCHEDULER_NO = ? AND TIMETABLE_DATE = ? ";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getPlaceNo());
+		pstmt.setString(2, vo.getSchedulerNo());
+		pstmt.setString(3, vo.getTimetableDate());
+		int result = pstmt.executeUpdate();
+		
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
+	}
 
 }

@@ -153,8 +153,11 @@
 
 	#p-introduce {
 		margin-right: 5px;
-		
 	}
+		
+	
+	.carousel-control-prev{height: 40px; width: 80px;}
+	.carousel-control-next{height: 40px; width: 80px;}
 
 
 
@@ -165,6 +168,7 @@
 
 
 	.btnn{
+		display: none;
 		width: 250px;
 		height: 70px;
 		padding: 5px;
@@ -322,27 +326,14 @@
 	
 			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
 			<div id="scheduler-area">
-			<div id="over">
-
-				<div id="scheduler-date-area" >
-					
-
-				</div>
-					<div id="test"></div>
-
-					<%-- 여행지을 가져 왔을때 생성 --%>
-
-					<div id="placejson">
-					
-
-					</div>
-					
+				<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev"></button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"></button>
+					<div class="carousel-inner" id="scheduler-slide">
 						
-					
-					
-				
-			</div>
-				
+			
+					</div>
+				</div>
 				<button class="btnn" >일정저장하기</button>
 			</div>
 		</div>
@@ -445,7 +436,14 @@
 			var endDate;
 			var pick =true;
 			var intro = document.querySelector('#intro');
+			var m ; //스케줄 배열
+			var cdate; //스케줄 날짜
+			var datadayValue;
+			var formattedEndDate;
 			
+
+		
+
 
 			
 	        $(function() {
@@ -471,23 +469,37 @@
 					startDate = start.format('YYYY-MM-DD');
 					endDate = end.format('YYYY-MM-DD');
 
-					console.log(startDate);
-					
+					//스케줄 생성
 					$('#maketimetable').on('click',function(){
 						setScheduler();
-						$('#maketimetable').hide();
-						$('#scheduler-area').show();
-						getScheduler();
-					})
-				});
-				
-				
-				$('.bi-plus-circle').on('click', function () {
-					setTimeTable($(this).data('placeno'));
-					getTimetable();
 
+						$('#maketimetable').hide();
+
+						$('#scheduler-area').show();
+						$('.btnn').show();
+
+					});//스생성
 				});
-	        });
+				
+				//일정표 생성
+				$('.bi-plus-circle').on('click', function () {
+					datadayValue = $(".carousel-item:visible").find('#dataday');
+
+					console.log(datadayValue.data('dataday')-1);
+					// 날짜에 일수를 더함
+					
+					setTimeTable($(this).data('placeno'));
+					
+
+				});//일 생성
+
+				
+
+
+
+
+			});
+	        
 			
 			/////////////////////////////////////////////////////////////
 			function setScheduler(){
@@ -500,13 +512,20 @@
 						endDate: endDate
 					},
 					success : function(x) { 
+						getScheduler();
 					},
 					error : function(error) { 
 						console.log(error)
 					}
 				});
 
+				
+
 			};
+
+			
+			
+			
 			function getScheduler(){
 
 				$.ajax({
@@ -517,45 +536,81 @@
 						memberNo:'1'
 					},
 					success : function(data) { 
-						console.log(data);
+						
+						m=JSON.parse(data);
+						console.log(m);
 
-						const x = JSON.parse(data);
-						console.log(x);
-
-						const sdiv = document.querySelector("#scheduler-date-area");
+						const sdiv = document.querySelector("#scheduler-slide");
 						sdiv.innerHTML="";
+						
+						let sstr="";
+						for(let i =1 ; i<=m[0].totalDay; i++){
+							if(i===1){
+								sstr+='<div id="over" class="carousel-item active" >'
+									
+									sstr+='<div id="scheduler-date-area" >'
+										sstr+='<div>이전</div>'
+										sstr+='<div id="dataday" class="scheduler-date" data-dataday="1" ><h4> DAY1 </h4></div>'
+										sstr+='<div>다음</div>'
+									sstr+='</div>'
+										
+										// <%-- 여행지을 가져 왔을때 생성 --%>
 
-						let str="";
-						for(let i =1 ; i<=x[0].totalDay; i++){
-							str+='<div><a class="scheduler-date" href="">이전날</a></div>'
-							str+='<div class="scheduler-date" ><h4> DAY'+i+'</h4></div>'
-							str+='<div><a class="scheduler-date" href="">다음날</a></div>'
-						}
-						sdiv.innerHTML+=str;
+										sstr+='<div id="placejson1-a"></div>'
+										
+								sstr+='</div>'
+							}else{
+							sstr+='<div id="over" class="carousel-item"  >'
+								
+								sstr+='<div id="scheduler-date-area"  >'
+									sstr+='<div>이전</div>'
+									sstr+='<div id="dataday" class="scheduler-date" data-dataday="'+i+'" ><h4> DAY'+i+'</h4></div>'
+									sstr+='<div>다음</div>'
+								sstr+='</div>'
+									
+									// <%-- 여행지을 가져 왔을때 생성 --%>
 
-					},
-					error : function(error) { 
-						console.log(error)
-					}
-				});
-
-			};
-
-
-			///////////////////////////////////////////////////////////////
-			
+									sstr+='<div id="placejson'+i+'-a"></div>'
+									
+							sstr+='</div>'
+									
+								}
+							}
+								sdiv.innerHTML+=sstr;
+								
+							},
+							error : function(error) { 
+								console.log(error)
+							}
+						});
+						
+					};
+					
+					
+					
+			///////////////////////////////////////////////////////////////time table
+					
 			function setTimeTable(placeno){
+				var date = new Date(startDate);
+
+				// startDate에 3일을 더한 날짜를 계산
+				var endDate = new Date(date);
+				endDate.setDate(date.getDate() + (datadayValue.data('dataday')-1));
+
+				// yyyy-mm-dd 형식으로 날짜 포맷팅
+				formattedEndDate = endDate.toISOString().slice(0, 10);
+
 				$.ajax({
 					type:'post',
 					url: '${root}/schedulermake/setTimetable',
 					data: { 
 						placeNo: placeno,
-						schedulerNo: '5',
-						timetableDate: startDate, //받아와야함 +1+1
-						timetableStartTime : startDate 
+						schedulerNo: m[0].schedulerNo,
+						timetableDate:formattedEndDate,
+						timetableStartTime : startDate //수정해야댐
 					},
 					success : function(data) { 
-						console.log(data);
+						getTimetable();
 						
 					},
 					error : function(error) { 
@@ -563,22 +618,23 @@
 					}
 				});
 				
-			};
+			};//settime
+
+
 			
 			function getTimetable(){
 				$.ajax({
 					url: '/semi/schedulermake/getTimetable',
 					type:'GET',
 					data: { 
-						schedulerNo:'5',
+						schedulerNo: m[0].schedulerNo,
+						timetableDate: formattedEndDate,
 					},
 					success : function(data) { 
 						console.log(data);
 
 						const x = JSON.parse(data);
-						console.log(x);
-
-						const pdiv = document.querySelector("#placejson");
+						const pdiv = document.querySelector("#placejson"+datadayValue.data('dataday')+"-a");
 						pdiv.innerHTML="";
 
 						let str="";
@@ -588,14 +644,15 @@
 							str+='	<img id="sc-img" height="80px" width="80px" src="" alt="">';
 							str+=	'<div id="area">';
 								str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
-								str+=		'<div class="time">소요시간 : <input type="text" value="'+x[i].placeTime+'">분</div>';
+								str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
 								str+=	'<div class="class-time">시작시간 : <input type="time" value="10:00"></div>';
 								str+=	'</div>';
-								str+=	'<div id="delete"><i class="bi bi-trash"></i></div>';
+								str+=	'<div id="yy" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+formattedEndDate+'"><i id="yy" class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+formattedEndDate+'" ></i></div>';
 								str+= '</div>';
 								str+='</div>';
 						}
 						pdiv.innerHTML+=str;
+						
 
 
 
@@ -607,29 +664,41 @@
 					}
 				});
 
-			};
+			};//get ttime
+
+			function deTimetable(placeno,timetableDate){
+
+				$.ajax({
+					type:'get',
+					url: '${root}/schedulermake/deTimetable',
+					data: { 
+						placeNo: placeno,
+						schedulerNo: m[0].schedulerNo,
+						timetableDate: timetableDate
+						
+					},
+					success : function(data) { 
+						getTimetable();
+						
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+
+
+
+			};//dele
+
+
+
+			//일정표 삭제 
+			
 
 			
 
 			///////////////////////////////////////////////////
-			// function plusScheduler(){
-			// 	$.ajax({
-			// 		type:'post',
-			// 		url: '${root}/schedulermake/plusTimetable',
-			// 		data: { 
-			// 			schedulerNo: '1',
-			// 			timetableDate: startDate, //받아와야함
-			// 		},
-			// 		success : function(data) { 
-			// 			console.log(data);
-						
-			// 		},
-			// 		error : function(error) { 
-			// 			console.log(error)
-			// 		}
-			// 	});
-
-			// }
+			
 		
 
 			

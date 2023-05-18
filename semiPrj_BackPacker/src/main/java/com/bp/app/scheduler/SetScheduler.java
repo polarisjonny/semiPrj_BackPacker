@@ -40,6 +40,7 @@ public class SetScheduler extends HttpServlet{
 			
 			
 			
+			
 			//req.getSession().setAttribute("sVo", sVo);
 			//화면
 			
