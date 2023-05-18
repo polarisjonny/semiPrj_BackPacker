@@ -7,6 +7,23 @@ public class GuideReplyVo {
 	private String content;
 	private String enrollDate;
 	private String deleteYn;
+	
+	//예린추가 
+	private String profile;
+	private String nick;
+	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public String getGuideReplyNo() {
 		return guideReplyNo;
 	}
@@ -46,10 +63,11 @@ public class GuideReplyVo {
 	@Override
 	public String toString() {
 		return "GuideReplyVo [guideReplyNo=" + guideReplyNo + ", writerNo=" + writerNo + ", guideBoardNo="
-				+ guideBoardNo + ", content=" + content + ", enrollDate=" + enrollDate + ", deleteYn=" + deleteYn + "]";
+				+ guideBoardNo + ", content=" + content + ", enrollDate=" + enrollDate + ", deleteYn=" + deleteYn
+				+ ", profile=" + profile + ", nick=" + nick + "]";
 	}
 	public GuideReplyVo(String guideReplyNo, String writerNo, String guideBoardNo, String content, String enrollDate,
-			String deleteYn) {
+			String deleteYn, String profile, String nick) {
 		super();
 		this.guideReplyNo = guideReplyNo;
 		this.writerNo = writerNo;
@@ -57,10 +75,14 @@ public class GuideReplyVo {
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.deleteYn = deleteYn;
+		this.profile = profile;
+		this.nick = nick;
 	}
 	public GuideReplyVo() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+	
 	
 	
 }

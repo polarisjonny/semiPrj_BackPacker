@@ -483,7 +483,10 @@
 					console.log(x);
 					if(x == 'ok'){
 						alert("댓글작성 성공!");
-						
+						document.querySelector("textarea[name=comment]").value='';
+						loadComment();
+					}else {
+						alert('댓글작성실패...');
 					}
 				},
 				error: ()=>{
@@ -492,31 +495,39 @@
 			});
 		}
 
-		// <div><img class="list-profile" src="${root}/static/img/profile2.jpg" alt=""></div>
-		// 					<div class="comment-list-text">
-		// 						<div class="comment-list-id">두둥탁</div>
-		// 						<div class="comment-list-content">ㅋㅋㅋㅋ라라라라ㅏ라라라라ㅏ라라라ㅏ라라라ㅏ랄와라라라라라라라라ㅏ라랄길어져라얍!ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋsidsidsid냥냥봍쿠라~ 스즈메의 문단속~ 바카나이떼~ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div>
-		// 						<div class="comment-list-day">2023-04-25 13:00:03</div> 
-		// 					</div>
-		//댓글불러오기///
-		$.ajax({
-			url : '${root}/accompany/reply/list',
-			type: "GET" ,
-			data : {
-				accomNo : '${gbvo.guideBoardNo}'
-			},
-			success : function(data){
-				const x  = JSON.parse(data);
-				const commentArea = document.querySelector(".comment");
-				for(let i=0; i<x.length; i++){
-					console.log(x[i]);
-				}
-			},
-			error : function(e){
-				console.log(e);
-			},
 
-		});
 
+		function loadComment(){
+			$.ajax({
+				url : '${root}/accompany/reply/list',
+				type: "GET" ,
+				data : {
+					accomNo : '${gbvo.guideBoardNo}'
+				},
+				success : function(data){
+					const x  = JSON.parse(data);
+					const commentArea = document.querySelector("#comment-list-area");
+					commentArea.innerHTML="";
+					let str = "";
+					for(let i=0; i<x.length; i++){
+						str+='<div class="comment">';
+						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt=""></div>';
+						str+='<div class="comment-list-text">';
+						str+='<div class="comment-list-id">'+x[i].nick+'</div>';
+						str+='<div class="comment-list-content">'+x[i].content+'</div>';
+						str+='<div class="comment-list-day">'+x[i].enrollDate+'</div>'; 
+						str+='</div>';
+						str+='</div>';
+					}
+					commentArea.innerHTML+=str;
+				},
+				error : function(e){
+					console.log(e);
+				},
+	
+			});
+		}
+	
 		loadComment();
+	
 </script>

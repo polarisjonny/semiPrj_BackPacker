@@ -194,20 +194,23 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql = "SELECT * FROM GUIDE_REPLY WHERE GUIDE_BOARD_NO = ? ORDER BY ENROLL_DATE desc";
+		String sql = "SELECT GR.*,M.NICK, M.PROFILE_IMAGE FROM GUIDE_REPLY GR JOIN MEMBER M ON (M.MEMBER_NO = GR.WRITER_NO) WHERE GUIDE_BOARD_NO = ? ORDER BY GR.ENROLL_DATE DESC";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, accomNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rx
 		List<GuideReplyVo> list = new ArrayList<>();
-		if(rs.next()) {
+		while(rs.next()) {
 			String guideReplyNo = rs.getString("GUIDE_REPLY_NO");
 			String writerNo = rs.getString("WRITER_NO");
 			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
 			String content = rs.getString("CONTENT");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String deleteYn = rs.getString("DELETE_YN");
+			
+			String nick = rs.getString("NICK");
+			String profileImage = rs.getString("PROFILE_IMAGE");
 			
 			GuideReplyVo rvo = new GuideReplyVo();
 			rvo.setGuideReplyNo(guideReplyNo);
@@ -216,6 +219,8 @@ public class GuideBoardService {
 			rvo.setContent(content);
 			rvo.setEnrollDate(enrollDate);
 			rvo.setDeleteYn(deleteYn);
+			rvo.setNick(nick);
+			rvo.setProfile(profileImage);
 			
 			list.add(rvo);
 			
