@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style>
 	main{
@@ -25,6 +27,7 @@
 	
 	#InformationWrite{
 		font-size: 2em;
+		margin-top:66px;
 	}
 	
 	#imgUpload{
@@ -66,33 +69,40 @@
 		height:450px;
 	}
 	
-	.panel{
+	.note-editor{
 		width:90%;
 	}
 	
-	#subMit{
+	#submit{
+		display:flex;
+		justify-content: flex-end;
+	}
+	
+	#submit > input{
+		margin-right:80px;
         border-radius: 10px;
         border: 1px solid #99ccff;
         background-color:  #99ccff;
         height:40px;
-        width:15%;
         color:white;
-        margin-left:650px;
         margin-top:10px;
+		width:120px;
     }
 </style>
 </head>
 <body>
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+		
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	
 		<main>
 		
 		<div id="travelInformationWrite">
-			<br>
-			<br>
 		
 			<div id="InformationWrite">여행정보 게시글 작성</div>
-			<br>
+
 				<form action="" method="post" enctype="multipart/form-data">
 				<div id="imgUpload">
 						<label for="imgFile">
@@ -105,7 +115,9 @@
 						
 						<textarea class="summernote" name="editordata" style="resize:none;" ></textarea>
 						
-						<input id="subMit" type="submit" value="작성 완료">
+						<div id="submit">
+							<input type="submit" value="작성 완료">
+						</div>
 				</form>
 
 			
