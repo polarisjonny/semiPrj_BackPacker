@@ -5,14 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지</title>
-<script>https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style>
+		#main-content {
+			margin-top: 10%;
+		}
+
         #my-page-title-area {
             margin: auto;
             width: 50%;
             height: 100px;
-            margin-top: 8%;
         }
 
         #my-page-title {
@@ -28,7 +30,7 @@
             color: white;
             background-color: #94d2e6;
             border: none;
-            width: 100px;
+            width: 15%;
             height: 40px;
             float: right;
             border-radius: 5px;
@@ -37,8 +39,8 @@
 
         #my-page-modify-title {
             margin-left: 25%;
-            font-size: 25px;
             font-weight: bold;
+            font-size: 25px;
         }
 
         #data-area {
@@ -86,12 +88,9 @@
             background-color: #94d2e6;
             border: none;
             border-radius: 5px;
-            width: 120px;
+            width: 30%;
             height: 30px;
             margin: 4px;
-            flex-grow: 1;
-             align-items: center;
-  			justify-content: center;
         }
 
         #my-article-list-title {
@@ -165,36 +164,26 @@
             align-items: center;
         }
         
+        #quit-area {
+        	margin: auto;
+        	text-align: center;
+        	margin-left: 37%;
+        }
         
         #quit-btn {
-        	margin-left: 65%;
-        	background-color: #94d2e6;
-        	border: none;
-        	width: 6%;
         	color: white;
+        	background-color: #94d2e6;
+        	border-radius: 5px;
+        	border: none;
         }
 
-		#final-quit-btn {
-			background-color: #94d2e6;
-			border: none;
-		}
-		
-		#close-btn {
-			background-color: lightgray;
-			border: none;
-		}
-		
-		#button-area {
-			display: flex;
-			align-items: center; /* Adjust vertical alignment as needed */
- 			 justify-content: flex-end; 
-		}
 
-    </style>
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	<main>
+	
+	<main id="main-content">
         <div id="my-page-title-area">
             <div id="my-page-title">MY PAGE</div>
             <button id="schedule-btn">일정 보기</button>
@@ -218,21 +207,26 @@
             </div>
     
             <div id="fpacker-area">
-                <c:if test="${loginMember.isGuide == 'O'}">
+                
                 	<div>이름</div>
                 	<div>${loginMember.name}</div>
                 	<div>신분증 등록</div>
-                	<div><img id="id-card-img" src="${root}/static/img/member/idCard/${loginMember.idCard}" alt="신분증 사진"></div>
-                </c:if>
-                        
-                
-                <div id="button-area">
-                    <c:if test="${loginMember.isGuide == 'X'}">
+                	<c:if test="${loginMember.isGuide eq null}">
+                		<div><img id="id-card-img" src="${root}/static/img/member/idCard/noImg.gif" alt="신분증 사진"></div>
+                	</c:if>
+                	<c:if test="${loginMember.isGuide eq 'O'}">
+                		<div><img id="id-card-img" src="${root}/static/img/member/idCard/${loginMember.idCard}" alt="신분증 사진"></div>
+                	</c:if>
+                	
+                <div id="btn-area">
+                	<c:if test="${loginMember.isGuide eq 'O'}">
                     	<div id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 이미 프패커로 등록된 유저입니다.</div>
-                    </c:if>
+                </c:if>
+                <div id="button-area">
                     <button id="register-btn" class="mypage-button">프패커 등록</button>
                     <button id="edit-info-btn" class="mypage-button">개인정보 수정</button>
                     <button id="password-edit-btn" class="mypage-button">비밀번호 수정</button>
+                </div>
                 </div>
                 
              </div>

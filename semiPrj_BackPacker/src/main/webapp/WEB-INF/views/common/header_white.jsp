@@ -93,7 +93,7 @@ header{
        	<c:if test="${not empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" alt="">
+				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="">
 				</button>
 				<ul class="dropdown-menu">
 					 <li hidden>${loginMember.memberNo}</li>
