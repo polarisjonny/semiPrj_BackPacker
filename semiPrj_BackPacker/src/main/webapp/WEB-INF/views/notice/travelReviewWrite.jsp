@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -25,6 +26,7 @@
 	
 	#reviewWrite{
 		font-size: 2em;
+		margin-top:66px;
 	}
 	
 	#imgUpload{
@@ -36,6 +38,7 @@
 		height:300px;
 		width:90%;
 		background-color:lightgray;
+		position: relative;
 	}
 	
 	
@@ -47,10 +50,10 @@
 	
 	#imgFile{
 		visibility: hidden;
-		width:80px;
+		
 	}
 	
-	#title{
+	#write-title{
 		border:1px solid lightgray;
 		border-radius: 5px;
 		width:90%;
@@ -65,20 +68,45 @@
 		height:450px;
 	}
 	
-	.panel{
+	.note-editor{
 		width:90%;
 	}
 	
-	#subMit{
+	#submit{
+		display:flex;
+		justify-content: flex-end;
+	}
+	
+	#submit > input{
+		margin-right:80px;
         border-radius: 10px;
         border: 1px solid #99ccff;
         background-color:  #99ccff;
         height:40px;
-        width:15%;
         color:white;
-        margin-left:650px;
         margin-top:10px;
+		width:120px;
     }
+
+	#main{
+		display: flex;
+		position: relative;
+		align-items: center;
+	}
+
+	#Thumnail{
+		position: absolute;
+		display: flex;
+		width: 100%;
+	}
+
+	#Thumnail > label{
+		text-align: center;
+		width: 120%;
+	}
+    
+
+    
 
 	
 	
@@ -86,8 +114,11 @@
 </head>
 <body>
 
+
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+	 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<main>
 	
 		<div id="travelReviewWrite">
@@ -96,19 +127,26 @@
 			<div id="reviewWrite">여행후기 게시글 작성</div>
 		
 			<br>
-				<form action="" method="post" enctype="multipart/form-data">
-				<div id="imgUpload">
-						<label for="imgFile">
-							썸네일 사진 올리기
-						</label>
-						<input type="file" id="imgFile">
-				</div>
-						<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
+				<form action="${root}/notice/travelReviewWrite" method="post" enctype="multipart/form-data">
+					<div id="main">
+						<img id="imgUpload">
+						<div id="Thumnail">
+							<label id="upload" for="imgFile">
+								썸네일 사진 올리기
+							</label>
+							<input type="file" name="fileName" id="imgFile">
+						</div>
+						
+					</div>
+
+						<input type="text" name="title" id="write-title"placeholder="제목을 20자 이내로 적어주세요.">
 						<br>
 						
-						<textarea class="summernote" name="editordata" style="resize:none;" ></textarea>
+						<textarea class="summernote" name="content" style="resize:none;" ></textarea>
 						
-						<input id="subMit" type="submit" value="작성 완료">
+						<div id="submit">
+							<input type="submit" value="작성 완료">
+						</div>
 				</form>
 
 			
@@ -121,22 +159,49 @@
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
-             <script>
-               $('.summernote').summernote({
-                 placeholder: 'Hello stand alone ui',
-                 tabsize: 2,
-                 height: 450,
-                 toolbar: [
-                   ['style', ['style']],
-                   ['font', ['bold', 'underline', 'clear']],
-                   ['color', ['color']],
-                   ['para', ['ul', 'ol', 'paragraph']],
-                   ['table', ['table']],
-                   ['insert', ['link', 'picture', 'video']],
-                   ['view', ['fullscreen', 'codeview', 'help']]
-                 ]
-               });
-             </script>
+    <script>
+    	$('.summernote').summernote({
+    	  placeholder: 'Hello stand alone ui',
+    	  tabsize: 2,
+    	  height: 450,
+    	  toolbar: [
+    	    ['style', ['style']],
+    	    ['font', ['bold', 'underline', 'clear']],
+    	    ['color', ['color']],
+    	    ['para', ['ul', 'ol', 'paragraph']],
+    	    ['table', ['table']],
+    	    ['insert', ['link', 'picture', 'video']],
+    	    ['view', ['fullscreen', 'codeview', 'help']]
+    	  ]
+    	});
+              
+		const fileTag = document.querySelector("#imgFile");
+		const Thumnail = document.querySelector('#Thumnail');
+		 
+		fileTag.addEventListener('change' , function (params) {
+			
+			const preview = document.querySelector("#imgUpload");
+
+			if(fileTag.files.length > 0){
+				const fr = new FileReader();
+				fr.readAsDataURL(fileTag.files[0]);
+
+				fr.addEventListener("load" , function(event) {
+					preview.src = event.target.result;
+					preview.width = "100";
+					preview.height = "100";
+					Thumnail.style.visibility='hidden';
+				})
+				
+	
+			}else{
+				preview.src = "";
+			}
+
+
+		})
+		
+     </script>
 
 </body>
 </html>
