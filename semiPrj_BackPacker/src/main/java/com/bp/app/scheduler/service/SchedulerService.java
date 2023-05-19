@@ -133,7 +133,7 @@ public class SchedulerService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 	
-		String sql = "INSERT INTO TIMETABLE (TIMETABLE_NO,PLACE_NO,SCHEDULER_NO,TIMETABLE_DATE,TIMETABLE_START_TIME)VALUES(SEQ_TIMETABLE_NO.NEXTVAL,?,?,TO_TIMESTAMP(?, 'YYYY-MM-DD'),TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
+		String sql = "INSERT INTO TIMETABLE (TIMETABLE_NO,PLACE_NO,SCHEDULER_NO,TIMETABLE_DATE,TIMETABLE_START_TIME)VALUES(SEQ_TIMETABLE_NO.NEXTVAL,?,?,?,TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, tVo.getPlaceNo());
 		pstmt.setString(2, tVo.getSchedulerNo());
@@ -305,6 +305,49 @@ public class SchedulerService {
 		
 		
 		return result;
+	}
+
+	public List<TimetableVo> totalTimetable(HttpServletRequest req) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String sql = "SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.TOTAL_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, req.getParameter("schedulerNo"));
+		ResultSet rs = pstmt.executeQuery();
+		List<TimetableVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String timetableNo = rs.getString("TIMETABLE_NO");
+			String placeNo = rs.getString("PLACE_NO");
+			String schedulerNo = rs.getString("SCHEDULER_NO");
+			String timetableDate = rs.getString("TIMETABLE_DATE");
+			String bespokePlace = rs.getString("BESPOKE_PLACE");
+			String bespokeTime = rs.getString("BESPOKE_TIME");
+			String timetableStartTime = rs.getString("TIMETABLE_START_TIME");
+			String totalDate = rs.getString("TOTAL_DATE");
+			
+			TimetableVo vo = new TimetableVo();
+			vo.setTimetableNo(timetableNo);
+			vo.setPlaceNo(placeNo);
+			vo.setSchedulerNo(schedulerNo);
+			vo.setTimetableDate(timetableDate);
+			vo.setBespokePlace(bespokePlace);
+			vo.setBespokeTime(bespokeTime);
+			vo.setTimetableStartTime(timetableStartTime);
+			vo.setTotalDate(totalDate);
+			
+			list.add(vo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		
+		
+		
+		return list;
 	}
 
 }

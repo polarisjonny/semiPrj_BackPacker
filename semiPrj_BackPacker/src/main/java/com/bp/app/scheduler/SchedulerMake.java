@@ -35,8 +35,8 @@ public class SchedulerMake extends HttpServlet{
 //			session.setAttribute("placeList",placeList);
 			
 			
-			req.getSession().setAttribute("placeList", placeList);
-//			req.setAttribute("placeList", placeList);
+//			req.getSession().setAttribute("placeList", placeList);
+			req.setAttribute("placeList", placeList);
 			req.getRequestDispatcher("/WEB-INF/views/scheduler/makeScheduler.jsp").forward(req, resp);
 			
 			
