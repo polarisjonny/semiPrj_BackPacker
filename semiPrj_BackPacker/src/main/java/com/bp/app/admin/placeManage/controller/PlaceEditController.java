@@ -2,7 +2,9 @@ package com.bp.app.admin.placeManage.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,12 @@ import com.bp.app.admin.placeManage.service.PlaceManageService;
 import com.bp.app.scheduler.vo.PlaceVo;
 import com.bp.app.util.file.AttachmentVo;
 import com.bp.app.util.file.FileUploader;
+@MultipartConfig(
+		maxFileSize = 1024 * 1024 * 50,
+		maxRequestSize = 1024 * 1024 * 50 * 2
+	)
 @WebServlet("/admin/place/edit")
+
 public class PlaceEditController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,11 +46,12 @@ public class PlaceEditController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-try {
+			try {
 			
 			Part f = req.getPart("placeImage");
 			String path = req.getServletContext().getRealPath("/static/img/place/");
-			AttachmentVo attachmentVo = FileUploader.saveFile(path , f);
+			AttachmentVo attachmentVo =null; 
+			attachmentVo = FileUploader.saveFile(path , f);
 			
 			//데꺼
 			String placeNo = req.getParameter("placeNo");
