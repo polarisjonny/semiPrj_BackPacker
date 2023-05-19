@@ -227,9 +227,11 @@ public class PlaceManageDao {
 
 	public int addPlace(Connection conn, PlaceVo vo) throws Exception {
 		//SQL
+		System.out.println(vo.getPlaceCategory());
 		String sql = "INSERT INTO PLACE( PLACE_NO, PLACE_CATEGORY_NO, COUNTRY_NO, LOCATION_NO, PLACE_NAME, PLACE_INTRODUCE, PLACE_IMAGE, PLACE_LAT, PLACE_LNG, PLACE_TIME, PLACE_EXPENSE ) VALUES(SEQ_PLACE_NO.NEXTVAL , ?, ?, ?, ?, ?, ?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getPlaceCategoryNo());
+		System.out.println(vo.getPlaceCategory());
+		pstmt.setString(1,vo.getPlaceCategory());
 		pstmt.setString(2, vo.getCountryNo());
 		pstmt.setString(3, vo.getLocationNo());
 		pstmt.setString(4, vo.getPlaceName());

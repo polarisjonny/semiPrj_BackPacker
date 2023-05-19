@@ -163,8 +163,10 @@ public class GuideBoardVo {
 	public String getMainImg() {
 		return mainImg;
 	}
-	public void setMainImg(String changeName) {
-		this.mainImg = changeName;
+
+	public void setMainImg(String mainImg) {
+		this.mainImg = mainImg;
+
 	}
 	public String getStartDate() {
 		return startDate;
@@ -192,7 +194,7 @@ public class GuideBoardVo {
 			String title, String content, String enrollDate, String modifyDate, String hit, String matchingState,
 			String travelExpense, String deleteYn, String reportCnt, String writerId, String writerNick,
 			String categoryName, String id, String nick, String age, String profileImage, String gender,
-			String changeName, String startDate, String endDate) {
+			String mainImg, String startDate, String endDate) {
 		super();
 		this.guideBoardNo = guideBoardNo;
 		this.writerNo = writerNo;

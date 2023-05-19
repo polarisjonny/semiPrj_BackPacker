@@ -10,7 +10,7 @@ import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.member.vo.MemberVo;
 
 public class GuideBoardDao {
-
+	//스케쥴러인서트
 	public int insertScheduler(Connection conn, GuideBoardVo vo, MemberVo loginMember) throws Exception {
 		String sql = "INSERT INTO SCHEDULER (SCHEDULER_NO, MEMBER_NO,START_DATE,END_DATE) VALUES (SEQ_SCHEDULER_NO.NEXTVAL,?,TO_DATE('"+vo.getStartDate()+"','YYYY-MM-DD'),TO_DATE('"+vo.getEndDate()+"','YYYY-MM-DD'))";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -20,14 +20,16 @@ public class GuideBoardDao {
 
 		return result;
 	}
-
+	
+	//가이드 보드에 인서트
 	public int insertGuideBoard(Connection conn, GuideBoardVo vo, MemberVo loginMember) throws Exception {
-		String sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?)";
+		String sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT,MAIN_IMG) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, loginMember.getMemberNo());
 		pstmt.setString(2, vo.getGuideBoardCategoryNo());
 		pstmt.setString(3, vo.getTitle());
 		pstmt.setString(4, vo.getContent());
+		pstmt.setString(5, vo.getMainImg());
 		int result = pstmt.executeUpdate();
 		JDBCTemplate.close(pstmt);
 
@@ -35,16 +37,8 @@ public class GuideBoardDao {
 		return result;
 	}
 
-	public int insertGuideIMG(Connection conn, GuideBoardVo vo) throws Exception {
-		String sql="INSERT INTO GUIDE_BOARD_IMG_LIST (GUIDE_BOARD_IMG_NO, GUIDE_BOARD_NO ,CHANGE_NAME) VALUES (SEQ_GUIDE_BOARD_IMG_NO.NEXTVAL, SEQ_GUIDE_BOARD_NO.CURRVAL,?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getChangeName());
-		int result = pstmt.executeUpdate();
-		JDBCTemplate.close(pstmt);
-
-		return result;
-	}
-
+	
+	//작성자 정보 가져오기
 	public MemberVo selectMemberByNo(Connection conn, GuideBoardVo bvo) throws Exception {
 		//sql
 		String sql = "SELECT NICK,ID,PROFILE_IMAGE,INTRO_MESSAGE FROM MEMBER WHERE MEMBER_NO = ?";
@@ -74,7 +68,7 @@ public class GuideBoardDao {
 		
 		return writerMember;
 	}
-
+	//게시글한개가져오기
 	public GuideBoardVo selectOneByNo(Connection conn, GuideBoardVo bvo) throws Exception {
 		//sql
 		String sql ="SELECT TITLE,CONTENT,ENROLL_DATE,MODIFY_DATE,HIT,MATCHING_STATE,SCHEDULER_NO FROM GUIDE_BOARD WHERE GUIDE_BOARD_NO = ?";

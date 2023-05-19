@@ -152,7 +152,7 @@
 		resize: none;
 	}
 
-	#comment-write-area > button {
+	#comment-write-area > input[type=button] {
 		width: 100%;
 		height: 100%;
 		border-radius: 5px;
@@ -168,6 +168,12 @@
 	#comment-text {
 		font-size: 30px;
 		font-weight: 800;
+	}
+	
+	#comment-write-area > textarea {
+		width: 100%;
+		height: 100%;
+		
 	}
 	textarea {
 		border-radius: 5px;
@@ -234,7 +240,12 @@
 	#sub-area {
 		margin-top: 30px
 	}
-	
+	.content-text {
+		width: 100%;
+		height: 300px;
+		border: none;
+		outline: none;
+	}
 </style>
 </head>
 <body>
@@ -242,24 +253,20 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 		<main>
-			<img src="${root}/static/img/main_big_img.jpg" alt="">
+ 	        <img class="middle-img" src="${root}/static/img/accompany/${vo.changeName}" alt="">
+			<%-- <img src="${root}/static/img/main_big_img.jpg" alt=""> --%>
 			<div id="main-box">
 				<div id="blank1"></div>
 				<div id="main-area">
 					<div id="title">${gbvo.title}</div>
 					<div id="introduce-area">
-						<div class="bold-text">자기소개</div>
-						<div id="content-text">
-							${writerMember.introMessage}
-						</div>
-						
-						<textarea id="content-text">${writerMember.introMessage}</textarea>
+						<div class="bold-text">자기소개</div>						
+						<textarea class="content-text" readonly style="resize: none;">${writerMember.introMessage}</textarea>
 					</div>
 					<div id="content-area">
 						<div class="bold-text">게시글 내용</div>
-						<div class="content-text">
-							${gbvo.content}
-						</div>
+						<textarea class="content-text" readonly style="resize: none;">${gbvo.content}</textarea>
+						
 					</div>
 				
 					<c:if test="${not empty tvo}">
@@ -431,18 +438,10 @@
 					</div>
 					<div id="comment-write-area">
 						<div id="comment-text">댓글</div>
-						<textarea name="comment" cols="20" rows="2" placeholder="댓글은 50자 이내로 작성해주세요. &#10;상대방을 비방하는 댓글은 자제해주세요."></textarea>
+						<textarea name="comment" style="resize: none;" placeholder="댓글은 50자 이내로 작성해주세요. &#10;상대방을 비방하는 댓글은 자제해주세요."></textarea>
 						<input type="button" value="댓글작성" onclick="writeComment();">
 					</div>
 					<div id="comment-list-area">
-						<div class="comment">
-							<div><img class="list-profile" src="${root}/static/img/profile2.jpg" alt=""></div>
-							<div class="comment-list-text">
-								<div class="comment-list-id">두둥탁</div>
-								<div class="comment-list-content">ㅋㅋㅋㅋ라라라라ㅏ라라라라ㅏ라라라ㅏ라라라ㅏ랄와라라라라라라라라ㅏ라랄길어져라얍!ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋsidsidsid냥냥봍쿠라~ 스즈메의 문단속~ 바카나이떼~ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div>
-								<div class="comment-list-day">2023-04-25 13:00:03</div> 
-							</div>
-						</div>
 					</div>
 				</div>
 				<div id="sub-area">
