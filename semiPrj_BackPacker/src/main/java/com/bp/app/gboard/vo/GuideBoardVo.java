@@ -29,7 +29,7 @@ public class GuideBoardVo {
 	private String gender;
 	
 	//썸네일 이미지
-	private String changeName;
+	private String mainImg;
 	
 	//일정
 	private String startDate;
@@ -160,11 +160,11 @@ public class GuideBoardVo {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getChangeName() {
-		return changeName;
+	public String getMainImg() {
+		return mainImg;
 	}
-	public void setChangeName(String changeName) {
-		this.changeName = changeName;
+	public void setMainImg(String changeName) {
+		this.mainImg = changeName;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -186,7 +186,7 @@ public class GuideBoardVo {
 				+ matchingState + ", travelExpense=" + travelExpense + ", deleteYn=" + deleteYn + ", reportCnt="
 				+ reportCnt + ", writerId=" + writerId + ", writerNick=" + writerNick + ", categoryName=" + categoryName
 				+ ", id=" + id + ", nick=" + nick + ", age=" + age + ", profileImage=" + profileImage + ", gender="
-				+ gender + ", changeName=" + changeName + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ gender + ", mainImg=" + mainImg + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 	public GuideBoardVo(String guideBoardNo, String writerNo, String guideBoardCategoryNo, String schedulerNo,
 			String title, String content, String enrollDate, String modifyDate, String hit, String matchingState,
@@ -215,7 +215,7 @@ public class GuideBoardVo {
 		this.age = age;
 		this.profileImage = profileImage;
 		this.gender = gender;
-		this.changeName = changeName;
+		this.mainImg = mainImg;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
