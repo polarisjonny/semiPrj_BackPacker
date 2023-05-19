@@ -134,7 +134,7 @@
 					<div id="trip-date">
 						DAY1
 						<br>
-						2023-04-27
+						2023-04-27   
 					</div>
 		
 					<div class="timetable">
@@ -146,38 +146,7 @@
 								10:00~11:00
 							</div>
 						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
+						
 						<div class="not-schedule">
 							<div>
 								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
@@ -187,120 +156,7 @@
 					</div>
 					
 				</div>
-				<div class="scheduler radious">
-					<div id="trip-date">
-						DAY1
-						<br>
-						2023-04-27
-					</div>
-		
-					<div class="timetable">
-						<div id="timetable1">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div class="not-schedule">
-							<div>
-								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-							</div>
-						</div>
-		
-					</div>
-					
-				</div>
-				<div class="scheduler radious">
-					<div id="trip-date">
-						DAY1
-						<br>
-						2023-04-27
-					</div>
-		
-					<div class="timetable">
-						<div id="timetable1">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div class="not-schedule">
-							<div>
-								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-							</div>
-						</div>
-		
-					</div>
-					
-				</div>
+				
 		
 			</div>	
 		</div>

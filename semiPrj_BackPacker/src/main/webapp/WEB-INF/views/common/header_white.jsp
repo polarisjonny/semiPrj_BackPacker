@@ -106,9 +106,7 @@ header{
 				<li><a class="dropdown-item " href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
 			  </div>
-			  <script>
-				$('.dropdown-toggle').dropdown();
-			  </script>
+			 
        	</c:if>
     </div>
 </header>

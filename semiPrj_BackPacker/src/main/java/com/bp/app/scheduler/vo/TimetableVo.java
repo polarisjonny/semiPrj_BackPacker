@@ -16,6 +16,7 @@ public class TimetableVo {
 	private String placeTime;
 	private String startDate;
 	private String endDate;
+	private String totalDate;
 	public String getTimetableNo() {
 		return timetableNo;
 	}
@@ -88,16 +89,23 @@ public class TimetableVo {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	public String getTotalDate() {
+		return totalDate;
+	}
+	public void setTotalDate(String totalDate) {
+		this.totalDate = totalDate;
+	}
 	@Override
 	public String toString() {
 		return "TimetableVo [timetableNo=" + timetableNo + ", placeNo=" + placeNo + ", schedulerNo=" + schedulerNo
 				+ ", timetableDate=" + timetableDate + ", bespokePlace=" + bespokePlace + ", bespokeTime=" + bespokeTime
 				+ ", timetableStartTime=" + timetableStartTime + ", placeName=" + placeName + ", placeImage="
-				+ placeImage + ", placeTime=" + placeTime + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ placeImage + ", placeTime=" + placeTime + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", totalDate=" + totalDate + "]";
 	}
 	public TimetableVo(String timetableNo, String placeNo, String schedulerNo, String timetableDate,
 			String bespokePlace, String bespokeTime, String timetableStartTime, String placeName, String placeImage,
-			String placeTime, String startDate, String endDate) {
+			String placeTime, String startDate, String endDate, String totalDate) {
 		super();
 		this.timetableNo = timetableNo;
 		this.placeNo = placeNo;
@@ -111,11 +119,15 @@ public class TimetableVo {
 		this.placeTime = placeTime;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.totalDate = totalDate;
 	}
 	public TimetableVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 	
 	
