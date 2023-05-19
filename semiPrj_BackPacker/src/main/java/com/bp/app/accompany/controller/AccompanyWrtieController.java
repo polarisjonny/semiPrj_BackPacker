@@ -48,7 +48,7 @@ public class AccompanyWrtieController extends HttpServlet {
 			
 			//꺼낸 데이터 vo에 set하기  
 			GuideBoardVo vo = new GuideBoardVo();
-			vo.setChangeName(attachmentVo.getChangeName());
+			vo.setMainImg(attachmentVo.getChangeName());
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setStartDate(startDate);

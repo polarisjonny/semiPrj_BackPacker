@@ -33,12 +33,11 @@ public class GuideBoardService {
 		//sql
 		int result1 =dao.insertScheduler(conn,vo,loginMember);
 		int result2= dao.insertGuideBoard(conn,vo,loginMember);
-		int result3 = dao.insertGuideIMG(conn,vo);
 		
 		
 		//tx
 		int result =0;
-		if(result1==1&&result2==1&&result3==1) {//셋다 1이면커밋 
+		if(result1==1&&result2==1) {//셋다 1이면커밋 
 			JDBCTemplate.commit(conn);
 			result=1;
 		}else {
@@ -55,10 +54,10 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER, L.CHANGE_NAME, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN GUIDE_BOARD_IMG_LIST L ON (L.GUIDE_BOARD_NO= GB.GUIDE_BOARD_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
+		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO ,GB.MAIN_IMG , M.ID, M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER , TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getBeginRow());
-		pstmt.setInt(2, pvo.getLastRow() );
+		pstmt.setInt(2, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
@@ -72,13 +71,14 @@ public class GuideBoardService {
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String gender = rs.getString("GENDER");
 			String writerNo = rs.getString("WRITER_NO");
+			
 			if(gender=="M") {
 				gender="남성";
 			}else {
 				gender="여성"; 
 			}
 			
-			String changeName = rs.getString("CHANGE_NAME");
+			String mainImg = rs.getString("MAIN_IMG");
 			String startDate_ = rs.getString("START_DATE");
 			String endDate_ = rs.getString("END_DATE");
 			
@@ -92,7 +92,7 @@ public class GuideBoardService {
 			bvo.setWriterNo(writerNo);
 			
 			bvo.setGender(gender);
-			bvo.setChangeName(changeName);
+			bvo.setMainImg(mainImg);
 			
 			//5월11일 이런식으로 데이터를 가공
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
