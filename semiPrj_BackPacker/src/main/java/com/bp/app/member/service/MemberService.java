@@ -97,16 +97,32 @@ public class MemberService {
 		return result;
 	}
 
-	public int registerFpacker(String idChangeName, String memberNo) throws Exception {
+	public MemberVo registerFpacker(String idChangeName, String memberNo) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		MemberDao dao = new MemberDao();
-		int result = dao.registerFpacker(idChangeName, memberNo, conn);
+		MemberVo updatedMember = null;
+		try {
+			//SQL
+			int result = dao.registerFpacker(idChangeName, memberNo, conn);
+			
+			//tx || rs
+			if(result == 1) {
+				updatedMember = dao.selectOneByNo(conn , memberNo);
+				if(updatedMember == null) {
+					throw new Exception();
+				}
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}finally {
+			//close
+			JDBCTemplate.close(conn);
+		}
 		
-		JDBCTemplate.close(conn);
-		
-		return result;
-		
+		return updatedMember;
 	}
 
 	public MemberVo editMemberInfo(MemberVo vo) throws Exception {

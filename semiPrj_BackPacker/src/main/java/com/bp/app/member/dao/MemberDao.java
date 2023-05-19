@@ -183,7 +183,7 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, idChangeName);
-		pstmt.setInt(2,  Integer.parseInt(memberNo));
+		pstmt.setString(2,  memberNo);
 		
 		int result = pstmt.executeUpdate();
 		

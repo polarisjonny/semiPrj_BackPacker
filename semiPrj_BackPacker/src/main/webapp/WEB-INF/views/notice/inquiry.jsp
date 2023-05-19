@@ -90,7 +90,7 @@
   		font-size:18px;
   		margin-bottom: 12px;
   		font-weight:700;
-		margin-left:15px;
+		margin-left:30px;
   	}
   	
   	.noticeBtn{

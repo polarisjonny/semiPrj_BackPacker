@@ -34,12 +34,14 @@ public class MemberLoginController extends HttpServlet {
 			MemberService ms = new MemberService();
 			MemberVo loginMember = ms.login(vo);
 			
-			
+			System.out.println(loginMember.getProfileImage());
 			if(loginMember != null) {
 				if(loginMember.getProfileImage() == null) {
+					
 					loginMember.setProfileImage("profile_default.jpg");
 				}
 				req.getSession().setAttribute("loginMember", loginMember);
+				System.out.println(loginMember);
 				
 				String root = req.getContextPath();
 				resp.sendRedirect(root+"/home");

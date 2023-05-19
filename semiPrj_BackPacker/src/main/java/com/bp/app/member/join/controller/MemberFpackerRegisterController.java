@@ -47,9 +47,10 @@ public class MemberFpackerRegisterController extends HttpServlet {
 			
 			
 			MemberService ms = new MemberService();
-			int result = ms.registerFpacker(idChangeName, memberNo);
+			MemberVo updatedMember = ms.registerFpacker(idChangeName, memberNo);
 			
-			if(result == 1) {
+			if(updatedMember != null) {
+				req.getSession().setAttribute("loginMember", updatedMember);
 				String root = req.getContextPath();
 				resp.sendRedirect(root+"/home");
 			} else {

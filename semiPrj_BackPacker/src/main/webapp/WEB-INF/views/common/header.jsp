@@ -54,10 +54,10 @@
        	<c:if test="${empty loginMember }">
 	       <a href='${root}/member/login'>로그인</a>
        	</c:if>
-       	<c:if test="${not empty loginMember}">
+       	<c:if test="${not empty loginMember }">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" alt="">
+				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="">
 				</button>
 				<ul class="dropdown-menu">
 				 <li hidden>${loginMember.memberNo}</li>
@@ -66,6 +66,7 @@
 				 <li><a class="dropdown-item" href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
 			  </div>
+
 			  
        	</c:if>
     </div>
