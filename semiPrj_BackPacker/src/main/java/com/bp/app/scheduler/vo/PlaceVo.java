@@ -16,6 +16,8 @@ public class PlaceVo {
 	private String placeDeleteYn;
 	
 	//민규
+	//placeCategory : place 이름
+	
 	private String placeCategory;
 	private String locationCategory;
 	private String countryCategory;
