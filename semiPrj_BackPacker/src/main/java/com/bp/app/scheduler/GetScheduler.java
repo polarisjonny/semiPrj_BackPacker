@@ -24,17 +24,10 @@ public class GetScheduler extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			String memberNo =  req.getParameter("memberNo");
-			String startDate =  req.getParameter("startDate");
-			
-			SchedulerVo sVo = new SchedulerVo();
-			sVo.setMemberNo(memberNo);
-			sVo.setStartDate(startDate);
 			
 			SchedulerService ss = new SchedulerService();
-			List<SchedulerVo> sList = ss.getScheduler(sVo);
+			List<SchedulerVo> sList = ss.getScheduler(req);
 			
-			System.out.println(sList);
 			//자바객체를 JSON 형태의 문자열로 변환
 			Gson gson = new Gson();
 			String sjsonStr = gson.toJson(sList);
@@ -43,6 +36,7 @@ public class GetScheduler extends HttpServlet{
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();
 			out.write(sjsonStr);
+			System.out.println(sjsonStr);
 			
 //			HttpSession session = req.getSession();
 //			session.setAttribute("scheduler", sjsonStr);
