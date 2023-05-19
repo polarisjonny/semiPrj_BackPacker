@@ -29,6 +29,12 @@
         height: 200px;
         
     }
+    #placeImg{
+    	width: 450px;
+        height: 200px;
+        
+    
+    }
     #select-grid1{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -97,7 +103,7 @@
 				 <input type="file" multiple="multiple" name="placeImage">
 			</label>
 				 <div id="edit-place-img">
-				    	<img id="placeImg">
+				    	<img id="placeImg" src="${root}/static/img/place/${pv.placeImage}">
 				 </div>
             <div id="select-grid1">
                 
@@ -123,20 +129,20 @@
                 
             </div>
             <div id="placeIntro">
-            <textarea  id="plIntro" placeholder="${pv.placeIntroduce}" name="placeIntroduce"></textarea>
+            <textarea  id="plIntro" placeholder="상세 정보 : ${pv.placeIntroduce}" name="placeIntroduce"></textarea>
             </div>
             <div id="place-info-grid">
                 <div>
-                    <input type="text" class="infotext" placeholder="${pv.placeTime}" id="time" name="placeTime">
+                    <input type="text" class="infotext" placeholder="소요시간 : ${pv.placeTime}" id="time" name="placeTime">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="${pv.placeExpense}" id="expense" name="placeExpense">
+                    <input type="text" class="infotext" placeholder="비용 : ${pv.placeExpense}" id="expense" name="placeExpense">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="${pv.placeLat}" id="lat" name="placeLat">
+                    <input type="text" class="infotext" placeholder="위도 : ${pv.placeLat}" id="lat" name="placeLat">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="${pv.placeLng}" id="lng" name="placeLng">
+                    <input type="text" class="infotext" placeholder="경도 : ${pv.placeLng}" id="lng" name="placeLng">
                 </div>
 
             </div>

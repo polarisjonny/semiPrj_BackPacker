@@ -17,14 +17,14 @@
 <title>Insert title here</title>
 </head>
 <style>
-    #edit-place-wrap{
+    #add-place-wrap{
         width: 450px;
          margin-top: 100px;
         margin-left: auto;
         margin-right: auto;
         height: 600px;
     }
-    #edit-place-img{
+    #add-place-img{
         width: 450px;
         height: 200px;
         
@@ -84,7 +84,7 @@
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-	<div id="edit-place-wrap">
+	<div id="add-place-wrap">
         <div style="text-align:center;">
             <span ><h1>여행지 추가</h1></span>
         </div>
@@ -96,7 +96,7 @@
 				대표사진
 				 <input type="file" multiple="multiple" name="placeImage">
 			</label>
-				 <div id="edit-place-img">
+				 <div id="add-place-img">
 				    	<img id="placeImg">
 				 </div>
             
@@ -124,20 +124,20 @@
                 
             </div>
             <div id="placeIntro">
-            <textarea  id="plIntro"  name="placeIntroduce"></textarea>
+            <textarea  id="plIntro"  name="placeIntroduce"  placeholder="상세 정보 : " ></textarea>
             </div>
             <div id="place-info-grid">
                 <div>
-                    <input type="text" class="infotext"  id="time" name="placeTime">
+                    <input type="text" class="infotext"  id="time" name="placeTime" placeholder="소요시간 : ">
                 </div>
                 <div>
-                    <input type="text" class="infotext"  id="expense" name="placeExpense">
+                    <input type="text" class="infotext"  id="expense" name="placeExpense" placeholder="비용 : " >
                 </div>
                 <div>
-                    <input type="text" class="infotext"  id="lat" name="placeLat">
+                    <input type="text" class="infotext"  id="lat" name="placeLat" placeholder="위도 : " >
                 </div>
                 <div>
-                    <input type="text" class="infotext"  id="lng" name="placeLng">
+                    <input type="text" class="infotext"  id="lng" name="placeLng" placeholder="경도 : " >
                 </div>
 
             </div>
