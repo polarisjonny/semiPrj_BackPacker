@@ -90,27 +90,27 @@
         </div>
         <form action="${root}/admin/place/add" method="post" enctype="multipart/form-data">
         <div>
-        	<input type="text" name = "placeName" placeholder="여행지 이름">
+        	<input type="text" name="placeName" placeholder="여행지 이름">
         </div>	
         	<label>
 				대표사진
-				 <input type="file" multiple="multiple" name="placeImage">
+				 <input type="file" multiple="multiple" name="placeImage" value="/app/static/img/tempprofile.png">
 			</label>
 				 <div id="add-place-img">
-				    	<img id="placeImg">
+				    	<img id="placeImg" >
 				 </div>
             
             <div id="select-grid1">
                 
                 <select class="g1sl" name="placeCategoryNo" id="placeSelect">
-                    <option value="10">식음료</option>
+                    <option value="10"selected>식음료</option>
                     <option value="20">관광</option>
                     <option value="30">체험</option>
                 </select>
             
             
                 <select class="g1sl" name="countryNo" id="countrySelect">
-                    <option value="1">한국</option>
+                    <option value="1"selected>한국</option>
                     <option value="2">일본</option>
                     <option value="3">중국</option>
                 </select>
@@ -118,7 +118,7 @@
             
                 <select class="g1sl" name="locationNo" id="locationSelect">
                     <option value="301">베이징</option>
-                    <option value="302">상하이(항주, 소주)</option>
+                    <option value="302"selected>상하이(항주, 소주)</option>
                     <option value="303">사천</option>
                 </select>
                 

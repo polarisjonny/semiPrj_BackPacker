@@ -82,7 +82,7 @@ public class PlaceManageService {
 	public int addPlace(PlaceVo vo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-		
+		System.out.println(vo.getPlaceCategory());
 		int result = dao.addPlace(conn , vo);
 		
 		//tx || rs
