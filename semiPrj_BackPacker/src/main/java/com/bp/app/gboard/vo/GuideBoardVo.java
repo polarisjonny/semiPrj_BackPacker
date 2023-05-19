@@ -163,8 +163,10 @@ public class GuideBoardVo {
 	public String getMainImg() {
 		return mainImg;
 	}
+
 	public void setMainImg(String mainImg) {
 		this.mainImg = mainImg;
+
 	}
 	public String getStartDate() {
 		return startDate;

@@ -211,7 +211,7 @@
                 	<div>이름</div>
                 	<div>${loginMember.name}</div>
                 	<div>신분증 등록</div>
-                	<c:if test="${loginMember.isGuide eq null}">
+                	<c:if test="${loginMember.isGuide eq null || loginMember.isGuide eq 'X'}">
                 		<div><img id="id-card-img" src="${root}/static/img/member/idCard/noImg.gif" alt="신분증 사진"></div>
                 	</c:if>
                 	<c:if test="${loginMember.isGuide eq 'O'}">
@@ -259,29 +259,29 @@
          <br>
          <div id="my-article-list-area">
             <div id="first-article-area">
-                <img class="article-image" src="${root}/static/img/memberExample/lion.jpg" alt="여행지 샘플 사진">
-                <div id="article-title">오르비스 같이 가실분...</div>
-                <div class="article-text-style" id="article-page">동행찾기 게시판</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 2017.04.27(목)</div>
-                <div class="article-text-style" id="article-views">조회수 1,203회</div>
+                <img class="article-image" src="${root}/static/img/views/accompany/${gbList[0].mainImg}" alt="여행지 샘플 사진">
+                <div id="article-title">${gbList[0].title}</div>
+                <div class="article-text-style" id="article-page">${gbList[0].categoryName}</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 gbList[0].enrollDate</div>
+                <div class="article-text-style" id="article-views">조회수 gbList[0].hit</div>
                 
             </div>
     
             <div id="second-article-area">
-                <img class="article-image" src="${root}/static/img/memberExample/lion.jpg" alt="여행지 샘플 사진">
-                <div id="article-title">오르비스 같이 가실분...</div>
-                <div class="article-text-style" id="article-page">동행찾기 게시판</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 2017.04.27(목)</div>
-                <div class="article-text-style" id="article-views">조회수 1,203회</div>
+                <img class="article-image" src="${root}/static/img/views/accompany/${gbList[1].mainImg}" alt="여행지 샘플 사진">
+                <div id="article-title">${gbList[1].title}</div>
+                <div class="article-text-style" id="article-page">${gbList[1].categoryName}</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[1].enrollDate}</div>
+                <div class="article-text-style" id="article-views">조회수 ${gbList[1].hit}</div>
                
             </div>
     
             <div id="third-article-area">
-                <img class="article-image" src="${root}/static/img/memberExample/lion.jpg" alt="여행지 샘플 사진">
-                <div id="article-title">오르비스 같이 가실분...</div>
-                <div class="article-text-style" id="article-page">동행찾기 게시판</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 2017.04.27(목)</div>
-                <div class="article-text-style" id="article-views">조회수 1,203회</div>
+                <img class="article-image" src="${root}/static/img/views/accompany/${gbList[2].mainImg}" alt="여행지 샘플 사진">
+                <div id="article-title">${gbList[2].title}</div>
+                <div class="article-text-style" id="article-page">${gbList[2].categoryName}</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[2].categoryName}</div>
+                <div class="article-text-style" id="article-views">조회수 ${gbList[2].hit}</div>
             </div>
         </div>
     
@@ -394,6 +394,11 @@
    	 	const passwordEditBtn = document.querySelector("#password-edit-btn");
    	 	passwordEditBtn.addEventListener("click", function(){
    	 		location.href = "${root}/member/modify/password";
+   	 	});
+   	 	
+   	 	const scheduleBtn = document.querySelector("#schedule-btn");
+   	 	scheduleBtn.addEventListener("click", function(){
+   	 		location.href = "${root}/member/myPage/schedule/scheduleList";
    	 	});
 </script>
     
