@@ -18,7 +18,7 @@ import com.bp.app.member.vo.MemberVo;
 public class MyPageController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/member/myPageForm.jsp").forward(req, resp);
+		
 		
 		try {
 			HttpSession session = req.getSession();
@@ -34,6 +34,9 @@ public class MyPageController extends HttpServlet {
 			if(gbList != null) {
 //				req.getSession().setAttribute("gbList", gbList);
 				req.setAttribute("gbList", gbList);
+				req.getRequestDispatcher("/WEB-INF/views/member/myPageForm.jsp").forward(req, resp);
+			} else {
+				throw new Exception("[ERROR] 마이 페이지 작성한 글 목록 불러오기 중 오류 발생...");
 			}
 			
 		} catch(Exception e) {

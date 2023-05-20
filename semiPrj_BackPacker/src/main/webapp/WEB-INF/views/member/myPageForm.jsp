@@ -257,13 +257,14 @@
          <button id="my-article-list-btn">작성한 모든 글 보기></button>
          <br>
          <br>
-         <div id="my-article-list-area">
+         <c:if test="${not empty gbList}">
+			<div id="my-article-list-area">
             <div id="first-article-area">
                 <img class="article-image" src="${root}/static/img/views/accompany/${gbList[0].mainImg}" alt="여행지 샘플 사진">
                 <div id="article-title">${gbList[0].title}</div>
                 <div class="article-text-style" id="article-page">${gbList[0].categoryName}</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 gbList[0].enrollDate</div>
-                <div class="article-text-style" id="article-views">조회수 gbList[0].hit</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[0].enrollDate}</div>
+                <div class="article-text-style" id="article-views">조회수 ${gbList[0].hit}</div>
                 
             </div>
     
@@ -280,10 +281,11 @@
                 <img class="article-image" src="${root}/static/img/views/accompany/${gbList[2].mainImg}" alt="여행지 샘플 사진">
                 <div id="article-title">${gbList[2].title}</div>
                 <div class="article-text-style" id="article-page">${gbList[2].categoryName}</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[2].categoryName}</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[2].enrollDate}</div>
                 <div class="article-text-style" id="article-views">조회수 ${gbList[2].hit}</div>
             </div>
-        </div>
+        </div>         
+         </c:if>
     
     
         <br>
@@ -400,6 +402,12 @@
    	 	scheduleBtn.addEventListener("click", function(){
    	 		location.href = "${root}/member/myPage/schedule/scheduleList";
    	 	});
+   	 	
+   	 	const myArticleListBtn = document.querySelector("#my-article-list-btn");
+   	 	myArticleListBtn.addEventListener("click", function(){
+   	 		location.href = "${root}/member/myPage/myBoardList?page=1";
+   	 	});
+   	 	
 </script>
     
 </body>
