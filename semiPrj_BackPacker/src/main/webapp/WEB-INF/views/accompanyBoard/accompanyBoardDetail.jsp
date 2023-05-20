@@ -253,7 +253,7 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 		<main>
- 	        <img class="middle-img" src="${root}/static/img/accompany/${vo.changeName}" alt="">
+ 	        <img class="middle-img" src="${root}/static/img/accompany/${gbvo.mainImg}" alt="">
 			<%-- <img src="${root}/static/img/main_big_img.jpg" alt=""> --%>
 			<div id="main-box">
 				<div id="blank1"></div>
@@ -290,7 +290,7 @@
 											<div class="bold-text">하남벛꽃축제</div>
 											<div class="content-text">10:00~11:00</div>
 										</div>
-										<div class="shedule">
+					 					<div class="shedule">
 											<img src="${root}/static/img/shedule.jpg" alt="">
 											<div class="bold-text">하남벛꽃축제</div>
 											<div class="content-text">10:00~11:00</div>

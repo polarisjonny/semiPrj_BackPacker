@@ -71,7 +71,7 @@ public class GuideBoardDao {
 	//게시글한개가져오기
 	public GuideBoardVo selectOneByNo(Connection conn, GuideBoardVo bvo) throws Exception {
 		//sql
-		String sql ="SELECT TITLE,CONTENT,ENROLL_DATE,MODIFY_DATE,HIT,MATCHING_STATE,SCHEDULER_NO FROM GUIDE_BOARD WHERE GUIDE_BOARD_NO = ?";
+		String sql ="SELECT TITLE,CONTENT,ENROLL_DATE,MODIFY_DATE,HIT,MATCHING_STATE,SCHEDULER_NO, MAIN_IMG FROM GUIDE_BOARD WHERE GUIDE_BOARD_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, bvo.getGuideBoardNo());
 		ResultSet rs = pstmt.executeQuery();
@@ -86,17 +86,18 @@ public class GuideBoardDao {
 			String hit =rs.getString("HIT");
 			String matchingState =rs.getString("MATCHING_STATE");
 			String schedulerNo =rs.getString("SCHEDULER_NO");
+			String mainImg = rs.getString("MAIN_IMG");
 			
 			selectedBvo = new GuideBoardVo();
 			selectedBvo.setTitle(title);
-			selectedBvo.setContent(content);
+			selectedBvo.setContent(content);	
 			selectedBvo.setEnrollDate(enrollDate);
 			selectedBvo.setModifyDate(modifyDate);
 			selectedBvo.setHit(hit);
 			selectedBvo.setMatchingState(matchingState);
 			selectedBvo.setSchedulerNo(schedulerNo);
 			selectedBvo.setGuideBoardNo(bvo.getGuideBoardNo());
-			
+			selectedBvo.setMainImg(mainImg);
 		}
 		
 		//close
