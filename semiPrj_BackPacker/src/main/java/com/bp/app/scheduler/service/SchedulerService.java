@@ -293,7 +293,7 @@ public class SchedulerService {
 		pstmt.setString(3, vo.getTimetableDate());
 		int result = pstmt.executeUpdate();
 		
-		if(result==1) {
+		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);

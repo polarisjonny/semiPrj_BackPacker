@@ -158,8 +158,8 @@
 	}
 	
 	
-	.carousel-control-prev{height: 40px; width: 80px;}
-	.carousel-control-next{height: 40px; width: 80px;}
+	.carousel-control-prev{height: 40px; width: 80px; color: black;}
+	.carousel-control-next{height: 40px; width: 80px; color: black;}
 	
 	
 	
@@ -293,6 +293,9 @@
 		overflow: auto;
     	height: 400px;
 	}
+
+	.carousel-control-next>span{width: 80px ;color: black;}
+	.carousel-control-prev>span{width: 80px;color: black;}
     
 	
     
@@ -329,8 +332,8 @@
 			<%-- jstl 로 설정 날짜와 일정저장 버튼 생김--%>
 			<div id="scheduler-area">
 				<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev"></button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"></button>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev"><span>이전</span></button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"><span>다음</span></button>
 					<div class="carousel-inner" id="scheduler-slide">
 						
 			
@@ -554,9 +557,9 @@
 								sstr+='<div id="over" class="carousel-item active" >'
 									
 									sstr+='<div id="scheduler-date-area" >'
-										sstr+='<div>이전</div>'
+										sstr+='<div></div>'
 										sstr+='<div id="dataday" class="scheduler-date" data-dataday="1" ><h4> DAY1 </h4></div>'
-										sstr+='<div>다음</div>'
+										sstr+='<div></div>'
 										sstr+='</div>'
 										
 										// <%-- 여행지을 가져 왔을때 생성 --%>
@@ -568,9 +571,9 @@
 								sstr+='<div id="over" class="carousel-item"  >'
 									
 									sstr+='<div id="scheduler-date-area"  >'
-										sstr+='<div>이전</div>'
+										sstr+='<div></div>'
 										sstr+='<div id="dataday" class="scheduler-date" data-dataday="'+i+'" ><h4> DAY'+i+'</h4></div>'
-										sstr+='<div>다음</div>'
+										sstr+='<div></div>'
 										sstr+='</div>'
 										
 										// <%-- 여행지을 가져 왔을때 생성 --%>

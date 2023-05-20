@@ -25,8 +25,9 @@ public class SchedulerWrite extends HttpServlet{
 			SchedulerService ss = new SchedulerService();
 			List<TimetableVo>timetableVo = ss.totalTimetable(req);
 			
-			
+			System.out.println(timetableVo);
 			req.setAttribute("timetableVo", timetableVo);
+			
 			req.getRequestDispatcher("/WEB-INF/views/scheduler/writeScheduler.jsp").forward(req, resp);
 			
 		} catch (Exception e) {
