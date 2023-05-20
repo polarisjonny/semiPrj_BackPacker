@@ -23,15 +23,7 @@
 		font-weight: 700;
 		margin-bottom: 10px;
 	}
-	#imgUpload {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		height: 400px;
-		justify-content: center;
-		align-items: center;
-		
-	}
+
 	#title-area {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -68,14 +60,34 @@
 		width: 240px;
 	}
 	/* 썸네일 올리는 영역 css */
-	#imgFile {
+	#imgUpload {
+		background-color: lightgray;
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		width: 100%;
+		height: 450px;
+		position: relative;
 	}
-	#imgFile > input {
-		display: none;
+	#Thumnail{
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%,-50%);
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+
+	}
+	#imgFile{
+		visibility: hidden;
+	}
+	#Thum-parent {
+		width: 100%;
+		height: 450px;
+		position: relative;
+	}
+	#thumnail > label {
 	}
 </style>
 </head>
@@ -90,12 +102,20 @@
 		<div id="main-area">
 			<div id="big-text">동행게시판 게시글 작성</div>
 			<form action="${root}/accompany/write" method="post" enctype="multipart/form-data">
-				<div id="imgUpload">
-					<label id="imgFile">
-						<div>썸네일 사진 올리기</div> 
+				<div id="Thum-parent">
+					<img id="imgUpload">
+					<div id="Thumnail">
+						<label id="upload" for="imgFile">
+							썸네일 사진 올리기 
+						</label>
 						<input type="file" id="imgFile" name="boardListThumbnail">
-					</label>
+					</div>
+
 				</div>
+
+
+
+
 				<div id="title-area">
 					<input type="text" name="title"placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
@@ -115,25 +135,29 @@
 		<div class="main-blank"></div>
 	</div>
 		
-	<script>
-		const fileTag = document.querySelector("input[type=file]");
-		const imgUpload = document.querySelector("#imgUpload");
-
-		fileTag.onchange = function(e){
-			const fr = new FileReader();
-			fr.readAsDataURL(fileTag.files[0]);
-
-			fr.onload = function(e){
-				imgUpload.setAttribute('background-image',url(e.target.result));
-	
-
-
-			}
-		}
-
-	</script>
 	
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
+<script>
+	const fileTag =document.querySelector("#imgFile");
+	const Thumnail = document.querySelector("#Thumnail");
+	const preview = document.querySelector("#imgUpload");
+
+	fileTag.addEventListener('change',function(params){
+		if(fileTag.files.length>0){
+			const fr = new FileReader();
+			fr.readAsDataURL(fileTag.files[0]);
+			
+			fr.addEventListener("load",function(event){
+				preview.src = event.target.result;
+				preview.width ="100%"
+				preview.height ="100%"
+				// Thumnail.style.visibility='hidden';
+			});
+		}else {
+		preview.src ="";
+		}
+	})
+</script>

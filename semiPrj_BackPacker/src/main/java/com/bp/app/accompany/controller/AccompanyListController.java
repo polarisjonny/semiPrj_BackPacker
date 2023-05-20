@@ -1,7 +1,9 @@
 package com.bp.app.accompany.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +26,9 @@ public class AccompanyListController extends HttpServlet{
 	
 		//데뭉
 		try {
-
+			String searchType = req.getParameter("searchType");
+			String searchValue = req.getParameter("searchValue");
+			
 			//서비스
 			//가이드vo형식의 리스트를 담아서 모든 정보를 가지고 와서 session에 담아 전달...? session에 담아야할까?
 			GuideBoardService gbs = new GuideBoardService();
@@ -34,12 +38,25 @@ public class AccompanyListController extends HttpServlet{
 			
 			PageVo pvo = new PageVo(cnt, currentPage, 5, 8);
 			
-			List<GuideBoardVo> bvoList = gbs.getAccomList(pvo);
+			
+			List<GuideBoardVo> bvoList = null;
+			if(searchType ==null || searchType.equals("")) {
+				bvoList = gbs.getAccomList(pvo);
+			}else {
+				bvoList = gbs.getAccomList(pvo, searchType, searchValue);		
+			}
+			
+			Map<String,String> map= new HashMap<>();
+			map.put("searchType", searchType);
+			map.put("searchValue", searchValue);
 			
 			
 			//화면
+			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pvo);
 			req.setAttribute("gbvoList", bvoList);
+			
+			
 			req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardList.jsp").forward(req, resp);
 		} catch (Exception e) {
 			System.out.println("동행게시판 리스트 보여주는 메소드에서 발생");
