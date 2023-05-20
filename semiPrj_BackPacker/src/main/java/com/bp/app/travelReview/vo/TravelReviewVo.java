@@ -11,6 +11,12 @@ public class TravelReviewVo {
 	private String modifyDate;
 	private String hit;
 	private String deleteYn;
+	
+	private String changeName;
+	
+	private String profileImage;
+	private String writerNick;
+	private String writerId;
 	public String getInfoNo() {
 		return infoNo;
 	}
@@ -65,14 +71,40 @@ public class TravelReviewVo {
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
 	}
+	public String getChangeName() {
+		return changeName;
+	}
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+	public String getwriterNick() {
+		return writerNick;
+	}
+	public void setwriterNick(String writerNick) {
+		this.writerNick = writerNick;
+	}
+	public String getwriterId() {
+		return writerId;
+	}
+	public void setwriterId(String writerId) {
+		this.writerId = writerId;
+	}
 	@Override
 	public String toString() {
 		return "TravelReviewVo [infoNo=" + infoNo + ", infoCategoryNo=" + infoCategoryNo + ", writerNo=" + writerNo
 				+ ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate + ", modifyDate="
-				+ modifyDate + ", hit=" + hit + ", deleteYn=" + deleteYn + "]";
+				+ modifyDate + ", hit=" + hit + ", deleteYn=" + deleteYn + ", changeName=" + changeName
+				+ ", profileImage=" + profileImage + ", writerNick=" + writerNick + ", writerId=" + writerId + "]";
 	}
 	public TravelReviewVo(String infoNo, String infoCategoryNo, String writerNo, String title, String content,
-			String enrollDate, String modifyDate, String hit, String deleteYn) {
+			String enrollDate, String modifyDate, String hit, String deleteYn, String changeName, String profileImage,
+			String writerNick, String writerId) {
 		super();
 		this.infoNo = infoNo;
 		this.infoCategoryNo = infoCategoryNo;
@@ -83,11 +115,25 @@ public class TravelReviewVo {
 		this.modifyDate = modifyDate;
 		this.hit = hit;
 		this.deleteYn = deleteYn;
+		this.changeName = changeName;
+		this.profileImage = profileImage;
+		this.writerNick = writerNick;
+		this.writerId = writerId;
 	}
 	public TravelReviewVo() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
+	} 
+	
+	
+	
+
+	
+
+	
+
+	
+	
 	
 	
 }

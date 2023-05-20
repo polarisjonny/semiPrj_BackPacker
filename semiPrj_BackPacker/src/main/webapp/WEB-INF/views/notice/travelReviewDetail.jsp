@@ -15,7 +15,7 @@ main{
 	
 	#mainReviewImg > img{
 		width:100%;
-		height:400px;
+		height:300px;
 	}
 	
 	#notice-title > div{
@@ -27,16 +27,19 @@ main{
 		display:flex;
 		justify-content : space-between;
 		margin-bottom:10px;
+		
 	}
 	
 	#notice-writer{
 		display:flex;
 		margin-left:185px;
+		align-items:flex-end;
 	}
 	
 	#date-hit{
 		display:flex;
 		margin-right:185px;
+		align-items:flex-end;
 	}
 	
 	.hr{
@@ -62,6 +65,10 @@ main{
 		height:200px;
 	}
 	
+	#profile-img{
+		border-radius: 70%;
+	}
+	
 </style>
 </head>
 <body>
@@ -71,27 +78,27 @@ main{
 		<main>
 		
 	<div id="mainReviewImg">
-	<img src="${root}/static/img/travelReview/SingaporeReview.jpg">
+	<img src="${root}/static/img/travelReview/${vo.changeName}">
 	</div>
-			
+			<input type="hidden" name="infoNo" value="${vo.infoNo }">
 			<br>
 			<br>
 			
 			<div id="notice-title">
-				<div>싱가포르 여행은 이틀이면 충분하다</div> <!-- 게시글 제목 -->
+				<div>${vo.title}</div> <!-- 게시글 제목 -->
 			</div>
 			
 			<br>
 			
 			<div id="notice-write">
 				<div id="notice-writer">
-					<div>프사</div>
-					<div>&nbsp;&nbsp;&nbsp;&nbsp;닉네임</div>
+					<img width="50px" height="50px" id="profile-img"src="${root}/static/img/member/profile/${vo.profileImage}">
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;${vo.writerNick}</div>
 				</div>
 				
 				<div id="date-hit">
-					<div>날짜 : 2023.01.09</div>
-					<div>&nbsp;&nbsp;&nbsp;&nbsp;조회수 : 150</div>
+					<div>날짜 : ${vo.enrollDate }</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${vo.hit }</div>
 				</div>
 			</div>
 			
@@ -101,32 +108,37 @@ main{
 			
 			<div id="notice-content-area">
 			
-				<p id="notice-content">
-				싱가포르는 도시국가다.
-				그렇기때문에 이틀이면 
-				충분히 여러 관광명소를 
-				둘러볼 수 있다.
-				처음 간 곳은 마리나배이샌즈 호텔이다.
-				너무 멋있었다.
-				야경이 정말 끝내줬다.
-				호텔안에 들어가면 밖에 뚫려있는 멋있는 수영장이 있는데
-				생각보다 별로였다.
-				호텔 전체적으로 멀리서 보는게
-				더 멋있는거 같다.
-				</p>
+				${vo.content}
 				
 			</div>
 			
-			<c:if test="${loginMember.id == 'ADMIN' }">
+			<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
 				<div id="review-btn">
-						<a href="${root}/notice/reviewEdit?no=${vo.no}">수정하기</a>
-						<a href="${root}/notice/reviewDelete?no=${vo.no}">삭제하기</a>
+						
+						<button onclick="edit();">수정하기</button>
+						<button onclick="reviewDelete();">삭제하기</button>
+						
 				</div>
 			</c:if>
-		
+			
+			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		</main>
+
+		<script>
+
+			function reviewDelete(params) {
+				const result = confirm('게시글을 삭제 할까요?');
+
+				if(!result){
+					return;
+				}
+
+				location.href='${root}/notice/reviewDelete?infoNo='+'${vo.infoNo}';
+
+			}
+
+		</script>
 	
-		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		
 
 </body>

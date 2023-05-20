@@ -45,11 +45,20 @@ public class TravelReviewWriteController extends HttpServlet{
 		try {
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			if(loginMember == null) {
+				throw new IllegalStateException();
+			}
 			
 			//파일 업로드
 			Part f = req.getPart("fileName");
-			String path = req.getServletContext().getRealPath("/static/img/travelReview");
-			AttachmentVo attvo = FileUploader.saveFile(path, f);
+			String path = req.getServletContext().getRealPath("/static/img/travelReview/");
+
+			AttachmentVo attvo = null;
+			System.out.println(f);
+			if(f != null && "fileName".equals(f.getName())) {
+				System.out.println(f);
+				attvo = FileUploader.saveFile(path, f);
+			}
 
 			//데이터 꺼내기
 			String title = req.getParameter("title");
@@ -63,13 +72,13 @@ public class TravelReviewWriteController extends HttpServlet{
 			trvo.setWriterNo(writerNo);
 			
 			
+			
 			TravelReviewService trs = new TravelReviewService();
 			int result = trs.write(trvo , attvo);
 			
 			//화면
 			if(result == 1) {
-				req.setAttribute("trvo", trvo);
-				resp.sendRedirect(req.getContextPath()+"/home");
+				resp.sendRedirect(req.getContextPath()+"/notice/travelReview?page=1");
 			}
 			else {
 				throw new Exception();

@@ -46,7 +46,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	#mainImg-area > #mainImg{
 		width:100%;
-		height:400px;
+		height:300px;
 		margin:0;
 	}
 
@@ -54,11 +54,11 @@ footer, header, hgroup, menu, nav, section {
         position: absolute;
         display:flex;
         flex-direction:column;
-        top:35%;
+        top:30%;
         left:5%;
         color:whitesmoke;
         font-weight: bold;
-        font-size: 2.5em;
+        font-size: 2em;
     }
     
     
