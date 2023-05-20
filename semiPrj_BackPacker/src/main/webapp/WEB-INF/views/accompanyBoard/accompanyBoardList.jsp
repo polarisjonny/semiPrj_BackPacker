@@ -224,7 +224,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="middle-content">
-	                            <img class="middle-img" src="${root}/static/img/accompany/${vo.changeName}" alt="">
+	                            <img class="middle-img" src="${root}/static/img/accompany/${vo.mainImg}" alt="">
 	                        </div>
 	                        <div class="end-content">${vo.title}</div>
 	                    </div>

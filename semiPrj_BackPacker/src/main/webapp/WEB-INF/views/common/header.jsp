@@ -72,13 +72,13 @@
     </div>
 </header>
 <script >
-// let logo ;
-// logo = document.querySelector('.logo');
-// logo.addEventListener('click', ()=>{
+ let logo ;
+ logo = document.querySelector('.logo');
+ logo.addEventListener('click', ()=>{
 
-//   window.location.href = `${root}/home`;
+   window.location.href = `${root}/home`;
 
-// });
+ });
 
 // let chatLogo;
 // chatLogo = document.querySelector('.chat-logo');

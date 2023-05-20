@@ -54,7 +54,7 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO ,GB.MAIN_IMG , M.ID, M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER , TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER,GB.MAIN_IMG, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getBeginRow());
 		pstmt.setInt(2, pvo.getLastRow());
@@ -71,6 +71,7 @@ public class GuideBoardService {
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String gender = rs.getString("GENDER");
 			String writerNo = rs.getString("WRITER_NO");
+			String mainImg = rs.getString("MAIN_IMG");
 			
 			if(gender=="M") {
 				gender="남성";
@@ -78,7 +79,6 @@ public class GuideBoardService {
 				gender="여성"; 
 			}
 			
-			String mainImg = rs.getString("MAIN_IMG");
 			String startDate_ = rs.getString("START_DATE");
 			String endDate_ = rs.getString("END_DATE");
 			
@@ -115,7 +115,7 @@ public class GuideBoardService {
 		//close
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
-		JDBCTemplate.commit(conn);
+		JDBCTemplate.close(conn);
 		
 		return bvoList; 
 	}
@@ -153,7 +153,7 @@ public class GuideBoardService {
 		return writerMember;
 	}
 
-
+	//게시글 상세조회
 	public GuideBoardVo selectOneByNo(GuideBoardVo bvo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
