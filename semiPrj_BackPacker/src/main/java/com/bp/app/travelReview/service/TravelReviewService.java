@@ -62,5 +62,48 @@ public class TravelReviewService {
 	
 	}
 
+	//후기 상세 조회 
+	public TravelReviewVo selectOneByNo(String infoNo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.increaseHit(conn,infoNo);
+		if(result != 1) {
+			JDBCTemplate.rollback(conn);
+			throw new Exception("조회수 증가 쿼리문 실행 실패");
+		}
+
+		TravelReviewVo vo = dao.selectOneByNo(conn,infoNo);
+		
+		JDBCTemplate.commit(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+		
+	}
+
+	//여행후기 삭제
+	public int delete(TravelReviewVo vo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		
+		
+		int result = dao.delete(conn,vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}
+		else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
+	}//method
+
 
 }

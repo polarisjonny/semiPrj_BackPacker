@@ -32,12 +32,13 @@ public class TravelReviewListController extends HttpServlet{
 			}
 			int currentPage = Integer.parseInt(page);
 			int pageLimit = 5;
-			int boardLimit = 10;
+			int boardLimit = 4;
 			
 			PageVo pv = new PageVo(listCnt, currentPage, pageLimit, boardLimit);
 			
 			//서비스
 			List<TravelReviewVo> trList = trs.selectReviewList(pv);
+			
 			
 			//화면
 			req.setAttribute("pv", pv);

@@ -177,10 +177,10 @@
               
 		const fileTag = document.querySelector("#imgFile");
 		const Thumnail = document.querySelector('#Thumnail');
-		 
+		const preview = document.querySelector("#imgUpload");
+		
 		fileTag.addEventListener('change' , function (params) {
 			
-			const preview = document.querySelector("#imgUpload");
 
 			if(fileTag.files.length > 0){
 				const fr = new FileReader();
@@ -193,13 +193,12 @@
 					Thumnail.style.visibility='hidden';
 				})
 				
-	
 			}else{
 				preview.src = "";
 			}
-
-
+			
 		})
+
 		
      </script>
 

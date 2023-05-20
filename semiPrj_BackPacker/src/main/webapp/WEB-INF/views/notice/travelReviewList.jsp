@@ -46,7 +46,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	#mainImg-area > #mainImg{
 		width:100%;
-		height:400px;
+		height:300px;
 		margin:0;
 	}
 
@@ -173,7 +173,6 @@ footer, header, hgroup, menu, nav, section {
     
     <main>
     
-   ${attvo}
 
 		<div id="mainImg-area">
 	        <img id="mainImg" src="${root}/static/img/travelReview/travelReviewMain.jpg" alt="메인 이미지">
@@ -184,7 +183,7 @@ footer, header, hgroup, menu, nav, section {
 		<br>
 		
         <div id="review-search-area">
-            <form action="${root}/notice/travelReviewList">
+            <form action="${root}/notice/travelReview" >
                 <select name="search-type">
                         <option value="title">제목</option>
                         <option value="writer">작성자</option>
@@ -218,36 +217,17 @@ footer, header, hgroup, menu, nav, section {
 
       <div id="reviewList">
       
-        <div id="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelReview/JejuReview.jpg">
-           	<div>
-            <a href="#">아름다운 제주도 투어 후기</a>
-           	</div>
-        </div>
-        
-
-		<div class="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelReview/osaka.jpg">
-        	<div>
-           	 <a href="#">오사카 유니버셜 스튜디오 여행기</a>
-        	</div>
-		</div>
-
-        
-        
-        <div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelReview/sanghiReview.jpg">
-            <div>
-            <a href="#">상하이 건물이 진자 이쁘네요</a>
-            </div>
-        </div>
-
-		<div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelReview/SingaporeReview.jpg">
-			<div>
-            <a href="#">상가포르 여행은 언제든 아름다워요</a>
-			</div>
-		</div>		
+     	
+      	<c:forEach items="${trList}" var="trList">
+	        <div id="review-area">
+	        	<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelReview/${trList.changeName}"></a>
+	           	<div>
+	            <a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
+	            <!-- infoNo를 get방식으로 전달하여 req.getParameter에 담김 -->
+	           	</div>
+	        </div>
+      	</c:forEach>
+      
       </div>  
         
         <br>
@@ -257,13 +237,13 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
             	
             	<c:if test="${pv.currentPage > 1}">
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage - 1}"> << </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage - 2}"> < </a>
             	</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a href="${root}/notice/travelReview?page=${i}">${i}</a>
             		</c:if>
             		
             		
@@ -273,8 +253,8 @@ footer, header, hgroup, menu, nav, section {
             	</c:forEach>
             	
             	<c:if test="${pv.currentPage < pv.maxPage}">
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}"> > </a>
+	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 2}"> >> </a>
             	</c:if> 
             </div>
    
