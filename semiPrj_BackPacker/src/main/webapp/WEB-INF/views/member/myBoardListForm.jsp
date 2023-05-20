@@ -68,14 +68,17 @@
     <h1 id="myBoardListTitle">내가 등록한 글 목록</h1>
 
     <div id="board-list-area">
-        <div class="write-style" id="first-write-area">
-            <div><img class="board-write-img-style" src="/travel.jpg" alt=""></div>
-            <div>일본 오사카 같이 갈 동행...</div>
-             <div class="my-board-list-font-style">동행게시판</div>
-             <div class="my-board-list-font-style">작성일 2017.04.27</div>
-        </div>
+    	<c:forEach items="${gvList}" var="vo">
+    		<div class="write-style" id="first-write-area" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+            	<div><img class="board-write-img-style" src="${root}/static/img/accompany/${vo.mainImg}" alt=""></div>
+            	<div>${vo.title}</div>
+             	<div class="my-board-list-font-style">${vo.categoryName}</div>
+             	<div class="my-board-list-font-style">작성일 ${vo.enrollDate}</div>
+        	</div>
+    	</c:forEach>
+        
 
-        <div class="write-style" id="second-write-area">
+       <!--  <div class="write-style" id="second-write-area">
             <div><img class="board-write-img-style" src="/travel.jpg" alt=""></div>
             <div>일본 오사카 같이 갈 동행...</div>
              <div class="my-board-list-font-style">동행게시판</div>
@@ -122,21 +125,26 @@
             <div>일본 오사카 같이 갈 동행...</div>
             <div class="my-board-list-font-style">동행게시판</div>
              <div class="my-board-list-font-style">작성일 2017.04.27</div>
-        </div>
+        </div> -->
     </div>
 
     <br>
     <br>
     <div id="page-list-area">
-        <a class="page-list-style" id="previous-deco" href=""><<</a>
-        <a class="page-list-style" id="previous-deco" href=""><</a>
-        <a class="page-list-style" href="">1</a>
-        <a class="page-list-style" href="">2</a>
-        <a class="page-list-style" href="">3</a>
-        <a class="page-list-style" href="">4</a>
-        <a class="page-list-style" href="">5</a>
-        <a class="page-list-style" id="after-deco" href="">></a>
-        <a class="page-list-style" id="after-deco" href="">>></a>
+    <c:if test="${pv.currentPage > 1}">
+	            <a href="/semi/member/myPage/myBoardList?page=1"><<</a>
+	            <a href="/semi/member/myPage/myBoardList?page=${pv.currentPage-1 }"><</a>
+        	</c:if>
+            
+            <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
+ 	           <a href="/semi//member/myPage/myBoardList?page=${i}">${i}</a>
+            </c:forEach>
+            
+            <c:if test="${pv.currentPage < pv.maxPage }">
+	            <a href="/semi/member/myPage/myBoardList?page=${pv.currentPage+1}">></a>
+	            <a href="/semi/member/myPage/myBoardList?page=${pv.maxPage}">>></a>            
+            </c:if>
+        
     </div>
    </main>
 </body>
