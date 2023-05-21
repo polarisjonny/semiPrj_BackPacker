@@ -299,30 +299,32 @@
         <button id="matching-complete-member-list-btn">회원 목록 더보기></button>
         <br>
         <br>
-        <div id="matching-complete-member-list-area">
+        <c:if test="${not empty matchingList}">
+        	<div id="matching-complete-member-list-area">
             
     
             <div class="matching-member-area" id="first-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/memberExample/lion.jpg" alt="프로필 사진">
-                <span>yer5_27</span>
+                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[0].profileImage}" alt="프로필 사진">
+                <span>${matchingList[0].nick}</span>
             </div>
     
             <div class="matching-member-area" id="second-member-area">
-                <img class="matching-complete-member-image" src="/cat.jpg" alt="프로필 사진">
-                <span>yer5_27</span>
+                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[1].profileImage}" alt="프로필 사진">
+                <span>${matchingList[1].nick}</span>
             </div>
     
             <div class="matching-member-area" id="third-member-area">
-                <img class="matching-complete-member-image" src="/신짱구.png" alt="프로필 사진">
-                <span>yer5_27</span>
+                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[2].profileImage}" alt="프로필 사진">
+                <span>${matchingList[2].nick}</span>
             </div>
     
     
             <div class="matching-member-area" id="fourth-member-area">
-                <img class="matching-complete-member-image" src="/신짱구.png" alt="프로필 사진">
-                <span>yer5_27</span>
+                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[3].profileImage}" alt="프로필 사진">
+                <span>${matchingList[3].nick}</span>
             </div>
         </div>
+        </c:if>
     	<br>
     	<br>
     	<br>
@@ -408,6 +410,10 @@
    	 		location.href = "${root}/member/myPage/myBoardList?page=1";
    	 	});
    	 	
+   	   const matchingCompleteMemberListBtn = document.querySelector("#matching-complete-member-list-btn");
+   	   matchingCompleteMemberListBtn.addEventListener("click", function(){
+   		   location.href = "${root}/member/myPage/matchingMemberList?page=1";
+   	   });
 </script>
     
 </body>
