@@ -240,11 +240,16 @@ public class GuideBoardService {
 	}
 
 	//게시글 상세조회
-	public GuideBoardVo selectOneByNo(GuideBoardVo bvo) throws Exception {
+	public GuideBoardVo selectOneByNo(GuideBoardVo bvo, String lmNo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-			
-		int result = dao.increaseHit(conn,bvo);
+		
+		int result=0;
+		if(lmNo.equals(bvo.getWriterNo())) {
+			result=1;
+		}else {
+			result = dao.increaseHit(conn,bvo);			
+		}
 		GuideBoardVo selectedBvo =  dao.selectOneByNo(conn,bvo);
 		if(result==1) {
 			JDBCTemplate.commit(conn);

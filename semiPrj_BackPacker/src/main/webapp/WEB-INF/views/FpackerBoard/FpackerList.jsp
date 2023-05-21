@@ -204,6 +204,8 @@
                 <div id="main-area">
                     <div class="content-area">
                         <img src="${root}/static/img/middle-img.png" alt="">
+                        
+                        
                         <div class="text-area">
                             <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
                             <div class="text-small">최저가 ￦15,000/인</div>

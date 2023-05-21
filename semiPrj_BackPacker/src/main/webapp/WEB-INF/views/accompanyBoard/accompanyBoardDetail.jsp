@@ -431,7 +431,12 @@
 					<div id="profile-box">
 						 <input type="hidden" value="${writerMember.memberNo}">
 						 <div id="profile-area" class="profile">
-							<img src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
+						 	<c:if test="${not empty writerMember.profileImage}">
+								<img src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
+						 	</c:if>
+						 	<c:if test="${empty writerMember.profileImage}">
+								<img src="${root}/static/img/member/profile/profile_default.jpg" alt="">
+						 	</c:if>
 						 </div>
 						 <div id="info-box">
 							<div id="blank-98"></div>

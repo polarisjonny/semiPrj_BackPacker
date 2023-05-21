@@ -219,7 +219,13 @@
 	                	<div class="content-box" onclick="location.href ='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
 	                        <div class="top-content">
 	                            <div class="left-img">
-	                                <img class="profile" src="${root}/static/img/member/profile/${vo.profileImage}" alt="">
+	              					<c:if test="${not empty vo.profileImage}">
+		                                <img class="profile" src="${root}/static/img/member/profile/${vo.profileImage}" alt="">
+		                               
+	              					</c:if>
+	              					<c:if test="${empty vo.profileImage}">
+	              						 <img class="profile" src="${root}/static/img/member/profile/profile_default.jpg" alt="">
+	              					</c:if>
 	                            </div>
 	                            <div class="right-text">
 	                                <div class="small-text">${vo.id}(${vo.nick})</div>
@@ -255,7 +261,6 @@
             </c:if>
         </div>
         
-     
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>
