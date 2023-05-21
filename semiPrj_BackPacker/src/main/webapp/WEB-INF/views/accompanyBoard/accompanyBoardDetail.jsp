@@ -13,7 +13,7 @@
 	main > img{
 		width: 100%;
 		height: 400px;
-		object-fit: none;
+		object-fit: cover;
 	}
 
 	/* 영역나누기 */
@@ -246,6 +246,12 @@
 		border: none;
 		outline: none;
 	}
+	/*  댓글 삭제버튼 */
+	.comment-del {
+		font-size: 13px;
+		border-radius: 5px;
+		border: none;
+	}
 </style>
 </head>
 <body>
@@ -418,6 +424,7 @@
 					</div>
 					</c:if>
 					<div id="profile-box">
+						 <input type="hidden" value="${writerMember.memberNo}">
 						 <div id="profile-area" class="profile">
 							<img src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
 						 </div>
@@ -458,16 +465,18 @@
 				</div>
 				<div id="blank2"></div>
 			</div>
-					
 		</main>
 
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>
-	
 </body>
 </html>
 
 <script>
+
+			
+		
+		
 		//댓글작성
 		function writeComment(){
 			const comment = document.querySelector("textarea[name=comment]").value;
@@ -493,9 +502,34 @@
 				} ,
 			});
 		}
+		
 
-
-
+		//댓글삭제
+		function delComment(guideReplyNo){
+			$.ajax({
+				url: "${root}/accompany/reply/delete",
+				type: "post",
+				data : {
+					replyNo : guideReplyNo,
+				},
+				success : (x)=>{
+					if(x=='ok'){
+						alert('댓글삭제성공!');
+						loadComment();
+					}else {
+						alert('댓글작성실패...');
+					}
+				},
+				error: ()=>{
+					console.log("댓글작성실패...통신에러");
+				},
+			});
+		}
+		
+		//댓글불러오기
+		
+		
+		//다 가져와서 비저블리티를 기본적으로 안보이게 수정
 		function loadComment(){
 			$.ajax({
 				url : '${root}/accompany/reply/list',
@@ -511,10 +545,11 @@
 					for(let i=0; i<x.length; i++){
 						str+='<div class="comment">';
 						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt=""></div>';
-						str+='<div class="comment-list-text">';
+						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].guideBoardNo+'">';
 						str+='<div class="comment-list-id">'+x[i].nick+'</div>';
 						str+='<div class="comment-list-content">'+x[i].content+'</div>';
-						str+='<div class="comment-list-day">'+x[i].enrollDate+'</div>'; 
+						str+='<div class="comment-list-day">'+x[i].enrollDate;
+						str+='<button class="comment-del" onclick="delComment('+x[i].guideReplyNo+');">삭제</button></div>';
 						str+='</div>';
 						str+='</div>';
 					}
@@ -523,10 +558,22 @@
 				error : function(e){
 					console.log(e);
 				},
-	
+
 			});
 		}
-	
 		loadComment();
-	
+		const input = document.querySelector(".comment-list-text > input").value;
+		alert(input);
+		
+		
+		function setVisibility(){
+		
+			// for(let i=0;i<btnDelArr.length;i++){
+			// 	btnDelArr[i].style.visibility='hidden';
+			// }
+		}
+
+		
+		setVisibility();
+		
 </script>
