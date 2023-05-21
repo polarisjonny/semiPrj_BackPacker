@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
       #joinTitle {
             text-align: center;
@@ -223,7 +224,7 @@
 	 <main>
         <h1 id="joinTitle">회원가입</h1>
 
-    <form action="${pageContext.request.contextPath}/member/join" method="POST" onsubmit="return checkValidation();" enctype="multipart/form-data">
+    <form id="join-form" action="${pageContext.request.contextPath}/member/join" method="POST" onsubmit="return checkJoinProcess();" enctype="multipart/form-data">
         <div id="join-area">
         
             <div id="first-area">
@@ -343,6 +344,34 @@
 				previewArea.appendChild(imgTag);
 			}
 		};
+		
+		function checkJoinProcess() {
+		    const formInputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+		    const genderCheckbox = document.querySelector('input[name="gender"]:checked');
+
+		    for (let i = 0; i < formInputs.length; i++) {
+		        if (formInputs[i].value.trim() === '') {
+		            Swal.fire({
+		                icon: 'error',
+		                title: '회원가입 실패',
+		                text: '모든 값을 입력하셔야 합니다',
+		            });
+		            return false;
+		        }
+		    }
+
+		    if (!genderCheckbox) {
+		        Swal.fire({
+		            icon: 'error',
+		            title: '회원가입 실패',
+		            text: '성별을 선택해 주세요',
+		        });
+		        return false;
+		    }
+
+		    return true;
+		}
+
 	</script>
 	
 	<script>
