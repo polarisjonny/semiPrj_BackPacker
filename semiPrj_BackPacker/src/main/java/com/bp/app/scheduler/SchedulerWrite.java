@@ -45,12 +45,14 @@ public class SchedulerWrite extends HttpServlet{
 		try {
 			
 			//데이터 꺼내기
+			String schedulerNo = req.getParameter("schedulerNo");
 			String category = req.getParameter("category");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			
 			//데이터 뭉치기
 			GuideBoardVo bgVo = new GuideBoardVo();
+			bgVo.setSchedulerNo(schedulerNo);
 			bgVo.setGuideBoardCategoryNo(category);
 			bgVo.setTitle(title);
 			bgVo.setContent(content);
@@ -61,7 +63,18 @@ public class SchedulerWrite extends HttpServlet{
 			
 			//화면
 			if(result==1) {
-				resp.sendRedirect("/semi/doPpacker/list");
+				if(category=="1") {
+					resp.sendRedirect("/semi/doFpacker/list");
+					
+				}
+				if(category=="1") {
+					resp.sendRedirect("/semi/findFpacker/list");
+					
+				}
+				if(category=="1") {
+					resp.sendRedirect("/semi/accompany/list");
+					
+				}
 			}else {
 				throw new IllegalStateException("작성결과 1아님");
 			}

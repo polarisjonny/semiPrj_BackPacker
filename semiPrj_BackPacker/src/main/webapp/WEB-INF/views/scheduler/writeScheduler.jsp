@@ -184,14 +184,15 @@
 	
 		<div id="board" class="text">
 
-			<form action="" method="post">
+			<form action="/semi/schedulerwrite" method="post">
 				<div><h2>게시글 작성 할까요?</h2></div>
+				<input type="hidden" name="schedulerNo" value="${firstTimetable.schedulerNo}">
 				
 				<div id="check">
 	
 					<select name="category" id="select">
-						<option value="1">일정표를 참조하여 동행구하기</option>
-						<option value="1">일정표를 참조하여 프패커구하기</option>
+						<option value="3">일정표를 참조하여 동행구하기</option>
+						<option value="2">일정표를 참조하여 프패커구하기</option>
 						<option value="1">일정표를 참조하여 백패커구하기</option>
 					</select>
 	

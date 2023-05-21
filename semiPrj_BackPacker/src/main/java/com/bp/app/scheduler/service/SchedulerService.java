@@ -77,11 +77,12 @@ public class SchedulerService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,TITLE,CONTENT,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,1,?,?,?,SYSDATE)";
+		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,TITLE,CONTENT,SCHEDULER_NO,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,1,?,?,?,?,SYSDATE)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, bgVo.getGuideBoardCategoryNo());
 		pstmt.setString(2, bgVo.getTitle());
 		pstmt.setString(3, bgVo.getContent());
+		pstmt.setString(4, bgVo.getSchedulerNo());
 		
 		System.out.println(bgVo.getTitle());
 		int result = pstmt.executeUpdate();
