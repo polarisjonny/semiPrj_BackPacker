@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.member.myPage.matchingMemberService.MyPageMatchingMemberService;
 import com.bp.app.member.myPage.service.MyPageBoardService;
 import com.bp.app.member.vo.MemberVo;
 
@@ -27,13 +28,23 @@ public class MyPageController extends HttpServlet {
 			if(loginMember == null) {
 				throw new IllegalStateException("로그인 하고 오세요");
 			}
+			
+			//내가 작성한 글 보기 
 			String memberNo = loginMember.getMemberNo();
 			MyPageBoardService mpbs = new MyPageBoardService();
 			List<GuideBoardVo> gbList = mpbs.selectGuideBoardList(memberNo);
+			
+			
+			//매칭 완료된 회원 목록 가져오기
+			MyPageMatchingMemberService mpms = new MyPageMatchingMemberService();
+			List<MemberVo> matchingList = mpms.selectMatchingMemberList(memberNo);
+			
+			
+			
 			System.out.println(gbList);
-			if(gbList != null) {
-//				req.getSession().setAttribute("gbList", gbList);
+			if(gbList != null && matchingList != null) {
 				req.setAttribute("gbList", gbList);
+				req.setAttribute("matchingList", matchingList);
 				req.getRequestDispatcher("/WEB-INF/views/member/myPageForm.jsp").forward(req, resp);
 			} else {
 				throw new Exception("[ERROR] 마이 페이지 작성한 글 목록 불러오기 중 오류 발생...");

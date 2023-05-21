@@ -71,12 +71,15 @@
     <br>
 
     <div id="member-list-area">
-        <div id="first-member-area">
-             <div class="profile-img-style" style="background-image: url('${root}/static/img/memberExample/lion.jpg');"></div>
-            <div>yer5_27</div>
+    	<c:forEach items="${matchingList}" var="vo">
+    		 <div id="first-member-area">
+             <div class="profile-img-style" style="background-image: url('${root}/static/img/views/member/${vo.profileImage}');"></div>
+            <div>${vo.nick}</div>
         </div>
+    	</c:forEach>
+       
 
-        <div id="second-member-area">
+        <%-- <div id="second-member-area">
              <div class="profile-img-style" style="background-image: url('${root}/static/img/memberExample/lion.jpg');"></div>
             <div>yer5_27</div>
         </div>
@@ -109,19 +112,23 @@
         <div id="eighth-member-area">
              <div class="profile-img-style" style="background-image: url('${root}/static/img/memberExample/lion.jpg');"></div>
             <div>yer5_27</div>
-        </div>
+        </div> --%>
     </div>
 
     <div id="page-list-area">
-        <a class="page-list-style" id="previous-deco" href=""><<</a>
-        <a class="page-list-style" id="previous-deco" href=""><</a>
-        <a class="page-list-style" href="">1</a>
-        <a class="page-list-style" href="">2</a>
-        <a class="page-list-style" href="">3</a>
-        <a class="page-list-style" href="">4</a>
-        <a class="page-list-style" href="">5</a>
-        <a class="page-list-style" id="after-deco" href="">></a>
-        <a class="page-list-style" id="after-deco" href="">>></a>
+        <c:if test="${pv.currentPage > 1}">
+	            <a href="/semi/member/myPage/matchingMemberList?page=1"><<</a>
+	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage-1 }"><</a>
+        	</c:if>
+            
+            <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
+ 	           <a href="/semi//member/myPage/matchingMemberList?page=${i}">${i}</a>
+            </c:forEach>
+            
+            <c:if test="${pv.currentPage < pv.maxPage }">
+	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage+1}">></a>
+	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.maxPage}">>></a>            
+            </c:if>
     </div>
     </main>
     
