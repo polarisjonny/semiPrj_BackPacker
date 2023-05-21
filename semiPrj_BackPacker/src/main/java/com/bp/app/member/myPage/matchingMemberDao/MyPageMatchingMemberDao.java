@@ -16,7 +16,7 @@ public class MyPageMatchingMemberDao {
 
 	public List<MemberVo> selectMatchingMemberList(Connection conn, String memberNo) throws Exception {
 
-		String sql = "SELECT M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILE_IMAGE FROM MEMBER M JOIN CHATTING_ROOM C ON (M.MEMBER_NO = C.CHATTING_USER_NO OR M.MEMBER_NO = C.CHATTING_USER2_NO) WHERE (C.CHATTING_USER_NO = ? OR C.CHATTING_USER2_NO = ?) AND C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y' AND C.CHATTING_STATUS = 1 AND M.MEMBER_NO <> ?";
+		String sql = "SELECT M.MEMBER_NO AS MEMBER_NO, M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILE_IMAGE FROM MEMBER M JOIN CHATTING_ROOM C ON (M.MEMBER_NO = C.CHATTING_USER_NO OR M.MEMBER_NO = C.CHATTING_USER2_NO) WHERE (C.CHATTING_USER_NO = ? OR C.CHATTING_USER2_NO = ?) AND C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y' AND C.CHATTING_STATUS = 1 AND M.MEMBER_NO <> ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,  memberNo);
 		pstmt.setString(2,  memberNo);
@@ -26,10 +26,12 @@ public class MyPageMatchingMemberDao {
 		List<MemberVo> list = new ArrayList<>();
 		//rs || tx
 		while(rs.next()) {
+			String no = rs.getString("MEMBER_NO");
 			String nick = rs.getString("NICK");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			
 			MemberVo vo = new MemberVo();
+			vo.setMemberNo(no);
 			vo.setNick(nick);
 			vo.setProfileImage(profileImage);
 			
@@ -45,7 +47,7 @@ public class MyPageMatchingMemberDao {
 	}
 
 	public List<MemberVo> selectMatchingMemberListForPage(Connection conn, PageVo pv, String memberNo) throws Exception {
-		String sql = "SELECT M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILE_IMAGE FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT * FROM CHATTING_ROOM WHERE (CHATTING_USER_NO = ? OR CHATTING_USER2_NO = ?) AND MATCHING_CHECK = 'Y' AND MATCHING_CHECK2 = 'Y' AND CHATTING_STATUS = 1 ORDER BY CHATTING_ROOM_NO DESC ) T ) C JOIN MEMBER M ON ( (M.MEMBER_NO = C.CHATTING_USER_NO OR M.MEMBER_NO = C.CHATTING_USER2_NO) AND M.MEMBER_NO <> ? ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT M.MEMBER_NO AS MEMBER_NO, M.NICK AS NICK, M.PROFILE_IMAGE AS PROFILE_IMAGE FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT * FROM CHATTING_ROOM WHERE (CHATTING_USER_NO = ? OR CHATTING_USER2_NO = ?) AND MATCHING_CHECK = 'Y' AND MATCHING_CHECK2 = 'Y' AND CHATTING_STATUS = 1 ORDER BY CHATTING_ROOM_NO DESC ) T ) C JOIN MEMBER M ON ( (M.MEMBER_NO = C.CHATTING_USER_NO OR M.MEMBER_NO = C.CHATTING_USER2_NO) AND M.MEMBER_NO <> ? ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		pstmt.setString(2,  memberNo);
@@ -59,10 +61,12 @@ public class MyPageMatchingMemberDao {
 		List<MemberVo> list = new ArrayList<>();
 		//rs || tx
 		while(rs.next()) {
+			String no = rs.getString("MEMBER_NO");
 			String nick = rs.getString("NICK");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			
 			MemberVo vo = new MemberVo();
+			vo.setMemberNo(no);
 			vo.setNick(nick);
 			vo.setProfileImage(profileImage);
 			
