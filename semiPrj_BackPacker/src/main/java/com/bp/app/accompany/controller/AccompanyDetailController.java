@@ -23,6 +23,8 @@ public class AccompanyDetailController extends HttpServlet{
 			//데꺼
 			String boardNo = req.getParameter("no");
 			String writerNo = req.getParameter("writerNo");
+			
+			
 	
 			//데뭉
 			GuideBoardVo bvo = new GuideBoardVo();

@@ -1,4 +1,4 @@
-package com.bp.app.doPpacker.controller;
+package com.bp.app.Fpacker.controller;
 
 import java.io.IOException;
 
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet ("/doFpacker/write")
-public class DoPpackerWriteController extends HttpServlet{
+@WebServlet ("/Fpacker/write")
+public class FpackerWriteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/p_packerBoard/do/doPpackerBoardWrite.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/writeForm.jsp").forward(req, resp);
 	}
 }
