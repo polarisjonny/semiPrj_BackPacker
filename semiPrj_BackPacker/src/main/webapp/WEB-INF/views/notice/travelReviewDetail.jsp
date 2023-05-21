@@ -69,6 +69,22 @@ main{
 		border-radius: 70%;
 	}
 	
+	#review-btn{
+		display:flex;
+		justify-content : center;
+		align-items: center;
+	}
+	
+	#review-btn > button{
+		border-radius: 10px;
+        border: 1px solid #99ccff;
+        background-color:  #99ccff;
+        color:white;
+        padding:10px;
+        margin:0px 10px 10px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -77,13 +93,20 @@ main{
 	
 		<main>
 		
-	<div id="mainReviewImg">
-	<img src="${root}/static/img/travelReview/${vo.changeName}">
-	</div>
+		<c:if test="${empty vo.changeName}">
+			<div id="mainReviewImg">
+			<img src="${root}/static/img/travelReview/travelReviewMain.jpg">
+			</div>
+		</c:if>
+		
+	<c:if test="${not empty vo.changeName }">
+		<div id="mainReviewImg">
+			<img src="${root}/static/img/travelReview/${vo.changeName}">
+		</div>
+	</c:if>
 			<input type="hidden" name="infoNo" value="${vo.infoNo }">
 			<br>
 			<br>
-			
 			<div id="notice-title">
 				<div>${vo.title}</div> <!-- 게시글 제목 -->
 			</div>
@@ -114,12 +137,15 @@ main{
 			
 			<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
 				<div id="review-btn">
-						
-						<button onclick="edit();">수정하기</button>
+						<button class="edit-btn">수정하기</button>
 						<button onclick="reviewDelete();">삭제하기</button>
 						
+						<span id="back">
+							<a href="${root}/notice/travelReview">목록으로</a>
+						</span>
 				</div>
 			</c:if>
+
 			
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		</main>
@@ -136,6 +162,17 @@ main{
 				location.href='${root}/notice/reviewDelete?infoNo='+'${vo.infoNo}';
 
 			}
+
+			const editBtn = document.querySelector('.edit-btn');
+			editBtn.addEventListener('click' , function (params) {
+				const no ='${vo.infoNo}'
+				const width = 800;
+				const height = 1000;
+				const left = (screen.width/2) - (width/2);
+				const top = 0;
+				window.open('${root}/notice/reviewEdit?infoNo='+no ,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top )
+				
+			});
 
 		</script>
 	

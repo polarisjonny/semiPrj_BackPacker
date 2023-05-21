@@ -42,14 +42,13 @@ public class TravelReviewService {
 	}
 
 	//여행후기 작성
-	public int write(TravelReviewVo trvo, AttachmentVo attvo) throws Exception {
+	public int write(TravelReviewVo trvo) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
-		
 		int result = dao.write(conn , trvo);
-		int result2 = dao.insertReviewImg(conn,attvo);
+//		int result2 = dao.insertReviewImg(conn);
 		
-		if(result == 1 && result2 > 0) {
+		if(result == 1 ) {
 			JDBCTemplate.commit(conn);
 		}
 		else {
@@ -105,5 +104,33 @@ public class TravelReviewService {
 	
 	}//method
 
+	//여행후기 게시글 수정
+	public int edit(TravelReviewVo vo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.edit(conn,vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}
+		else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+
+		return result;
+	}//edit
+
 
 }
+
+
+
+
+
+
+
+
+

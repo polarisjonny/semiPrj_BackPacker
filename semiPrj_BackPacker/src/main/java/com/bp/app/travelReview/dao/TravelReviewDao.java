@@ -33,14 +33,32 @@ public class TravelReviewDao {
 
 		return cnt;
 		
-
-		
 	}
 
+	//여행후기 작성
+	public int write(Connection conn, TravelReviewVo trvo) throws Exception {
+		
+		String sql="INSERT INTO INFO_BOARD( INFO_NO ,INFO_CATEGORY_NO ,WRITER_NO ,TITLE ,CONTENT,MAIN_IMG ) VALUES (SEQ_INFO_BOARD_NO.NEXTVAL , 1 , ? , ? , ?,?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, trvo.getWriterNo());
+		pstmt.setString(2, trvo.getTitle());
+		pstmt.setString(3, trvo.getContent());
+		pstmt.setString(4, trvo.getMainImg());
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+		
+		
+	}
+	
 	//여행후기 조회
 	public List<TravelReviewVo> selectReviewList(Connection conn, PageVo pv) throws Exception {
 		
-		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,L.CHANGE_NAME ,M.ID AS ID ,M.NICK AS NICK FROM INFO_BOARD I JOIN INFO_BOARD_IMG_LIST L ON I.INFO_NO = L.INFO_NO JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG ,M.ID AS ID ,M.NICK AS NICK FROM INFO_BOARD I JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pv.getBeginRow());
 		pstmt.setInt(2, pv.getLastRow());
@@ -58,9 +76,9 @@ public class TravelReviewDao {
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String hit = rs.getString("HIT");
 			String deleteYn = rs.getString("DELETE_YN");
-			String changeName = rs.getString("CHANGE_NAME");
 			String writerId = rs.getString("ID");
 			String writerNick = rs.getString("NICK");
+			String mainImg = rs.getString("MAIN_IMG");
 			
 			
 			TravelReviewVo vo = new TravelReviewVo();
@@ -73,9 +91,9 @@ public class TravelReviewDao {
 			vo.setModifyDate(modifyDate);
 			vo.setHit(hit);
 			vo.setDeleteYn(deleteYn);
-			vo.setChangeName(changeName);
-			vo.setwriterId(writerId);
-			vo.setwriterNick(writerNick);
+			vo.setWriterId(writerId);
+			vo.setWriterNick(writerNick);
+			vo.setMainImg(mainImg);
 			
 			trList.add(vo);
 		}
@@ -87,33 +105,15 @@ public class TravelReviewDao {
 		
 	}
 
-	//여행후기 작성
-	public int write(Connection conn, TravelReviewVo trvo) throws Exception {
-
-		String sql="INSERT INTO INFO_BOARD( INFO_NO ,INFO_CATEGORY_NO ,WRITER_NO ,TITLE ,CONTENT ) VALUES (SEQ_INFO_BOARD_NO.NEXTVAL , 1 , ? , ? , ?)";
-		
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, trvo.getWriterNo());
-		pstmt.setString(2, trvo.getTitle());
-		pstmt.setString(3, trvo.getContent());
-		
-		int result = pstmt.executeUpdate();
-		
-		JDBCTemplate.close(pstmt);
-		
-		return result;
-		
-		
-	}
 
 	//여행 후기 이미지 업로드
-	public int insertReviewImg(Connection conn, AttachmentVo attvo) throws Exception {
+	public int insertReviewImg(Connection conn) throws Exception {
 
 		String sql="INSERT INTO INFO_BOARD_IMG_LIST( IMG_LIST_NO ,INFO_NO ,ORIGIN_NAME ,CHANGE_NAME ) VALUES ( SEQ_IMG_LIST_NO.NEXTVAL , SEQ_INFO_BOARD_NO.CURRVAL,?, ? )";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, attvo.getOriginName());
-		pstmt.setString(2, attvo.getChangeName());
+//		pstmt.setString(1, attvo.getOriginName());
+//		pstmt.setString(2, attvo.getChangeName());
 		int result = pstmt.executeUpdate();
 		
 		JDBCTemplate.close(conn);
@@ -124,7 +124,7 @@ public class TravelReviewDao {
 	//상세조회
 	public TravelReviewVo selectOneByNo(Connection conn, String infoNo) throws Exception {
 
-		String sql = "SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,M.PROFILE_IMAGE ,M.NICK ,M.ID ,L.CHANGE_NAME FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO JOIN INFO_BOARD_IMG_LIST L ON I.INFO_NO = L.INFO_NO WHERE I.INFO_NO=? AND DELETE_YN='N'";
+		String sql = "SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,M.PROFILE_IMAGE , M.NICK , M.ID FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO WHERE I.INFO_NO=? AND DELETE_YN='N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, infoNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -141,7 +141,6 @@ public class TravelReviewDao {
 			String deleteYn = rs.getString("DELETE_YN");
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String writerNick = rs.getString("NICK");
-			String changeName = rs.getString("CHANGE_NAME");
 			String writerId = rs.getString("ID");
 			
 			vo.setInfoNo(infoNo);
@@ -154,9 +153,8 @@ public class TravelReviewDao {
 			vo.setHit(hit);
 			vo.setDeleteYn(deleteYn);
 			vo.setProfileImage(profileImage);
-			vo.setwriterNick(writerNick);
-			vo.setChangeName(changeName);
-			vo.setwriterId(writerId);
+			vo.setWriterNick(writerNick);
+			vo.setWriterId(writerId);
 		}
 
 			JDBCTemplate.close(pstmt);
@@ -189,6 +187,23 @@ public class TravelReviewDao {
 		JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	//게시글 수정
+	public int edit(Connection conn, TravelReviewVo vo) throws Exception {
+
+		String sql ="UPDATE INFO_BOARD SET TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE WHERE INFO_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		pstmt.setString(3, vo.getInfoNo());
+		int result = pstmt.executeUpdate();
+		System.out.println(vo);
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	
 	}
 
 }//class

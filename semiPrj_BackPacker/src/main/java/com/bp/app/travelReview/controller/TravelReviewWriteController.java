@@ -50,31 +50,34 @@ public class TravelReviewWriteController extends HttpServlet{
 			}
 			
 			//파일 업로드
+			TravelReviewVo trvo = new TravelReviewVo();
 			Part f = req.getPart("fileName");
-			String path = req.getServletContext().getRealPath("/static/img/travelReview/");
 
 			AttachmentVo attvo = null;
-			System.out.println(f);
-			if(f != null && "fileName".equals(f.getName())) {
-				System.out.println(f);
+			if(f.getSubmittedFileName()!=null && f.getSubmittedFileName()!="") {
+				String path = req.getServletContext().getRealPath("/static/img/travelReview/");
 				attvo = FileUploader.saveFile(path, f);
+				trvo.setMainImg(attvo.getChangeName());
+			}else {
+				String changeName = "travelReviewMain.jpg";
+				trvo.setMainImg(changeName);
 			}
 
 			//데이터 꺼내기
+			
+			
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			String writerNo = loginMember.getMemberNo();
 			
 			//데이터 뭉치기
-			TravelReviewVo trvo = new TravelReviewVo();
 			trvo.setTitle(title);
 			trvo.setContent(content);
 			trvo.setWriterNo(writerNo);
-			
-			
+		
 			
 			TravelReviewService trs = new TravelReviewService();
-			int result = trs.write(trvo , attvo);
+			int result = trs.write(trvo);
 			
 			//화면
 			if(result == 1) {
