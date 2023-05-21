@@ -40,11 +40,11 @@ public class AccompanyDetailController extends HttpServlet{
 			//화면
 			if(writerMember!=null&&gbvo!=null) {
 				if(tvo==null) {
-					req.setAttribute("gbvo", gbvo);
+					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("writerMember", writerMember);
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);								
 				}else {
-					req.setAttribute("gbvo", gbvo);
+					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("WriterMember", writerMember);
 					req.setAttribute("tvo", tvo);
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);

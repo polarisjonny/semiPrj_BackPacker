@@ -18,6 +18,7 @@ import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.dao.MemberDao;
 import com.bp.app.member.vo.MemberVo;
+import com.bp.app.report.vo.ReportVo;
 
 public class GuideBoardService {
 	private final GuideBoardDao dao;
@@ -341,6 +342,57 @@ public class GuideBoardService {
 		
 		return result;
 		
+	}
+
+
+	public int modify(GuideBoardVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		//sql
+		String sql = "UPDATE GUIDE_BOARD SET TITLE =? ,CONTENT = ? , MODIFY_DATE = SYSDATE WHERE GUIDE_BOARD_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		pstmt.setString(3, vo.getGuideBoardNo());
+		int result = pstmt.executeUpdate();
+		
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+
+	public int report(ReportVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//Guide_Report테이블에 인서트
+		GuideBoardDao dao = new GuideBoardDao();
+		int result1=dao.insertReport(conn,vo);
+		int result2=dao.reportCnt(conn,vo);
+		//tx
+		
+		int result=0;
+		if(result1==result2) {
+			JDBCTemplate.commit(conn);
+			result=1;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		
+		// TODO Auto-generated method stub
+		return result;
 	}
 
 }
