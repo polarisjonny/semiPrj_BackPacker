@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -252,6 +253,10 @@
 		border-radius: 5px;
 		border: none;
 	}
+	#button-area > a {
+		color :black;
+		text-decoration: none;
+	}
 </style>
 </head>
 <body>
@@ -433,8 +438,15 @@
 							<div id="id-area">
 								<div id="name-area">${writerMember.nick}(${writerMember.id})</div>
 								<div id="btn-area">
-									<button class="s-btn btn-blue">수정</button>
+									<button class="s-btn btn-blue modify-btn">수정</button>
 									<button class="s-btn btn-red">삭제</button>
+									<script>
+										const sBtn = document.querySelectorAll(".s-btn");
+										if('${loginMember.memberNo}'!='${writerMember.memberNo}'){
+											sBtn[0].style.display = 'none';
+											sBtn[1].style.display = 'none';
+										}
+									</script>
 								</div>
 							</div>
 							<div id="info-area">
@@ -456,11 +468,18 @@
 						<div>
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
-						<button class="btn-blue">동행신청하기</button>
-						<button class="btn-red">게시글신고하기</button>
+						<button class="btn-blue disable-btn">동행신청하기</button>
+						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						<script>
+							const disableBtn = document.querySelectorAll(".disable-btn");
+							if('${writerMember.memberNo}'=='${loginMember.memberNo}'){
+								disableBtn[0].disabled = true;
+								disableBtn[1].disabled = true;
+							}
+						</script>
 					</div>
-					<div id="bottom-area">
-						<a href="#">▲맨위로 올라가기</a>
+					<div id="botton-area">
+						<a href="${root}/accompany/list?page=1">목록으로 돌아가기</a>
 					</div>
 				</div>
 				<div id="blank2"></div>
@@ -473,10 +492,7 @@
 </html>
 
 <script>
-
-			
-		
-		
+		loadComment();
 		//댓글작성
 		function writeComment(){
 			const comment = document.querySelector("textarea[name=comment]").value;
@@ -502,7 +518,7 @@
 				} ,
 			});
 		}
-		
+	
 
 		//댓글삭제
 		function delComment(guideReplyNo){
@@ -539,6 +555,7 @@
 				},
 				success : function(data){
 					const x  = JSON.parse(data);
+					console.log(x);
 					const commentArea = document.querySelector("#comment-list-area");
 					commentArea.innerHTML="";
 					let str = "";
@@ -549,7 +566,10 @@
 						str+='<div class="comment-list-id">'+x[i].nick+'</div>';
 						str+='<div class="comment-list-content">'+x[i].content+'</div>';
 						str+='<div class="comment-list-day">'+x[i].enrollDate;
-						str+='<button class="comment-del" onclick="delComment('+x[i].guideReplyNo+');">삭제</button></div>';
+						if('${loginMember.memberNo}'==x[i].writerNo){
+							str+='<button class="comment-del" onclick="delComment('+x[i].guideReplyNo+');">삭제</button>'
+						}
+						str+='</div>';
 						str+='</div>';
 						str+='</div>';
 					}
@@ -561,19 +581,24 @@
 
 			});
 		}
-		loadComment();
-		const input = document.querySelector(".comment-list-text > input").value;
-		alert(input);
-		
-		
-		function setVisibility(){
-		
-			// for(let i=0;i<btnDelArr.length;i++){
-			// 	btnDelArr[i].style.visibility='hidden';
-			// }
-		}
+		let modifyBtn = document.querySelector('.modify-btn');
+		modifyBtn.addEventListener('click',function(){
+			const no = '${gbvo.guideBoardNo}'
+			const width =800;
+			const height=1000;
+			const left = (screen.width/2)-(width/2);
+			const top = 0;
+			window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		});
 
-		
-		setVisibility();
-		
+		let reportBtn = document.querySelector('.report-btn');
+		reportBtn.addEventListener('click',function(){
+			const no = '${gbvo.guideBoardNo}'
+			const width =800;
+			const height=1000;
+			const left = (screen.width/2)-(width/2);
+			const top = 0;
+			window.open('${root}/accompany/report?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		});
+
 </script>

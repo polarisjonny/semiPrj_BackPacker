@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.member.vo.MemberVo;
+import com.bp.app.report.vo.ReportVo;
 
 public class GuideBoardDao {
 	//스케쥴러인서트
@@ -105,6 +106,30 @@ public class GuideBoardDao {
 		JDBCTemplate.close(pstmt);
 		
 		return selectedBvo;
+	}
+	
+	//신고테이블 인서트
+	public int insertReport(Connection conn, ReportVo vo) throws Exception {
+		String sql ="INSERT INTO GUIDE_REPORT (REPORT_NO,MEMBER_NO,GUIDE_BOARD_NO,REPORT_CONTENT) VALUES (SEQ_GUIDE_REPORT_NO.NEXTVAL,?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setString(2, vo.getGuideBoardNo());
+		pstmt.setString(3, vo.getReportContent());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	public int reportCnt(Connection conn, ReportVo vo) throws Exception {
+		String sql = "UPDATE GUIDE_BOARD SET REPORT_CNT = REPORT_CNT+1 WHERE GUIDE_BOARD_NO =?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getGuideBoardNo());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }
