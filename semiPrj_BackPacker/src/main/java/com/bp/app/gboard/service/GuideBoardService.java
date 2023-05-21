@@ -276,7 +276,7 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql = "SELECT GR.*,M.NICK, M.PROFILE_IMAGE FROM GUIDE_REPLY GR JOIN MEMBER M ON (M.MEMBER_NO = GR.WRITER_NO) WHERE GUIDE_BOARD_NO = ? ORDER BY GR.ENROLL_DATE DESC";
+		String sql = "SELECT GR.*,M.NICK, M.PROFILE_IMAGE FROM GUIDE_REPLY GR JOIN MEMBER M ON (M.MEMBER_NO = GR.WRITER_NO) WHERE GUIDE_BOARD_NO = ? AND DELETE_YN ='N' ORDER BY GR.ENROLL_DATE DESC";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, accomNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -315,6 +315,32 @@ public class GuideBoardService {
 		//close
 		
 		return list;
+	}
+
+
+	public int deleteReply(String replyNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//sql
+		String sql = "UPDATE GUIDE_REPLY SET DELETE_YN = 'Y' WHERE GUIDE_REPLY_NO=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, replyNo);
+		int result = pstmt.executeUpdate();
+		
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
 	}
 
 }
