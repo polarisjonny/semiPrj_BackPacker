@@ -23,6 +23,7 @@ public class AccompanyDetailController extends HttpServlet{
 			//데꺼
 			String boardNo = req.getParameter("no");
 			String writerNo = req.getParameter("writerNo");
+			MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
 			
 			
 	
@@ -36,7 +37,14 @@ public class AccompanyDetailController extends HttpServlet{
 			SchedulerService ss = new SchedulerService();
 			
 			MemberVo writerMember = gbs.selectMemberByNo(bvo);
-			GuideBoardVo gbvo =  gbs.selectOneByNo(bvo);
+			//조회수 버그 고치기 위한.. 
+			GuideBoardVo gbvo =null;
+			if(loginMember==null||loginMember.equals("")) {
+				gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+			}else {
+				String lmNo = loginMember.getMemberNo();	
+				gbvo =  gbs.selectOneByNo(bvo,lmNo);
+			}
 			TimetableVo tvo = ss.getTimetable(gbvo.getSchedulerNo());
 			
 			//화면
