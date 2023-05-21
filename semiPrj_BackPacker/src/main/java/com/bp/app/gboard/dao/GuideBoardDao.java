@@ -132,4 +132,15 @@ public class GuideBoardDao {
 		return result;
 	}
 
+	public int increaseHit(Connection conn, GuideBoardVo bvo) throws Exception {
+		String sql = "UPDATE GUIDE_BOARD SET HIT = HIT+1 WHERE GUIDE_BOARD_NO=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bvo.getGuideBoardNo());
+		int result =pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 }

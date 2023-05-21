@@ -239,7 +239,7 @@
 	}
 	
 	#sub-area {
-		margin-top: 30px
+		margin-top: 70px
 	}
 	.content-text {
 		width: 100%;
@@ -265,10 +265,10 @@
 	
 		<main>
  	        <img class="middle-img" src="${root}/static/img/accompany/${gbvo.mainImg}" alt="">
-			<%-- <img src="${root}/static/img/main_big_img.jpg" alt=""> --%>
 			<div id="main-box">
 				<div id="blank1"></div>
 				<div id="main-area">
+					<div>조회수 : ${gbvo.hit}</div>
 					<div id="title">${gbvo.title}</div>
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>						

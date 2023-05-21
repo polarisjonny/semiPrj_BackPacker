@@ -204,12 +204,15 @@ public class GuideBoardService {
 		
 		return bvoList; 
 	}
-	public int countCnt() throws Exception {
+	
+	//페이징 게시글 개수세기 (게시판카테고리 매개변수)
+	public int countCnt(int i) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql = "SELECT COUNT(*) as CNT FROM GUIDE_BOARD WHERE DELETE_YN ='N' and MATCHING_STATE = 'N'";
+		String sql = "SELECT COUNT(*) as CNT FROM GUIDE_BOARD WHERE DELETE_YN ='N' and MATCHING_STATE = 'N' and GUIDE_BOARD_CATEGORY_NO = ?";
 		PreparedStatement pstmt =conn.prepareStatement(sql);
+		pstmt.setInt(1, i);
 		ResultSet rs = pstmt.executeQuery();
 		//rs
 		int cnt = 0;
@@ -224,7 +227,7 @@ public class GuideBoardService {
 		return cnt;
 	}
 
-
+	//자기소개및 작성자정보 조회
 	public MemberVo selectMemberByNo(GuideBoardVo bvo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
@@ -241,14 +244,19 @@ public class GuideBoardService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 			
+		int result = dao.increaseHit(conn,bvo);
 		GuideBoardVo selectedBvo =  dao.selectOneByNo(conn,bvo);
-		
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return selectedBvo;
 		
 	}
 
-
+	//댓글쓰기
 	public int replyWrite(GuideReplyVo rvo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();

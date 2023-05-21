@@ -34,7 +34,7 @@ public class AccompanyListController extends HttpServlet{
 			GuideBoardService gbs = new GuideBoardService();
 			String currentPage_ = req.getParameter("page");
 			int currentPage = Integer.parseInt(currentPage_);
-			int cnt = gbs.countCnt();
+			int cnt = gbs.countCnt(3);
 			
 			PageVo pvo = new PageVo(cnt, currentPage, 5, 8);
 			
