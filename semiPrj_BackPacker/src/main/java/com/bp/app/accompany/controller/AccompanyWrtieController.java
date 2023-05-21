@@ -33,10 +33,17 @@ public class AccompanyWrtieController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//썸네일 사진 서버에 업로드
-			Part f = req.getPart("boardListThumbnail");
-			String path = req.getServletContext().getRealPath("/static/img/accompany/");
-			AttachmentVo attachmentVo = FileUploader.saveFile(path,f);			
+			GuideBoardVo vo = new GuideBoardVo();
 			
+			Part f = req.getPart("boardListThumbnail");
+			if(f.getSubmittedFileName()!=null&&f.getSubmittedFileName()!="") {
+				String path = req.getServletContext().getRealPath("/static/img/accompany/");
+				AttachmentVo attachmentVo = FileUploader.saveFile(path,f);	
+				vo.setMainImg(attachmentVo.getChangeName());
+			}else {
+				String changeName = "accom_basic.jpg";
+				vo.setMainImg(changeName);
+			}
 			//데이터 꺼내기
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
@@ -46,9 +53,9 @@ public class AccompanyWrtieController extends HttpServlet {
 			//카테고리넘버
 			String categoryNo = "3";
 			
-			//꺼낸 데이터 vo에 set하기  
-			GuideBoardVo vo = new GuideBoardVo();
-			vo.setMainImg(attachmentVo.getChangeName());
+			//꺼낸 데이터 vo에 set하기 
+			System.out.println(vo.getMainImg());
+			
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setStartDate(startDate);
