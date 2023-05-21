@@ -27,7 +27,7 @@ public class TravelReviewDetailController extends HttpServlet{
 			
 			//화면
 			if(vo != null) {
-				req.setAttribute("vo" , vo);
+				req.getSession().setAttribute("vo", vo);
 				req.getRequestDispatcher("/WEB-INF/views/notice/travelReviewDetail.jsp").forward(req, resp);
 			}else {
 				throw new Exception();

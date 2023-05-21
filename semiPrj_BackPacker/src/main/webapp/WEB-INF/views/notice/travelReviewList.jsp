@@ -207,7 +207,6 @@ footer, header, hgroup, menu, nav, section {
 
 			<div id="review">여행후기</div>
 			   
-	        
 	        <div id="hit">
 				<a href="#">조회순</a>  
 				 <span id="line">|</span>   
@@ -216,11 +215,9 @@ footer, header, hgroup, menu, nav, section {
         </div>
 
       <div id="reviewList">
-      
-     	
       	<c:forEach items="${trList}" var="trList">
 	        <div id="review-area">
-	        	<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelReview/${trList.changeName}"></a>
+	        	<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelReview/${trList.mainImg}"></a>
 	           	<div>
 	            <a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
 	            <!-- infoNo를 get방식으로 전달하여 req.getParameter에 담김 -->

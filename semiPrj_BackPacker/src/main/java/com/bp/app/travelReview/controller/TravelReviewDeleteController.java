@@ -34,7 +34,7 @@ public class TravelReviewDeleteController extends HttpServlet{
 			
 			TravelReviewVo vo = new TravelReviewVo();
 			vo.setInfoNo(infoNo);
-			vo.setwriterId(writerId);
+			vo.setWriterId(writerId);
 			
 			//서비스
 			TravelReviewService trs = new TravelReviewService();
