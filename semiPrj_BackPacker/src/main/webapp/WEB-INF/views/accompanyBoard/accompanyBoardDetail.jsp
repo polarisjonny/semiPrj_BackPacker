@@ -481,7 +481,7 @@
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${empty loginMember}'||'${loginMember.id}'=='ADMIN'){
+							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
 								disableBtn[0].disabled = true;
 								disableBtn[1].disabled = true;
 							}
