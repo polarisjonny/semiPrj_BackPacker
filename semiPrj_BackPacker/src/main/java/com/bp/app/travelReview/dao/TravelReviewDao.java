@@ -206,6 +206,36 @@ public class TravelReviewDao {
 	
 	}
 
+	//게시글 신고수 증가
+	public int increaseReportCnt(Connection conn, TravelReviewVo vo) throws Exception {
+
+		String sql = "UPDATE INFO_BOARD SET REPORT_CNT = REPORT_CNT+1 WHERE INFO_NO = ? AND DELETE_YN ='N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getInfoNo());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+
+	}
+
+	//게시글 신고내용 인서트
+	public int insertReport(Connection conn, TravelReviewVo vo) throws Exception {
+		
+		String sql ="INSERT INTO INFO_BOARD_REPORT (REPORT_NO , MEMBER_NO , INFO_BOARD_NO , REPORT_CONTENT) VALUES (SEQ_INFO_REPORT_NO.NEXTVAL , ? , ? , ?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getWriterNo());
+		pstmt.setString(2, vo.getInfoNo());
+		pstmt.setString(3, vo.getContent());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 }//class
 
 
