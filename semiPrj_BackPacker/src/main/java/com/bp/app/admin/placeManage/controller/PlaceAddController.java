@@ -36,18 +36,17 @@ public class PlaceAddController extends HttpServlet {
 			String path = req.getServletContext().getRealPath("/static/img/place/");
 			f = req.getPart("placeImage");
 			System.out.println(f);
-			if(req.getPart("placeImage")!=null) {
-				
-				System.out.println(f);
-				attachmentVo = FileUploader.saveFile(path , f);
+			if(f != null && f.getSize() > 0) {
+				attachmentVo = FileUploader.saveFile(path, f);
 			}
+		
 			System.out.println(f);
 			
 		
 			
 //			String changeName = "1";
-			String changeName = attachmentVo.getChangeName();
-			System.out.println(attachmentVo);
+			
+
 			
 			//데꺼
 			String placeCategoryNo = req.getParameter("placeCategoryNo");
@@ -71,8 +70,10 @@ public class PlaceAddController extends HttpServlet {
 			
 			
 			PlaceVo vo = new PlaceVo();
-			vo.setPlaceCategory(placeCategoryNo);
-			vo.setPlaceImage(changeName);
+			if (attachmentVo != null) {
+                vo.setPlaceImage(attachmentVo.getChangeName());
+            }
+			vo.setPlaceCategoryNo(placeCategoryNo);
 			vo.setCountryNo(countryNo);
 			vo.setLocationNo(locationNo);
 			vo.setPlaceIntroduce(placeIntroduce);

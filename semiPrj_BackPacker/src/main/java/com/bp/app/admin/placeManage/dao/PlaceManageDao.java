@@ -230,8 +230,7 @@ public class PlaceManageDao {
 		System.out.println(vo.getPlaceCategory());
 		String sql = "INSERT INTO PLACE( PLACE_NO, PLACE_CATEGORY_NO, COUNTRY_NO, LOCATION_NO, PLACE_NAME, PLACE_INTRODUCE, PLACE_IMAGE, PLACE_LAT, PLACE_LNG, PLACE_TIME, PLACE_EXPENSE ) VALUES(SEQ_PLACE_NO.NEXTVAL , ?, ?, ?, ?, ?, ?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		System.out.println(vo.getPlaceCategory());
-		pstmt.setString(1,vo.getPlaceCategory());
+		pstmt.setString(1,vo.getPlaceCategoryNo());
 		pstmt.setString(2, vo.getCountryNo());
 		pstmt.setString(3, vo.getLocationNo());
 		pstmt.setString(4, vo.getPlaceName());
@@ -240,6 +239,7 @@ public class PlaceManageDao {
 		pstmt.setString(7, vo.getPlaceLat());
 		pstmt.setString(8, vo.getPlaceLng());
 		pstmt.setString(9, vo.getPlaceTime());
+		pstmt.setString(10, vo.getPlaceExpense());
 		pstmt.setString(10, vo.getPlaceExpense());
 		int result = pstmt.executeUpdate();
 		JDBCTemplate.close(pstmt);

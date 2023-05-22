@@ -99,7 +99,7 @@
         <form action="${root}/admin/place/edit" method="post" enctype="multipart/form-data">
         	<input type="text" name = "plcaeNo" value=${pv.placeNo } hidden>
         	<div>
-        	<input type="text" name = "placeName" placeholder="이름 : ${pv.placeName}">
+        	<input type="text" name = "placeName" value="${pv.placeName}">
         </div>	
            <label>
 				대표사진
@@ -110,21 +110,21 @@
 				 </div>
             <div id="select-grid1">
                 
-                <select class="g1sl" name="placeCategoryNo" id="placeSelect">
+                <select class="g1sl" name="placeCategoryNo" id="placeSelect" value="${pv.placeCategoryNo}">
                     <option value="10" selected>식음료</option>
                     <option value="20">관광</option>
                     <option value="30">체험</option>
                 </select>
             
             
-                <select class="g1sl" name="countryNo" id="countrySelect">
+                <select class="g1sl" name="countryNo" id="countrySelect" value= "${pv.countryNo }">
                     <option value="1" selected>한국</option>
                     <option value="2">일본</option>
                     <option value="3">중국</option>
                 </select>
             
             
-                <select class="g1sl" name="locationNo" id="locationSelect">
+                <select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
                     <option value="301" >베이징</option>
                     <option value="302">상하이(항주, 소주)</option>
                     <option value="303"selected>사천</option>
@@ -132,20 +132,20 @@
                 
             </div>
             <div id="placeIntro">
-            <textarea  id="plIntro" placeholder="상세 정보 : ${pv.placeIntroduce}" name="placeIntroduce"></textarea>
+            <textarea  id="plIntro" value=" ${pv.placeIntroduce}" name="placeIntroduce">${pv.placeIntroduce}</textarea>
             </div>
             <div id="place-info-grid">
                 <div>
-                    <input type="text" class="infotext" placeholder="소요시간 : ${pv.placeTime}" id="time" name="placeTime">
+                    <input type="text" class="infotext" value="${pv.placeTime}" id="time" name="placeTime">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="비용 : ${pv.placeExpense}" id="expense" name="placeExpense">
+                    <input type="text" class="infotext" value="${pv.placeExpense}" id="expense" name="placeExpense">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="위도 : ${pv.placeLat}" id="lat" name="placeLat">
+                    <input type="text" class="infotext" value="${pv.placeLat}" id="lat" name="placeLat">
                 </div>
                 <div>
-                    <input type="text" class="infotext" placeholder="경도 : ${pv.placeLng}" id="lng" name="placeLng">
+                    <input type="text" class="infotext" value="${pv.placeLng}" id="lng" name="placeLng">
                 </div>
 
             </div>

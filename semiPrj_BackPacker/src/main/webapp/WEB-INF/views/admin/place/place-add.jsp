@@ -94,7 +94,7 @@
         </div>	
         	<label>
 				대표사진
-				 <input type="file" multiple="multiple" name="placeImage" value="/app/static/img/tempprofile.png">
+				 <input type="file" multiple="multiple" name="placeImage" value="/app/static/img/temp_profile.png">
 			</label>
 				 <div id="add-place-img">
 				    	<img id="placeImg" >
