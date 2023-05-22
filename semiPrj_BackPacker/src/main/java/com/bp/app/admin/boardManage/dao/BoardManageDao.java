@@ -9,11 +9,11 @@ import java.util.List;
 
 import com.bp.app.admin.boardManage.vo.GuideReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardReportVo;
-import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.admin.boardManage.vo.QnaBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.travelReview.vo.TravelReviewVo;
 
 public class BoardManageDao {
 
@@ -225,7 +225,7 @@ public class BoardManageDao {
 		return cnt;
 	}
 
-	public List<InfoBoardVo> getReviewInfoBoardList(Connection conn, PageVo pv) throws Exception {
+	public List<TravelReviewVo> getReviewInfoBoardList(Connection conn, PageVo pv) throws Exception {
 		
 		String sql = "SELECT *FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.INFO_NO, I.WRITER_NO, I.INFO_CATEGORY_NO, I.TITLE, I.CONTENT, I.ENROLL_DATE, I.MODIFY_DATE, I.HIT, I.DELETE_YN, I.REPORT_CNT, C.INFO_CATEGORY_NAME AS CATEGORY, M.NICK AS WRITERNICK, M.ID AS WRITERID FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO JOIN INFO_BOARD_CATEGORY C ON I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO WHERE DELETE_YN = 'N' ORDER BY INFO_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		
@@ -234,7 +234,7 @@ public class BoardManageDao {
 		pstmt.setInt(2, pv.getLastRow());
 		ResultSet rs =  pstmt.executeQuery();
 		
-		List<InfoBoardVo> voList = new ArrayList<>();
+		List<TravelReviewVo> voList = new ArrayList<>();
 		while(rs.next()) {
 			
 			String infoNo = rs.getString("INFO_NO");
@@ -250,7 +250,7 @@ public class BoardManageDao {
 			String writerId = rs.getString("WRITERID");
 			String writerNick =rs.getString("WRITERNICK");
 			String categoryName = rs.getString("CATEGORY");
-			InfoBoardVo vo = new InfoBoardVo();
+			TravelReviewVo vo = new TravelReviewVo();
 		
 			vo.setInfoNo(infoNo);
 			vo.setWriterNo(writerNo);
@@ -275,7 +275,7 @@ public class BoardManageDao {
 		return voList;
 	}
 
-	public List<InfoBoardVo> getReviewInfoBoardList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+	public List<TravelReviewVo> getReviewInfoBoardList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
 		String sql = "";
 		
 		if("title".equals(searchType)) {
@@ -309,7 +309,7 @@ public class BoardManageDao {
 		pstmt.setInt(3, pv.getLastRow());
 		ResultSet rs =  pstmt.executeQuery();
 		//rs
-		List<InfoBoardVo> voList = new ArrayList<>();
+		List<TravelReviewVo> voList = new ArrayList<>();
 		while(rs.next()) {
 			
 			String infoNo = rs.getString("INFO_NO");
@@ -325,7 +325,7 @@ public class BoardManageDao {
 			String writerId = rs.getString("WRITERID");
 			String writerNick =rs.getString("WRITERNICK");
 			String categoryName = rs.getString("CATEGORY");
-			InfoBoardVo vo = new InfoBoardVo();
+			TravelReviewVo vo = new TravelReviewVo();
 		
 			vo.setInfoNo(infoNo);
 			vo.setWriterNo(writerNo);
