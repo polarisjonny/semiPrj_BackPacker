@@ -104,6 +104,69 @@ public class TravelReviewDao {
 			return trList;
 		
 	}
+	
+	//검색해서 조회
+	public List<TravelReviewVo> selectReviewList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+
+		String sql = "";
+		if(searchType.equals("title")) {
+			//제목 검색
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG ,C.INFO_CATEGORY_NAME , M.NICK FROM INFO_BOARD I JOIN INFO_BOARD_CATEGORY C ON (I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO) JOIN MEMBER M ON (I.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND I.TITLE LIKE '%'||?||'%' ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		}else if(searchType.equals("writer")){
+			//작성자 검색
+			sql = "SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG ,C.INFO_CATEGORY_NAME , M.NICK FROM INFO_BOARD I JOIN INFO_BOARD_CATEGORY C ON I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO JOIN MEMBER M ON (I.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND M.NICK LIKE '%'||?||'%' ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		}else {
+			return selectReviewList(conn,pv);
+		}
+		System.out.println(sql);
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setString(3, String.valueOf(pv.getLastRow()));
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<TravelReviewVo> trList = new ArrayList<>();
+		while(rs.next()) {
+			String infoNo = rs.getString("INFO_NO");
+			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+			String deleteYn = rs.getString("DELETE_YN");
+//			String writerId = rs.getString("ID");
+			String writerNick = rs.getString("NICK");
+			String mainImg = rs.getString("MAIN_IMG");
+			String infoCategoryName = rs.getString("INFO_CATEGORY_NAME");
+			
+			
+			TravelReviewVo vo = new TravelReviewVo();
+			vo.setInfoNo(infoNo);
+			vo.setInfoCategoryNo(infoCategoryNo);
+			vo.setWriterNo(writerNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setHit(hit);
+			vo.setDeleteYn(deleteYn);
+//			vo.setWriterId(writerId);
+			vo.setWriterNick(writerNick);
+			vo.setMainImg(mainImg);
+			vo.setInfoCategoryName(infoCategoryName);
+			
+			trList.add(vo);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return trList;
+	
+	}
 
 
 	//여행 후기 이미지 업로드
@@ -235,6 +298,8 @@ public class TravelReviewDao {
 		
 		return result;
 	}
+
+	
 
 }//class
 
