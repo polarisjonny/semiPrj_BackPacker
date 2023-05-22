@@ -51,8 +51,9 @@ public class PlaceEditController extends HttpServlet {
 			Part f = req.getPart("placeImage");
 			String path = req.getServletContext().getRealPath("/static/img/place/");
 			AttachmentVo attachmentVo =null; 
-			attachmentVo = FileUploader.saveFile(path , f);
-			
+			if(f != null && f.getSize() > 0) {
+				attachmentVo = FileUploader.saveFile(path, f);
+			}			
 			//데꺼
 			String placeNo = req.getParameter("placeNo");
 			String placeCategoryNo = req.getParameter("placeCategoryNo");
@@ -68,8 +69,10 @@ public class PlaceEditController extends HttpServlet {
 			
 			PlaceVo vo = new PlaceVo();
 			vo.setPlaceNo(placeNo);
-			vo.setPlaceCategory(placeCategoryNo);
-			vo.setPlaceImage(attachmentVo.getChangeName());
+			vo.setPlaceCategoryNo(placeCategoryNo);
+			if (attachmentVo != null) {
+                vo.setPlaceImage(attachmentVo.getChangeName());
+            }
 			vo.setCountryNo(countryNo);
 			vo.setLocationNo(locationNo);
 			vo.setPlaceIntroduce(placeIntroduce);
