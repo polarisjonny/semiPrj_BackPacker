@@ -55,7 +55,7 @@ public class AccompanyDetailController extends HttpServlet{
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);								
 				}else {
 					req.getSession().setAttribute("gbvo", gbvo);
-					req.setAttribute("WriterMember", writerMember);
+					req.setAttribute("writerMember", writerMember);
 					req.setAttribute("tvo", tvo);
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);
 				}
