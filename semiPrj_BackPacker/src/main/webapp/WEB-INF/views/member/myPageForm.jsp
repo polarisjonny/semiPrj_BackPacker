@@ -304,23 +304,23 @@
             
     
             <div class="matching-member-area" id="first-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[0].profileImage}" alt="프로필 사진">
+                <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[0].profileImage}" alt="프로필 사진">
                 <span>${matchingList[0].nick}</span>
             </div>
     
             <div class="matching-member-area" id="second-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[1].profileImage}" alt="프로필 사진">
+                <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[1].profileImage}" alt="프로필 사진">
                 <span>${matchingList[1].nick}</span>
             </div>
     
             <div class="matching-member-area" id="third-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[2].profileImage}" alt="프로필 사진">
+                <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[2].profileImage}" alt="프로필 사진">
                 <span>${matchingList[2].nick}</span>
             </div>
     
     
             <div class="matching-member-area" id="fourth-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/views/member/${matchingList[3].profileImage}" alt="프로필 사진">
+                <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[3].profileImage}" alt="프로필 사진">
                 <span>${matchingList[3].nick}</span>
             </div>
         </div>
