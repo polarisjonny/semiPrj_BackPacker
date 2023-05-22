@@ -81,7 +81,6 @@ public class PlaceEditController extends HttpServlet {
 			vo.setPlaceLat(placeLat);
 			vo.setPlaceLng(placeLng);
 			vo.setPlaceName(placeName);
-			
 			PlaceManageService pms = new PlaceManageService();
 			int result = pms.editPlace(vo);
 			
@@ -91,7 +90,7 @@ public class PlaceEditController extends HttpServlet {
 				req.getSession().setAttribute("alertMsg", "여행지 수정 성공!");
 				resp.sendRedirect(root + "/admin/place/list");
 			}else {
-				throw new Exception("[ERROR] 여행지 추가 에러.");
+				throw new Exception("[ERROR] 여행지 수정 에러.");
 			}
 			
 			
