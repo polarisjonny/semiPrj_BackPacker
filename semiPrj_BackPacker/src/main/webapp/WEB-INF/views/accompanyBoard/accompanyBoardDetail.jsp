@@ -450,6 +450,10 @@
 										if('${loginMember.memberNo}'!='${writerMember.memberNo}'){
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
+											if('${loginMember.id}'=='ADMIN'){
+												sBtn[0].style.display = 'block';
+												sBtn[1].style.display = 'block';
+											}
 										}
 									</script>
 								</div>
@@ -477,7 +481,7 @@
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${writerMember.memberNo}'=='${loginMember.memberNo}'){
+							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${empty loginMember}'||'${loginMember.id}'=='ADMIN'){
 								disableBtn[0].disabled = true;
 								disableBtn[1].disabled = true;
 							}
