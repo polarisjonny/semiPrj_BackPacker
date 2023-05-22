@@ -204,7 +204,7 @@
 
         <div class="profileMiddle">
             <div id="profileMidLeft">
-                 <img width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" alt="">
+                 <img width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/${selectMember.profileImage}" alt="">
             </div>
             <div id="profileMidRightUp">
                 <div id="profileMidRightUpDistance">

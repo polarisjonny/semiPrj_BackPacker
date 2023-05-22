@@ -72,11 +72,11 @@
 
     <div id="member-list-area">
     	<c:forEach items="${matchingList}" var="vo">
-    		<div hidden> ${vo.memberNo} </div>
     		 <div id="first-member-area">
-             <div class="profile-img-style imgToProfile" style="background-image: url('${root}/static/img/views/member/${vo.profileImage}');"></div>
-            <div>${vo.nick}</div>
-        </div>
+    		 	<div hidden> ${vo.memberNo} </div>
+             	<div class="profile-img-style imgToProfile2" style="background-image: url('${root}/static/img/member/profile/${vo.profileImage}');"></div>
+            	<div>${vo.nick}</div>
+        	</div>
     	</c:forEach>
        
 
@@ -134,16 +134,17 @@
     </main>
     
    <script>
-let imgToProfile;
-imgToProfile= document.querySelector('.imgToProfile');
-imgToProfile.addEventListener('click', function(e) {
-   const no = e.target.parentNode.children[0].innerText; //게시글 작성자 번호
-   const width = 800;
-   const height = 1000;
-   const left = (screen.width / 2) - (width / 2);
-   const top = 0;
-   window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-});
+	let imgToProfile2 = null;
+	imgToProfile2= document.querySelector('.imgToProfile2');
+	imgToProfile2.addEventListener('click', function(e) {
+   		const no = e.target.parentNode.children[0].innerText; //게시글 작성자 번호
+   		console.log(no);
+   		const width = 800;
+   		const height = 1000;
+   		const left = (screen.width / 2) - (width / 2);
+   		const top = 0;
+   		window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+	});
 </script>
 </body>
 </html>
