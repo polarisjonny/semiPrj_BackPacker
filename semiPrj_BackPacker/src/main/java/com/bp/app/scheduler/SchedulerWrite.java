@@ -52,6 +52,7 @@ public class SchedulerWrite extends HttpServlet{
 			
 			//데이터 뭉치기
 			GuideBoardVo bgVo = new GuideBoardVo();
+			//로그인멤버 셋팅
 			bgVo.setSchedulerNo(schedulerNo);
 			bgVo.setGuideBoardCategoryNo(category);
 			bgVo.setTitle(title);

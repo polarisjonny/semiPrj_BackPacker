@@ -312,8 +312,9 @@ public class SchedulerService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		String sql = "SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.TOTAL_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?";
+		String sql = "SELECT * FROM ( SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.TOTAL_DATE ,M.MEMBER_NO ,M.START_DATE ,M.END_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE ,S.MEMBER_NO ,TO_CHAR(S.START_DATE, 'yyyy-mm-dd') AS START_DATE ,TO_CHAR(S.END_DATE, 'yyyy-mm-dd') AS END_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?) K JOIN PLACE P ON( K.PLACE_NO = P.PLACE_NO)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		//로그인멤버도 체크할거면 AND M.MEMBER_NO=?
 		pstmt.setString(1, req.getParameter("schedulerNo"));
 		ResultSet rs = pstmt.executeQuery();
 		List<TimetableVo> list = new ArrayList<>();
@@ -326,6 +327,10 @@ public class SchedulerService {
 			String bespokeTime = rs.getString("BESPOKE_TIME");
 			String timetableStartTime = rs.getString("TIMETABLE_START_TIME");
 			String totalDate = rs.getString("TOTAL_DATE");
+			String placeName = rs.getString("PLACE_NAME");
+			String placeImage = rs.getString("PLACE_IMAGE");
+			String startDate = rs.getString("START_DATE");
+			String endDate = rs.getString("END_DATE");
 			
 			TimetableVo vo = new TimetableVo();
 			vo.setTimetableNo(timetableNo);
@@ -336,6 +341,10 @@ public class SchedulerService {
 			vo.setBespokeTime(bespokeTime);
 			vo.setTimetableStartTime(timetableStartTime);
 			vo.setTotalDate(totalDate);
+			vo.setPlaceName(placeName);
+			vo.setPlaceImage(placeImage);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
 			
 			list.add(vo);
 			

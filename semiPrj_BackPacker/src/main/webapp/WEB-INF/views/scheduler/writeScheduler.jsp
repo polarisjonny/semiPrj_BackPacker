@@ -14,7 +14,7 @@
 
 	.scheduler{
 		width: 400px;
-		height: 300px;
+		height: 320px;
 		border: 1px solid #E7E6E6;
 		box-shadow: 5px 5px 5px #878787;
 	}
@@ -23,7 +23,7 @@
 	.timetable{
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-row: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
 		margin-top: 20px;
 		justify-items: center;
 	}
@@ -114,6 +114,17 @@
 		position: relative;
     	top: 79px;
 	}
+	#timetable1{
+		width: 90px;
+		height: 132px;
+	}
+	#dd{
+		text-align: center;
+		font-size: xx-large;
+		font-style: italic;
+		color: rgba(148, 210, 230, 1);
+		font-weight: bold;
+	}
 	
 </style>
 <body>
@@ -129,12 +140,19 @@
 		
 			</div>
 
+			<c:set var="firstTimetable" value="${timetableVo[0]}" />
+			<c:set var="endValue" value="${firstTimetable.totalDate}" />
+
+			
+			<div id="dd" >
+				${firstTimetable.startDate} ~ ${firstTimetable.endDate}
+			</div>
+
 			
 
 			<div  id="scheduler-area">
 
-			<c:set var="firstTimetable" value="${timetableVo[0]}" />
-			<c:set var="endValue" value="${firstTimetable.totalDate}" />
+			
 
 			<c:forEach begin="1" end="${endValue}" var="index">
 				
@@ -148,10 +166,11 @@
 							<c:forEach  items="${timetableVo}" var="item" >
 								<c:if test="${index == item.timetableDate}">
 									<div id="timetable1">
-										<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
+										<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
 										<div id="place-time">
-											${item.placeNo}
+											${item.placeName}
 											<br>
+											
 											10:00~11:00
 										</div>
 									</div>
@@ -163,7 +182,7 @@
 							
 							<div class="not-schedule">
 								<div>
-									<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
+									<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정 없음.
 								</div>
 							</div>
 			
