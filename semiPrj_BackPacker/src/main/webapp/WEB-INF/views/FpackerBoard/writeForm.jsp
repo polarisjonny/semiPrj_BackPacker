@@ -88,9 +88,15 @@
 		position: relative;
 	}
 	#addInput-area {
-		margin-top: 10px;
-		float: right;
+		width: 100%;
+		margin-top: 15px;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+
+		
 	}
+
 </style>
 </head>
 <body>
@@ -104,7 +110,7 @@
 		<div id="main-area">
 			<div id="big-text">프패커게시판 게시글 작성</div>
 			게시판을 선택해주세요.
-			<select name="category" id="category">
+			<select id="category" name="categoryValue">
 				<option value="1">프패커합니다</option>
 				<option value="2">프패커구해요</option>
 			</select>
@@ -119,7 +125,7 @@
 					</div>
 
 				</div>
-
+		
 
 
 
@@ -136,10 +142,11 @@
 					<div>종료날짜</div>
 					<input type="date" name="endDate">
 				</div>
-				<div id="addInput-area">
-					<input type="number">원
+				<div id="addInput-area"></div>
+				<div>
+					<input id="submit-btn" type="submit" value="작성완료">	
 				</div>
-				<input id="submit-btn" type="submit" value="작성완료">	
+				
 			</form>	
 		</div>
 	</div>
@@ -169,6 +176,7 @@
 		preview.src ="";
 		}
 	})
-
+	//카테고리가 프패커합니다면 아래 금액인풋태가 보이게
+	const categoryValue = document.querySelector("select[name=categoryValue]").value;
 
 </script>
