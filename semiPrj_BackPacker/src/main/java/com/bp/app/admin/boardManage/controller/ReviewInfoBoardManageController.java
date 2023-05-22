@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.admin.boardManage.service.BoardManageService;
-import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.common.page.PageVo;
+import com.bp.app.travelReview.vo.TravelReviewVo;
 @WebServlet("/admin/reviewInfoBoard")
 public class ReviewInfoBoardManageController extends HttpServlet {
 	@Override
@@ -33,7 +33,7 @@ public class ReviewInfoBoardManageController extends HttpServlet {
 				page = 1;
 			}
 			PageVo pv = new PageVo(cnt, page, 10, 5);
-			List<InfoBoardVo> voList = null;
+			List<TravelReviewVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
 				voList = bs.getReviewInfoBoardList(pv);

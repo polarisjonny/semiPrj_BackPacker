@@ -13,13 +13,13 @@ public class TravelReviewVo {
 	private String deleteYn;
 	private String mainImg;
 	
-	private String infoCategoryName;
-	
 	private String changeName;
 	
 	private String profileImage;
 	private String writerNick;
 	private String writerId;
+	private String reportCnt;
+	private String categoryName;
 	public String getInfoNo() {
 		return infoNo;
 	}
@@ -80,12 +80,6 @@ public class TravelReviewVo {
 	public void setMainImg(String mainImg) {
 		this.mainImg = mainImg;
 	}
-	public String getInfoCategoryName() {
-		return infoCategoryName;
-	}
-	public void setInfoCategoryName(String infoCategoryName) {
-		this.infoCategoryName = infoCategoryName;
-	}
 	public String getChangeName() {
 		return changeName;
 	}
@@ -110,17 +104,29 @@ public class TravelReviewVo {
 	public void setWriterId(String writerId) {
 		this.writerId = writerId;
 	}
+	public String getReportCnt() {
+		return reportCnt;
+	}
+	public void setReportCnt(String reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	@Override
 	public String toString() {
 		return "TravelReviewVo [infoNo=" + infoNo + ", infoCategoryNo=" + infoCategoryNo + ", writerNo=" + writerNo
 				+ ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate + ", modifyDate="
-				+ modifyDate + ", hit=" + hit + ", deleteYn=" + deleteYn + ", mainImg=" + mainImg
-				+ ", infoCategoryName=" + infoCategoryName + ", changeName=" + changeName + ", profileImage="
-				+ profileImage + ", writerNick=" + writerNick + ", writerId=" + writerId + "]";
+				+ modifyDate + ", hit=" + hit + ", deleteYn=" + deleteYn + ", mainImg=" + mainImg + ", changeName="
+				+ changeName + ", profileImage=" + profileImage + ", writerNick=" + writerNick + ", writerId="
+				+ writerId + ", reportCnt=" + reportCnt + ", categoryName=" + categoryName + "]";
 	}
 	public TravelReviewVo(String infoNo, String infoCategoryNo, String writerNo, String title, String content,
-			String enrollDate, String modifyDate, String hit, String deleteYn, String mainImg, String infoCategoryName,
-			String changeName, String profileImage, String writerNick, String writerId) {
+			String enrollDate, String modifyDate, String hit, String deleteYn, String mainImg, String changeName,
+			String profileImage, String writerNick, String writerId, String reportCnt, String categoryName) {
 		super();
 		this.infoNo = infoNo;
 		this.infoCategoryNo = infoCategoryNo;
@@ -132,26 +138,18 @@ public class TravelReviewVo {
 		this.hit = hit;
 		this.deleteYn = deleteYn;
 		this.mainImg = mainImg;
-		this.infoCategoryName = infoCategoryName;
 		this.changeName = changeName;
 		this.profileImage = profileImage;
 		this.writerNick = writerNick;
 		this.writerId = writerId;
+		this.reportCnt = reportCnt;
+		this.categoryName = categoryName;
 	}
 	public TravelReviewVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	
-	
-
-	
-
-	
-
 	
 	
 	

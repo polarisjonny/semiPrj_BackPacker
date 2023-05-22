@@ -109,8 +109,8 @@
     <div class="profileStarWrap">
         <div id="profileStarTop">
             
-        		<div class="gcon">${crv.chattingUserNick} </div>
-        		<div class="gcon"> ${crv.chattingUser2Nick} </div>
+        		<div class="gcon">${loginMember.nick} </div>
+        		<div class="gcon"> ${selectMember.nick} </div>
        			<div class="gcon">
        				<div hidden > ${loginMember.memberNo}</div>
        				<img width="100px" height="100px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" onclick="imgClick(event)">
@@ -126,7 +126,7 @@
         </div>
         <br>
         <div id="profileText">
-        	${crv.chattingUserNick}님 ${crv.chattingUser2Nick}님과의 여행은 어떠셨나요?
+        	${loginMember.nick}님 ${selectMember.nick}님과의 여행은 어떠셨나요?
 	       
 	        	
         </div>
