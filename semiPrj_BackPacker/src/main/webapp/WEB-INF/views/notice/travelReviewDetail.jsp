@@ -69,13 +69,22 @@ main{
 		border-radius: 70%;
 	}
 	
-	#review-btn{
-		display:flex;
-		justify-content : center;
-		align-items: center;
+	#buttons{
+		display : flex;
+		align-items:center;
+		justify-content: space-around;
 	}
 	
 	#review-btn > button{
+		border-radius: 10px;
+        border: 1px solid #99ccff;
+        background-color:  #99ccff;
+        color:white;
+        padding:10px;
+        margin:0px 10px 10px;
+	}
+	
+	span > button {
 		border-radius: 10px;
         border: 1px solid #99ccff;
         background-color:  #99ccff;
@@ -132,19 +141,26 @@ main{
 			<div id="notice-content-area">
 			
 				${vo.content}
-				
 			</div>
 			
-			<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
-				<div id="review-btn">
-						<button class="edit-btn">수정하기</button>
-						<button onclick="reviewDelete();">삭제하기</button>
+			
+
+			<div id="buttons">
+				<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
+					<span id="review-btn">
+							<button class="edit-btn">수정하기</button>
+							<button onclick="reviewDelete();">삭제하기</button>
+							
+					</span>
+				</c:if>
 						
-						<span id="back">
-							<a href="${root}/notice/travelReview">목록으로</a>
+						<span>
+							<c:if test="${not empty loginMember }">
+								<button class="report-btn disable-btn">신고하기</button>
+							</c:if>
+							<button onclick="history.back();">목록으로</button>
 						</span>
-				</div>
-			</c:if>
+			</div>
 
 			
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
@@ -161,6 +177,22 @@ main{
 
 				location.href='${root}/notice/reviewDelete?infoNo='+'${vo.infoNo}';
 
+			}
+
+
+			const report = document.querySelector('.report-btn');
+			report.addEventListener('click' , function(params) {
+				const no = '${vo.infoNo}'
+				const width = 800;
+				const height = 1000;
+				const left = (screen.width/2) - (width/2);
+				const top = 0;
+				window.open('${root}/notice/report?infoNo='+no ,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top )
+			});
+			
+			const disableBtn = document.querySelector(".disable-btn");
+			if('${loginMember.memberNo}' == '${vo.writerNo}'){
+				disableBtn.disabled = true;
 			}
 
 			const editBtn = document.querySelector('.edit-btn');

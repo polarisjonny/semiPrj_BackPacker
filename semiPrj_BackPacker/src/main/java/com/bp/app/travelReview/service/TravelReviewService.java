@@ -123,6 +123,27 @@ public class TravelReviewService {
 		return result;
 	}//edit
 
+	//여행후기 신고
+	public int report(TravelReviewVo vo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.insertReport(conn,vo);
+		int result2 = dao.increaseReportCnt(conn,vo);
+		
+		if(result == 1 && result2 == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	
+
 
 }
 
