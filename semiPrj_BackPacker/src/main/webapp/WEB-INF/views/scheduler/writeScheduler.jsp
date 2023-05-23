@@ -158,25 +158,36 @@
 				
 					
 					<div class="scheduler radious">
-						<div id="trip-date">
+						<div id="trip-date" style="font-weight: bold; font-size: 1.3em;">
 							DAY${index}   
 						</div>
 			
 						<div class="timetable">
 							<c:forEach  items="${timetableVo}" var="item" >
 								<c:if test="${index == item.timetableDate}">
-									<div id="timetable1">
-										<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
-										<div id="place-time">
-											${item.placeName}
-											<br>
-											
-											10:00~11:00
+
+									<c:if test="${item.placeNo=='1'}">
+										<div id="timetable1">
+											<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
+											<div id="place-time" style="font-weight: bold;">
+												${item.bespokePlace}
+												<br>
+												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+											</div>
 										</div>
-									</div>
+									</c:if>
+
+									<c:if test="${item.placeNo !='1'}">
+										<div id="timetable1">
+											<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
+											<div id="place-time" style="font-weight: bold;">
+												${item.placeName}
+												<br>
+												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+											</div>
+										</div>
+									</c:if>
 								</c:if>
-
-
 							</c:forEach>
 							
 							

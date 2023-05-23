@@ -64,16 +64,18 @@ public class SchedulerWrite extends HttpServlet{
 			
 			//화면
 			if(result==1) {
-				if(category=="1") {
-					resp.sendRedirect("/semi/doFpacker/list");
+				if("3".equals(category)) {
+					resp.sendRedirect("/semi/accompany/list?page=1");
 					
 				}
-				if(category=="2") {
-					resp.sendRedirect("/semi/findFpacker/list");
+
+				if("2".equals(category)) {
+					resp.sendRedirect("/semi/accompany/list?page=1");
 					
 				}
-				if(category=="3") {
-					resp.sendRedirect("/semi/accompany/list");
+				if("1".equals(category)) {
+					resp.sendRedirect("/semi/accompany/list?page=1");
+
 					
 				}
 			}else {

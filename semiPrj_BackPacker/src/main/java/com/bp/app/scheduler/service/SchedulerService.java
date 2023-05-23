@@ -134,7 +134,7 @@ public class SchedulerService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 	
-		String sql = "INSERT INTO TIMETABLE (TIMETABLE_NO,PLACE_NO,SCHEDULER_NO,TIMETABLE_DATE,TIMETABLE_START_TIME)VALUES(SEQ_TIMETABLE_NO.NEXTVAL,?,?,?,TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
+		String sql = "INSERT INTO TIMETABLE (TIMETABLE_NO,PLACE_NO,SCHEDULER_NO,TIMETABLE_DATE,TIMETABLE_START_TIME)VALUES(SEQ_TIMETABLE_NO.NEXTVAL,?,?,?,(TO_TIMESTAMP(?, 'HH24:MI')))";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, tVo.getPlaceNo());
 		pstmt.setString(2, tVo.getSchedulerNo());
@@ -160,7 +160,7 @@ public class SchedulerService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
+		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, req.getParameter("schedulerNo"));
 		pstmt.setString(2,req.getParameter("timetableDate"));
@@ -286,15 +286,16 @@ public class SchedulerService {
 	
 		Connection conn = JDBCTemplate.getConnection();
 		
-		String sql="DELETE FROM TIMETABLE WHERE PLACE_NO = ? AND SCHEDULER_NO = ? AND TIMETABLE_DATE = ? ";
+		String sql="DELETE FROM TIMETABLE WHERE TIMETABLE_NO = ? AND PLACE_NO = ? AND SCHEDULER_NO = ? AND TIMETABLE_DATE = ? ";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getPlaceNo());
-		pstmt.setString(2, vo.getSchedulerNo());
-		pstmt.setString(3, vo.getTimetableDate());
+		pstmt.setString(1, vo.getTimetableNo());
+		pstmt.setString(2, vo.getPlaceNo());
+		pstmt.setString(3, vo.getSchedulerNo());
+		pstmt.setString(4, vo.getTimetableDate());
 		int result = pstmt.executeUpdate();
 		
-		if(result>0) {
+		if(result==1) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -312,7 +313,7 @@ public class SchedulerService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		String sql = "SELECT * FROM ( SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.TOTAL_DATE ,M.MEMBER_NO ,M.START_DATE ,M.END_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,T.TIMETABLE_START_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE ,S.MEMBER_NO ,TO_CHAR(S.START_DATE, 'yyyy-mm-dd') AS START_DATE ,TO_CHAR(S.END_DATE, 'yyyy-mm-dd') AS END_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?) K JOIN PLACE P ON( K.PLACE_NO = P.PLACE_NO)";
+		String sql = "SELECT * FROM ( SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLAY_TIME,M.TOTAL_DATE ,M.MEMBER_NO ,M.START_DATE ,M.END_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME,T.PLAY_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE ,S.MEMBER_NO ,TO_CHAR(S.START_DATE, 'yyyy-mm-dd') AS START_DATE ,TO_CHAR(S.END_DATE, 'yyyy-mm-dd') AS END_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?) K JOIN PLACE P ON( K.PLACE_NO = P.PLACE_NO)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		//로그인멤버도 체크할거면 AND M.MEMBER_NO=?
 		pstmt.setString(1, req.getParameter("schedulerNo"));
@@ -331,6 +332,7 @@ public class SchedulerService {
 			String placeImage = rs.getString("PLACE_IMAGE");
 			String startDate = rs.getString("START_DATE");
 			String endDate = rs.getString("END_DATE");
+			String playTime = rs.getString("PLAY_TIME");
 			
 			TimetableVo vo = new TimetableVo();
 			vo.setTimetableNo(timetableNo);
@@ -345,6 +347,7 @@ public class SchedulerService {
 			vo.setPlaceImage(placeImage);
 			vo.setStartDate(startDate);
 			vo.setEndDate(endDate);
+			vo.setPlayTime(playTime);
 			
 			list.add(vo);
 			
@@ -355,6 +358,107 @@ public class SchedulerService {
 		JDBCTemplate.close(conn);
 		
 		
+		
+		
+		return list;
+	}
+
+	public int updateTimetable(TimetableVo vo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String sql="UPDATE TIMETABLE SET TIMETABLE_START_TIME = TO_TIMESTAMP(?, 'HH24:MI') WHERE TIMETABLE_NO=?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTimetableStartTime());
+		pstmt.setString(2, vo.getTimetableNo());
+	
+		int result = pstmt.executeUpdate();
+		
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
+	}
+
+	public int SetUser(TimetableVo vo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String sql = "INSERT INTO TIMETABLE (TIMETABLE_NO, PLACE_NO, SCHEDULER_NO, TIMETABLE_DATE, BESPOKE_PLACE, TIMETABLE_START_TIME) VALUES (SEQ_TIMETABLE_NO.NEXTVAL, ?, ?, ?, ?, TO_TIMESTAMP(?, 'HH24:MI'))";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getPlaceNo());
+		pstmt.setString(2, vo.getSchedulerNo());
+		pstmt.setString(3, vo.getTimetableDate());
+		pstmt.setString(4, vo.getBespokePlace());
+		pstmt.setString(5, vo.getTimetableStartTime());
+		
+		int result = pstmt.executeUpdate();
+		
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		JDBCTemplate.close(pstmt);	
+		
+		
+		
+		return result;
+	}
+
+	public List<PlaceVo> search(HttpServletRequest req) throws Exception {
+	
+		Connection conn = JDBCTemplate.getConnection();
+		String sql = "SELECT * FROM PLACE WHERE PLACE_NAME LIKE '%'||?||'%'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,req.getParameter("searchPlace"));
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<PlaceVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String placeNo =rs.getString("PLACE_NO");
+			String placeCategoryNo =rs.getString("PLACE_CATEGORY_NO");
+			String countryNo =rs.getString("COUNTRY_NO");
+			String locationNo =rs.getString("LOCATION_NO");
+			String placeName =rs.getString("PLACE_NAME");
+			String placeIntroduce =rs.getString("PLACE_INTRODUCE");
+			String placeImage =rs.getString("PLACE_IMAGE");
+			String placeLat =rs.getString("PLACE_LAT");
+			String placeLng =rs.getString("PLACE_LNG");
+			String placeTime =rs.getString("PLACE_TIME");
+			String placeExpense =rs.getString("PLACE_EXPENSE");
+		
+			PlaceVo vo = new PlaceVo();
+			vo.setPlaceNo(placeNo);
+			vo.setPlaceCategoryNo(placeCategoryNo);
+			vo.setCountryNo(countryNo);
+			vo.setLocationNo(locationNo);
+			vo.setPlaceName(placeName);
+			vo.setPlaceIntroduce(placeIntroduce);
+			vo.setPlaceImage(placeImage);
+			vo.setPlaceLat(placeLat);
+			vo.setPlaceLng(placeLng);
+			vo.setPlaceTime(placeTime);
+			vo.setPlaceExpense(placeExpense);
+			
+			list.add(vo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		JDBCTemplate.close(conn);
 		
 		
 		return list;

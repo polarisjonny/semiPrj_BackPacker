@@ -122,7 +122,7 @@
 	}
 	#place{
 		width: 300px;
-		height: 90px;
+		height: 100px;
 		display: flex;
 		align-items: center;
 		border: 1px solid rgb(195, 191, 191);
@@ -199,7 +199,7 @@
 		grid-template-rows: 1fr 1fr;
 	}
 	#in>input{
-		width: 150px;
+		width: 120px;
 	}
 	#po{
 		position: relative;
@@ -350,7 +350,7 @@
 	
 			<div id="placeName">
 				<i id="po" class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-				<input type="text" placeholder="여행지검색" name="placeName">
+				<input type="text" id="search" placeholder="여행지검색" name="placeName" >
 			</div>
 	
 			
@@ -359,68 +359,75 @@
 				<h4>여행지 장소 리스트</h4>
 				
 				<div id="place">
-					<img id="place-img" src="" alt="">
+					<img id="place-img" src="${root}/static/img/place/user.png" alt="">
 						<div id="in">
 							<div>사용자 지정 여행지</div>
-							<input type="text" name="name" placeholder="장소이름">
-							<input type="text" name="time" placeholder="소요시간">
+							<input id="userName" type="text" name="name" placeholder="장소이름">
+							<input id="userTime" type="time" name="time" >
 						</div>
 					<div id="p-area">
-						<div id="p-pick"><i class="bi bi-plus-circle"></i></div>
+						<div id="p-pick" data-placeno="1">추가</div>
 					</div>
 				</div>
+
+				<div id="placesearch" style="display: none;">
+					
+				</div>
 				
-				<c:forEach items="${placeList}" var="place">
-					<div id="place" data-lng="${place.placeLng}" data-lat="${place.placeLat}">
-						<img id="place-img" src="${root}/static/img/place/${place.placeImage}" alt="">
-						<div id="p-place">${place.placeName}</div>
-						<div id="p-area">
-							<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>
-							<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="${place.placeNo}" ></i></div>
-						</div>
-					</div>
-					<div id="modal-area" class="modal-area">
-						<div id="box">
-							<div id="modal-img">
-								<img style="width: 440px; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
+				<c:forEach items="${placeList}" var="place" varStatus="loop">
+					<c:if test="${loop.index > 0}">
+						<!-- 첫 번째 요소를 제외한 나머지 요소를 표시하는 코드 -->
+						<div id="place" data-lng="${place.placeLng}" data-lat="${place.placeLat}">
+							<img id="place-img" src="${root}/static/img/place/${place.placeImage}" alt="">
+							<div id="p-place">${place.placeName}</div>
+							<div id="p-area">
+								<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>
+								<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="${place.placeNo}" ></i></div>
 							</div>
-							<div id="modal-in">
-								<div id="modal-name" style="padding-bottom: 10px; font-size: large;">
-									${place.placeName}
+						</div>
+						<div id="modal-area" class="modal-area">
+							<div id="box">
+								<div id="modal-img">
+									<img style="width: 440px; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
 								</div>
-								<div id="modal-tro">
-									여행지소개
-									<div>
+								<div id="modal-in">
+									<div id="modal-name" style="padding-bottom: 10px; font-size: large;">
+										${place.placeName}
+									</div>
+									<div id="modal-tro">
+										여행지소개
+										<div>
 										${place.placeIntroduce}
+										</div>
 									</div>
 								</div>
-							</div>
 							<div id="modal-btn">
 								<button id="close" class="close">X</button>
 							</div>
-				
 						</div>
-					</div>
+						</div>
+					</c:if>
+				</c:forEach>	
+				
+				
+				<script>
+					var openModals = document.querySelectorAll('.bi-info-circle');
+					var closeModals = document.querySelectorAll('.close');
+					var modals = document.querySelectorAll('.modal-area');
+	
+					openModals.forEach(function(openModal, index) {
+						openModal.addEventListener('click', function() {
+							modals[index].style.display = 'flex';
+						});
+					});
 					
-				</c:forEach>
-					<script>
-						var openModals = document.querySelectorAll('.bi-info-circle');
-						var closeModals = document.querySelectorAll('.close');
-						var modals = document.querySelectorAll('.modal-area');
-
-						openModals.forEach(function(openModal, index) {
-							openModal.addEventListener('click', function() {
-								modals[index].style.display = 'flex';
-							});
+					closeModals.forEach(function(closeModal, index) {
+						closeModal.addEventListener('click', function() {
+							modals[index].style.display = 'none';
 						});
-						
-						closeModals.forEach(function(closeModal, index) {
-							closeModal.addEventListener('click', function() {
-								modals[index].style.display = 'none';
-							});
-						});
-						
-						</script>
+					});
+				</script>
+					
 				
 	           
 	        </div>
@@ -437,6 +444,8 @@
 	
 	
 	    <script defer>
+
+		
 			var startDate;
 			var endDate;
 			var pick =true;
@@ -457,6 +466,7 @@
 			
 			
 	        $(function() {
+				
 				$('input[name="daterange"]').daterangepicker({
 					opens: 'left',
 					locale: {
@@ -489,17 +499,37 @@
 						$('.btnn').show();
 						
 					});//스생성
-
-
-
-
 				});
+					
+					//검색
+
+				$('#search').on('keydown', function(event) {
+					if (event.key === 'Enter') {
+						var searchPlaceName = $('#search').val();
+						searchPlace(searchPlaceName);
+
+						
+					}
+
+
+				});//검색
+				
+				//사용자 지정 
+				$('#p-pick').on('click', function () {
+					datadayValue = $(".carousel-item:visible").find('#dataday');
+					var nameValue = $("#userName").val();
+					var timeValue = $("#userTime").val();
+					// 날짜에 일수를 더함
+					console.log(timeValue);
+					
+					setTimeTable($(this).data('placeno'),nameValue,timeValue);
+					
+				});//사용자 생성
 				
 				//일정표 생성
 				$('.bi-plus-circle').on('click', function () {
 					datadayValue = $(".carousel-item:visible").find('#dataday');
 					
-					console.log(datadayValue.data('dataday'));
 					// 날짜에 일수를 더함
 					
 					setTimeTable($(this).data('placeno'));
@@ -507,9 +537,103 @@
 				});//일 생성
 
 			});
-	        
-			
-			/////////////////////////////////////////////////////////////
+
+
+			//여행지 검색
+
+			function searchPlace(searchPlaceName) {
+
+				$.ajax({
+					type:'get',
+					url: '${root}/schedulermake/searchPlace',
+					data: { 
+						searchPlace:searchPlaceName
+					},
+					success : function(x) { 
+						s=JSON.parse(x);
+						console.log(s);
+
+						const div = document.querySelector("#placesearch");
+						div.innerHTML="";
+						
+						let sstr="";
+						for(let i = 0; i<s.length; i++){
+
+							sstr+=	'<div id="place" data-lng="'+s[i].placeLng+'" data-lat="'+s[i].placeLat+'">'
+								sstr+= '<img id="place-img" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
+								sstr+=	'<div id="p-place">'+s[i].placeName+'</div>'
+								sstr+=	'<div id="p-area">'
+								sstr+=		'<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>'
+								sstr+=		'<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="'+s[i].placeNo+'" ></i></div>'
+								sstr+='</div>'
+								sstr+='</div>'
+								sstr+='<div id="modal-area" class="modal-area">'
+								sstr+=	'<div id="box">'
+								sstr+=		'<div id="modal-img">'
+								sstr+=			'<img style="width: 440px; height: 298px;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
+								sstr+=		'</div>'
+								sstr+=		'<div id="modal-in">'
+								sstr+=			'<div id="modal-name" style="padding-bottom: 10px; font-size: large;">'
+								sstr+=				's[i].placeName'
+								sstr+=			'</div>'
+								sstr+=			'<div id="modal-tro">'
+								sstr+=			'여행지소개'
+								sstr+=				'<div>'
+								sstr+=				's[i].placeIntroduce'
+								sstr+=				'</div>'
+								sstr+=			'</div>'
+								sstr+=		'</div>'
+								sstr+=	'<div id="modal-btn">'
+								sstr+=		'<button id="close" class="close">X</button>'
+								sstr+=	'</div>'
+								sstr+='</div>'
+							sstr+='</div>'
+						}
+						div.innerHTML+=sstr;
+						
+						$('#placesearch').show();
+
+						//모달
+						
+						var openModals = document.querySelectorAll('.bi-info-circle');
+						var closeModals = document.querySelectorAll('.close');
+						var modals = document.querySelectorAll('.modal-area');
+		
+						openModals.forEach(function(openModal, index) {
+							openModal.addEventListener('click', function() {
+								modals[index].style.display = 'flex';
+							});
+						});
+						
+						closeModals.forEach(function(closeModal, index) {
+							closeModal.addEventListener('click', function() {
+								modals[index].style.display = 'none';
+							});
+						});
+						////모달
+
+					//+버튼
+						$('.bi-plus-circle').on('click', function () {
+							datadayValue = $(".carousel-item:visible").find('#dataday');
+							
+							// 날짜에 일수를 더함
+							
+							setTimeTable($(this).data('placeno'));
+							
+						});//일 생성
+					//
+					
+						
+					},
+					
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+														
+					}	
+							
+
 			function setScheduler(){
 				
 				$.ajax({
@@ -520,7 +644,9 @@
 						endDate: endDate
 					},
 					success : function(x) { 
+						console.log(x);
 						getScheduler();
+						
 					},
 					error : function(error) { 
 						console.log(error)
@@ -601,7 +727,7 @@
 					
 					///////////////////////////////////////////////////////////////time table
 					
-			function setTimeTable(placeno){
+			function setTimeTable(placeno,nameValue,timeValue){
 				var date = new Date(startDate);
 				
 				// startDate에 3일을 더한 날짜를 계산
@@ -612,24 +738,49 @@
 				formattedEndDate = endDate.toISOString().slice(0, 10);
 
 				console.log(datadayValue.data('dataday'));
-				
-				$.ajax({
-					type:'post',
-					url: '${root}/schedulermake/setTimetable',
-					data: { 
-						placeNo: placeno,
-						schedulerNo: m[0].schedulerNo,
-						timetableDate: datadayValue.data('dataday'),
-						timetableStartTime : startDate //수정해야댐
-					},
-					success : function(data) { 
-						getTimetable();
-						
-					},
-					error : function(error) { 
-						console.log(error)
-					}
-				});
+
+				console.log(timeValue);
+
+				if(placeno==1){
+					$.ajax({
+						type:'get',
+						url: '${root}/schedulermake/userTimetable',
+						data: { 
+							placeNo: placeno,
+							schedulerNo: m[0].schedulerNo,
+							timetableDate: datadayValue.data('dataday'),
+							bespokePlace:nameValue,
+							timetableStartTime:timeValue
+							
+						},
+						success : function(data) { 
+							getTimetable();
+							
+						},
+						error : function(error) { 
+							console.log(error)
+						}
+					});
+
+				}else{
+					$.ajax({
+						type:'post',
+						url: '${root}/schedulermake/setTimetable',
+						data: { 
+							placeNo: placeno,
+							schedulerNo: m[0].schedulerNo,
+							timetableDate: datadayValue.data('dataday'),
+							timetableStartTime : "10:00" //수정해야댐
+						},
+						success : function(data) { 
+							getTimetable();
+							
+						},
+						error : function(error) { 
+							console.log(error)
+						}
+					});
+				}
 				
 			};//settime
 
@@ -652,32 +803,53 @@
 						
 						let str="";
 						for(let i =0 ; i<x.length ; i++){
-							str+='<div id="scheduler-place-area">';
+							if(x[i].placeNo==1){
+								str+='<div id="scheduler-place-area">';
 								str+='<div id="scheduler-place">';
 									str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
 									str+=	'<div id="area">';
-										str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
+										str+=		'<div class="place">장소명 : '+x[i].bespokePlace+' </div>';
 										str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
-										str+=	'<div class="class-time">시작시간 : <input type="time" value="10:00"></div>';
+										str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 										str+=	'</div>';
-										str+=	'<div ><i class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" ></i></div>';
+										str+=	'<div ><i class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
 										str+= '</div>';
 								str+='</div>';
-
+							}else{
+								str+='<div id="scheduler-place-area">';
+									str+='<div id="scheduler-place">';
+										str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
+										str+=	'<div id="area">';
+											str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
+											str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
+											str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
+											str+=	'</div>';
+											str+=	'<div ><i class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
+											str+= '</div>';
+									str+='</div>';
 							}
+
+						}
 
 							
 							pdiv.innerHTML+=str;
 
 
-							//삭제
+					//삭제
 					$('.bi-trash').on('click',function () {
 
 						//일정표 삭제하고 다시 가져오기 
-						deTimetable($(this).attr('data-placeno'), $(this).attr('data-timetableDate'));
+						deTimetable($(this).attr('data-placeno'), $(this).attr('data-timetableDate'),$(this).attr('data-timetableNo'));
 
 
 					});//삭제
+
+					//업데이트
+					$('.class-time input[type="time"]').on('change', function () {
+						var changedValue = $(this).val();
+
+						updateTimetable(changedValue,$(this).attr('data-timetableNo'));
+					});
 						
 						
 					},
@@ -688,12 +860,13 @@
 				
 			};//get ttime
 			
-			function deTimetable(placeno,timetableDate){
+			function deTimetable(placeno,timetableDate,timetableNo){
 				
 				$.ajax({
 					type:'get',
 					url: '${root}/schedulermake/deTimetable',
 					data: { 
+						timetableNo:timetableNo,
 						placeNo: placeno,
 						schedulerNo: m[0].schedulerNo,
 						timetableDate: timetableDate
@@ -708,9 +881,28 @@
 					}
 				});
 				
-				
-				
 			};//dele
+
+			function updateTimetable(changedValue,timetableNo) {
+
+				$.ajax({
+					type:'get',
+					url: '${root}/schedulermake/updateTimetable',
+					data: { 
+						timetableStartTime:changedValue,
+						timetableNo:timetableNo,
+					},
+					success : function(data) { 
+						getTimetable();
+						
+					},
+					error : function(error) { 
+						console.log(error)
+					}
+				});
+				
+			}//update
+
 			
 			
 			
@@ -816,7 +1008,7 @@
 			
 
 
-
+		
 			
 			
 						
