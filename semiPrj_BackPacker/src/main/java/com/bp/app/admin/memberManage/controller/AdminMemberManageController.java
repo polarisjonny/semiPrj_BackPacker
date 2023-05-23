@@ -24,8 +24,8 @@ public class AdminMemberManageController extends HttpServlet {
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	   try {
 		   
-		   String searchType = req.getParameter("searchType");
-			String searchValue = req.getParameter("searchValue");
+		   	String searchType = req.getParameter("searchType");
+		   	String searchValue = req.getParameter("searchValue");
 			
 
 			 AdminMemberService ams = new AdminMemberService();

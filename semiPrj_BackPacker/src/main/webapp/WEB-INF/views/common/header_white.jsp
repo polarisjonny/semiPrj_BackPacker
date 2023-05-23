@@ -138,7 +138,7 @@ chatLogo.addEventListener('click', () => {
     resizable=no`;
 
   // 새 창 열기
-  const newWindow = window.open('${root}/chat/room/list', '', windowFeatures);
+  const newWindow = window.open('${root}/chat/room/list/open', '', windowFeatures);
 
   // 새 창이 로드되면 스크롤바 스타일 설정
   newWindow.addEventListener('load', () => {

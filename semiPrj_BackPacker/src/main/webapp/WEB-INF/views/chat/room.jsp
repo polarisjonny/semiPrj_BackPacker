@@ -145,14 +145,14 @@
             
         </div>  
         <br>
-        <div class="chat-area">
-						<div id="comment-text">댓글</div>
-						<textarea name="chat" style="resize: none;" placeholder="채팅칸."></textarea>
-						<input type="button" value="채팅작성" onclick="writeChat()">
-		</div>
 			<div id="receive-chat-area">
 			</div>
            
+        <div class="chat-area">
+						<div id="comment-text">채팅</div>
+						<textarea name="chat" style="resize: none;" placeholder="채팅칸."></textarea>
+						<input type="button" value="채팅작성" onclick="writeChat()">
+		</div>
            
            
        
