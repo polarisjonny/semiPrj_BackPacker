@@ -97,7 +97,7 @@
         
         
         <form action="${root}/admin/place/edit" method="post" enctype="multipart/form-data">
-        	<input type="text" name = "plcaeNo" value=${pv.placeNo } hidden>
+        	<input type="text" name = "placeNo" value= "${pv.placeNo }" hidden>
         	<div>
         	<input type="text" name = "placeName" value="${pv.placeName}">
         </div>	

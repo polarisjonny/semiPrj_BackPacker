@@ -98,7 +98,7 @@
 		
 					<div class="timetable">
 						<div id="timetable1">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
+							<div><img  class="radious" width="90px" height="60px" src="" alt=""></div>
 							<div id="place-time">
 								곽지해수욕장
 								<br>

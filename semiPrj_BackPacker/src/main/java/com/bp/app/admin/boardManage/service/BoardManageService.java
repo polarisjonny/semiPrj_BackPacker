@@ -6,11 +6,11 @@ import java.util.List;
 import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.admin.boardManage.vo.GuideReportVo;
 import com.bp.app.admin.boardManage.vo.InfoBoardReportVo;
-import com.bp.app.admin.boardManage.vo.InfoBoardVo;
 import com.bp.app.admin.boardManage.vo.QnaBoardVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.travelReview.vo.TravelReviewVo;
 
 public class BoardManageService {
 	private BoardManageDao dao = new BoardManageDao();
@@ -65,9 +65,9 @@ public class BoardManageService {
 		
 		return cnt;
 	}
-	public List<InfoBoardVo> getReviewInfoBoardList(PageVo pv) throws Exception {
+	public List<TravelReviewVo> getReviewInfoBoardList(PageVo pv) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
-		List<InfoBoardVo>voList = dao.getReviewInfoBoardList(conn, pv);
+		List<TravelReviewVo>voList = dao.getReviewInfoBoardList(conn, pv);
 		//sql
 
 		//close
@@ -76,11 +76,11 @@ public class BoardManageService {
 		
 		return voList;
 	}
-	public List<InfoBoardVo> getReviewInfoBoardList(PageVo pv, String searchType, String searchValue) throws Exception {
+	public List<TravelReviewVo> getReviewInfoBoardList(PageVo pv, String searchType, String searchValue) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<InfoBoardVo>voList = dao.getReviewInfoBoardList(conn, pv, searchType, searchValue);
+		List<TravelReviewVo>voList = dao.getReviewInfoBoardList(conn, pv, searchType, searchValue);
 		//sql
 
 		//close

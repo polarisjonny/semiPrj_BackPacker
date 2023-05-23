@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>매칭 완료된 회원 목록 페이지</title>
+  
 <style>
        body {
        		width: 100vw;
@@ -72,11 +73,11 @@
 
     <div id="member-list-area">
     	<c:forEach items="${matchingList}" var="vo">
-    		<div hidden> ${vo.memberNo} </div>
-    		 <div id="first-member-area">
-             <div class="profile-img-style imgToProfile" style="background-image: url('${root}/static/img/views/member/${vo.profileImage}');"></div>
-            <div>${vo.nick}</div>
-        </div>
+    		 <div id="first-member-area" class="member-area" data-member-no="${vo.memberNo}">
+    		 	<div hidden>${vo.memberNo}</div>
+             	<div onclick="openProfile(this)" class="profile-img-style" id="imgToProfile2" style="background-image: url('${root}/static/img/member/profile/${vo.profileImage}');"></div>
+            	<div>${vo.nick}</div>
+        	</div>
     	</c:forEach>
        
 
@@ -118,32 +119,30 @@
 
     <div id="page-list-area">
         <c:if test="${pv.currentPage > 1}">
-	            <a href="/semi/member/myPage/matchingMemberList?page=1"><<</a>
-	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage-1 }"><</a>
+	            <a id="previous-deco" class="page-list-style" href="/semi/member/myPage/matchingMemberList?page=1"><<</a>
+	            <a id="previous-deco" class="page-list-style" href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage-1 }"><</a>
         	</c:if>
             
             <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
- 	           <a href="/semi//member/myPage/matchingMemberList?page=${i}">${i}</a>
+ 	           <a class="page-list-style" href="/semi//member/myPage/matchingMemberList?page=${i}">${i}</a>
             </c:forEach>
             
             <c:if test="${pv.currentPage < pv.maxPage }">
-	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage+1}">></a>
-	            <a href="/semi/member/myPage/matchingMemberList?page=${pv.maxPage}">>></a>            
+	            <a id="after-deco" class="page-list-style" href="/semi/member/myPage/matchingMemberList?page=${pv.currentPage+1}">></a>
+	            <a id="after-deco" class="page-list-style" href="/semi/member/myPage/matchingMemberList?page=${pv.maxPage}">>></a>            
             </c:if>
     </div>
     </main>
     
-   <script>
-let imgToProfile;
-imgToProfile= document.querySelector('.imgToProfile');
-imgToProfile.addEventListener('click', function(e) {
-   const no = e.target.parentNode.children[0].innerText; //게시글 작성자 번호
-   const width = 800;
-   const height = 1000;
-   const left = (screen.width / 2) - (width / 2);
-   const top = 0;
-   window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-});
-</script>
+ 	<script>
+ 	function openProfile(element) {
+        const memberNo = element.parentNode.dataset.memberNo;
+        const width = 800;
+        const height = 1000;
+        const left = (screen.width / 2) - (width / 2);
+        const top = 0;
+        window.open('${root}/click/profile?selectMemberNo=' + memberNo, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+    }
+	</script>
 </body>
 </html>

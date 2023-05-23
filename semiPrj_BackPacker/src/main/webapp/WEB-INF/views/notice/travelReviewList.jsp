@@ -183,16 +183,16 @@ footer, header, hgroup, menu, nav, section {
 		<br>
 		
         <div id="review-search-area">
-            <form action="${root}/notice/travelReview" >
-                <select name="search-type">
+            <form action="${root}/notice/travelReview" method="get">
+            	<input type="hidden" name="page" value="1">
+                <select name="searchType">
                         <option value="title">제목</option>
-                        <option value="writer">작성자</option>
-                        <option value="category">카테고리</option>
+                        <option value="writer">닉네임</option>
                 </select>
                	
                <span class="input-area">
 	               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-	               	<input type="text" placeholder="검색할 단어를 입력하세요.">
+	               	<input name="searchValue" type="text" placeholder="검색할 단어를 입력하세요." value="${searchVo.searchValue }">
                </span>
         
             </form>
@@ -256,12 +256,28 @@ footer, header, hgroup, menu, nav, section {
             </div>
    
     
-    </main>
+		</main>
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    
+	<script>
+
+		const searchValue = '${searchVo.searchValue}';
+		const searchType = '${searchVo.searchType}';
+		
+		if(searchType.length > 1){
+			initSearchType();
+		}
+
+		function initSearchType(params) {
+			const x = document.querySelector('select > option[value="' + searchType + '"]');
+			x.selected = true;
+		}
+
+		
+
+	</script>
     
     
-    
-    
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
 
 	

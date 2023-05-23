@@ -182,6 +182,7 @@
 </head>
 
 <body>
+
     <div class="profileWrap">
 
         <div class="profileTop">
@@ -204,7 +205,13 @@
 
         <div class="profileMiddle">
             <div id="profileMidLeft">
-                 <img width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/${loginMember.profileImage}" alt="">
+            	<c:if test="${not empty selectMember.profileImage}">
+                              <img  width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/${selectMember.profileImage}" alt="" >
+		                               
+       					</c:if>
+       					<c:if test="${empty selectMember.profileImage}">
+       						 <img  width="100px" height="100px" class="profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" >
+       					</c:if>
             </div>
             <div id="profileMidRightUp">
                 <div id="profileMidRightUpDistance">
@@ -242,7 +249,13 @@
 		                  </td>
                         <td class = "imgInput " rowspan="2"  >
                           
-							<img width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)">
+                          <c:if test="${not empty reviewList.giverProfile}">
+                              <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)" >
+		                               
+	       					</c:if>
+	       					<c:if test="${empty reviewList.giverProfile}">
+	       						 <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick(event)" >
+	       					</c:if>
                           
 
                         </td>
@@ -289,7 +302,7 @@
             
       e.preventDefault();
         window.location.href ='${root}/click/profile/review/detail?selectMemberNo='+no1;
-   })
+   });
 
    function writeReview() {
       

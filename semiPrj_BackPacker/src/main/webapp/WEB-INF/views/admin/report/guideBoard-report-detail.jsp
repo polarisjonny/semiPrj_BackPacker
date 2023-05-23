@@ -65,7 +65,7 @@
    	 <div id="wrapt">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-        <h1 id="th1">동행, 프페커 게시판 신고 내용</h1>
+        <h1 id="th1">동행, 프패커 게시판 신고 내용</h1>
         <hr>
         <div id="search-area">
                 <form action="${root}/admin/guideBoard/report" method="get">

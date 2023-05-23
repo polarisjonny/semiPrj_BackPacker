@@ -18,6 +18,30 @@ public class TimetableVo {
 	private String startDate;
 	private String endDate;
 	private String totalDate;
+	
+	
+	
+	
+	//국가
+	private String countryNo;
+	private String countryName;
+	
+	
+	public String getCountryNo() {
+		return countryNo;
+	}
+	public void setCountryNo(String countryNo) {
+		this.countryNo = countryNo;
+	}
+	public String getCountryName() {
+		return countryName;
+	}
+	
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+	
+	
 	public String getTimetableNo() {
 		return timetableNo;
 	}

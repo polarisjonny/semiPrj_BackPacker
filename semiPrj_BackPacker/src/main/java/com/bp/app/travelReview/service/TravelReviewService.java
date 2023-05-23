@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bp.app.common.db.JDBCTemplate;
@@ -40,6 +41,17 @@ public class TravelReviewService {
 		
 		return trList;
 	}
+	
+	//여행 후기 검색해서 리스트 조회하기
+	public List<TravelReviewVo> selectReviewList(PageVo pv, String searchType, String searchValue) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		List<TravelReviewVo> trList = dao.selectReviewList(conn, pv, searchType, searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return trList;
+	}//method
 
 	//여행후기 작성
 	public int write(TravelReviewVo trvo) throws Exception {
@@ -122,6 +134,29 @@ public class TravelReviewService {
 
 		return result;
 	}//edit
+
+	//여행후기 신고
+	public int report(TravelReviewVo vo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.insertReport(conn,vo);
+		int result2 = dao.increaseReportCnt(conn,vo);
+		
+		if(result == 1 && result2 == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	
+
+	
 
 
 }

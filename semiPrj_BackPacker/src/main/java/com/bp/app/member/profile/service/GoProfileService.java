@@ -2,6 +2,7 @@ package com.bp.app.member.profile.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bp.app.common.db.JDBCTemplate;
@@ -27,12 +28,13 @@ public class GoProfileService {
    }
 
    public List<MemberReviewVo> selectMemberReadReview(String selectMemberNo) throws Exception {
-      List<MemberReviewVo> MemberReviewVolist = null;
+      List<MemberReviewVo> MemberReviewVolist = new ArrayList<>();
       //conn
       Connection conn = JDBCTemplate.getConnection();
          //update
-         
+        System.out.println("service" + selectMemberNo);
       MemberReviewVolist = dao.selectMemberReadReview(conn , selectMemberNo);
+      System.out.println("service2" + selectMemberNo);
          
       JDBCTemplate.close(conn);
       return MemberReviewVolist;

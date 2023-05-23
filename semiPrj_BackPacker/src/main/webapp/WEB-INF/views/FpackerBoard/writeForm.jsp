@@ -142,7 +142,9 @@
 					<div>종료날짜</div>
 					<input type="date" name="endDate">
 				</div>
-				<div id="addInput-area"></div>
+				<div id="addInput-area">
+					<input type="number">원
+				</div>
 				<div>
 					<input id="submit-btn" type="submit" value="작성완료">	
 				</div>
@@ -176,7 +178,17 @@
 		preview.src ="";
 		}
 	})
-	//카테고리가 프패커합니다면 아래 금액인풋태가 보이게
-	const categoryValue = document.querySelector("select[name=categoryValue]").value;
+	//카테고리가 프패커합니다면 아래 금액인풋태그가 보이게
+	const categoryValueTag = document.querySelector("select[name=categoryValue]");
+	const inputArea = document.querySelector("#addInput-area")
+	categoryValueTag.addEventListener("change",function(){
+		if(categoryValueTag.value ==2){
+			inputArea.style.visibility = 'hidden';
+		}else {
+			inputArea.style.visibility = 'visible';
+		}
+
+	});
+	
 
 </script>

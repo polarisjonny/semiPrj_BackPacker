@@ -137,70 +137,106 @@
 </style>
 <body>
 	<div class="chatWrap">
+		${vo.chattingUserNick } 환영합니다
         <div class="container">
-            <div class="item">ADMIN(김민규)님과의 대화방</div>
+            <div class="item">${vo.chattingUser2Nick }님과의 대화방</div>
             <div class="item">♡</div>
             <div class="item">↕</div>
             
         </div>  
         <br>
-        <div class="receivechatarea">
-            <div>
-                <div hidden> 셀렉트 멤버 no</div>
-                <div>40*40</div>
-            </div>
-            <div id="receivechattext">
-                안녕하세요!!. 예린님! 
-            </div>
-            <div id="receivechatdate">
-                2010.08.09.23:00
-            </div>
-        </div>
-        <br><br>
-        <div class="sendchatarea">
-            <div id="sendchatdate">
-                2010.08.09.23:05
-            </div>
-            <div id="sendchattext">
-                안녕하세요!!. 또치님!! ㅎㅎ 작성한 글 내용은 보시고 연락주신거죠? 코골이nono 면허는 꼭 있어야해요 !!
-
-            </div>
-        </div>
-        <br><br>
-        <div class="receivechatarea">
-            <div>
-                <div hidden> 셀렉트 멤버 no</div>
-                <div>40*40</div>
-            </div>
-            <div id="receivechattext">
-                네네 보고 연락드린거 맞구용. 저는 숙소만 동행하고 싶은데 나머지는 자유시간으로 갖구싶구요.. 혹시 숙소는 어디로 가세요..? 아 저 사진 잘찍어드릴수 있어요. 전 사진찍는거 좋아하는데 예린님은 사진 잘 찍으세요?
-            </div>
-            <div id="receivechatdate">
-                2010.08.09.23:00
-            </div>
-        </div>
-        <br><br>
-        <div class="sendchatarea">
-            <div id="sendchatdate">
-                2010.08.09.23:05
-            </div>
-            <div id="sendchattext">
-                전 사진찍어주는거 좋아해요. 엄청 잘찍지는 못하지만 성심성의껏 원하시는 각도로 찍어드릴게요 ㅎㅎ 
-
-            </div>
-        </div>
-        <br><br>
-        <div id="outmsg">ehatchu0527(김또치)님이 대화방을 나가셨습니다.</div>
-        <div id="outdate">2023-04-24 13:00:35 </div>
-        <hr>
-        <div style="text-align: end; "><button>매칭 확정</button></div>
-        <br>
-        <div id="chatout"><button class="exit" id="chatoutbtn">채팅방 나가기</button></div>
-        <br>
-        <div style="margin-left: 10px;">
-            <input type="text" placeholder="메시지를 입력하세요" id="writemsg">
-            <input type="submit" value="전송" id="sendmsgbtn">
-        </div>
+        <div class="chat-area">
+						<div id="comment-text">댓글</div>
+						<textarea name="chat" style="resize: none;" placeholder="채팅칸."></textarea>
+						<input type="button" value="채팅작성" onclick="writeChat()">
+		</div>
+			<div id="receive-chat-area">
+			</div>
+           
+           
+           
+       
     </div>
+    <script>
+		loadChat();
+		//댓글작성
+		let chat = null;
+		function writeChat(){
+			chat = document.querySelector("textarea[name=chat]").value;
+			console.log(chat);
+			$.ajax({
+				url : "${root}/chat/room/send",
+				type : "POST",
+				data : {
+					guideBoardNo : '${vo.guideBoardNo}',
+					content : chat ,
+					chattingRoomNo :'${vo.chattingRoomNo}',
+					chattingUserNo :'${vo.chattingUserNo}',
+					chattingUser2No :'${vo.chattingUser2No}',
+					matchingCheck :'${vo.matchingCheck}',
+					matchingCheck2 :'${vo.matchingCheck2}',
+					chattingStatus :'${vo.chattingStatus}',
+					chattingUserNick :'${vo.chattingUserNick}',
+					chattingUser2Nick :'${vo.chattingUser2Nick}',
+				},
+				success: (x)=>{
+					console.log(x);
+					if(x == 'ok'){
+						alert("채팅작성 성공!");
+						document.querySelector("textarea[name=chat]").value='';
+						loadChat();
+					}else {
+						alert('채팅 작성실패...');
+					}
+				},
+				error: ()=>{
+					console.log("채팅작성실패...");
+				} ,
+			});
+		}
+	
+
+		//댓글불러오기
+		
+		
+		//다 가져와서 비저블리티를 기본적으로 안보이게 수정
+		function loadChat(){
+			$.ajax({
+				url : '${root}/chat/room/send/list',
+				type: "GET" ,
+				data : {
+					chattingRoomNo :'${vo.chattingRoomNo}',
+					
+				},
+				success : function(data){
+					const x  = JSON.parse(data);
+					console.log(x);
+					const chatArea = document.querySelector("#receive-chat-area");
+					chatArea.innerHTML="";
+					let str = "";
+					for(let i=0; i<x.length; i++){
+						str+='<div class="comment">';
+						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt=""></div>';
+						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].messageNo+'">';
+						str+='<div class="comment-list-id">'+x[i].senderNick+'</div>';
+						str+='<div class="comment-list-content">'+x[i].content+'</div>';
+						str+='<div class="comment-list-day">'+x[i].enrollDate;
+						//if('${loginMember.memberNo}'==x[i].senderNo){
+						//	str+= 보낸사람이 로그인회원;
+					//	}
+						str+='</div>';
+						str+='</div>';
+						str+='</div>';
+					}
+					chatArea.innerHTML+=str;
+				},
+				error : function(e){
+					console.log(e);
+				},
+
+			});
+		}
+		
+</script>
 </body>
 </html>

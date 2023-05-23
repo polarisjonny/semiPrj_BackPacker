@@ -33,13 +33,16 @@ public class GoProfileController extends HttpServlet{
          selectMemberNo = req.getParameter("selectMemberNo");
          //데뭉
          //서비스
-         
+         System.out.println(selectMemberNo);
+         System.out.println(selectMemberNo);
          
          selectMember = gps.selectMemberToProfile(selectMemberNo);
+         System.out.println(selectMember);
          
 
          //서비스
          List<MemberReviewVo> selectMemberReviewlist = gps.selectMemberReadReview(selectMemberNo);
+         System.out.println(selectMemberReviewlist);
          //화면
 //         MemberReviewVo selevtMemberReview = gps.selectMemberReadReview(selectMemberNo);
          //화면
@@ -48,6 +51,7 @@ public class GoProfileController extends HttpServlet{
             req.getSession().setAttribute("selectMember", selectMember);
             req.setAttribute("loginMember", loginMember);
             req.setAttribute("selectMemberReviewlist", selectMemberReviewlist);
+            System.out.println(selectMemberReviewlist);
 //            req.setAttribute("pv" , pv);
             req.getRequestDispatcher("/WEB-INF/views/profile/profile.jsp").forward(req, resp);
          }else {

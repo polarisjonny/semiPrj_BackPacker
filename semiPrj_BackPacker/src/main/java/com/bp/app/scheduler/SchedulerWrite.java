@@ -68,12 +68,14 @@ public class SchedulerWrite extends HttpServlet{
 					resp.sendRedirect("/semi/accompany/list?page=1");
 					
 				}
+
 				if("2".equals(category)) {
 					resp.sendRedirect("/semi/accompany/list?page=1");
 					
 				}
 				if("1".equals(category)) {
 					resp.sendRedirect("/semi/accompany/list?page=1");
+
 					
 				}
 			}else {
