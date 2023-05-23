@@ -9,6 +9,7 @@ public class TimetableVo {
 	private String bespokePlace;
 	private String bespokeTime;
 	private String timetableStartTime;
+	private String playTime;
 	
 	//시작날짜 끝날짜 여행지 이름
 	private String placeName;
@@ -59,6 +60,12 @@ public class TimetableVo {
 	public void setTimetableStartTime(String timetableStartTime) {
 		this.timetableStartTime = timetableStartTime;
 	}
+	public String getPlayTime() {
+		return playTime;
+	}
+	public void setPlayTime(String playTime) {
+		this.playTime = playTime;
+	}
 	public String getPlaceName() {
 		return placeName;
 	}
@@ -99,13 +106,13 @@ public class TimetableVo {
 	public String toString() {
 		return "TimetableVo [timetableNo=" + timetableNo + ", placeNo=" + placeNo + ", schedulerNo=" + schedulerNo
 				+ ", timetableDate=" + timetableDate + ", bespokePlace=" + bespokePlace + ", bespokeTime=" + bespokeTime
-				+ ", timetableStartTime=" + timetableStartTime + ", placeName=" + placeName + ", placeImage="
-				+ placeImage + ", placeTime=" + placeTime + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", totalDate=" + totalDate + "]";
+				+ ", timetableStartTime=" + timetableStartTime + ", playTime=" + playTime + ", placeName=" + placeName
+				+ ", placeImage=" + placeImage + ", placeTime=" + placeTime + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", totalDate=" + totalDate + "]";
 	}
 	public TimetableVo(String timetableNo, String placeNo, String schedulerNo, String timetableDate,
-			String bespokePlace, String bespokeTime, String timetableStartTime, String placeName, String placeImage,
-			String placeTime, String startDate, String endDate, String totalDate) {
+			String bespokePlace, String bespokeTime, String timetableStartTime, String playTime, String placeName,
+			String placeImage, String placeTime, String startDate, String endDate, String totalDate) {
 		super();
 		this.timetableNo = timetableNo;
 		this.placeNo = placeNo;
@@ -114,6 +121,7 @@ public class TimetableVo {
 		this.bespokePlace = bespokePlace;
 		this.bespokeTime = bespokeTime;
 		this.timetableStartTime = timetableStartTime;
+		this.playTime = playTime;
 		this.placeName = placeName;
 		this.placeImage = placeImage;
 		this.placeTime = placeTime;
@@ -125,6 +133,9 @@ public class TimetableVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 	
 	
