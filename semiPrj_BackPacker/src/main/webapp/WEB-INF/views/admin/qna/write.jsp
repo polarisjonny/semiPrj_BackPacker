@@ -143,7 +143,7 @@
 						<input type="radio" name="qnaCategoryNo" id="radio1" value="1">
 						<label for="radio1">공지사항</label>
 						<input type="radio" name="qnaCategoryNo" id="radio2" value="2">
-						<label for="radio2">QNA</label>
+						<label for="radio2">FAQ</label>
 					<div id="faq-input-area">
 						<input type="text" name="title" placeholder="제목을 작성해주세요.">
 						<br>

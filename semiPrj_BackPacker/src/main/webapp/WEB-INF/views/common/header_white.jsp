@@ -124,42 +124,12 @@ let chatLogo;
 chatLogo = document.querySelector('.chat-logo');
 chatLogo.addEventListener('click', () => {
   
-  // 창 옵션 설정
-  const windowFeatures = `
-    width=600,
-    height=700,
-    left=(screen.width / 2) - 275,
-    top=0,
-    toolbar=no,
-    location=no,
-    status=no,
-    menubar=no,
-    scrollbars=yes,
-    resizable=no`;
+  
+  window.open('${root}/chat/room/list/open', '');
 
-  // 새 창 열기
-  const newWindow = window.open('${root}/chat/room/list/open', '', windowFeatures);
 
-  // 새 창이 로드되면 스크롤바 스타일 설정
-  newWindow.addEventListener('load', () => {
-    const style = document.createElement('style');
-    style.textContent = `
-      /* 스크롤바 스타일 설정 */
-      ::-webkit-scrollbar {
-        width: 10px;
-        background-color: white;/* 연한 하늘색 배경색 */
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color:  #E0F2FE; /* 연한 하늘색 스크롤바 색상 */
-        border-radius: 5px; /* 스크롤바를 둥글게 보이도록 설정 */
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: #64B5F6; /* 마우스 오버 시 스크롤바 색상 변경 */
-      }
-    `;
-    newWindow.document.head.appendChild(style);
   });
-});
+
 </script>
 
 <script>

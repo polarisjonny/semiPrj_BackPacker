@@ -134,6 +134,10 @@
 	    border-radius: 10px;
 	    border: 1px solid;
 	}
+	.chat-area{
+		display : grid;
+		 grid-template-columns: 1fr 2fr 6fr 1fr;
+	}
 </style>
 <body>
 	<div class="chatWrap">
@@ -196,10 +200,7 @@
 		}
 	
 
-		//댓글불러오기
-		
-		
-		//다 가져와서 비저블리티를 기본적으로 안보이게 수정
+	
 		function loadChat(){
 			$.ajax({
 				url : '${root}/chat/room/send/list',
@@ -215,16 +216,13 @@
 					chatArea.innerHTML="";
 					let str = "";
 					for(let i=0; i<x.length; i++){
-						str+='<div class="comment">';
-						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt=""></div>';
-						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].messageNo+'">';
-						str+='<div class="comment-list-id">'+x[i].senderNick+'</div>';
-						str+='<div class="comment-list-content">'+x[i].content+'</div>';
-						str+='<div class="comment-list-day">'+x[i].enrollDate;
-						//if('${loginMember.memberNo}'==x[i].senderNo){
-						//	str+= 보낸사람이 로그인회원;
-					//	}
-						str+='</div>';
+						str+='<div class="chat-area">';
+						str+='<div class="profileImage"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:100px"></div>';
+						str+='<input type="hidden" value="'+x[i].messageNo+'">';
+						str+='<div class="senderNick">'+x[i].senderNick+'</div>';
+						str+='<div class="content">'+x[i].content+'</div>';
+						str+='<div class="enrollDate">'+x[i].enrollDate;
+			
 						str+='</div>';
 						str+='</div>';
 					}

@@ -46,7 +46,7 @@
         border-radius: 50px;
     }
     .chatlistWrap{
-        width: 530px;
+        width: 830px;
         margin: auto;
         height: 700px;
        
@@ -56,7 +56,7 @@
         margin-right: 10px;
     }
     #exitChatlist{
-        width: 500px;
+        width: 800px;
         height: 50px;
         background-color: rgb(214, 248, 246);
         border: 0px;
@@ -72,7 +72,7 @@
     	
     }
        #page-area{
-         width : 300px;
+         width : 500px;
          margin: auto;
          display: flex;
          justify-content: space-evenly; 
@@ -87,6 +87,15 @@
        background-color: rgba(0, 102, 255, 0.211);
        border-radius: 1px;
    }
+   table > tbody > tr{
+   		height : 100px;
+   }
+   .openOldChatByRoomNo{
+   
+   	width : 80px;
+   	height : 30px;
+   }
+   
 </style>
 <body>
 	<div class="chatlistWrap">
@@ -115,25 +124,25 @@
         </div>
      	<table>
                 <thead>
-                	<th >채팅방번호<th>
+                	<th hidden>채팅방번호</th>
                     <th>게시판 이름</th>
-                    <th>채팅 참여자1 이미지</th>
-                    <th>채팅 참여자1 </th>
-                    <th>채팅 참여자2 이미지</th>
-                    <th>채팅 참여자2</th>
+                    <th>작성자 </th>
+                    <th>작성자 </th>
+                    <th>신청자 </th>
+                    <th>신청자</th>
                     <th>들어가기</th>
                     
                 </thead>
                 <tbody>
                     <c:forEach items="${ roomList }" var="roomList" >
                     <tr>
-                    	<td >${roomList.chattingRoomNo}</td>
+                    	<td hidden>${roomList.chattingRoomNo}</td>
                         <td>${roomList.boardTitle}</td>
-                        <td>${roomList.chattingUserProfile}</td>
+                        <td><img class="profile" src="${root}/static/img/member/profile/${roomList.chattingUserProfile}" alt="" style="height:100px"></td>
                         <td>${roomList.chattingUserNick}</td>
-                        <td>${roomList.chattingUser2Profile}</td>
+                        <td><img class="profile" src="${root}/static/img/member/profile/${roomList.chattingUser2Profile}" alt="" style="height:100px"></td>
                         <td>${roomList.chattingUser2Nick}</td>
-                        <td><button class="openOldChatByRoomNo" value="들어가기"  onclick="openOldChatByRoomNo(event)"></button></td>
+                        <td><button class="openOldChatByRoomNo"   onclick="openOldChatByRoomNo(event)">들어가기</button></td>
                                            
                     </tr>
                  
@@ -166,15 +175,42 @@
     </div>
 <script>
 	function openOldChatByRoomNo(e){
+		 const windowFeatures = `
+			    width=600,
+			    height=700,
+			    left=(screen.width / 2) - 275,
+			    top=0,
+			    toolbar=no,
+			    location=no,
+			    status=no,
+			    menubar=no,
+			    scrollbars=yes,
+			    resizable=no`;
+
         const chattingRoomNo = e.target.parentNode.parentNode.children[0].innerText;
         console.log(chattingRoomNo);
         alert(chattingRoomNo);
-        const width = 800;
-        const height = 1000;
-        const left = (screen.width / 2) - (width / 2);
-        const top = 0;
-        window.open('${root}/chat/room/open?chattingRoomNo='+chattingRoomNo, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-    };
+ 
+        const newWindow = window.open('${root}/chat/room/open?chattingRoomNo='+chattingRoomNo, '', windowFeatures);
+        	newWindow.addEventListener('load', () => {
+        	    const style = document.createElement('style');
+        	    style.textContent = `
+        	      /* 스크롤바 스타일 설정 */
+        	      ::-webkit-scrollbar {
+        	        width: 10px;
+        	        background-color: white;/* 연한 하늘색 배경색 */
+        	      }
+        	      ::-webkit-scrollbar-thumb {
+        	        background-color:  #E0F2FE; /* 연한 하늘색 스크롤바 색상 */
+        	        border-radius: 5px; /* 스크롤바를 둥글게 보이도록 설정 */
+        	      }
+        	      ::-webkit-scrollbar-thumb:hover {
+        	        background-color: #64B5F6; /* 마우스 오버 시 스크롤바 색상 변경 */
+        	      }
+        	    `;
+        	    newWindow.document.head.appendChild(style);
+        	  });   
+    }
 
 
 
