@@ -388,7 +388,7 @@
 						<div id="modal-area" class="modal-area">
 							<div id="box">
 								<div id="modal-img">
-									<img style="width: 440px; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
+									<img style="width: 100%; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
 								</div>
 								<div id="modal-in">
 									<div id="modal-name" style="padding-bottom: 10px; font-size: large;">
@@ -444,6 +444,14 @@
 	
 	
 	    <script defer>
+
+		function scrollToTop() {
+			var div = document.getElementById('place-list-area');
+			div.scrollTo({
+				top: 0,
+				behavior: 'smooth' 
+			});
+		}
 
 		
 			var startDate;
@@ -507,8 +515,7 @@
 					if (event.key === 'Enter') {
 						var searchPlaceName = $('#search').val();
 						searchPlace(searchPlaceName);
-
-						
+						scrollToTop();
 					}
 
 
@@ -570,16 +577,16 @@
 								sstr+='<div id="modal-area" class="modal-area">'
 								sstr+=	'<div id="box">'
 								sstr+=		'<div id="modal-img">'
-								sstr+=			'<img style="width: 440px; height: 298px;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
+								sstr+=			'<img style="width: 100%; height: 298px;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
 								sstr+=		'</div>'
 								sstr+=		'<div id="modal-in">'
 								sstr+=			'<div id="modal-name" style="padding-bottom: 10px; font-size: large;">'
-								sstr+=				's[i].placeName'
+								sstr+=				s[i].placeName
 								sstr+=			'</div>'
 								sstr+=			'<div id="modal-tro">'
 								sstr+=			'여행지소개'
 								sstr+=				'<div>'
-								sstr+=				's[i].placeIntroduce'
+								sstr+=				s[i].placeIntroduce
 								sstr+=				'</div>'
 								sstr+=			'</div>'
 								sstr+=		'</div>'
@@ -667,7 +674,6 @@
 					url: '${root}/schedulermake/getScheduler',
 					data: { 
 						startDate: startDate,
-						memberNo:'1'
 					},
 					success : function(data) { 
 						

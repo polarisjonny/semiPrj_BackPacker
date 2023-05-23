@@ -4,17 +4,26 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.member.vo.MemberVo;
 import com.bp.app.scheduler.service.SchedulerService;
 import com.bp.app.scheduler.vo.PlaceVo;
 import com.bp.app.scheduler.vo.SchedulerVo;
 import com.bp.app.scheduler.vo.TimetableVo;
-
+import com.bp.app.util.file.AttachmentVo;
+import com.bp.app.util.file.FileUploader;
+@MultipartConfig(
+		maxFileSize = 1024*1024*50,
+		maxRequestSize = 1024*1024*50*10
+		)
 @WebServlet("/schedulerwrite")
 public class SchedulerWrite extends HttpServlet{
 	
@@ -43,20 +52,30 @@ public class SchedulerWrite extends HttpServlet{
 
 		
 		try {
+			HttpSession session = req.getSession();
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			//데이터 꺼내기
-			String schedulerNo = req.getParameter("schedulerNo");
+			String path = req.getServletContext().getRealPath("/static/img/accompany/");
+			Part f = req.getPart("f");
+			
+			AttachmentVo attvo = FileUploader.saveFile(path, f);
+			
+			String writerNo = loginMember.getMemberNo();
 			String category = req.getParameter("category");
+			String schedulerNo = req.getParameter("schedulerNo");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			
 			//데이터 뭉치기
 			GuideBoardVo bgVo = new GuideBoardVo();
 			//로그인멤버 셋팅
+			bgVo.setWriterNo(writerNo);
 			bgVo.setSchedulerNo(schedulerNo);
 			bgVo.setGuideBoardCategoryNo(category);
 			bgVo.setTitle(title);
 			bgVo.setContent(content);
+			bgVo.setMainImg(attvo.getChangeName());
 			
 			//서비스
 			SchedulerService ss = new SchedulerService();

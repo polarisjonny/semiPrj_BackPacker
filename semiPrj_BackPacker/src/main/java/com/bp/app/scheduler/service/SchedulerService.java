@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.member.vo.MemberVo;
 import com.bp.app.scheduler.vo.PlaceVo;
 import com.bp.app.scheduler.vo.SchedulerVo;
 import com.bp.app.scheduler.vo.TimetableVo;
@@ -77,14 +78,15 @@ public class SchedulerService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,TITLE,CONTENT,SCHEDULER_NO,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,1,?,?,?,?,SYSDATE)";
+		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,SCHEDULER_NO,TITLE,CONTENT,MAIN_IMG,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,?,?,?,?,SYSDATE)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, bgVo.getGuideBoardCategoryNo());
-		pstmt.setString(2, bgVo.getTitle());
-		pstmt.setString(3, bgVo.getContent());
-		pstmt.setString(4, bgVo.getSchedulerNo());
+		pstmt.setString(1, bgVo.getWriterNo());
+		pstmt.setString(2, bgVo.getGuideBoardCategoryNo());
+		pstmt.setString(3, bgVo.getSchedulerNo());
+		pstmt.setString(4, bgVo.getTitle());
+		pstmt.setString(5, bgVo.getContent());
+		pstmt.setString(6, bgVo.getMainImg());
 		
-		System.out.println(bgVo.getTitle());
 		int result = pstmt.executeUpdate();
 		//tx
 		if(result==1) {
@@ -106,11 +108,11 @@ public class SchedulerService {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql="INSERT INTO SCHEDULER (SCHEDULER_NO,MEMBER_NO,START_DATE,END_DATE)VALUES(SEQ_SCHEDULER_NO.NEXTVAL,1,TO_TIMESTAMP(?, 'YYYY-MM-DD'),TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
+		String sql="INSERT INTO SCHEDULER (SCHEDULER_NO,MEMBER_NO,START_DATE,END_DATE)VALUES(SEQ_SCHEDULER_NO.NEXTVAL,?,TO_TIMESTAMP(?, 'YYYY-MM-DD'),TO_TIMESTAMP(?, 'YYYY-MM-DD'))";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-//		pstmt.setString(0, sVo.getMemberNo());  ==1
-		pstmt.setString(1, sVo.getStartDate());
-		pstmt.setString(2, sVo.getEndDate());
+		pstmt.setString(1, sVo.getMemberNo()); 
+		pstmt.setString(2, sVo.getStartDate());
+		pstmt.setString(3, sVo.getEndDate());
 		int result = pstmt.executeUpdate();
 		
 		//tx
@@ -214,7 +216,8 @@ public class SchedulerService {
 		
 		String sql="SELECT SCHEDULER_NO ,MEMBER_NO ,START_DATE ,END_DATE ,TOTAL_EXPENSE ,TO_CHAR(CAST(EXTRACT(DAY FROM (END_DATE - START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE FROM SCHEDULER WHERE MEMBER_NO=? AND START_DATE = TO_TIMESTAMP(?, 'YYYY-MM-DD')";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,req.getParameter("memberNo"));
+		MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
+		pstmt.setString(1,loginMember.getMemberNo());
 		pstmt.setString(2,req.getParameter("startDate"));
 		ResultSet rs = pstmt.executeQuery();
 		
