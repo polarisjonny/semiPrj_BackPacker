@@ -71,6 +71,22 @@
     	width: 70px;
     	
     }
+       #page-area{
+         width : 300px;
+         margin: auto;
+         display: flex;
+         justify-content: space-evenly; 
+   }
+    #search{
+       display: flex;
+      
+       
+       justify-content: space-between;
+   }
+    #searchValue{
+       background-color: rgba(0, 102, 255, 0.211);
+       border-radius: 1px;
+   }
 </style>
 <body>
 	<div class="chatlistWrap">
@@ -78,110 +94,91 @@
         <div id="topnothing">
             "${loginMember.name}"님의 채팅 리스트
         </div>
-     
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mP01.JPG" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커]20대 후반 남자입니다. 부산으로 모십..</div>
-            <div class="chatlistMem">mingkyu119(김민규)</div>
-            
-        </div>
-        
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp02.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[동행]여행초보끼리 같이 모험떠나실분 구합니...</div>
-            <div class="chatlistMem">ehatchu0527(김또치)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mP01.JPG" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커]20대 후반 남자입니다. 부산으로 모십..</div>
-            <div class="chatlistMem">mingkyu119(김민규)</div>
-            
-        </div>
-        
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp02.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[동행]여행초보끼리 같이 모험떠나실분 구합니...</div>
-            <div class="chatlistMem">ehatchu0527(김또치)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
-        <hr>
-        <div class="chatlist">
-            <div class="chatlistImgDiv"><img width="50px" height="50px"  class="chatlistImg" src="mp03.jpg" alt="" onclick="imgClick(event)"></div>
-            <div class="chatlistTitle">[프패커요청]일본여행시켜주실 프패커 구합니다.</div>
-            <div class="chatlistMem">kimstrongminuate(김강분)</div>
-            
-        </div>
+        <div id="search">
+
+           
+            <div id="search-area">
+            <form action="${root}/chat/room/list/open" method="get"">
+                <input type="hidden" value="1" name="page">
+                    <select name="searchType" id="opt" >
+                        <option value="BOARDTITLE" >게시판이름</option>
+                        <option value="CHATTINGUSERNICK" >참여자 닉네임</option>
+                        
+                    </select>
+                    
                
-        <hr>
-        <div style="margin: auto;">
-            <input type="button" value="나가기" class="exit">
+                    <input class = "searchValueElem " id="searchValue" type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
+                    
+                    <input type="submit" value="검색">
+            </form>
+            </div>
         </div>
+     	<table>
+                <thead>
+                	<th >채팅방번호<th>
+                    <th>게시판 이름</th>
+                    <th>채팅 참여자1 이미지</th>
+                    <th>채팅 참여자1 </th>
+                    <th>채팅 참여자2 이미지</th>
+                    <th>채팅 참여자2</th>
+                    <th>들어가기</th>
+                    
+                </thead>
+                <tbody>
+                    <c:forEach items="${ roomList }" var="roomList" >
+                    <tr>
+                    	<td >${roomList.chattingRoomNo}</td>
+                        <td>${roomList.boardTitle}</td>
+                        <td>${roomList.chattingUserProfile}</td>
+                        <td>${roomList.chattingUserNick}</td>
+                        <td>${roomList.chattingUser2Profile}</td>
+                        <td>${roomList.chattingUser2Nick}</td>
+                        <td><button class="openOldChatByRoomNo" value="들어가기"  onclick="openOldChatByRoomNo(event)"></button></td>
+                                           
+                    </tr>
+                 
+                </c:forEach>
+                </tbody>
+
+            </table>
+  
+        
+        <hr>
+      
+  
+        <div id="page-area">
+               <c:if test="${pv.currentPage > 1}">
+                  <a class="btn btn-primary btn-sm" href="${root}/chat/room/list/open?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+               </c:if>
+                  <c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
+                     <c:if test="${pv.currentPage != i}">
+                        <a class="btn btn-primary btn-sm" href="${root}/chat/room/list/open?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+                     </c:if>
+                     <c:if test="${pv.currentPage == i}">
+                        <a class="btn btn-primary btn-sm">${i}</a>
+                     </c:if>
+                  </c:forEach>
+               <c:if test="${pv.currentPage < pv.maxPage}">
+                  <a class="btn btn-primary btn-sm" href="${root}/chat/room/list/open?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+               </c:if>
+            </div>
         
     </div>
-</body>
-</html>
 <script>
+	function openOldChatByRoomNo(e){
+        const chattingRoomNo = e.target.parentNode.parentNode.children[0].innerText;
+        console.log(chattingRoomNo);
+        alert(chattingRoomNo);
+        const width = 800;
+        const height = 1000;
+        const left = (screen.width / 2) - (width / 2);
+        const top = 0;
+        window.open('${root}/chat/room/open?chattingRoomNo='+chattingRoomNo, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+    };
 
-
-let exit;
-exit= document.querySelector('.exit');
-exit.addEventListener('click', function(e) {
-	 window.close();
-});
 
 
 </script>
 	
+</body>
+</html>

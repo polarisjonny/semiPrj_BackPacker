@@ -29,6 +29,11 @@ public class OpenChatRoomController extends HttpServlet {
 			String chattingUserNo = loginMember.getMemberNo();
 			String chattingUser2No = req.getParameter("writerNo");
 			String guideBoardNo = req.getParameter("guideBoardNo");
+			String chattingRoomNo = null;
+			if(req.getParameter("chattingRoomNo") != null) {
+				
+				chattingRoomNo = req.getParameter("chattingRoomNo");
+			}
 			
 			ChattingRoomVo crv = new ChattingRoomVo();
 			crv.setChattingUserNo(chattingUserNo);
@@ -37,10 +42,18 @@ public class OpenChatRoomController extends HttpServlet {
 			
 			ChatService cs = new ChatService();
 			ChattingRoomVo vo = new ChattingRoomVo();
-			vo = cs.openOldChatRoom(crv);
-			if(vo==null) {
-				vo = cs.openNewChatRoom(crv);
+			System.out.println("crn");
+			System.out.println(chattingRoomNo);
+			if(chattingRoomNo != null) {
+				crv.setChattingRoomNo(chattingRoomNo);
+				vo = cs.openOldChatRoomByRoomNo(crv);
+			}else {
 				
+				vo = cs.openOldChatRoom(crv);
+				if(vo==null) {
+					vo = cs.openNewChatRoom(crv);
+					
+				}
 			}
 			System.out.println(vo);
 			req.setAttribute("vo", vo);
