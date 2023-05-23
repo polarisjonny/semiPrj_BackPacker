@@ -299,6 +299,69 @@ public class TravelReviewDao {
 		return result;
 	}
 
+	public int replyWrite(Connection conn, TravelReviewVo replyVo) throws Exception {
+
+		String sql="INSERT INTO INFO_BOARD_REPLY (REPLY_NO , INFO_NO , WRITER_NO , CONTENT) VALUES (SEQ_BOARD_REPLY_NO.NEXTVAL , ? , ? , ?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, replyVo.getInfoNo());
+		pstmt.setString(2, replyVo.getWriterNo());
+		pstmt.setString(3, replyVo.getContent());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	//댓글 조회
+	public List<TravelReviewVo> selectReplyList(Connection conn, String infoNo) throws Exception {
+
+		String sql = "SELECT I.REPLY_NO ,I.INFO_NO ,I.WRITER_NO ,I.CONTENT ,I.ENROLL_DATE ,I.DELETE_YN ,M.PROFILE_IMAGE ,M.NICK FROM INFO_BOARD_REPLY I JOIN MEMBER M ON(I.WRITER_NO = M.MEMBER_NO) WHERE INFO_NO = ? AND DELETE_YN ='N' ORDER BY REPLY_NO DESC";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, infoNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<TravelReviewVo> replyList = new ArrayList<>();
+		while(rs.next()) {
+			String replyNo = rs.getString("REPLY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String profileImg = rs.getString("PROFILE_IMAGE");
+			String nick = rs.getString("NICK");
+			
+			TravelReviewVo replyVo = new TravelReviewVo();
+			replyVo.setReplyNo(replyNo);
+			replyVo.setWriterNo(writerNo);		
+			replyVo.setContent(content);
+			replyVo.setEnrollDate(enrollDate);
+			replyVo.setDeleteYn(deleteYn);
+			replyVo.setProfileImage(profileImg);
+			replyVo.setWriterNick(nick);
+			
+			replyList.add(replyVo);		
+		}
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		
+			return replyList;
+	}//
+
+	//댓글 삭제
+	public int deleteReply(Connection conn, String replyNo) throws Exception {
+
+		String sql ="UPDATE INFO_BOARD_REPLY SET DELETE_YN = 'Y' WHERE REPLY_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, replyNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 	
 
 }//class

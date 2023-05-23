@@ -152,6 +152,55 @@ public class TravelReviewService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}//report
+
+	//여행후기 댓글 작성
+	public int replyWrite(TravelReviewVo replyVo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.replyWrite(conn , replyVo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}//replyWrite
+
+	//댓글 조회
+	public List<TravelReviewVo> selectReplyList(String infoNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<TravelReviewVo> replyList = dao.selectReplyList(conn, infoNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return replyList;
+
+	}//selectReplyList
+
+	//댓글삭제
+	public int deleteReply(String replyNo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.deleteReply(conn,replyNo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 	
