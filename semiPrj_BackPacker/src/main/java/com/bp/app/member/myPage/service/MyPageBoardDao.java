@@ -14,7 +14,7 @@ import com.bp.app.gboard.vo.GuideBoardVo;
 public class MyPageBoardDao {
 
 	public List<GuideBoardVo> selectGuideBoardList(Connection conn, String memberNo) throws Exception {
-		String sql = "SELECT GUIDE_BOARD_NO, CATEGORY_NAME, MAIN_IMG, SUBSTR(TITLE, 1, 5) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ?";
+		String sql = "SELECT WRITER_NO, GUIDE_BOARD_NO, CATEGORY_NAME, MAIN_IMG, SUBSTR(TITLE, 1, 5) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -25,6 +25,7 @@ public class MyPageBoardDao {
 		
 		//tx || rs
 		while(rs.next()) {
+			String writerNo = rs.getString("WRITER_NO");
 			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
 			String categoryName = rs.getString("CATEGORY_NAME");
 			String mainImg = rs.getString("MAIN_IMG");
@@ -33,6 +34,7 @@ public class MyPageBoardDao {
 			String hit = rs.getString("HIT");
 			
 			GuideBoardVo vo = new GuideBoardVo();
+			vo.setWriterNo(writerNo);
 			vo.setGuideBoardNo(guideBoardNo);
 			vo.setCategoryName(categoryName);
 			vo.setMainImg(mainImg);
