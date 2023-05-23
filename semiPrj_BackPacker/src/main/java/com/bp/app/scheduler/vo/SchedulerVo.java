@@ -11,6 +11,28 @@ public class SchedulerVo {
 	
 	//여행날수
 	private String totalDay;
+	
+	private String countryName;
+	private String placeImage;
+
+	
+	
+	
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getPlaceImage() {
+		return placeImage;
+	}
+
+	public void setPlaceImage(String placeImage) {
+		this.placeImage = placeImage;
+	}
 
 	public String getSchedulerNo() {
 		return schedulerNo;

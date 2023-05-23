@@ -259,16 +259,17 @@
          <br>
          <c:if test="${not empty gbList}">
 			<div id="my-article-list-area">
-            <div id="first-article-area">
-                <img class="article-image" src="${root}/static/img/views/accompany/${gbList[0].mainImg}" alt="여행지 샘플 사진">
-                <div id="article-title">${gbList[0].title}</div>
-                <div class="article-text-style" id="article-page">${gbList[0].categoryName}</div>
-                <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[0].enrollDate}</div>
-                <div class="article-text-style" id="article-views">조회수 ${gbList[0].hit}</div>
-                
-            </div>
+            <c:forEach items="${gbList}" var="vo" begin="0" end="3">
+            	<div id="first-article-area" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                <img class="article-image" src="${root}/static/img/accompany/${vo.mainImg}" alt="여행지 샘플 사진" >
+                <div id="article-title">${vo.title}</div>
+                <div class="article-text-style" id="article-page">${vo.categoryName}</div>
+                <div class="article-text-style" id="article-enroll-date">작성일 ${vo.enrollDate}</div>
+                <div class="article-text-style" id="article-views">조회수 ${vo.hit}</div>
+                           	</div>
+            </c:forEach>
     
-            <div id="second-article-area">
+            <%-- <div id="second-article-area">
                 <img class="article-image" src="${root}/static/img/views/accompany/${gbList[1].mainImg}" alt="여행지 샘플 사진">
                 <div id="article-title">${gbList[1].title}</div>
                 <div class="article-text-style" id="article-page">${gbList[1].categoryName}</div>
@@ -283,7 +284,7 @@
                 <div class="article-text-style" id="article-page">${gbList[2].categoryName}</div>
                 <div class="article-text-style" id="article-enroll-date">작성일 ${gbList[2].enrollDate}</div>
                 <div class="article-text-style" id="article-views">조회수 ${gbList[2].hit}</div>
-            </div>
+            </div> --%>
         </div>         
          </c:if>
     
@@ -303,15 +304,17 @@
         	<div id="matching-complete-member-list-area">
             
     
-            <div class="matching-member-area" id="first-member-area">
-                <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[0].profileImage}" alt="프로필 사진">
-                <span>${matchingList[0].nick}</span>
-            </div>
-    
-            <div class="matching-member-area" id="second-member-area">
+            <c:forEach items="${matchingList}" var="mVo" begin="0" end="3">
+            	<div class="matching-member-area" id="first-member-area" data-member-no="${mVo.memberNo}">
+                	<img onclick="openProfile(this)" class="matching-complete-member-image" src="${root}/static/img/member/${mVo.profileImage}" alt="프로필 사진">
+                	<span>${mVo.nick}</span>
+            	</div>
+            </c:forEach>
+            <%-- <div class="matching-member-area" id="second-member-area">
                 <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[1].profileImage}" alt="프로필 사진">
                 <span>${matchingList[1].nick}</span>
             </div>
+            
     
             <div class="matching-member-area" id="third-member-area">
                 <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[2].profileImage}" alt="프로필 사진">
@@ -322,8 +325,8 @@
             <div class="matching-member-area" id="fourth-member-area">
                 <img class="matching-complete-member-image" src="${root}/static/img/member/${matchingList[3].profileImage}" alt="프로필 사진">
                 <span>${matchingList[3].nick}</span>
-            </div>
-        </div>
+            </div> --%>
+        	</div>
         </c:if>
     	<br>
     	<br>
@@ -414,6 +417,15 @@
    	   matchingCompleteMemberListBtn.addEventListener("click", function(){
    		   location.href = "${root}/member/myPage/matchingMemberList?page=1";
    	   });
+   	   
+   	function openProfile(element) {
+        const memberNo = element.parentNode.dataset.memberNo;
+        const width = 800;
+        const height = 1000;
+        const left = (screen.width / 2) - (width / 2);
+        const top = 0;
+        window.open('${root}/click/profile?selectMemberNo=' + memberNo, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+    }
 </script>
     
 </body>

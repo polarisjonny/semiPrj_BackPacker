@@ -63,29 +63,47 @@
             <h1 id="title">저장한 일정 다시보기</h1>
             <hr>
             <br>
-            <div class="schedule-area-style" id="first-schedule-area">
+<%--             <c:forEach items="${scheduleMap}" var="map">
+            	<div class="schedule-area-style" id="first-schedule-area">
+            	
                 <div id="first-area">
-                    <img class="schedule-area-img" src="/paris.jfif" alt="여행지 사진">
+                    <img class="schedule-area-img" src="${root}/img/place/airplane.jpg" alt="여행지 사진">
                 </div>
                 <div id="second-area">
                     <div id="place">
                         <div class="blue-text">여행지</div>
-                        <div class="normal-text">오사카</div>
+                        <div class="normal-text">${map.countryName}</div>
                     </div>
 
                     <div id="">
                         <div class="blue-text">여행 일정</div>
-                        <div class="normal-text">2023.04.20 - 2023.04.23</div>
-                    </div>
-
-                    <div>
-                        <div class="blue-text">여행 경비</div>
-                        <div class="normal-text">250,000</div>
+                        <div class="normal-text">${map.startDate - map.endDate}</div>
                     </div>
                 </div>
             </div>
+            </c:forEach>
+ --%>            
 
-            <div class="schedule-area-style"  id="second-schedule-area">
+			 <c:forEach items="${scheduleMap}" var="entry">
+                <div class="schedule-area-style" id="first-schedule-area">
+                    <div id="first-area" onclick="'location.href=${root}/member/myPage/schedule/detail'">
+                        <img class="schedule-area-img" src="${root}/static/img/place/airplane.jpg" alt="여행지 사진">
+                    </div>
+                    <div id="second-area">
+                        <div id="place">
+                            <div class="blue-text">여행지</div>
+                            <div class="normal-text">${entry.value.countryName}</div>
+                        </div>
+                        <div>
+                            <div class="blue-text">여행 일정</div>
+                            <div class="normal-text">${entry.value.startDate} ~ ${entry.value.endDate}</div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+			
+			
+            <!-- <div class="schedule-area-style"  id="second-schedule-area">
                 <div id="first-area">
                     <img class="schedule-area-img" src="/paris.jfif" alt="여행지 사진">
                 </div>
@@ -107,8 +125,8 @@
                 </div>
                 
             </div>
-
-            <div class="schedule-area-style"  id="third-schedule-area">
+ -->
+           <!--  <div class="schedule-area-style"  id="third-schedule-area">
                 <div id="first-area">
                     <img class="schedule-area-img" src="/paris.jfif" alt="여행지 사진">
                 </div>
@@ -128,7 +146,9 @@
                         <div class="normal-text">250,000</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            
+            
         </div>
         <div id="blank-two"></div>
     </div>
