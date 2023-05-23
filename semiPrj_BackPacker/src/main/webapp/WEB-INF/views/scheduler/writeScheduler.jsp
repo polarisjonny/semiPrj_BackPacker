@@ -26,6 +26,8 @@
 		grid-template-rows: 1fr 1fr;
 		margin-top: 20px;
 		justify-items: center;
+		height: 250px;
+		overflow: auto;
 	}
 	#trip-date {
 	    text-align: center;
@@ -97,7 +99,7 @@
 		font-size:1.4em;
 		cursor: pointer;
 		font-size: 1.4em;
-		border: 1px solid gray;
+		border: 0px;
 		width: 550px;
 		background-color: darkgray;
 		height: 200px;
@@ -124,6 +126,14 @@
 		font-style: italic;
 		color: rgba(148, 210, 230, 1);
 		font-weight: bold;
+	}
+
+	#thumbnail{
+		width: 100%;
+		height: 200px;
+		position: relative;
+		bottom: 113px;
+		display: none;
 	}
 	
 </style>
@@ -214,7 +224,7 @@
 	
 		<div id="board" class="text">
 
-			<form action="/semi/schedulerwrite" method="post">
+			<form action="/semi/schedulerwrite" method="post" enctype="multipart/form-data">
 				<div><h2>게시글 작성 할까요?</h2></div>
 				<input type="hidden" name="schedulerNo" value="${firstTimetable.schedulerNo}">
 				
@@ -232,8 +242,8 @@
 					<input type="text" id="title" name="title" placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
 				<div id="file-area">
-					<label id="infoLabel" for="imgFile" name="f"><div id="ment">썸네일 올리기</div></label>
-					<input type="file" id="imgFile">
+					<label id="infoLabel" for="imgFile" name="f"><div id="ment">썸네일 올리기 <img id="thumbnail" src="" alt=""></div></label>
+					<input type="file" id="imgFile" name="f">
 
 				</div>
 	
@@ -273,6 +283,38 @@
 	</main>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+	<script>
+
+		// 파일 미리보기
+		const fileTag = document.querySelector("input[name=f]");
+
+		fileTag.addEventListener("change", function() {
+		const mainThumbnail = document.querySelector("#thumbnail");
+
+		if (fileTag.files.length > 0) {
+			const fr = new FileReader();
+			fr.readAsDataURL(fileTag.files[0]);
+
+			fr.addEventListener("load", function(event) {
+			thumbnail.src = event.target.result;
+			mainThumbnail.style.display = "block";
+			});
+
+		} else {
+			mainThumbnail.style.display = "none";
+			thumbnail.src = "";
+		}
+		});
+
+
+
+
+
+
+
+	
+	</script>
 
 </body>
 </html>

@@ -124,26 +124,26 @@
 
 
         <div id="country-pick">
-            <div class="country" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+            <div class="country" id="ko" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 한국
             </div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+            <div class="country" id="ja" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 일본
             </div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+            <div class="country" id="ch" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 중국
             </div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+            <div class="country" id="si" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 싱가폴
             </div>
-            <div class="country"onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)">
+            <div class="country" id="pl" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 필리핀
             </div>
         </div>
 
 
         <div id="place-location-area">
-            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
                     <div>JEJU</div>
                     <div class="place-location">
@@ -152,7 +152,7 @@
                 </a>
             </div>
             
-            <div id="place-location" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>SEOUL</div>
                     <div class="place-location">
@@ -162,7 +162,7 @@
                 
             </div>
             
-            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>BUSAN</div>
                     <div class="place-location">
@@ -171,7 +171,7 @@
                 </a>
             </div>
 
-            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                <a href="">
                    <div>GANGWON</div>
                    <div class="place-location">
@@ -180,7 +180,7 @@
                </a>
             </div>
 
-            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>YEOSU</div>
                     <div class="place-location">
@@ -189,7 +189,7 @@
                 </a>
             </div>
 
-            <div id="place-location"onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>INCHEON</div>
                     <div class="place-location">
