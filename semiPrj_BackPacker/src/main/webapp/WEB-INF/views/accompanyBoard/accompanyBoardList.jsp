@@ -213,10 +213,10 @@
                     <button id="write-btn" type="button" onclick="location.href='${root}/accompany/write'">게시글 작성</button>
                 </div>
                 
-                
+               
                 <div id="main-area">
                 	<c:forEach items="${gbvoList}" var="vo">
-	                	<div class="content-box" onclick="location.href ='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+	                	<div class="content-box" onclick="location.href ='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}+'&schedulerNo='+${vo.schedulerNo}">
 	                        <div class="top-content">
 	                            <div class="left-img">
 	              					<c:if test="${not empty vo.profileImage}">

@@ -1,6 +1,7 @@
 package com.bp.app.accompany.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,18 +46,17 @@ public class AccompanyDetailController extends HttpServlet{
 				String lmNo = loginMember.getMemberNo();	
 				gbvo =  gbs.selectOneByNo(bvo,lmNo);
 			}
-			TimetableVo tvo = ss.getTimetable(gbvo.getSchedulerNo());
-			
+			List<TimetableVo>timetableVo = ss.totalTimetable(req);
 			//화면
 			if(writerMember!=null&&gbvo!=null) {
-				if(tvo==null) {
+				if(timetableVo==null||timetableVo.equals("")) {
 					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("writerMember", writerMember);
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);								
 				}else {
 					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("writerMember", writerMember);
-					req.setAttribute("tvo", tvo);
+					req.setAttribute("timetableVo", timetableVo);
 					req.getRequestDispatcher("/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp").forward(req, resp);
 				}
 			}else {

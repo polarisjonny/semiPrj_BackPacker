@@ -280,154 +280,68 @@
 						
 					</div>
 				
-					<c:if test="${not empty tvo}">
-					<div id="shedule-area">
-						<div class="bold-text big-text">일정표</div>
-						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-							<div class="carousel-indicators">
-							  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-							  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-							  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+					<c:if test="${not empty timetableVo}">
+						<c:if test="${not empty tvo}">
+							<div id="shedule-area">
+							
+							    <div class="bold-text big-text">일정표</div>
+							    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+							    <div class="carousel-indicators">
+						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						        </div>
+					    		<c:set var="firstTimetable" value="${timetableVo[0]}" />
+								<c:set var="endValue" value="${firstTimetable.totalDate}" />
+							    	<c:forEach begin="1" end="${endValue}" var="index">
+								        <div class="carousel-inner">
+								        
+								            <div class="carousel-item active">
+								            <!-- 이미지 대신 shedule박스 넣기 -->
+								            <div id="shedule-box" class="d-block">
+								                <div class="big-text bold-text middle-text">DAY${index}</div>
+								                <div class="middle-text">2023-04-27(화)</div>
+								                <div id="img-area">
+								                
+								                	<c:forEach items="${timetableVo}" var="item">
+								                		<c:if test="">
+										                    <div class="shedule">
+										                        <img src="${root}/static/img/shedule.jpg" alt="">
+										                        <div class="bold-text">하남벛꽃축제</div>
+										                        <div class="content-text">10:00~11:00</div>
+										                    </div>
+								                		</c:if>
+								                	</c:forEach>
+								                    
+								                    <!-- 없을때는 아래와 같이 만듦 -->
+								                    <div class="not-shedule">
+								                        <div>
+								                            <i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
+								                        </div>
+								                        <div class="blank999"></div>
+								                    </div>
+								                </div>
+								                <!-- shedule박스끝  -->
+								            </div>	
+								            </div>
+							    	</c:forEach>
+							        
+							           
+							           
+							        </div>
+							        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							            <span class="visually-hidden">Previous</span>
+							        </button>
+							        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							            <span class="visually-hidden">Next</span>
+							        </button>
+							        </div>
 							</div>
-							<div class="carousel-inner">
-							  <div class="carousel-item active">
-								<!-- 이미지 대신 shedule박스 넣기 -->
-								<div id="shedule-box" class="d-block">
-									<div class="big-text bold-text middle-text">DAY1</div>
-									<div class="middle-text">2023-04-27(화)</div>
-									<div id="img-area">
-										<div class="shedule">
-											<img src="${root}/static/img/shedule.jpg" alt="">
-											<div class="bold-text">하남벛꽃축제</div>
-											<div class="content-text">10:00~11:00</div>
-										</div>
-					 					<div class="shedule">
-											<img src="${root}/static/img/shedule.jpg" alt="">
-											<div class="bold-text">하남벛꽃축제</div>
-											<div class="content-text">10:00~11:00</div>
-										</div>
-										<div class="shedule">
-											<img src="${root}/static/img/shedule.jpg" alt="">
-											<div class="bold-text">하남벛꽃축제</div>
-											<div class="content-text">10:00~11:00</div>
-										</div>
-										<div class="shedule">
-											<img src="${root}/static/img/shedule.jpg" alt="">
-											<div class="bold-text">하남벛꽃축제</div>
-											<div class="content-text">10:00~11:00</div>
-										</div>
-										<div class="shedule">
-											<img src="${root}/static/img/shedule.jpg" alt="">
-											<div class="bold-text">하남벛꽃축제</div>
-											<div class="content-text">10:00~11:00</div>
-										</div>
-										<!-- 없을때는 아래와 같이 만듦 -->
-										<div class="not-shedule">
-											<div>
-												<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-											</div>
-											<div class="blank999"></div>
-										</div>
-									</div>
-									<!-- shedule박스끝  -->
-								</div>	
-							  </div>
-							  <div class="carousel-item">
-									<!-- 이미지 대신 shedule박스 넣기 -->
-									<div id="shedule-box" class="d-block">
-										<div class="big-text bold-text middle-text">DAY2</div>
-										<div class="middle-text">2023-04-27(화)</div>
-										<div id="img-area">
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<!-- 없을때는 아래와 같이 만듦 -->
-											<div class="not-shedule">
-												<div>
-													<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-												</div>
-												<div class="blank999"></div>
-											</div>
-										</div>
-										<!-- shedule박스끝  -->
-									</div>
-							  </div>
-							  <div class="carousel-item">
-									<!-- 이미지 대신 shedule박스 넣기 -->
-									<div id="shedule-box" class="d-block">
-										<div class="big-text bold-text middle-text">DAY3</div>
-										<div class="middle-text">2023-04-27(화)</div>
-										<div id="img-area">
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<div class="shedule">
-												<img src="${root}/static/img/shedule.jpg" alt="">
-												<div class="bold-text">하남벛꽃축제</div>
-												<div class="content-text">10:00~11:00</div>
-											</div>
-											<!-- 없을때는 아래와 같이 만듦 -->
-											<div class="not-shedule">
-												<div>
-													<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-												</div>
-												<div class="blank999"></div>
-											</div>
-										</div>
-										<!-- shedule박스끝  -->
-									</div>
-							  </div>
-							</div>
-							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							  <span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							  <span class="visually-hidden">Next</span>
-							</button>
-						  </div>
-					</div>
+						</c:if>
 					</c:if>
+					
 					<div id="profile-box">
 						 <input type="hidden" value="${writerMember.memberNo}">
 						 <div id="profile-area" class="profile">
