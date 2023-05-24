@@ -13,7 +13,11 @@ import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.travelReview.vo.TravelReviewVo;
 
 public class BoardManageService {
-	private BoardManageDao dao = new BoardManageDao();
+	private final BoardManageDao dao;
+	
+	public BoardManageService() {
+		dao=new BoardManageDao();
+	}
 	public int getGuideBoardListCnt(String searchType, String searchValue) throws Exception {
 		
 		//conn

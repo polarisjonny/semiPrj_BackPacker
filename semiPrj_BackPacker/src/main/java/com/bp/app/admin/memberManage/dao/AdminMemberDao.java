@@ -79,6 +79,7 @@ public class AdminMemberDao {
       pstmt.setString(1,   status );
       pstmt.setString(2, no);
       int result = pstmt.executeUpdate();
+   
       
       JDBCTemplate.close(pstmt);
       

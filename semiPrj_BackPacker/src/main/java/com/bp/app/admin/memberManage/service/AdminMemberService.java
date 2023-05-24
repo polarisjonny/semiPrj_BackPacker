@@ -3,19 +3,30 @@ package com.bp.app.admin.memberManage.service;
 import java.sql.Connection;
 import java.util.List;
 
+import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.admin.memberManage.dao.AdminMemberDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.member.vo.MemberVo;
 
 public class AdminMemberService {
-   private final AdminMemberDao dao = new AdminMemberDao();
+   
+   private final AdminMemberDao dao;
+	
+	public AdminMemberService() {
+		dao=new AdminMemberDao();
+	}
    public int editStatus(MemberVo vo) throws Exception {
       //conn
       Connection conn = JDBCTemplate.getConnection();
       
    
       int result = dao.editStatus(conn,vo);
+      if(result==1) {
+    	  JDBCTemplate.commit(conn);
+      }else {
+    	  JDBCTemplate.rollback(conn);
+      }
       JDBCTemplate.close(conn);
       
       

@@ -84,7 +84,19 @@
         background-color: rgb(149, 216, 247, 0.7);
         border-radius: 20px;
     }
-   
+    .none,
+   .ko,
+   	.jp,
+   	.ch,
+   	.si,
+   	.ph,
+   	.vi{
+   		display : none;
+   	}
+   	.active{
+		display : block;
+	}
+   	
 </style>
 <body>
 
@@ -97,7 +109,7 @@
         
         
         <form action="${root}/admin/place/edit" method="post" enctype="multipart/form-data">
-        	<input type="text" name = "placeNo" value= "${pv.placeNo }" hidden>
+        	<input type="hidden" name = "placeNo" value= "${pv.placeNo }" >
         	<div>
         	<input type="text" name = "placeName" value="${pv.placeName}">
         </div>	
@@ -121,14 +133,103 @@
                     <option value="1" selected>한국</option>
                     <option value="2">일본</option>
                     <option value="3">중국</option>
+                    <option value="4">싱가폴</option>
+                    <option value="5">필리핀</option>
+                    <option value="6">베트남</option>
                 </select>
             
-            
-                <select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
-                    <option value="301" >베이징</option>
-                    <option value="302">상하이(항주, 소주)</option>
-                    <option value="303"selected>사천</option>
+            	<div class = "none active">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                		<option value="101" selected>제주도</option>
+	                    <option value="102">102</option>
+	                    <option value="103">103</option>
+	                    <option value="104">104</option>
+	                    
+                		<option value="201" selected>오사카</option>
+	                    <option value="202">훗카이도</option>
+	                    <option value="203">도쿄</option>
+	                    <option value="204">교토</option>
+	                    
+                		<option value="301" selected >베이징</option>
+	                    <option value="302">상하이(항주, 소주)</option>
+	                    <option value="303">사천</option>
+	                    <option value="304">운남</option>
+	                    
+                		<option value="401" selected >싱가폴</option>
+	                
+                		<option value="501" selected >세부</option>
+                		<option value="502"  >보라카이</option>
+                		<option value="503"  >보홀</option>
+                		<option value="504"  >마닐라</option>
+	                
+                		<option value="601" selected >베트남</option>
+                    
                 </select>
+            	</div>
+               	<div class = "ko">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                		<option value="101" selected>제주도</option>
+	                    <option value="102">102</option>
+	                    <option value="103">103</option>
+	                    <option value="104">104</option>
+	               
+                    
+                	</select>
+            	</div>
+            	  	<div class = "jp">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+              
+	                    
+                		<option value="201" selected>오사카</option>
+	                    <option value="202">훗카이도</option>
+	                    <option value="203">도쿄</option>
+	                    <option value="204">교토</option>
+	                
+                    
+                </select>
+            	</div>
+            	  	<div class = "ch">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                		
+	                    
+                		<option value="301" selected >베이징</option>
+	                    <option value="302">상하이(항주, 소주)</option>
+	                    <option value="303">사천</option>
+	                    <option value="304">운남</option>
+	                    
+                	
+                    
+                </select>
+            	</div>
+            	  	<div class = "si">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                		
+	                    
+                		<option value="401" selected >싱가폴</option>
+	                
+                		
+                    
+                </select>
+            	</div>
+            	  	<div class = "ph">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                		
+	                
+                		<option value="501" selected >세부</option>
+                		<option value="502"  >보라카이</option>
+                		<option value="503"  >보홀</option>
+                		<option value="504"  >마닐라</option>
+	                
+                    
+                </select>
+            	</div>
+            	  	<div class = "vi">
+            		<select class="g1sl" name="locationNo" id="locationSelect" value="${pv.locationNo}">
+                			                
+                		<option value="601" selected >베트남</option>
+                    
+                </select>
+            	</div>
                 
             </div>
             <div id="placeIntro">
@@ -182,26 +283,75 @@
 	fileTag.addEventListener("change", function(){
     
 
-    const placeImg = document.querySelector("#placeImg");
+	    const placeImg = document.querySelector("#placeImg");
+	
+	    if(fileTag.files.length > 0){
+	
+	        const fr = new FileReader();
+	
+	        fr.readAsDataURL(fileTag.files[0]);
+	
+	        fr.addEventListener("load", function(event){
+	        	placeImg.src = event.target.result;
+	        	placeImg.width = "450";
+	        	placeImg.height = "200";
+	        });
+	
+	        
+	        
+	    }else{
+	    	placeImg.src ="";
+	    }
 
-    if(fileTag.files.length > 0){
 
-        const fr = new FileReader();
+	});
+    
+    const countrySelect = document.querySelector('#countrySelect');
+	const locationSelect = document.querySelector('#locationSelect');
 
-        fr.readAsDataURL(fileTag.files[0]);
-
-        fr.addEventListener("load", function(event){
-        	placeImg.src = event.target.result;
-        	placeImg.width = "450";
-        	placeImg.height = "200";
-        });
-
-        
-        
-    }else{
-    	placeImg.src ="";
-    }
-
-
-});
+		countrySelect.addEventListener('change', function() {
+			
+		const selectedValue = countrySelect.value;
+		const none = document.querySelector('.none');
+		const ko = document.querySelector('.ko');
+		const jp = document.querySelector('.jp');
+		const ch = document.querySelector('.ch');
+		const si = document.querySelector('.si');
+		const ph = document.querySelector('.ph');
+		const vi = document.querySelector('.vi');
+		ko.classList.remove('active');
+		jp.classList.remove('active');
+		ch.classList.remove('active');
+		si.classList.remove('active');
+		ph.classList.remove('active');
+		vi.classList.remove('active');
+		
+		// 선택된 값에 따라 locationSelect의 옵션을 변경
+		if (selectedValue === '1') {
+			none.classList.remove('active');
+			ko.classList.add('active');
+			locationSelect.value = '101';
+		} else if (selectedValue === '2') {
+			none.classList.remove('active');
+			jp.classList.add('active');
+			locationSelect.value = '201';
+		} else if (selectedValue === '3') {
+			none.classList.remove('active');
+			ch.classList.add('active');
+			locationSelect.value = '301';
+		} else if (selectedValue === '4') {
+			none.classList.remove('active');
+			si.classList.add('active');
+			locationSelect.value = '401';
+		} else if (selectedValue === '5') {
+			none.classList.remove('active');
+			ph.classList.add('active');
+			locationSelect.value = '501';
+		} else if (selectedValue === '6') {
+			none.classList.remove('active');
+			vi.classList.add('active');
+			locationSelect.value = '601';
+		}
+	});
+    
 </script>

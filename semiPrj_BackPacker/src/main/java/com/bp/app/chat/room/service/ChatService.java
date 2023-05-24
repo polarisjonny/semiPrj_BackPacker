@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bp.app.admin.placeManage.dao.PlaceManageDao;
 import com.bp.app.chat.message.vo.MessageVo;
 import com.bp.app.chat.room.dao.ChatDao;
 import com.bp.app.chat.room.vo.ChattingRoomVo;
@@ -18,7 +19,11 @@ import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.vo.MemberVo;
 
 public class ChatService {
-	private final ChatDao dao = new ChatDao();
+	private final ChatDao dao;
+	
+	public ChatService() {
+		dao=new ChatDao();
+	}
 	public ChattingRoomVo openNewChatRoom(ChattingRoomVo crv) throws Exception {
 		ChattingRoomVo vo = null;
 		Connection conn = JDBCTemplate.getConnection()	;

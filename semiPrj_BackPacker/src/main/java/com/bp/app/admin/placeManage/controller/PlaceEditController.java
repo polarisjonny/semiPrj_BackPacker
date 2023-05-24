@@ -96,10 +96,10 @@ public class PlaceEditController extends HttpServlet {
 			
 			
 		}catch(Exception e ) {
-			System.out.println("[ERROR] add fail ...");
+			System.out.println("[ERROR] edit fail ...");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "여행지추가 실패...");
+			req.setAttribute("errorMsg", "여행지수정 실패...");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 

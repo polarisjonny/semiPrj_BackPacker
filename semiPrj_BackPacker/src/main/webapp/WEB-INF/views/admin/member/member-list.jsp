@@ -129,7 +129,7 @@
                        
                       <td>
                             <form id= "stForm" action="${root}/admin/member/edit/status" method="post">
-                            <input type="text" value="${adminMemberVoList.memberNo}" name="memberNo" hidden>
+                            <input type="hidden" value="${adminMemberVoList.memberNo}" name="memberNo" hidden>
                                 <select name="memberStatus" id="selectMemberStatus">
                                     <option value="1">1</option>
                                     <option value="2">2</option>

@@ -7,19 +7,23 @@ import java.util.List;
 import com.bp.app.chat.room.vo.ChattingRoomVo;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
+import com.bp.app.member.profile.dao.GoProfileDao;
 import com.bp.app.member.profile.service.GoProfileService;
 import com.bp.app.member.vo.MemberVo;
 import com.bp.app.memberReview.dao.MemberReviewDao;
 import com.bp.app.memberReview.vo.MemberReviewVo;
 
 public class MemberReviewService {
-   MemberReviewDao dao = new MemberReviewDao();
+   private final MemberReviewDao dao;
+	
+  	public MemberReviewService() {
+  		dao=new MemberReviewDao();
+  	}
    public ChattingRoomVo checkCanWriteReview(String loginMemberNo, String selectMemberNo) throws Exception {
       ChattingRoomVo vo = null;
       //conn
       Connection conn = JDBCTemplate.getConnection();
          //update
-         System.out.println("service");
       vo = dao.checkCanWriteReview(conn , loginMemberNo,selectMemberNo );
          
       
