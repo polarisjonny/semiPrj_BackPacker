@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.bp.app.admin.boardManage.dao.BoardManageDao;
+import com.bp.app.admin.memberManage.dao.AdminMemberDao;
 import com.bp.app.admin.placeManage.dao.PlaceManageDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
@@ -12,7 +13,11 @@ import com.bp.app.scheduler.vo.PlaceVo;
 
 public class PlaceManageService {
 
-	private PlaceManageDao dao = new PlaceManageDao();
+	private final PlaceManageDao dao;
+	
+	public PlaceManageService() {
+		dao=new PlaceManageDao();
+	}
 	public int getPlaceListCnt(String searchType, String searchValue) throws Exception {
 		//conn
 

@@ -21,6 +21,8 @@ public class AdminMemberEditStatusController extends HttpServlet {
       //데꺼member
       String status = req.getParameter("memberStatus");
       String memberNo = req.getParameter("memberNo");
+      System.out.println(status);
+      System.out.println(memberNo);
       //데뭉
       MemberVo vo = new MemberVo();
       vo.setMemberStatus(status);;

@@ -7,12 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bp.app.admin.placeManage.dao.PlaceManageDao;
 import com.bp.app.chat.message.dao.MessageDao;
 import com.bp.app.chat.message.vo.MessageVo;
 import com.bp.app.common.db.JDBCTemplate;
 
 public class MessageService {
-	private final MessageDao dao = new MessageDao();
+	private final MessageDao dao;
+	
+	public MessageService() {
+		dao=new MessageDao();
+	}
 	public int sendMessage(MessageVo vo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();

@@ -41,16 +41,15 @@ public class OpenChatRoomController extends HttpServlet {
 			crv.setGuideBoardNo(guideBoardNo);
 			
 			ChatService cs = new ChatService();
-			ChattingRoomVo vo = new ChattingRoomVo();
-			System.out.println("crn");
-			System.out.println(chattingRoomNo);
+			ChattingRoomVo vo = null;
 			if(chattingRoomNo != null) {
 				crv.setChattingRoomNo(chattingRoomNo);
 				vo = cs.openOldChatRoomByRoomNo(crv);
 			}else {
-				
+				System.out.println("기존 채팅방 게시판에서 깁장");
 				vo = cs.openOldChatRoom(crv);
-				if(vo==null) {
+				if(vo.getChattingRoomNo()==null) {
+					System.out.println("새 채팅방 생성");
 					vo = cs.openNewChatRoom(crv);
 					
 				}

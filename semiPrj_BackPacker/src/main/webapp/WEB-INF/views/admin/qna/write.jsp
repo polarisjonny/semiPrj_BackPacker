@@ -147,7 +147,7 @@
 					<div id="faq-input-area">
 						<input type="text" name="title" placeholder="제목을 작성해주세요.">
 						<br>
-						<input type="text" name="writerNo" value="${loginMember.memberNo}" hidden>
+						<input type="hidden" name="writerNo" value="${loginMember.memberNo}" >
 						<textarea name="content" style="resize:none;" placeholder="내용을 작성해주세요."></textarea>
 					</div>
 					

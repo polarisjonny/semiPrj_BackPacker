@@ -248,19 +248,29 @@ public class PlaceManageDao {
 
 	public int editPlace(Connection conn, PlaceVo vo) throws Exception {
 		//SQL
-		String sql = "UPDATE PLACE SET PLACE_CATEGORY_NO =? , COUNTRY_NO = ? , LOCATION_NO = ?, PLACE_NAME = ?, PLACE_INTRODUCE =?, PLACE_IMAGE=? , PLACE_LAT =? , PLACE_LNG=? , PLACE_TIME=? , PLACE_EXPENSE=? WHERE PLACE_NO = ?";
+		String sql = "";
+		sql = "UPDATE PLACE SET PLACE_CATEGORY_NO =? , COUNTRY_NO = ? , LOCATION_NO = ?, PLACE_NAME = ?, PLACE_INTRODUCE =?,  PLACE_LAT =? , PLACE_LNG=? , PLACE_TIME=? , PLACE_EXPENSE=? WHERE PLACE_NO = ?";
+		if(vo.getPlaceImage() != null) {
+			sql = "UPDATE PLACE SET PLACE_CATEGORY_NO =? , COUNTRY_NO = ? , LOCATION_NO = ?, PLACE_NAME = ?, PLACE_INTRODUCE =? , PLACE_LAT =? , PLACE_LNG=? , PLACE_TIME=? , PLACE_EXPENSE=? , PLACE_IMAGE=? WHERE PLACE_NO = ?";
+		}
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getPlaceCategoryNo());
 		pstmt.setString(2, vo.getCountryNo());
 		pstmt.setString(3, vo.getLocationNo());
 		pstmt.setString(4, vo.getPlaceName());
 		pstmt.setString(5, vo.getPlaceIntroduce());
-		pstmt.setString(6, vo.getPlaceImage());
-		pstmt.setString(7, vo.getPlaceLat());
-		pstmt.setString(8, vo.getPlaceLng());
-		pstmt.setString(9, vo.getPlaceTime());
-		pstmt.setString(10, vo.getPlaceExpense());
-		pstmt.setString(11, vo.getPlaceNo());
+		pstmt.setString(6, vo.getPlaceLat());
+		pstmt.setString(7, vo.getPlaceLng());
+		pstmt.setString(8, vo.getPlaceTime());
+		pstmt.setString(9, vo.getPlaceExpense());
+		if(vo.getPlaceImage() == null) {
+			
+			pstmt.setString(10, vo.getPlaceNo());
+		}else if(vo.getPlaceImage() != null) {
+			pstmt.setString(10, vo.getPlaceImage());
+			pstmt.setString(11, vo.getPlaceNo());
+			
+		}
 		int result = pstmt.executeUpdate();
 		JDBCTemplate.close(pstmt);
 		return result;

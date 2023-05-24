@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bp.app.chat.room.dao.ChatDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.member.profile.dao.GoProfileDao;
@@ -12,7 +13,11 @@ import com.bp.app.member.vo.MemberVo;
 import com.bp.app.memberReview.vo.MemberReviewVo;
 
 public class GoProfileService {
-   private final GoProfileDao dao = new GoProfileDao();
+   private final GoProfileDao dao;
+	
+	public GoProfileService() {
+		dao=new GoProfileDao();
+	}
 
    public MemberVo selectMemberToProfile(String selectMemberNo) throws Exception {
       

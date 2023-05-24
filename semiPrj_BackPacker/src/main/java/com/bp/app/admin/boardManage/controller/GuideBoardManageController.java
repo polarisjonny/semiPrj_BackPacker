@@ -18,7 +18,7 @@ import com.bp.app.gboard.vo.GuideBoardVo;
 public class GuideBoardManageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
 		try {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
