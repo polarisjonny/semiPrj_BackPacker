@@ -22,9 +22,7 @@
 	    background-color: rgb(214, 248, 246);
 	    margin: auto;
 	    width: 450px;
-	  height: 700px;
 	  border-radius: 10px;
-	  overflow: auto;
 	  
 	}
 	.container {
@@ -136,14 +134,20 @@
 	}
 	.chat-area{
 		display : grid;
-		 grid-template-columns: 1fr 2fr 6fr 1fr;
+		 grid-template-columns: 1fr 4fr;
+		 
 	}
 </style>
 <body>
 	<div class="chatWrap">
-		${vo.chattingUserNick } 환영합니다
+		${loginMember.nick } 님 환영합니다
         <div class="container">
-            <div class="item">${vo.chattingUser2Nick }님과의 대화방</div>
+        	<c:if test="${loginMember.nick == vo.chattingUser2Nick}">
+        		<div class="item">${vo.chattingUserNick }님과의 대화방</div>
+       		</c:if>
+             <c:if test="${loginMember.nick != vo.chattingUser2Nick}">
+        		<div class="item">${vo.chattingUser2Nick }님과의 대화방</div>
+       		</c:if>
             <div class="item">♡</div>
             <div class="item">↕</div>
             
@@ -153,7 +157,6 @@
 			</div>
            
         <div class="chat-area">
-						<div id="comment-text">채팅</div>
 						<textarea name="chat" style="resize: none;" placeholder="채팅칸."></textarea>
 						<input type="button" value="채팅작성" onclick="writeChat()">
 		</div>
@@ -211,22 +214,48 @@
 				},
 				success : function(data){
 					const x  = JSON.parse(data);
-					console.log(x);
+					const j = x.length;
 					const chatArea = document.querySelector("#receive-chat-area");
 					chatArea.innerHTML="";
 					let str = "";
-					for(let i=0; i<x.length; i++){
-						str+='<div class="chat-area">';
-						str+='<div class="profileImage"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:100px"></div>';
-						str+='<input type="hidden" value="'+x[i].messageNo+'">';
-						str+='<div class="senderNick">'+x[i].senderNick+'</div>';
-						str+='<div class="content">'+x[i].content+'</div>';
-						str+='<div class="enrollDate">'+x[i].enrollDate;
-			
-						str+='</div>';
-						str+='</div>';
+					console.log(x);
+					for(let i=j-1; i>=0; i--){
+						let no = x[i].senderNo;
+						console.log(no);
+						if(no == ${loginMember.memberNo}){
+							str+='<div class="chat-area">';
+							str+='<input type="hidden" value="'+x[i].messageNo+'">';
+							str+='<div class="profileImage" style="text-align:center;"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:70px; border-radius:30px; "><div>'+x[i].senderNick+'</div></div>';
+							str+='<div class="content" style="border : 1px solid black; background-color : white; border-radius:10px; margin-right:50px; padding-left : 10px;">'+x[i].content+'</div>';
+							str+='<div></div>';
+							str+='<div class="enrollDate" style="font-size : 12px; text-align:right; margin-right:50px;">'+x[i].enrollDate;
+				
+							str+='</div>';
+							str+='</div><br><br>';
+						}else{
+							str+='<div class="chat-area">';
+							str+='<input type="hidden" value="'+x[i].messageNo+'">';
+							str+='<div class="profileImage" style="text-align:center;"></div>';
+							str+='<div class="content" style="border : 1px solid black; background-color : white; border-radius:10px; margin-left:70px; padding-left : 10px;">'+x[i].content+'</div>';
+							str+='<div></div>';
+							str+='<div class="enrollDate" style="font-size : 12px; text-align:left; margin-left:70px;">'+x[i].enrollDate;
+				
+							str+='</div>';
+							str+='</div><br><br>';
+						}
 					}
 					chatArea.innerHTML+=str;
+					
+					  // 스크롤을 가장 아래로 조정
+		            chatArea.scrollTop = chatArea.scrollHeight;
+					  
+		            // textarea에 포커스 이동
+		            setTimeout(function () {
+		                const textarea = document.querySelector('textarea[name=chat]');
+		                textarea.focus();
+		            }, 0);
+
+					
 				},
 				error : function(e){
 					console.log(e);
