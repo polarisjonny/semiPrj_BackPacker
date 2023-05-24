@@ -284,76 +284,74 @@
 							<div id="shedule-area">
 							
 							    <div class="bold-text big-text">일정표</div>
-							    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-							    <div class="carousel-indicators">
-						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-						        </div>
-					    		<c:set var="firstTimetable" value="${timetableVo[0]}" />
-								<c:set var="endValue" value="${firstTimetable.totalDate}" />
-							    	<c:forEach begin="1" end="${endValue}" var="index">
-								        <div class="carousel-inner">
-								        
+							    
+								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					    			<c:set var="firstTimetable" value="${timetableVo[0]}" />
+									<c:set var="endValue" value="${firstTimetable.totalDate}" />
+								<div class="carousel-inner">
+									
+											<c:forEach begin="1" end="${endValue}" var="index">
 								            <div class="carousel-item active">
 								            <!-- 이미지 대신 shedule박스 넣기 -->
-								            <div id="shedule-box" class="d-block">
-								                <div class="big-text bold-text middle-text">DAY${index}</div>
-								                <div class="middle-text">2023-04-27(화)</div>
-								                <div id="img-area">
-								                
-								                	<c:forEach items="${timetableVo}" var="item">
-														<c:if test="${index == item.timetableDate}">
-															<c:if test="${item.placeNo=='1'}">
-																<div class="shedule">
-																	<img src="${root}/static/img/place/${item.placeImage}" alt="">
-																	<div class="bold-text">${item.bespokePlace}</div>
-																	<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
-																</div>
-															</c:if>
-															<c:if test="${item.placeNo!='1'}">
-																<div class="shedule">
-																	<img src="${root}/static/img/place/${item.placeImage}" alt="">
-																	<div class="bold-text">${item.placeName}</div>
-																	<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
-																</div>
-															</c:if>
+												<div id="shedule-box" class="d-block">
+													<div class="big-text bold-text middle-text">DAY${index}</div>
+													<div class="middle-text">2023-04-27(화)</div>
+													<div id="img-area">
+													
+														<c:forEach items="${timetableVo}" var="item">
+															<c:if test="${index == item.timetableDate}">
+																<c:if test="${item.placeNo=='1'}">
+																	<div class="shedule">
+																		<img src="${root}/static/img/place/${item.placeImage}" alt="">
+																		<div class="bold-text">${item.bespokePlace}</div>
+																		<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
+																	</div>
+																</c:if>
+																<c:if test="${item.placeNo!='1'}">
+																	<div class="shedule">
+																		<img src="${root}/static/img/place/${item.placeImage}" alt="">
+																		<div class="bold-text">${item.placeName}</div>
+																		<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
+																	</div>
+																</c:if>
 
-														</c:if>
-								                	</c:forEach>
-								                    
-								        
+															</c:if>
+														</c:forEach>
+														
+													</div>
 								                    
 								                </div>
 								                <!-- shedule박스끝  -->
 								            </div>	
-								            </div>
-							    	</c:forEach>
-							        </div>
+										</c:forEach>
+									</div>
+									<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
+									  </button>
+									  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
+									  </button>
+								</div>
 
 
 
-							        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-							            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							            <span class="visually-hidden">Previous</span>
-							        </button>
-							        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-							            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							            <span class="visually-hidden">Next</span>
-							        </button>
-							        </div>
-							</div>
-					
+						
+							     </div>
 					</c:if>
+					
+					
+					
 					
 					<div id="profile-box">
 						 <input type="hidden" value="${writerMember.memberNo}">
 						 <div id="profile-area" class="profile">
 						 	<c:if test="${not empty writerMember.profileImage}">
-								<img src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
+								<img class="imgToProfileWindow" src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
 						 	</c:if>
 						 	<c:if test="${empty writerMember.profileImage}">
-								<img src="${root}/static/img/member/profile/profile_default.jpg" alt="">
+								<img class="imgToProfileWindow" src="${root}/static/img/member/profile/profile_default.jpg" alt="">
 						 	</c:if>
 						 </div>
 						 <div id="info-box">
@@ -390,6 +388,7 @@
 					<div id="comment-list-area">
 					</div>
 				</div>
+				
 				<div id="sub-area">
 					<div id="top-area">
 						<div>
@@ -418,6 +417,18 @@
 </html>
 
 <script>
+
+		
+		const imgToProfileTag= document.querySelector('.imgToProfileWindow');
+		imgToProfileTag.addEventListener('click', function(e) {
+			const no =  '${writerMember.memberNo}'; //작성자 번호
+		const width = 800;
+		const height = 1000;
+		const left = (screen.width / 2) - (width / 2);
+		const top = 0;
+		window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+		});
+
 		let openChat = null;
 		openChat = document.querySelector("#openChat");
 		openChat.addEventListener('click', function(e) {
@@ -532,7 +543,12 @@
 					let str = "";
 					for(let i=0; i<x.length; i++){
 						str+='<div class="comment">';
-						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt=""></div>';
+
+						if(x[i].profile==null||x[i].profile==""){
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/profile_default.jpg" alt=""></div>';
+						}else {
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt=""></div>';
+						}
 						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].guideBoardNo+'">';
 						str+='<div class="comment-list-id">'+x[i].nick+'</div>';
 						str+='<div class="comment-list-content">'+x[i].content+'</div>';
