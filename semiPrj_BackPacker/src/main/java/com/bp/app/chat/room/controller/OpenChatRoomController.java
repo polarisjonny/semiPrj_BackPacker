@@ -28,6 +28,11 @@ public class OpenChatRoomController extends HttpServlet {
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String chattingUserNo = loginMember.getMemberNo();
 			String chattingUser2No = req.getParameter("writerNo");
+			if(chattingUserNo == chattingUser2No) {
+				req.setAttribute("errorMsg", "이거 니가쓴글이야 정신차려");
+				
+				throw new Exception("이거 니가쓴 글이다");
+			}
 			String guideBoardNo = req.getParameter("guideBoardNo");
 			String chattingRoomNo = null;
 			if(req.getParameter("chattingRoomNo") != null) {
@@ -46,7 +51,7 @@ public class OpenChatRoomController extends HttpServlet {
 				crv.setChattingRoomNo(chattingRoomNo);
 				vo = cs.openOldChatRoomByRoomNo(crv);
 			}else {
-				System.out.println("기존 채팅방 게시판에서 깁장");
+				System.out.println("기존 채팅방 게시판에서 입장");
 				vo = cs.openOldChatRoom(crv);
 				if(vo.getChattingRoomNo()==null) {
 					System.out.println("새 채팅방 생성");
@@ -54,7 +59,6 @@ public class OpenChatRoomController extends HttpServlet {
 					
 				}
 			}
-			System.out.println(vo);
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room.jsp").forward(req, resp);
 		}catch(Exception e) {

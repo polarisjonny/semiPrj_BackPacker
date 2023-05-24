@@ -55,7 +55,7 @@ public class OpenRoomListController extends HttpServlet {
 				
 				roomList = cs.openRoomList(pv,searchType, searchValue, crv);
 			}
-			
+			System.out.println(roomList);
 			
 			
 			Map<String, String> map = new HashMap<>();
