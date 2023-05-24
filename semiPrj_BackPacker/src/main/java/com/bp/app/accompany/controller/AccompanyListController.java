@@ -41,7 +41,7 @@ public class AccompanyListController extends HttpServlet{
 			
 			List<GuideBoardVo> bvoList = null;
 			if(searchType ==null || searchType.equals("")) {
-				bvoList = gbs.getAccomList(pvo);
+				bvoList = gbs.getList(3, pvo);
 			}else {
 				bvoList = gbs.getAccomList(pvo, searchType, searchValue);		
 			}

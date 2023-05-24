@@ -51,93 +51,36 @@ public class GuideBoardService {
 	}
 
 	//리스트(게시글넘버,제목,아이디,닉네임,연령,프사,성별,글쓴이,썸네일,시작날짜,끝날짜 조회)
-	public List<GuideBoardVo> getAccomList(PageVo pvo) throws Exception {
+	public List<GuideBoardVo> getList(int i, PageVo pvo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.TITLE, GB.WRITER_NO, GB.SCHEDULER_NO , M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER,GB.MAIN_IMG, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, pvo.getBeginRow());
-		pstmt.setInt(2, pvo.getLastRow());
-		ResultSet rs = pstmt.executeQuery();
+		GuideBoardDao dao = new GuideBoardDao();
+		List<GuideBoardVo> voList = dao.getList(conn,i,pvo);
 		
-		//rs
-		List<GuideBoardVo> bvoList = new ArrayList<>(); 
-		while(rs.next()) {
-			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
-			String title = rs.getString("TITLE");
-			String id = rs.getString("ID");
-			String nick = rs.getString("NICK");
-			String age = rs.getString("AGE");
-			String profileImage = rs.getString("PROFILE_IMAGE");
-			String gender = rs.getString("GENDER");
-			String writerNo = rs.getString("WRITER_NO");
-			String mainImg = rs.getString("MAIN_IMG");
-			String schedulerNo = rs.getString("SCHEDULER_NO");
-			if(gender=="M") {
-				gender="남성";
-			}else {
-				gender="여성"; 
-			}
-			
-			String startDate_ = rs.getString("START_DATE");
-			String endDate_ = rs.getString("END_DATE");
-			
-			GuideBoardVo bvo = new GuideBoardVo();
-			bvo.setGuideBoardNo(guideBoardNo);
-			bvo.setTitle(title);
-			bvo.setId(id);
-			bvo.setNick(nick);
-			bvo.setAge(age);
-			bvo.setProfileImage(profileImage);
-			bvo.setWriterNo(writerNo);
-			
-			bvo.setGender(gender);
-			bvo.setMainImg(mainImg);
-			bvo.setSchedulerNo(schedulerNo);
-			//5월11일 이런식으로 데이터를 가공
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date startDate = formatter.parse(startDate_);
-			Date endDate =formatter.parse(endDate_);
-			SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
-			String startDateStr = format.format(startDate);
-			String endDateStr = format.format(endDate);
-			
-			
-			bvo.setStartDate(startDateStr);
-			bvo.setEndDate(endDateStr);
-			
-			
-			
-			bvoList.add(bvo);
-			
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
 		JDBCTemplate.close(conn);
 		
-		return bvoList; 
+		return voList; 
 	}
 
 	//리스트(게시글넘버,제목,아이디,닉네임,연령,프사,성별,글쓴이,썸네일,시작날짜,끝날짜 조회) 검색해서 불러오기
+	//동행게시판만해당됨 (검색 제목,작성자아이디,잗성자닉네임) 이대로 냅둬도 될듯 굳이 모든 항목을 가져오지 않아도 된다고 판단됨.
 	public List<GuideBoardVo> getAccomList(PageVo pvo,String searchType,String searchValue) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		//sql
-		String sql = "";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO ,GB.SCHEDULER_NO ,GB.TITLE , GB.WRITER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG , TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,GB.TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' AND ";
 		if(searchType.equals("title")) {
-			sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.SCHEDULER_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER,GB.MAIN_IMG, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' AND GB.TITLE LIKE '%'||?||'%' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
+			sql+="GB.TITLE LIKE '%'||?||'%' ";
 		}else if(searchType.equals("writerId")) {
-			sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.SCHEDULER_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER,GB.MAIN_IMG, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' AND M.ID LIKE '%'||?||'%' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
-
+			sql+="M.ID LIKE '%'||?||'%' ";
+			
 		}else if(searchType.equals("writerNick")) {
-			sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO,GB.SCHEDULER_NO,GB.TITLE, GB.WRITER_NO, M.ID, M.NICK, M.AGE, M.PROFILE_IMAGE, M.GENDER,GB.MAIN_IMG, TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' AND M.NICK LIKE '%'||?||'%' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ";
-
+			sql+="M.NICK LIKE '%'||?||'%' ";
+			
 		}else {
-			return getAccomList(pvo);
+			return getList(3,pvo);
 		}
+		sql+="ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, searchValue);
@@ -246,6 +189,7 @@ public class GuideBoardService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result=0;
+		//작성자가 본 조회수는오르지 않는 코드
 		if(lmNo.equals(bvo.getWriterNo())) {
 			result=1;
 		}else {
