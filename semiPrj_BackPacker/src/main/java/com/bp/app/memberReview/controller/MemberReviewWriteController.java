@@ -55,6 +55,7 @@ public class MemberReviewWriteController extends HttpServlet{
          e.printStackTrace();
          
          req.setAttribute("errorMsg", "같이 여행한 적이 없어요");
+         req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
          
       }
    }
@@ -95,7 +96,8 @@ public class MemberReviewWriteController extends HttpServlet{
          
          e.printStackTrace();
       
-         req.setAttribute("errorMsg", "후기 작성 실패");
+         req.setAttribute("errorMsg", "후기는 1번 매칭마다 1번만 가능합니다");
+         req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
       
       }
       

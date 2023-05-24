@@ -61,6 +61,7 @@ public class OpenChatRoomController extends HttpServlet {
 		}catch(Exception e) {
 			System.out.println("[ERROR] chat reply error");
 			e.printStackTrace();
+	        req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 			
 		}
 	}
