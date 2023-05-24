@@ -230,7 +230,12 @@
 	                            <div class="right-text">
 	                                <div class="small-text">${vo.id}(${vo.nick})</div>
 	                                <div class="small-text">${vo.age}대 ${vo.gender}</div>
-	                                <div class="small-text">${vo.startDate}~${vo.endDate}</div>
+	                                <c:if test="${not empty vo.startDate}">
+		                                <div class="small-text">${vo.startDate}~${vo.endDate}</div>
+	                                </c:if>
+	                                <c:if test="${empty vo.startDate}">
+		                                <div class="small-text">확정된 일정이 없습니다.</div>	                                
+	                                </c:if>
 	                            </div>
 	                        </div>
 	                        <div class="middle-content">

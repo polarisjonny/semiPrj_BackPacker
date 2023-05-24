@@ -215,16 +215,20 @@ public class GuideBoardDao {
 			bvo.setMainImg(mainImg);
 			bvo.setSchedulerNo(schedulerNo);
 			//5월11일 이런식으로 데이터를 가공
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date startDate = formatter.parse(startDate_);
-			Date endDate =formatter.parse(endDate_);
-			SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
-			String startDateStr = format.format(startDate);
-			String endDateStr = format.format(endDate);
-			
-			
-			bvo.setStartDate(startDateStr);
-			bvo.setEndDate(endDateStr);
+			if(startDate_==null) {
+					
+			}else {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				Date startDate = formatter.parse(startDate_);
+				Date endDate =formatter.parse(endDate_);
+				SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
+				String startDateStr = format.format(startDate);
+				String endDateStr = format.format(endDate);
+				
+				
+				bvo.setStartDate(startDateStr);
+				bvo.setEndDate(endDateStr);
+			}
 			
 			
 			
