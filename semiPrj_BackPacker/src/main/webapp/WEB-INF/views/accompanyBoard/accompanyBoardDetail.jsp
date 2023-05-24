@@ -281,7 +281,6 @@
 					</div>
 				
 					<c:if test="${not empty timetableVo}">
-						<c:if test="${not empty tvo}">
 							<div id="shedule-area">
 							
 							    <div class="bold-text big-text">일정표</div>
@@ -304,31 +303,36 @@
 								                <div id="img-area">
 								                
 								                	<c:forEach items="${timetableVo}" var="item">
-								                		<c:if test="">
-										                    <div class="shedule">
-										                        <img src="${root}/static/img/shedule.jpg" alt="">
-										                        <div class="bold-text">하남벛꽃축제</div>
-										                        <div class="content-text">10:00~11:00</div>
-										                    </div>
-								                		</c:if>
+														<c:if test="${index == item.timetableDate}">
+															<c:if test="${item.placeNo=='1'}">
+																<div class="shedule">
+																	<img src="${root}/static/img/place/${item.placeImage}" alt="">
+																	<div class="bold-text">${item.bespokePlace}</div>
+																	<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
+																</div>
+															</c:if>
+															<c:if test="${item.placeNo!='1'}">
+																<div class="shedule">
+																	<img src="${root}/static/img/place/${item.placeImage}" alt="">
+																	<div class="bold-text">${item.placeName}</div>
+																	<div class="content-text">시작시간 : ${item.timetableStartTime}</div>
+																</div>
+															</c:if>
+
+														</c:if>
 								                	</c:forEach>
 								                    
-								                    <!-- 없을때는 아래와 같이 만듦 -->
-								                    <div class="not-shedule">
-								                        <div>
-								                            <i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-								                        </div>
-								                        <div class="blank999"></div>
-								                    </div>
+								        
+								                    
 								                </div>
 								                <!-- shedule박스끝  -->
 								            </div>	
 								            </div>
 							    	</c:forEach>
-							        
-							           
-							           
 							        </div>
+
+
+
 							        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 							            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							            <span class="visually-hidden">Previous</span>
@@ -339,7 +343,7 @@
 							        </button>
 							        </div>
 							</div>
-						</c:if>
+					
 					</c:if>
 					
 					<div id="profile-box">
