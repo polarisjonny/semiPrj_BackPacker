@@ -113,9 +113,8 @@
         }
 
         #my-article-list-area {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             width: 50%;
             height: 80%;
             margin: auto;

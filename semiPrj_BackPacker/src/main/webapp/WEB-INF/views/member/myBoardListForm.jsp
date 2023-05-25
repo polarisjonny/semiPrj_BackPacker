@@ -60,8 +60,9 @@
         }
         
         #travel-review-btn {
+        	margin-top: 1%;
         	margin-left: 71%;
-        	margin-bottom: 3%;
+        	margin-bottom: 2%;
         	height: 40px;
         	width: 250px;
         	border: none;
@@ -81,7 +82,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 	<main>
-    <h1 id="myBoardListTitle">내가 등록한 글 목록</h1>
+    <h1 id="myBoardListTitle">내가 등록한 프패커 게시판 글 목록</h1>
     <button type="button" id="travel-review-btn">내가 작성한 여행 후기 글 보기</button>
     <br>
 	<br>
@@ -117,7 +118,7 @@
    <script type="text/javascript">
    		const travelReviewBtn = document.querySelector("#travel-review-btn");
    		travelReviewBtn.addEventListener("click", function(){
-   			location.href="${root}/member/myPage/myReviewList";
+   			location.href="${root}/member/myPage/myReviewList?page=1";
    		});
    </script>
 </body>
