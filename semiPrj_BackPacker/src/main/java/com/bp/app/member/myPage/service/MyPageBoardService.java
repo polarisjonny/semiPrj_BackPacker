@@ -56,57 +56,33 @@ public class MyPageBoardService {
 		return list;
 	}
 
-	public List<TravelReviewVo> selectMyTravelReviewList(String memberNo) throws Exception {
+	public List<TravelReviewVo> selectMyTravelReviewList(PageVo pv, String memberNo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
+		MyPageBoardDao dao = new MyPageBoardDao();
+		List<TravelReviewVo> tList = dao.selectMyTravelReviewList(conn, pv, memberNo);
 		//sql
-		String sql = "SELECT * FROM INFO_BOARD WHERE WRITER_NO = ? AND DELETE_YN = 'N' AND INFO_CATEGORY_NO = 1";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, memberNo);
-		ResultSet rs = pstmt.executeQuery();
 		
-		List<TravelReviewVo> tList = new ArrayList<>();
-		
-		//tx || rs
-		while(rs.next()) {
-			String infoNo = rs.getString("INFO_NO");
-			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
-			String writerNo = rs.getString("WRITER_NO");
-			String title = rs.getString("TITLE");
-			String content = rs.getString("CONTENT");
-			String enrollDate = rs.getString("ENROLL_DATE");
-			String modifyDate = rs.getString("MODIFY_DATE");
-			String hit = rs.getString("HIT");
-			String deleteYn = rs.getString("DELETE_YN");
-			String reportCnt = rs.getString("REPORT_CNT");
-			String mainImg = rs.getString("MAIN_IMG");
-			
-			
-			TravelReviewVo vo = new TravelReviewVo();
-			vo.setInfoNo(infoNo);
-			vo.setInfoCategoryNo(infoCategoryNo);
-			vo.setWriterNo(writerNo);
-			vo.setTitle(title);
-			vo.setContent(content);
-			vo.setEnrollDate(enrollDate);
-			vo.setModifyDate(modifyDate);
-			vo.setHit(hit);
-			vo.setDeleteYn(deleteYn);
-			vo.setReportCnt(reportCnt);
-			vo.setMainImg(mainImg);
-			
-			tList.add(vo);
-		}
-		
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
 		JDBCTemplate.close(conn);
 		
 		
 		//return
 		return tList;
+	}
+	
+	
+
+	
+	public int selectMyReviewCount(String memberNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MyPageBoardDao dao = new MyPageBoardDao();
+		int count = dao.selectMyReviewCount(conn, memberNo);
+		
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
 	}
 }

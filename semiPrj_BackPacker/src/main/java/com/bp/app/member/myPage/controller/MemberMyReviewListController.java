@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bp.app.common.page.PageVo;
 import com.bp.app.member.myPage.service.MyPageBoardService;
 import com.bp.app.member.vo.MemberVo;
 import com.bp.app.travelReview.vo.TravelReviewVo;
@@ -27,13 +28,22 @@ public class MemberMyReviewListController extends HttpServlet {
 			}
 			
 			String memberNo = loginMember.getMemberNo();
-			
+			String page = req.getParameter("page");
+			if(page == null) page = "1";
+			int currentPage = Integer.parseInt(req.getParameter("page"));
+			int pageLimit = 5;
+			int boardLimit = 8;
 			MyPageBoardService mpbs = new MyPageBoardService();
+			int listCount = mpbs.selectMyReviewCount(memberNo);
+			PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 			
-			List<TravelReviewVo> tList = mpbs.selectMyTravelReviewList(memberNo);
+			
+			
+			List<TravelReviewVo> tList = mpbs.selectMyTravelReviewList(pv, memberNo);
 
 			
 			if(tList != null) {
+				req.setAttribute("pv", pv);
 				req.setAttribute("tList", tList);
 				req.getRequestDispatcher("/WEB-INF/views/member/myReviewListForm.jsp").forward(req, resp);
 			} else {
