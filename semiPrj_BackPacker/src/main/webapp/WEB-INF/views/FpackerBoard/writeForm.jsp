@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
 <style>
 	#main-box {
 		margin-top: 100px;
@@ -47,10 +46,7 @@
 		float: right;
 		margin-top: 10px;
 	}
-	textarea {
-		width: 100%;
-		height: 300px;
-	}
+	
 	.travel-date-area {
 		display: grid;
 		grid-template-columns: 0.8fr 1.6fr 0.8fr 1.6fr;
@@ -102,6 +98,10 @@
 <body>
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	
 	<main>
 	
 		
@@ -125,16 +125,16 @@
 					</div>
 
 				</div>
-		
-
-
-
+				
 				<div id="title-area">
-					<input type="text" name="title"placeholder="제목을 20자 이내로 적어주세요.">
+					<input type="text" name="title" placeholder="제목을 입력해주세요.">
 				</div>
-				<div id="content-area">
-					<textarea name="content" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>		
-				</div>
+
+				 <div id="summernote"></div>
+
+				
+			    
+				
 				<div class="travel-date-area">
 					<div>시작날짜</div>
 					<input type="date" name="startDate">
@@ -190,5 +190,21 @@
 
 	});
 	
+	
+    $('#summernote').summernote({
+      placeholder: 'Hello stand alone ui',
+      tabsize: 2,
+      height: 500,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+
 
 </script>
