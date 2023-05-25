@@ -86,7 +86,7 @@
 
 			 <c:forEach items="${scheduleMap}" var="entry">
                 <div class="schedule-area-style" id="first-schedule-area">
-                    <div id="first-area" onclick="'location.href=${root}/member/myPage/schedule/detail'">
+                    <div id="first-area" onclick="location.href='${root}/member/myPage/schedule/detail?schedulerNo='+${entry.value.schedulerNo}">
                         <img class="schedule-area-img" src="${root}/static/img/place/airplane.jpg" alt="여행지 사진">
                     </div>
                     <div id="second-area">

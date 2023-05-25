@@ -1,25 +1,20 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지 스케줄 상세 페이지</title>
+<title>Insert title here</title>
+</head>
 <style>
-
-    #title {
-        color: #94d2e6;
-        font-weight: bold;
-        margin-top: 8%;
-    }
-    
 	#wrap{
 		margin-top: 150px;
 	}
 
 	.scheduler{
 		width: 400px;
-		height: 290px;
+		height: 320px;
 		border: 1px solid #E7E6E6;
 		box-shadow: 5px 5px 5px #878787;
 	}
@@ -28,7 +23,7 @@
 	.timetable{
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-row: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
 		margin-top: 20px;
 		justify-items: center;
 	}
@@ -72,207 +67,150 @@
 		color: white;
 		position: relative;
 		top: 20px;
+		font-size: 20px;
 	}
 
+	#title{
+		padding: 5px;
+		border: 1px solid #979797;
+		border-radius: 5px;
+		width: 550px;
+		height: 35px;
+	}
+
+	textarea{
+		padding: 5px;
+		border: 1px solid #979797;
+		border-radius: 5px;
+		width: 550px;
+	}
+	#select{
+		border:0px;
+		background:rgba(148, 210, 230, 1);
+		color:white;
+		height: 30px;
+    	border-radius: 3px;
+	}
+
+	#infoLabel{
+		cursor: pointer;
+		font-size:1.4em;
+		cursor: pointer;
+		font-size: 1.4em;
+		border: 1px solid gray;
+		width: 550px;
+		background-color: darkgray;
+		height: 200px;
+		margin-top: 30px;
+		margin-left: 80px;
+    	border-radius: 5px;
+	}
+	
+	#imgFile{
+		visibility: hidden;
+		width:80px;
+	}
+	#ment{
+		position: relative;
+    	top: 79px;
+	}
+	#timetable1{
+		width: 90px;
+		height: 132px;
+	}
+	#dd{
+		text-align: center;
+		font-size: xx-large;
+		font-style: italic;
+		color: rgba(148, 210, 230, 1);
+		font-weight: bold;
+	}
 	
 </style>
-</head>
 <body>
+
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
 	<main>
 		<div id="wrap">
+			<c:set var="firstTimetable" value="${timetableVo[0]}" />
+			<c:set var="endValue" value="${firstTimetable.totalDate}" />
 
-			<div class="text">
-				<h1 id="title">MY SCHEDULE</h1>
-		
+			
+			<div id="dd" >
+				${firstTimetable.startDate} ~ ${firstTimetable.endDate}
 			</div>
-		
+
+			
+
 			<div  id="scheduler-area">
+
+			
+
+			<c:forEach begin="1" end="${endValue}" var="index">
 				
-				<div class="scheduler radious">
-					<div id="trip-date">
-						DAY1
-						<br>
-						2023-04-27
-					</div>
-		
-					<div class="timetable">
-						<div id="timetable1">
-							<div><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div class="not-schedule">
-							<div>
-								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-							</div>
-						</div>
-		
-					</div>
 					
-				</div>
-				<div class="scheduler radious">
-					<div id="trip-date">
-						DAY1
-						<br>
-						2023-04-27
-					</div>
+					<div class="scheduler radious">
+						<div id="trip-date" style="font-weight: bold; font-size: 1.3em;">
+							DAY${index}   
+						</div>
+			
+						<div class="timetable">
+							<c:forEach  items="${timetableVo}" var="item" >
+								<c:if test="${index == item.timetableDate}">
+
+									<c:if test="${item.placeNo=='1'}">
+										<div id="timetable1">
+											<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
+											<div id="place-time" style="font-weight: bold;">
+												${item.bespokePlace}
+												<br>
+												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+											</div>
+										</div>
+									</c:if>
+
+									<c:if test="${item.placeNo !='1'}">
+										<div id="timetable1">
+											<div ><img  class="radious" width="90px" height="60px" src="${root}/static/img/place/${item.placeImage}" ></div>
+											<div id="place-time" style="font-weight: bold;">
+												${item.placeName}
+												<br>
+												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+											</div>
+										</div>
+									</c:if>
+								</c:if>
+							</c:forEach>
+							
+							
+							<div class="not-schedule">
+								<div>
+									<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정 없음.
+								</div>
+							</div>
+			
+						</div>
+						
+						
+						
+					</div>	
+				</c:forEach>
+				
+			</div>
+
 		
-					<div class="timetable">
-						<div id="timetable1">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div class="not-schedule">
-							<div>
-								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-							</div>
-						</div>
-		
-					</div>
-					
-				</div>
-				<div class="scheduler radious">
-					<div id="trip-date">
-						DAY1
-						<br>
-						2023-04-27
-					</div>
-		
-					<div class="timetable">
-						<div id="timetable1">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable2">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable3">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable4">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div id="timetable5">
-							<div ><img  class="radious" width="90px" height="60px" src="" alt=""></div>
-							<div id="place-time">
-								곽지해수욕장
-								<br>
-								10:00~11:00
-							</div>
-						</div>
-						<div class="not-schedule">
-							<div>
-								<i class="fa-solid fa-circle-info fa-lg" style="color: #878787;"></i>일정이 없습니다.
-							</div>
-						</div>
-		
-					</div>
-					
-				</div>
-		
-			</div>	
 		</div>
 		
 		
 	
 	
 		
-	
-		
-	
+
+				
 	</main>
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 </body>
 </html>

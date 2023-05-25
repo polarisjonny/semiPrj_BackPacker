@@ -10,6 +10,7 @@ import java.util.List;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.vo.GuideBoardVo;
+import com.bp.app.travelReview.vo.TravelReviewVo;
 
 public class MyPageBoardService {
 
@@ -53,5 +54,35 @@ public class MyPageBoardService {
 		JDBCTemplate.close(conn);
 		
 		return list;
+	}
+
+	public List<TravelReviewVo> selectMyTravelReviewList(PageVo pv, String memberNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MyPageBoardDao dao = new MyPageBoardDao();
+		List<TravelReviewVo> tList = dao.selectMyTravelReviewList(conn, pv, memberNo);
+		//sql
+		
+		JDBCTemplate.close(conn);
+		
+		
+		//return
+		return tList;
+	}
+	
+	
+
+	
+	public int selectMyReviewCount(String memberNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MyPageBoardDao dao = new MyPageBoardDao();
+		int count = dao.selectMyReviewCount(conn, memberNo);
+		
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
 	}
 }
