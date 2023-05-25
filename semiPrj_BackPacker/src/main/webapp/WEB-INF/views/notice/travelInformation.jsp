@@ -193,11 +193,10 @@ footer, header, hgroup, menu, nav, section {
 		<br>
 		
         <div id="review-search-area">
-            <form action="${root}/notice/travelReviewList">
-                <select name="search-type">
+            <form action="${root}/notice/travelInformation">
+                <select name="searchType">
                         <option value="title">제목</option>
-                        <option value="writer">작성자</option>
-                        <option value="category">카테고리</option>
+                        <option value="writer">여행지 이름</option>
                 </select>
                	
                <span class="input-area">
@@ -220,43 +219,21 @@ footer, header, hgroup, menu, nav, section {
 	        
 	        <div id="hit">
 				<a href="#">조회순</a>  
-				 <span id="line">|</span>   
-				<a href="#">등록순</a>     
 	        </div>
         </div>
 
       <div id="reviewList">
       
+      	<c:forEach items="${tiList }" var="tiList">
+      	</c:forEach>
         <div class="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelInformation/fireworks.jpg">
+        	<a href="#"><img alt="서브 이미지" src="${root}/static/img/travelInformation/fireworks.jpg"></a>
            	<div>
-            <a href="#">5.10~5.12 오사카 불꽃놀이 축제</a>
+            <a href="#"></a>
            	</div>
         </div>
         
-
-		<div class="review-area">
-        	<img alt="서브 이미지" src="${root}/static/img/travelInformation/paris.jpg">
-        	<div>
-           	 <a href="#">10.1~11.4 파리 에펠탑 투어</a>
-        	</div>
-		</div>
-
-        
-        
-        <div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelInformation/dokyo.jpg">
-            <div>
-            <a href="#">도쿄 맛집 총정리</a>
-            </div>
-        </div>
-
-		<div class="review-area">
-            <img alt="서브 이미지" src="${root}/static/img/travelInformation/jejudo.jpg">
-			<div>
-            <a href="#">제주도 액티비티 추천</a>
-			</div>
-		</div>		
+			
       </div>  
         
         <br>
@@ -265,37 +242,37 @@ footer, header, hgroup, menu, nav, section {
         
         <div id="page-area">
             	
-            	<%-- <c:if test="${pv.currentPage > 1}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
-            	<%-- </c:if> --%>
+            	 <c:if test="${pv.currentPage > 1}">
+				  <c:set var="previousPage" value="${pv.currentPage - 2}" />
+				  <c:choose>
+				    <c:when test="${backPage < 1}">
+				      <c:set var="previousPage" value="1" />
+				    </c:when>
+				  </c:choose>
+				  <a style="color:#99ccff" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+				  <a style="color:#99ccff" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+				</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">1</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">2</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">3</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">4</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">5</a>
+		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             		</c:if>
             		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a>${i}</a>
+            	      	<a style="color:#99ccff">${i}</a>
             		</c:if>
             	</c:forEach>
             	
-            	<%-- <c:if test="${pv.currentPage < pv.maxPage}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
-            	<%-- </c:if> --%>
+            	 <c:if test="${pv.currentPage < pv.maxPage}">
+				  <c:set var="nextPage" value="${pv.currentPage + 2}" />
+				  <c:choose>
+				    <c:when test="${nextPage > pv.maxPage}">
+				      <c:set var="nextPage" value="${pv.maxPage}" />
+				    </c:when>
+				  </c:choose>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+				</c:if>
             </div>
    
     

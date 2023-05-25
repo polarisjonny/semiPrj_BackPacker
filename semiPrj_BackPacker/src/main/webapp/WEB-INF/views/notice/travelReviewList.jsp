@@ -234,25 +234,36 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
             	
             	<c:if test="${pv.currentPage > 1}">
-	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage - 1}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage - 2}"> < </a>
-            	</c:if>
+				  <c:set var="previousPage" value="${pv.currentPage - 2}" />
+				  <c:choose>
+				    <c:when test="${backPage < 1}">
+				      <c:set var="previousPage" value="1" />
+				    </c:when>
+				  </c:choose>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+				</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReview?page=${i}">${i}</a>
+		            	<a href="${root}/notice/travelReview?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             		</c:if>
             		
-            		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a>${i}</a>
+            	      	<a style="color:#99ccff">${i}</a>
             		</c:if>
             	</c:forEach>
             	
             	<c:if test="${pv.currentPage < pv.maxPage}">
-	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}"> > </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 2}"> >> </a>
-            	</c:if> 
+				  <c:set var="nextPage" value="${pv.currentPage + 2}" />
+				  <c:choose>
+				    <c:when test="${nextPage > pv.maxPage}">
+				      <c:set var="nextPage" value="${pv.maxPage}" />
+				    </c:when>
+				  </c:choose>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+				</c:if>
             </div>
    
     
