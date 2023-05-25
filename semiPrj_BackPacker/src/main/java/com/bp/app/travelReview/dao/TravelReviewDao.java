@@ -187,7 +187,7 @@ public class TravelReviewDao {
 	//상세조회
 	public TravelReviewVo selectOneByNo(Connection conn, String infoNo) throws Exception {
 
-		String sql = "SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,M.PROFILE_IMAGE , M.NICK , M.ID FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO WHERE I.INFO_NO=? AND DELETE_YN='N'";
+		String sql = "SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,I.MAIN_IMG ,M.PROFILE_IMAGE , M.NICK , M.ID FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO WHERE I.INFO_NO= ? AND I.INFO_CATEGORY_NO = 1 AND DELETE_YN='N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, infoNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -205,6 +205,7 @@ public class TravelReviewDao {
 			String profileImage = rs.getString("PROFILE_IMAGE");
 			String writerNick = rs.getString("NICK");
 			String writerId = rs.getString("ID");
+			String mainImg = rs.getString("MAIN_IMG");
 			
 			vo.setInfoNo(infoNo);
 			vo.setInfoCategoryNo(infoCategoryNo);
@@ -218,6 +219,7 @@ public class TravelReviewDao {
 			vo.setProfileImage(profileImage);
 			vo.setWriterNick(writerNick);
 			vo.setWriterId(writerId);
+			vo.setChangeName(mainImg);
 		}
 
 			JDBCTemplate.close(pstmt);

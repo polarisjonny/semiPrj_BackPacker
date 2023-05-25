@@ -17,7 +17,7 @@ public class TravelInformationDao {
 	public int selectCnt(Connection conn) throws Exception {
 
 		//sql
-		String sql ="SELECT COUNT(*) FROM INFO_BOARD WHERE DELETE_YN = 'N'";
+		String sql ="SELECT COUNT(*) FROM INFO_BOARD WHERE DELETE_YN = 'N' AND INFO_CATEGORY_NO = 2";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -80,5 +80,49 @@ public class TravelInformationDao {
 		
 			return tiList;
 	}//selectList
+
+	//여행정보 게시판 상세조회
+	public TravelReviewVo selectOneByNo(Connection conn, String infoNo) throws Exception {
+
+		String sql="SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT ,I.MAIN_IMG ,M.PROFILE_IMAGE , M.NICK , M.ID FROM INFO_BOARD I JOIN MEMBER M ON I.WRITER_NO = M.MEMBER_NO WHERE I.INFO_NO= ? AND I.INFO_CATEGORY_NO = 2 AND DELETE_YN='N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, infoNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		TravelReviewVo vo = new TravelReviewVo();
+		if(rs.next()) {
+			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+			String deleteYn = rs.getString("DELETE_YN");
+			String profileImage = rs.getString("PROFILE_IMAGE");
+			String writerNick = rs.getString("NICK");
+			String writerId = rs.getString("ID");
+			String mainImg = rs.getString("MAIN_IMG");
+			
+			vo.setInfoNo(infoNo);
+			vo.setInfoCategoryNo(infoCategoryNo);
+			vo.setWriterNo(writerNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setHit(hit);
+			vo.setDeleteYn(deleteYn);
+			vo.setProfileImage(profileImage);
+			vo.setWriterNick(writerNick);
+			vo.setWriterId(writerId);
+			vo.setChangeName(mainImg);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
+	}
 
 }
