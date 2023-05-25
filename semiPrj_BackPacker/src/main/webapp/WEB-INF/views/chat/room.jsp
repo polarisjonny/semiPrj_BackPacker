@@ -42,101 +42,46 @@
 	  
 	    padding: 10px;
 	}
-	.receivechatarea{
-	    font-size: 14px;
-	    margin: auto;
-	    display: grid;
-	    grid-template-columns: 2fr 7fr 1fr;
-	  
+	.receive-chat-area{
+	    
+	  	overflow-y: scroll;
 	    gap: 10px;
+	    height : 500px;
 	   
 	}
-	#receivechattext{
-	    border: 1px solid rgba(0, 0, 0, 0.384);
-	    border-radius: 10px;
-	    background-color: white;
-	    padding: 5px;
-	    letter-spacing: 0.3px
-	
-	}
-	#receivechatdate{
-	    display: flex;
-	    align-items: flex-end;
-	    justify-content: center;
-	    padding-top: 0 ;
-	    padding-top: 10px;
-	    font-size: 10px;
-	}
-	.sendchatarea{
-	    font-size: 14px;
-	    margin: auto;
-	    display: grid;
-	    grid-template-columns: 2fr 8fr;
-	  
-	    gap: 10px;
-	}
-	#sendchatdate{
-	    display: flex;
-	    align-items: flex-end;
-	    justify-content: center;
-	    padding-top: 0 ;
-	    padding-top: 10px;
-	    font-size: 10px;
-	}
-	
-	#sendchattext{
-	    padding: 5px;
-	    border: 1px solid rgba(0, 0, 0, 0.384);
-	    border-radius: 10px;
-	    background-color: white;
-	    letter-spacing: 0.3px
 	
 	 
-	}
-	#chatout{
-	    display: flex;
-	    align-items: flex-end;
-	    justify-content: center;
+	.chat-area {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
 	
 	}
-	#chatoutbtn{
-	    font-size: 25px;
-	    color: crimson;
-	    background-color: white;
-	    width: 100%;
-	    height: 50px;
-	    border-radius: 20px;
-	    border: 1px solid black;
-	    
+
+	/* 스크롤바 스타일 설정 */
+	::-webkit-scrollbar {
+		width: 10px;
+		background-color: #E0F2FE; /* 연한 하늘색 배경색 */
 	}
-	#outmsg{
-	    text-align: center;
-	    
+
+	::-webkit-scrollbar-thumb {
+		background-color: #64B5F6; /* 연한 하늘색 스크롤바 색상 */
+		border-radius: 5px; /* 스크롤바를 둥글게 보이도록 설정 */
 	}
-	#outdate{
-	    text-align: center;
-	    
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: #1976D2; /* 마우스 오버 시 스크롤바 색상 변경 */
 	}
-	#writemsg{
-	    padding-left: 10px;
-	    width: 320px;
-	    height: 30px;
-	    border-radius: 10px;
-	    border: 1px solid black;
-	    box-sizing: border-box;
+
+	.write-area-btn{
+		wirdth : 450px;
 	}
-	#sendmsgbtn{
-	    margin-left: 10px;
-	    width: 60px;
-	    height: 30px;
-	    border-radius: 10px;
-	    border: 1px solid;
+	.write-area-btn > textarea{
+		width : 450px;
 	}
-	.chat-area{
-		display : grid;
-		 grid-template-columns: 1fr 4fr;
-		 
+	.write-area-btn > input{
+		width : 450px;
 	}
+	
 </style>
 <body>
 	<div class="chatWrap">
@@ -153,19 +98,25 @@
             
         </div>  
         <br>
-			<div id="receive-chat-area">
+			<div class="receive-chat-area">
+			
 			</div>
            
-        <div class="chat-area">
-						<textarea name="chat" style="resize: none;" placeholder="채팅칸."></textarea>
+		<div class= "write-area-btn">
+		
+						<textarea name="chat" style="resize: none;" placeholder="채팅칸." ></textarea>
 						<input type="button" value="채팅작성" onclick="writeChat()">
 		</div>
+		<br>
+		<br>
            
            
        
     </div>
     <script>
-		loadChat();
+   		setInterval(loadChat,100);
+ 		loadChat();
+    	
 		//댓글작성
 		let chat = null;
 		function writeChat(){
@@ -187,11 +138,13 @@
 					chattingUser2Nick :'${vo.chattingUser2Nick}',
 				},
 				success: (x)=>{
+					const chatArea = document.querySelector(".receive-chat-area");
 					console.log(x);
 					if(x == 'ok'){
-						alert("채팅작성 성공!");
 						document.querySelector("textarea[name=chat]").value='';
+						chatArea.scrollTop = chatArea.scrollHeight;
 						loadChat();
+						
 					}else {
 						alert('채팅 작성실패...');
 					}
@@ -215,7 +168,7 @@
 				success : function(data){
 					const x  = JSON.parse(data);
 					const j = x.length;
-					const chatArea = document.querySelector("#receive-chat-area");
+					const chatArea = document.querySelector(".receive-chat-area");
 					chatArea.innerHTML="";
 					let str = "";
 					console.log(x);
