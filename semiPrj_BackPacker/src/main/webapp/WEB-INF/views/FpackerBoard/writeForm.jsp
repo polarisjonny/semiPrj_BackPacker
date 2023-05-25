@@ -92,15 +92,15 @@
 
 		
 	}
-
+	textarea {
+		width: 100%;
+		height: 500px;
+	}
 </style>
 </head>
 <body>
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	
 	<main>
 	
@@ -130,9 +130,10 @@
 					<input type="text" name="title" placeholder="제목을 입력해주세요.">
 				</div>
 
-				 <div id="summernote"></div>
-
 				
+				<textarea style="resize: none;">내용을입력해주세요.</textarea>
+				
+				  
 			    
 				
 				<div class="travel-date-area">
@@ -191,20 +192,6 @@
 	});
 	
 	
-    $('#summernote').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 500,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
 
 
 </script>
