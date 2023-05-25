@@ -42,4 +42,16 @@ public class TravelInformationService {
 		
 	}
 
+	//여행정보 게시판 상세조회
+	public TravelReviewVo selectOneByNo(String infoNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		TravelReviewVo vo = dao.selectOneByNo(conn,infoNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
 }

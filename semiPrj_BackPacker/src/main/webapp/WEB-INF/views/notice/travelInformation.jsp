@@ -214,7 +214,7 @@ footer, header, hgroup, menu, nav, section {
         <div id="content-area">
          
 
-			<div id="review">여행후기</div>
+			<div id="review">여행정보</div>
 			   
 	        
 	        <div id="hit">
@@ -223,25 +223,21 @@ footer, header, hgroup, menu, nav, section {
         </div>
 
       <div id="reviewList">
-      
-      	<c:forEach items="${tiList }" var="tiList">
-      	</c:forEach>
+      	<c:forEach items="${tiList}" var="tiList">
         <div class="review-area">
-        	<a href="#"><img alt="서브 이미지" src="${root}/static/img/travelInformation/fireworks.jpg"></a>
+        	<a href="${root}/notice/travelInformation/detail?infoNo=${tiList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${tiList.mainImg}"></a>
            	<div>
-            <a href="#"></a>
+            <a href="${root}/notice/travelInformation/detail?infoNo=${tiList.infoNo}">${tiList.title}</a>
            	</div>
         </div>
+      	</c:forEach>
         
 			
       </div>  
         
         <br>
         
-       
-        
         <div id="page-area">
-            	
             	 <c:if test="${pv.currentPage > 1}">
 				  <c:set var="previousPage" value="${pv.currentPage - 2}" />
 				  <c:choose>
