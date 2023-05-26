@@ -1,4 +1,4 @@
-package com.bp.app.scheduler;
+package com.bp.app.scheduler.controller;
 
 import java.io.IOException;
 
@@ -11,25 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 import com.bp.app.scheduler.service.SchedulerService;
 import com.bp.app.scheduler.vo.TimetableVo;
 
-@WebServlet("/schedulermake/updateTimetable")
-public class UpdateTimetable extends HttpServlet{
-
+@WebServlet("/schedulermake/deTimetable")
+public class DeTimetable extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
 			//데이터
-			String timetableStartTime =req.getParameter("timetableStartTime");
-			String timetableNo =req.getParameter("timetableNo");
+			String placeNo =req.getParameter("placeNo");
+			String schedulerNo =req.getParameter("schedulerNo");
+			String timetableDate =req.getParameter("timetableDate");
+			String timetableNo = req.getParameter("timetableNo");
 			
 			TimetableVo vo = new TimetableVo();
-			vo.setTimetableStartTime(timetableStartTime);
+			vo.setPlaceNo(placeNo);
+			vo.setSchedulerNo(schedulerNo);
+			vo.setTimetableDate(timetableDate);
 			vo.setTimetableNo(timetableNo);
 			
 			SchedulerService ss = new SchedulerService();
-			int result = ss.updateTimetable(vo);
-			
-			
+			int result = ss.deTimetable(vo);
 			
 			
 			
@@ -37,8 +39,9 @@ public class UpdateTimetable extends HttpServlet{
 			System.out.println("[ERROR] timetable삭제하다가 에러");
 			e.printStackTrace();
 		}
+		
 	
 	
 	}
-	
+
 }

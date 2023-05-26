@@ -1,4 +1,4 @@
-package com.bp.app.scheduler;
+package com.bp.app.scheduler.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

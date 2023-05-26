@@ -52,7 +52,7 @@
 		box-sizing: border-box;
 		display: grid;
 
-		width: 250px;
+		width: 298px;
 		
 		grid-template-columns: 1.3fr 4fr 1.3fr;
 		justify-items: center;
@@ -179,6 +179,7 @@
 		border: 0;
 		background-color: rgb(225, 224, 224);
 		font-size: 20px;
+		margin-left: 22px;
 	}
 	
 	#tripDate{
@@ -296,11 +297,14 @@
 
 	.carousel-control-next>span{width: 80px ;color: black;}
 	.carousel-control-prev>span{width: 80px;color: black;}
+
+	.cursor{cursor: pointer;}
     
 	
     
 	</style>
 <body>
+	
 	
 	
 	
@@ -311,7 +315,7 @@
 	<div id="wrap">
 	
 	
-	    <div id="sidebarLeft">
+	    <div id="sidebarLeft" >
 			
 			<div id="tripDate">
 				기간선택 : &nbsp; <input type="text" name="daterange" />
@@ -366,7 +370,7 @@
 							<input id="userTime" type="time" name="time" >
 						</div>
 					<div id="p-area">
-						<div id="p-pick" data-placeno="1">추가</div>
+						<div id="p-pick" data-placeno="1" class="cursor">추가</div>
 					</div>
 				</div>
 
@@ -377,12 +381,12 @@
 				<c:forEach items="${placeList}" var="place" varStatus="loop">
 					<c:if test="${loop.index > 0}">
 						<!-- 첫 번째 요소를 제외한 나머지 요소를 표시하는 코드 -->
-						<div id="place" data-lng="${place.placeLng}" data-lat="${place.placeLat}">
+						<div id="place" class="latlng" data-lng="${place.placeLng}" data-lat="${place.placeLat}">
 							<img id="place-img" src="${root}/static/img/place/${place.placeImage}" alt="">
 							<div id="p-place">${place.placeName}</div>
 							<div id="p-area">
-								<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>
-								<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="${place.placeNo}" ></i></div>
+								<div id="p-introduce"><i class="bi bi-info-circle cursor" ></i></div>
+								<div id="p-pick"><i class="bi bi-plus-circle cursor"  data-placeno="${place.placeNo}" ></i></div>
 							</div>
 						</div>
 						<div id="modal-area" class="modal-area">
@@ -570,8 +574,8 @@
 								sstr+= '<img id="place-img" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
 								sstr+=	'<div id="p-place">'+s[i].placeName+'</div>'
 								sstr+=	'<div id="p-area">'
-								sstr+=		'<div id="p-introduce"><i class="bi bi-info-circle" ></i></div>'
-								sstr+=		'<div id="p-pick"><i class="bi bi-plus-circle" data-placeno="'+s[i].placeNo+'" ></i></div>'
+								sstr+=		'<div id="p-introduce"><i class="bi bi-info-circle cursor" ></i></div>'
+								sstr+=		'<div id="p-pick"><i class="bi bi-plus-circle cursor" data-placeno="'+s[i].placeNo+'" ></i></div>'
 								sstr+='</div>'
 								sstr+='</div>'
 								sstr+='<div id="modal-area" class="modal-area">'
@@ -591,7 +595,7 @@
 								sstr+=			'</div>'
 								sstr+=		'</div>'
 								sstr+=	'<div id="modal-btn">'
-								sstr+=		'<button id="close" class="close">X</button>'
+								sstr+=		'<button id="close" class="close cursor">X</button>'
 								sstr+=	'</div>'
 								sstr+='</div>'
 							sstr+='</div>'
@@ -674,6 +678,7 @@
 					url: '${root}/schedulermake/getScheduler',
 					data: { 
 						startDate: startDate,
+						endDate: endDate
 					},
 					success : function(data) { 
 						
@@ -686,7 +691,7 @@
 						let sstr="";
 						for(let i =1 ; i<=m[0].totalDay; i++){
 							if(i===1){
-								sstr+='<div id="over" class="carousel-item active" >'
+								sstr+='<div id="over" class="carousel-item active">'
 									
 									sstr+='<div id="scheduler-date-area" >'
 										sstr+='<div></div>'
@@ -696,11 +701,11 @@
 										
 										// <%-- 여행지을 가져 왔을때 생성 --%>
 										
-										sstr+='<div id="placejson1-a"></div>'
+										sstr+='<div id="placejson1-a"> <br><br><br><br><br>여행지 장소리스트에서 <br>가고 싶은 곳을 골라 + 아이콘을 눌러<br> 추가하시오 <br> 시작시간을 설정하여 일정표를 만드세요!</div>'
 										
 								sstr+='</div>'
 							}else{
-								sstr+='<div id="over" class="carousel-item"  >'
+								sstr+='<div id="over" class="carousel-item">'
 									
 									sstr+='<div id="scheduler-date-area"  >'
 										sstr+='<div></div>'
@@ -818,7 +823,7 @@
 										str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
 										str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 										str+=	'</div>';
-										str+=	'<div ><i class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
+										str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
 										str+= '</div>';
 								str+='</div>';
 							}else{
@@ -830,7 +835,7 @@
 											str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
 											str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 											str+=	'</div>';
-											str+=	'<div ><i class="bi bi-trash" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
+											str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
 											str+= '</div>';
 									str+='</div>';
 							}
@@ -919,19 +924,7 @@
 			
 			///////////////////////////////////////////////////
 			
-			var divElement = document.getElementById("place");
-			divElement.addEventListener("mouseover", function() {
-			// 호버 이벤트 핸들러 내부 코드
-			var placeLat = parseFloat(this.dataset.lat);
-			var placeLng = parseFloat(this.dataset.lng);
 			
-			// 호버한 위치로 지도를 이동시킵니다.
-			if (!isNaN(placeLat) && !isNaN(placeLng)) {
-				var zoomPosition = new google.maps.LatLng(placeLat, placeLng);
-				map.setCenter(zoomPosition);
-				map.setZoom(12); 
-			}
-			});
 			
 			
 			
@@ -942,81 +935,97 @@
 			const dataList = placeList.split("],");
 			const markers = []; // 마커를 저장할 배열
 
+			console.log(placeList);
+
 			function initMap() {
-			map = new google.maps.Map(document.getElementById("map"), {
-				center: { lat: 33.4996213, lng: 126.5311884 },
-				zoom: 10,
-			});
-
-			for (const data of dataList) {
-				const placeInfo = data.replace("[", "").replace("]", "").split(",");
-				const markerInfo = {}; // 마커 정보를 저장할 객체
-
-				for (const info of placeInfo) {
-				const [key, value] = info.split("=").map(item => item.trim());
-
-				switch (key) {
-					case "placeNo":
-					markerInfo.placeNo = value;
-					break;
-					case "placeCategoryNo":
-					markerInfo.placeCategoryNo = value;
-					break;
-					case "countryNo":
-					markerInfo.countryNo = value;
-					break;
-					case "locationNo":
-					markerInfo.locationNo = value;
-					break;
-					case "placeName":
-					markerInfo.placeName = parseFloat(value);
-					break;
-					case "placeLat":
-					markerInfo.placeLat = parseFloat(value);
-					break;
-					case "placeLng":
-					markerInfo.placeLng = parseFloat(value);
-					break;
-					default:
-					// 다른 키에 대한 처리 내용
-					break;
-				}
-				}
-
-				const marker = new google.maps.Marker({
-				position: { lat: markerInfo.placeLat, lng: markerInfo.placeLng },
-				map: map,
-				title: placeName,
+				map = new google.maps.Map(document.getElementById("map"), {
+					center: { lat: 33.4996213, lng: 126.5311884 },
+					zoom: 10.5,
 				});
 
-				marker.addListener("click", function () {
-				// 클릭한 마커의 정보를 가져옵니다.
-				const clickedMarkerInfo = markers.find(marker => marker.marker === this);
+				for (const data of dataList) {
+					const placeInfo = data.replace("[", "").replace("]", "").split(",");
+					const markerInfo = {}; // 마커 정보를 저장할 객체
 
-				if (clickedMarkerInfo) {
-					// 클릭한 마커 정보를 사용하여 원하는 작업을 수행합니다.
-					const clickedPlaceNo = clickedMarkerInfo.placeNo;
+					for (const info of placeInfo) {
+						const [key, value] = info.split("=").map(item => item.trim());
 
-					// 클릭한 마커로 지도를 이동시킵니다.
-					map.setCenter(this.getPosition());
+						switch (key) {
+							case "placeNo":
+							markerInfo.placeNo = value;
+							break;
+							case "placeCategoryNo":
+							markerInfo.placeCategoryNo = value;
+							break;
+							case "countryNo":
+							markerInfo.countryNo = value;
+							break;
+							case "locationNo":
+							markerInfo.locationNo = value;
+							break;
+							case "placeName":
+							markerInfo.placeName = value;
+							break;
+							case "placeLat":
+							markerInfo.placeLat = parseFloat(value);
+							break;
+							case "placeLng":
+							markerInfo.placeLng = parseFloat(value);
+							break;
+							default:
+							// 다른 키에 대한 처리 내용
+							break;
+						}
+					}
 
-					// 필요에 따라 지도의 줌 레벨을 조정할 수 있습니다.
-					map.setZoom(13); // 예시로 줌 레벨 12로 설정
+					const marker = new google.maps.Marker({
+						position: { lat: markerInfo.placeLat, lng: markerInfo.placeLng },
+						map: map,
+						title: markerInfo.placeName,
+					});
+
+					marker.addListener("click", function () {
+					// 클릭한 마커의 정보를 가져옵니다.
+						const clickedMarkerInfo = markers.find(marker => marker.marker === this);
+
+						if (clickedMarkerInfo) {
+							// 클릭한 마커 정보를 사용하여 원하는 작업을 수행합니다.
+							const clickedPlaceNo = clickedMarkerInfo.placeNo;
+
+							// 클릭한 마커로 지도를 이동시킵니다.
+							map.setCenter(this.getPosition());
+
+							// 필요에 따라 지도의 줌 레벨을 조정할 수 있습니다.
+							map.setZoom(14); // 예시로 줌 레벨 12로 설정
+						}
+					});
+
+					markers.push({ marker: marker, ...markerInfo }); // 마커와 정보를 배열에 저장
 				}
+			}
+			
+			//클릭하면 줌됌
+			
+			var divElement = document.getElementsByClassName("latlng");
+			for (var i = 0; i < divElement.length; ++i) {
+				divElement[i].addEventListener("click", function() {
+					// 호버 이벤트 핸들러 내부 코드
+					var placeLat = parseFloat(this.dataset.lat);
+					var placeLng = parseFloat(this.dataset.lng);
+					
+					// 호버한 위치로 지도를 이동시킵니다.
+						if (!isNaN(placeLat) && !isNaN(placeLng)) {
+						var zoomPosition = new google.maps.LatLng(placeLat, placeLng);
+						map.setCenter(zoomPosition);
+						map.setZoom(14); 
+						}
 				});
-
-				markers.push({ marker: marker, ...markerInfo }); // 마커와 정보를 배열에 저장
 			}
-			}
-			
-	        window.initMap = initMap;
-			
-			
-
 
 		
-			
-			
+		window.initMap = initMap;
+
+
 						
 			
 			// 마커 생성
