@@ -47,8 +47,14 @@ public class TravelInformationService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
+		int result = dao.increaseHit(conn , infoNo);
+		if(result != 1) {
+			JDBCTemplate.rollback(conn);
+			throw new Exception("조회수 증가 쿼리문 실패");
+		}
 		TravelReviewVo vo = dao.selectOneByNo(conn,infoNo);
 		
+		JDBCTemplate.commit(conn);
 		JDBCTemplate.close(conn);
 		
 		return vo;
