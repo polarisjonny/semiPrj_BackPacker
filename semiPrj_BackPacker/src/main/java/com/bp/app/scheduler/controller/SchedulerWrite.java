@@ -1,4 +1,4 @@
-package com.bp.app.scheduler;
+package com.bp.app.scheduler.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,7 +59,13 @@ public class SchedulerWrite extends HttpServlet{
 			String path = req.getServletContext().getRealPath("/static/img/accompany/");
 			Part f = req.getPart("f");
 			
-			AttachmentVo attvo = FileUploader.saveFile(path, f);
+			AttachmentVo attachmentVo = null;
+			
+			if(f != null && f.getSize() > 0) {
+				attachmentVo = FileUploader.saveFile(path, f);
+			}
+			
+			
 			
 			String writerNo = loginMember.getMemberNo();
 			String category = req.getParameter("category");
@@ -75,7 +81,9 @@ public class SchedulerWrite extends HttpServlet{
 			bgVo.setGuideBoardCategoryNo(category);
 			bgVo.setTitle(title);
 			bgVo.setContent(content);
-			bgVo.setMainImg(attvo.getChangeName());
+			if (attachmentVo != null) {
+                bgVo.setProfileImage(attachmentVo.getChangeName());
+            }
 			
 			//서비스
 			SchedulerService ss = new SchedulerService();
