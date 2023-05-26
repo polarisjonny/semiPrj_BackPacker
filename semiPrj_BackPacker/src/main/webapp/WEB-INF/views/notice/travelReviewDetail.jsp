@@ -329,7 +329,11 @@ main{
 					let str = "";
 					for(let i=0; i<x.length; i++){
 						str+='<div class="comment">';
-						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profileImage+'" alt=""></div>';
+						if(x[i].profileImage == null){
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/profile_default.jpg" alt=""></div>';
+						}else{
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profileImage+'" alt=""></div>';
+						}
 						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].infoNo+'">';
 						str+='<div class="comment-list-id">'+x[i].writerNick+'</div>';
 						str+='<div class="comment-list-content">'+x[i].content+'</div>';

@@ -125,4 +125,16 @@ public class TravelInformationDao {
 		return vo;
 	}
 
+	//여행 정보 게시판 조회수 증가
+	public int increaseHit(Connection conn, String infoNo) throws Exception {
+
+		String sql="UPDATE INFO_BOARD SET HIT = HIT+1 WHERE INFO_NO = ? AND DELETE_YN ='N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, infoNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
 }
