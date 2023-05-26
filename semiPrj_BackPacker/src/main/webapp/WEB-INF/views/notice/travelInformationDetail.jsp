@@ -15,7 +15,7 @@ main{
 	
 	#mainReviewImg > img{
 		width:100%;
-		height:400px;
+		height:300px;
 	}
 	
 	#notice-title > div{
@@ -32,11 +32,13 @@ main{
 	#notice-writer{
 		display:flex;
 		margin-left:185px;
+		align-items:flex-end;
 	}
 	
 	#date-hit{
 		display:flex;
 		margin-right:185px;
+		align-items:flex-end;
 	}
 	
 	.hr{
@@ -62,6 +64,25 @@ main{
 		height:200px;
 	}
 	
+	#profile-img{
+		border-radius : 70%;
+	}
+	
+	#review-btn{
+		display : flex;
+		align-items: center;
+		justify-content:center;
+	}
+	
+	#review-btn > button{
+		border-radius: 10px;
+        border: 1px solid #99ccff;
+        background-color:  #99ccff;
+        color:white;
+        padding:10px;
+        margin:0px 10px 10px;
+	}
+	
 </style>
 </head>
 <body>
@@ -70,28 +91,43 @@ main{
 	
 		<main>
 		
-	<div id="mainReviewImg">
-	<img src="${root}/static/img/travelReview/SingaporeReview.jpg">
-	</div>
+		<c:if test="${empty vo.changeName }">
+			<div id="mainReviewImg">
+			<img src="${root}/static/img/travelInformation/travelInfoMain.jpg">
+			</div>
+		</c:if>
+		
+		<c:if test="${not empty vo.changeName }">
+			<div id="mainReviewImg">
+			<img src="${root}/static/img/travelInformation/${vo.changeName}">
+			</div>
+		</c:if>
+
 			
 			<br>
 			<br>
 			
 			<div id="notice-title">
-				<div>도쿄 맛집 총정리</div> <!-- 게시글 제목 -->
+				<div>${vo.title}</div> <!-- 게시글 제목 -->
 			</div>
 			
 			<br>
 			
 			<div id="notice-write">
 				<div id="notice-writer">
-					<div>프사</div>
-					<div>&nbsp;&nbsp;&nbsp;&nbsp;닉네임</div>
+					<c:if test="${empty vo.profileImage }">
+					<img width="50px" height="50px" id="profile-img" src="${root}/static/img/member/profile/profile_default.jpg">
+					</c:if>
+					
+					<c:if test="${not empty vo.profileImage}">
+						<img width="50px" height="50px" id="profile-img" src="${root}/static/img/member/profile/${vo.profileImage}">
+					</c:if>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;${vo.writerNick}</div>
 				</div>
 				
 				<div id="date-hit">
-					<div>날짜 : 2023.01.09</div>
-					<div>&nbsp;&nbsp;&nbsp;&nbsp;조회수 : 150</div>
+					<div>날짜 : ${vo.enrollDate }</div>
+					<div>&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${vo.hit }</div>
 				</div>
 			</div>
 			
@@ -100,26 +136,18 @@ main{
 			
 			<div id="notice-content-area">
 			
-				<p id="notice-content">
-					도쿄 주변 맛집과 먹거리
-					야키토리 골목
-					리츠 칼튼 도쿄의 히노키자카(ひのきざか)
-					닌자 아카사카(ニンジャ アカサカ)
-					니다이메 츠지타(二代目つじ田)
-					모미노키 하우스(Mominoki House)
-					스키야바시지로(すきやばし次郎)
-					스시 카라쿠(鮨 からく)
-					렌가테이(煉瓦亭)
-				</p>
+				<div id="notice-content">
+					${vo.content}
+				</div>
 				
 			</div>
 			
-			<c:if test="${loginMember.id == 'ADMIN' }">
-				<div id="review-btn">
-						<a href="${root}/notice/informationEdit?no=${vo.no}">수정하기</a>
-						<a href="${root}/notice/informationDelete?no=${vo.no}">삭제하기</a>
-				</div>
-			</c:if>
+			<div id="review-btn">
+				<c:if test="${loginMember.id == 'ADMIN' }">
+					<button class="edit-btn">수정하기</button>
+				</c:if>
+					<button onclick="history.back();">목록으로</button>
+			</div>
 		
 		</main>
 	

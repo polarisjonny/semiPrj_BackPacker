@@ -180,7 +180,7 @@ footer, header, hgroup, menu, nav, section {
    
 
 		<div id="mainImg-area">
-	        <img id="mainImg" src="${root}/static/img/travelInformation/mainImg.jpg" alt="메인 이미지">
+	        <img id="mainImg" src="${root}/static/img/travelInformation/travelInfoMain.jpg" alt="메인 이미지">
 	        <div id="mainContent">
 	        	<div>다양한</div>
 	        	<div>여행 정보를</div>
@@ -206,9 +206,9 @@ footer, header, hgroup, menu, nav, section {
         
             </form>
             
-	         <div class="noticeBtn">
+	         <%-- <div class="noticeBtn">
 		        <button onclick="location.href='${root}/notice/travelInformationWrite'">게시글 작성</button>
-	        </div>
+	        </div> --%>
         </div>
         
         <div id="content-area">
@@ -218,16 +218,16 @@ footer, header, hgroup, menu, nav, section {
 			   
 	        
 	        <div id="hit">
-				<a href="#">조회순</a>  
+				<a href="#">조회순으로 보기</a>  
 	        </div>
         </div>
 
       <div id="reviewList">
       	<c:forEach items="${tiList}" var="tiList">
         <div class="review-area">
-        	<a href="${root}/notice/travelInformation/detail?infoNo=${tiList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${tiList.mainImg}"></a>
+        	<a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${tiList.mainImg}"></a>
            	<div>
-            <a href="${root}/notice/travelInformation/detail?infoNo=${tiList.infoNo}">${tiList.title}</a>
+            <a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}">${tiList.title}</a>
            	</div>
         </div>
       	</c:forEach>
