@@ -27,7 +27,7 @@ public class GuideBoardService {
 	}
 	
 
-	public int accomWrite(GuideBoardVo vo, MemberVo loginMember) throws Exception {
+	public int write(GuideBoardVo vo, MemberVo loginMember) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -150,25 +150,16 @@ public class GuideBoardService {
 	}
 	
 	//페이징 게시글 개수세기 (게시판카테고리 매개변수)
-	public int countCnt(int i) throws Exception {
+	public int countCnt(int i, String searchType, String searchValue) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-		//sql
-		String sql = "SELECT COUNT(*) as CNT FROM GUIDE_BOARD WHERE DELETE_YN ='N' and MATCHING_STATE = 'N' and GUIDE_BOARD_CATEGORY_NO = ?";
-		PreparedStatement pstmt =conn.prepareStatement(sql);
-		pstmt.setInt(1, i);
-		ResultSet rs = pstmt.executeQuery();
-		//rs
-		int cnt = 0;
-		if(rs.next()) {
-			cnt = rs.getInt("CNT");
-		}
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
+		
+		GuideBoardDao dao = new GuideBoardDao();
+		int listCnt = dao.countCnt(conn, 3, searchType, searchValue);
+		
 		JDBCTemplate.close(conn);
 		
-		return cnt;
+		return listCnt;
 	}
 
 	//자기소개및 작성자정보 조회

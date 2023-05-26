@@ -30,12 +30,21 @@ public class GuideBoardDao {
 	//가이드 보드에 인서트
 	public int insertGuideBoard(Connection conn, GuideBoardVo vo, MemberVo loginMember) throws Exception {
 		String sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT,MAIN_IMG) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?,?)";
+		//여행 경비값이 있을때 다른 쿼리문 실행
+		if(vo.getTravelExpense()!=null) {
+			sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT,MAIN_IMG,TRAVEL_EXPENSE) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?,?,?)";
+	
+		}
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, loginMember.getMemberNo());
 		pstmt.setString(2, vo.getGuideBoardCategoryNo());
 		pstmt.setString(3, vo.getTitle());
 		pstmt.setString(4, vo.getContent());
 		pstmt.setString(5, vo.getMainImg());
+		if(vo.getTravelExpense()!=null) {
+			pstmt.setString(6, vo.getTravelExpense());
+		}
+		
 		int result = pstmt.executeUpdate();
 		JDBCTemplate.close(pstmt);
 
@@ -126,7 +135,7 @@ public class GuideBoardDao {
 		
 		return result;
 	}
-
+	//신고수 업데이트하기
 	public int reportCnt(Connection conn, ReportVo vo) throws Exception {
 		String sql = "UPDATE GUIDE_BOARD SET REPORT_CNT = REPORT_CNT+1 WHERE GUIDE_BOARD_NO =?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -136,7 +145,7 @@ public class GuideBoardDao {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
+	//조회수 올리기
 	public int increaseHit(Connection conn, GuideBoardVo bvo) throws Exception {
 		String sql = "UPDATE GUIDE_BOARD SET HIT = HIT+1 WHERE GUIDE_BOARD_NO=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -147,7 +156,7 @@ public class GuideBoardDao {
 		
 		return result;
 	}
-
+	//목록 보여주기 리스트 가져와서 담기
 	public List<GuideBoardVo> getList(Connection conn, int i, PageVo pvo) throws Exception {
 		//sql
 		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO , GB.SCHEDULER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG ,TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,GB.TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO) WHERE GUIDE_BOARD_CATEGORY_NO =? AND DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
@@ -241,6 +250,36 @@ public class GuideBoardDao {
 		JDBCTemplate.close(pstmt);
 		
 		return bvoList;
+	}
+
+	public int countCnt(Connection conn, int categoryNo, String searchType, String searchValue) throws Exception {
+		//sql
+		String sql = "SELECT COUNT(*) as CNT FROM (SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO , GB.SCHEDULER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG ,TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,GB.TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO)) WHERE DELETE_YN ='N' and MATCHING_STATE = 'N' AND GUIDE_BOARD_CATEGORY_NO = ? ";
+		
+		if("title".equals(searchType)) {
+			sql += "AND TITLE LIKE '%" + searchValue + "%'";
+		}else if("writerId".equals(searchType)) {
+			sql += "AND ID LIKE '%" + searchValue + "%'";
+		}else if("writerNick".equals(searchType)) {
+			sql += "AND NICK LIKE '%" + searchValue + "%'";
+		}
+		
+		
+		
+		
+		PreparedStatement pstmt =conn.prepareStatement(sql);
+		pstmt.setInt(1,categoryNo);
+		ResultSet rs = pstmt.executeQuery();
+		//rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt("CNT");
+		}
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
 	}
 
 }

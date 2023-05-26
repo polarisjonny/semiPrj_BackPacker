@@ -71,7 +71,7 @@ public class AccompanyWrtieController extends HttpServlet {
 			//insert를 총 3번해서 result1,result2, result3이 나오지만 반환값은 result로 받음
 			//위의 1,2,3이 모두 1일때에만 result값인 1을 반환.
 			GuideBoardService gbs = new GuideBoardService();
-			int result = gbs.accomWrite(vo,loginMember);
+			int result = gbs.write(vo,loginMember);
 			
 			if(result==1) {
 				//위의 insert문 3개가 정상적으로 삽입되면 BoardList로 이동
