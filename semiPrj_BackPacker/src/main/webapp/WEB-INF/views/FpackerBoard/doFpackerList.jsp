@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AccompanyFindBoard</title>
+<title>P_Packer_find_board</title>
 <style>
 	body {
 		overflow-x :hidden;	
@@ -18,6 +18,7 @@
         padding: 0px;
     }
 	main {
+
 		width: 100vw;
 	}
 
@@ -29,15 +30,15 @@
         box-sizing: border-box;
     }
     #ca1 {
-        width: 15vw;
+        width: 10vw;
     }
 
     #ca2 {
-        width: 15vw;
+        width: 10vw;
     }
 
     #c-main {
-        width: 70vw;
+        width: 80vw;
     }
 
     #page-area {
@@ -66,55 +67,11 @@
         font-weight: 800;
         font-size: 40px;
     }
-    #main-area {
-        height: 700px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-    .content-box {
-        margin-right: 25px;
-        margin-top: 20px;
-        display: grid;
-        grid-template-rows: 1fr 3fr 1fr;
-        box-shadow: 0px 0px 8px grey;
-      
-        border-radius: 25px;
-    }
+
    
-    .middle-img {
-        height: 198px;
-        width: 100%;
-    }
-
-    .end-content {
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
-    }
-
-  .top-content {
-        display: flex;
-        align-items: center;
-    }
-    .profile {
-        width: 60px;
-        height: 60px;
-        border-radius: 70%; 
-    }
-    .small-text {
-        font-size: 13px;
-    }
-    .right-text {
-        margin-left: 10px;
-    }
-    .left-img {
-        vertical-align: center;
-        margin-left: 10px;
-    }
     #page-area {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 30px;
     }
   
 
@@ -153,13 +110,13 @@
         color: white;
         border-radius: 10px;
         border: none;
-        margin-right: 25px;
+        margin-right: 30px;
     }
 
     #main-img > img {
+        object-fit: none;
         width: 100vw;
-        height: 400px;
-        object-fit : none;
+        height: 450px;
     }
 
     #main-img {
@@ -178,25 +135,70 @@
     #page-area > a:last-child{
         margin-right: 0px;
     }
-     /* 작은 버튼 구해요 합니다버튼*/
-  
+
+    /* main-area content-area 관련 스타일*/
+    #main-area {
+        display: grid;
+        height: 1050px;
+        margin-top: 30px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .content-area > img{
+        object-fit: none;
+        width: 100%;
+        height: 90%;
+        border-radius: 30px;
+    }
+
+    .content-area {
+        margin-bottom: 50px;
+        margin-right: 20px;
+    }
+    .text-small {
+        font-size: 16px;
+    }
+    .content-small-bold {
+        font-weight: 600;
+    }
+    .text-area {
+        margin-top: 5px;
+    }
+    /*  */
+    .content-area > img {
+    	object-fit : cover;
+    }
+      .s-btn {
+        border: none;
+        border-top-left-radius: 10px ;
+        border-top-right-radius: 10px;
+        padding: 5px 5px 0px 5px;
+    }
+    .active-btn {
+    	background-color: #94D2E6;
+        color: white;
+    }
 </style>
 </head>
 <body>
-
 	<div id="wrap">
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <div id="main-img">
             <img src="${root}/static/img/board-main.jpg" alt="">
-            <div id="info-text">동행을 구해보세요!</div>
+            <div id="info-text">
+                백패커들이<br>
+                당신을<br>
+                찾습니다<br>
+            </div>
         </div>
         <div id="content-area">
             <div id="ca1"></div>
             <div id="c-main">
-                <div><a href="${root}/doFpacker/list?page=1">프패커게시판으로 이동하기</a></div>
+                <div>동행구하기 게시판으로 이동하기</div>
                 <div id="search-area">
-                	<form action="${root}/accompany/list" method="get">
+                	<form action="${root}/doFpacker/list" method="get">
                 		<input type="hidden" name="page" value="1">
 	                    <select name="searchType" id="category-area">
 	                        <option value="title">제목</option>
@@ -210,44 +212,35 @@
 	                    <!-- <input type="submit" value="검색"> -->                	
                 	</form>
                 </div>
-                
+                <div><button class="s-btn">구해요</button><button class="s-btn active-btn">합니다</button></div>
                 <div id="middle-area">
-                    <span id="big-text">동행을 찾아보세요</span>
-                    <button id="write-btn" type="button" onclick="location.href='${root}/accompany/write'">게시글 작성</button>
+                    <span id="big-text">프패커게시판</span>
+                    <c:if test="${empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
+	                    <script>
+	                    	function f01(){
+	                    		alert('로그인 먼저 해주세요.');
+	                    	}
+	                    </script>
+                    </c:if>
+                    <c:if test="${not empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="location.href='${root}/Fpacker/write'">게시글 작성</button>
+                    </c:if>
+                
                 </div>
                 
-               
+              
                 <div id="main-area">
                 	<c:forEach items="${gbvoList}" var="vo">
-	                	<div class="content-box" onclick="location.href ='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}+'&schedulerNo='+${vo.schedulerNo}">
-	                        <div class="top-content">
-	                            <div class="left-img">
-	              					<c:if test="${not empty vo.profileImage}">
-		                                <img class="profile" src="${root}/static/img/member/profile/${vo.profileImage}" alt="">
-		                               
-	              					</c:if>
-	              					<c:if test="${empty vo.profileImage}">
-	              						 <img class="profile" src="${root}/static/img/member/profile/profile_default.jpg" alt="">
-	              					</c:if>
-	                            </div>
-	                            <div class="right-text">
-	                                <div class="small-text">${vo.id}(${vo.nick})</div>
-	                                <div class="small-text">${vo.age}대 ${vo.gender}</div>
-	                                <c:if test="${not empty vo.startDate}">
-		                                <div class="small-text">${vo.startDate}~${vo.endDate}</div>
-	                                </c:if>
-	                                <c:if test="${empty vo.startDate}">
-		                                <div class="small-text">확정된 일정이 없습니다.</div>	                                
-	                                </c:if>
-	                            </div>
+	                    <div class="content-area">
+	                        <img class="thum-Img" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="">
+	                        <div class="text-area">
+	                            <div class="text-small content-small-bold">${vo.title}</div>
+	                            <div class="text-small">최저가  ￦${vo.travelExpense}/인</div>
 	                        </div>
-	                        <div class="middle-content">
-	                            <img class="middle-img" src="${root}/static/img/accompany/${vo.mainImg}" alt="">
-	                        </div>
-	                        <div class="end-content">${vo.title}</div>
 	                    </div>
                 	</c:forEach>
-                    
+
                 </div>
 
             </div>
@@ -255,20 +248,19 @@
         </div>
         <div id="page-area">
         	<c:if test="${pv.currentPage >1}">
-	            <a href="${root}/accompany/list?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><<</a>
-	            <a href="${root}/accompany/list?page=${pv.currentPage -1 }&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><</a>
+	            <a href="${root}/doFpacker/list?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><<</a>
+	            <a href="${root}/doFpacker/list?page=${pv.currentPage -1 }&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><</a>
         	</c:if>
             
             <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
- 	           <a href="${root}/accompany/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+ 	           <a href="${root}/doFpacker/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             </c:forEach>
             
             <c:if test="${pv.currentPage < pv.maxPage }">
-	            <a href="${root}/accompany/list?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
-	            <a href="${root}/accompany/list?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">>></a>            
+	            <a href="${root}/doFpacker/list?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
+	            <a href="${root}/doFpacker/list?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">>></a>            
             </c:if>
         </div>
-        
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>
@@ -286,3 +278,4 @@
 	}
    
 </script>
+
