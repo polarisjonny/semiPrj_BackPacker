@@ -30,12 +30,21 @@ public class GuideBoardDao {
 	//가이드 보드에 인서트
 	public int insertGuideBoard(Connection conn, GuideBoardVo vo, MemberVo loginMember) throws Exception {
 		String sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT,MAIN_IMG) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?,?)";
+		//여행 경비값이 있을때 다른 쿼리문 실행
+		if(vo.getTravelExpense()!=null) {
+			sql = "INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO, SCHEDULER_NO, TITLE,CONTENT,MAIN_IMG,TRAVEL_EXPENSE) VALUES (SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,SEQ_SCHEDULER_NO.CURRVAL,?,?,?,?)";
+	
+		}
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, loginMember.getMemberNo());
 		pstmt.setString(2, vo.getGuideBoardCategoryNo());
 		pstmt.setString(3, vo.getTitle());
 		pstmt.setString(4, vo.getContent());
 		pstmt.setString(5, vo.getMainImg());
+		if(vo.getTravelExpense()!=null) {
+			pstmt.setString(6, vo.getTravelExpense());
+		}
+		
 		int result = pstmt.executeUpdate();
 		JDBCTemplate.close(pstmt);
 

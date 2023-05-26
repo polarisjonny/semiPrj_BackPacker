@@ -109,12 +109,12 @@
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">프패커게시판 게시글 작성</div>
+			<form action="${root}/Fpacker/write" method="post" enctype="multipart/form-data">
 			게시판을 선택해주세요.
 			<select id="category" name="categoryValue">
 				<option value="1">프패커합니다</option>
 				<option value="2">프패커구해요</option>
 			</select>
-			<form action="${root}/Fpacker/write" method="post" enctype="multipart/form-data">
 				<div id="Thum-parent">
 					<img id="imgUpload">
 					<div id="Thumnail">
@@ -131,7 +131,7 @@
 				</div>
 
 				
-				<textarea style="resize: none;">내용을입력해주세요.</textarea>
+				<textarea style="resize: none;" placeholder="내용을입력해주세요." name="content"></textarea>
 				
 				  
 			    
@@ -144,7 +144,7 @@
 					<input type="date" name="endDate">
 				</div>
 				<div id="addInput-area">
-					<input type="number">원
+					<input type="number" value="0" name="expense">원
 				</div>
 				<div>
 					<input id="submit-btn" type="submit" value="작성완료">	

@@ -27,7 +27,7 @@ public class GuideBoardService {
 	}
 	
 
-	public int accomWrite(GuideBoardVo vo, MemberVo loginMember) throws Exception {
+	public int write(GuideBoardVo vo, MemberVo loginMember) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		

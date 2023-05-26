@@ -168,7 +168,6 @@
 </style>
 </head>
 <body>
-
 	<div id="wrap">
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
@@ -197,7 +196,18 @@
                 </div>
                 <div id="middle-area">
                     <span id="big-text">프패커합니다</span>
-                    <button id="write-btn">게시글 작성</button>
+                    <c:if test="${empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
+	                    <script>
+	                    	function f01(){
+	                    		alert('로그인 먼저 해주세요.');
+	                    	}
+	                    </script>
+                    </c:if>
+                    <c:if test="${not empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="location.href='${root}/Fpacker/write'">게시글 작성</button>
+                    </c:if>
+                
                 </div>
                 
                 
@@ -298,3 +308,5 @@
 	</div>
 </body>
 </html>
+
+
