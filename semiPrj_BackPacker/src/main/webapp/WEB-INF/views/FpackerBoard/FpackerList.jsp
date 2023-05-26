@@ -171,6 +171,7 @@
 	<div id="wrap">
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
+        
         <div id="main-img">
             <img src="${root}/static/img/board-main.jpg" alt="">
             <div id="info-text">

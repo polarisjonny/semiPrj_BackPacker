@@ -252,17 +252,17 @@
         </div>
         <div id="page-area">
         	<c:if test="${pv.currentPage >1}">
-	            <a href="/semi/accompany/list?page=1"><<</a>
-	            <a href="/semi/accompany/list?page=${pv.currentPage-1 }"><</a>
+	            <a href="${root}/accompany/list?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><<</a>
+	            <a href="${root}/accompany/list?page=${pv.currentPage -1 }&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><</a>
         	</c:if>
             
             <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
- 	           <a href="/semi/accompany/list?page=${i}">${i}</a>
+ 	           <a href="${root}/accompany/list?page=${pv.currentPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             </c:forEach>
             
             <c:if test="${pv.currentPage < pv.maxPage }">
-	            <a href="/semi/accompany/list?page=${pv.currentPage+1}">></a>
-	            <a href="/semi/accompany/list?page=${pv.maxPage}">>></a>            
+	            <a href="${root}/accompany/list?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
+	            <a href="${root}/accompany/list?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">>></a>            
             </c:if>
         </div>
         
