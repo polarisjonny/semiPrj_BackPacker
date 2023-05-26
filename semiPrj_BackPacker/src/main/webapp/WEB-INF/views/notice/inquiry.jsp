@@ -78,6 +78,7 @@
   	}
   	
   	.inquiry-item > ul > li{
+		width: 213px;
   		font-size:15px;
   		list-style:none;
   	}
@@ -131,7 +132,7 @@
 				<span class="input-area">
 		               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 		               	<input type="text" placeholder="여행지로 검색">
-	               </span>
+	            </span>
 			</div>
 		
 		</div>
@@ -139,58 +140,76 @@
 		<div id="margin-bottom"></div>
 		
 		<div id="mainContent">
-		
+
 			<div class="inquiry">
 				<ul class="inquiry-list">
+				
+
 					<li class="inquiry-item">
 						<h3 class="item-title">공지사항</h3>
 						<ul>
-							<li>[해외]남아프리카 공화국이 현재 역병으로 인해 여행을</ㅣ>
-							<li>[국내]제주도 여행선이 태풍으로 인해 유턴중입니...</li>
-							<li>상대방을 신뢰할 수 있는 거리 점수를 이용해 신중...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li><a href="${root}/notice/inquiryBoard"> 공지사항 더보기> </a></li>
+							<c:set var="count" value="0" /> 
+
+							<c:forEach var="item" items="${list}">
+								<c:if test="${item.qnaCategoryNo == '1'}"> 
+									<c:if test="${count < 5}"> 
+										<li>${item.title}</li>
+										<c:set var="count" value="${count + 1}" /> 
+									</c:if>
+								</c:if>
+							</c:forEach>
+							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=1"> 공지사항 더보기> </a></li>
 						</ul>
 					</li>
-					
 					<li class="inquiry-item">
 						<h3 class="item-title">FAQ</h3>
 						<ul>
-							<li>[해외]남아프리카 공화국이 현재 역병으로 인해 여행을</li>
-							<li>[국내]제주도 여행선이 태풍으로 인해 유턴중입니...</li>
-							<li>상대방을 신뢰할 수 있는 거리 점수를 이용해 신중...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li><a href="${root}/notice/inquiryFAQ"> FAQ 더보기></a></li>
+							<c:set var="count" value="0" /> 
+
+							<c:forEach var="item" items="${list}">
+								<c:if test="${item.qnaCategoryNo == '2'}"> 
+									<c:if test="${count < 5}"> 
+										<li>${item.title}</li>
+										<c:set var="count" value="${count + 1}" /> 
+									</c:if>
+								</c:if>
+							</c:forEach>
+							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
 						</ul>
 					</li>
-					
 					<li class="inquiry-item">
 						<h3 class="item-title">서비스문의</h3>
 						<ul>
-							<li>[해외]남아프리카 공화국이 현재 역병으로 인해 여행을</li>
-							<li>[국내]제주도 여행선이 태풍으로 인해 유턴중입니...</li>
-							<li>상대방을 신뢰할 수 있는 거리 점수를 이용해 신중...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li><a href="${root}/notice/inquiryService"> 서비스문의 더보기></a></li>
+							<c:set var="count" value="0" /> 
 
+							<c:forEach var="item" items="${list}">
+								<c:if test="${item.qnaCategoryNo == '3'}"> 
+									<c:if test="${count < 5}"> 
+										<li>${item.title}</li>
+										<c:set var="count" value="${count + 1}" /> 
+									</c:if>
+								</c:if>
+							</c:forEach>
+							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=3"> 서비스문의 더보기> </a></li>
 						</ul>
 					</li>
-					
 					<li class="inquiry-item">
-						<h3 class="item-title">1:1문의</h3>
+						<h3 class="item-title">1:1 문의</h3>
 						<ul>
-							<li>[해외]남아프리카 공화국이 현재 역병으로 인해 여행을</li>
-							<li>[국내]제주도 여행선이 태풍으로 인해 유턴중입니...</li>
-							<li>상대방을 신뢰할 수 있는 거리 점수를 이용해 신중...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li>반드시 매칭이 되서 여행을 가시면 후기를 작성해주세...</li>
-							<li><a href="${root}/notice/inquiryQnA"> 1:1문의 더보기></a></li>
+							<c:set var="count" value="0" /> 
 
+							<c:forEach var="item" items="${list}">
+								<c:if test="${item.qnaCategoryNo == '4'}"> 
+									<c:if test="${count < 5}"> 
+										<li>${item.title}</li>
+										<c:set var="count" value="${count + 1}" /> 
+									</c:if>
+								</c:if>
+							</c:forEach>
+							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=4"> 1:1 문의 더보기> </a></li>
 						</ul>
 					</li>
+
 				</ul>				
 			</div>
 		

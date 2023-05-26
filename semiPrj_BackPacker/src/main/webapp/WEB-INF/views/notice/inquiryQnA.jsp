@@ -161,10 +161,7 @@
 	               </span>
 			</div>
 		</div>
-		
-		
-		
-		
+
 			<div id="board-search-area">
 	
 				<form action="${root}/notice/">
@@ -186,16 +183,9 @@
 	
 			<div id="main-content">
 				<div id="main-inquiry">
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요 dsafsadfsdfdsfa</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[1:1문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
+					<c:forEach items="${list}" var="vo">
+						<div class="inquiry-item">[${vo.qnaCategoryName}] ${vo.title}</div> 
+					</c:forEach>
 				</div>
 			</div>
 				
