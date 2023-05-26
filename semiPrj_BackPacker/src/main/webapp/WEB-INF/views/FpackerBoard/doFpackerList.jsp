@@ -179,6 +179,9 @@
     	background-color: #94D2E6;
         color: white;
     }
+    .current-page {
+    	color :  #D7ECF2;
+    }
 </style>
 </head>
 <body>
@@ -196,7 +199,7 @@
         <div id="content-area">
             <div id="ca1"></div>
             <div id="c-main">
-                <div>동행구하기 게시판으로 이동하기</div>
+                <div><a href="${root}/accompany/list?page=1">동행구하기 게시판으로 이동하기</a></div>
                 <div id="search-area">
                 	<form action="${root}/doFpacker/list" method="get">
                 		<input type="hidden" name="page" value="1">
@@ -224,7 +227,7 @@
 	                    </script>
                     </c:if>
                     <c:if test="${not empty loginMember}">
-	                    <button id="write-btn" type="button" onclick="location.href='${root}/Fpacker/write'">게시글 작성</button>
+	                    <button id="write-btn" type="button" onclick="location.href='${root}/doFpacker/write'">게시글 작성</button>
                     </c:if>
                 
                 </div>
@@ -253,11 +256,16 @@
         	</c:if>
             
             <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
- 	           <a href="${root}/doFpacker/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+            	<c:if test="${pv.currentPage != i}">
+	 	           <a href="${root}/doFpacker/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+           		</c:if>
+           		<c:if test="${pv.currentPage == i}">
+	 	           <a class="current-page">${i}</a>
+           		</c:if>
             </c:forEach>
             
             <c:if test="${pv.currentPage < pv.maxPage }">
-	            <a href="${root}/doFpacker/list?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
+	            <a href="${root}/doFpacker/list?pa  ge=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
 	            <a href="${root}/doFpacker/list?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">>></a>            
             </c:if>
         </div>

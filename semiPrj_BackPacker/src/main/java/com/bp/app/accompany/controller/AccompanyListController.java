@@ -43,7 +43,7 @@ public class AccompanyListController extends HttpServlet{
 			if(searchType ==null || searchType.equals("")) {
 				bvoList = gbs.getList(3, pvo);
 			}else {
-				bvoList = gbs.getAccomList(pvo, searchType, searchValue);		
+				bvoList = gbs.getList(3 ,pvo, searchType, searchValue);		
 			}
 			
 			Map<String,String> map= new HashMap<>();

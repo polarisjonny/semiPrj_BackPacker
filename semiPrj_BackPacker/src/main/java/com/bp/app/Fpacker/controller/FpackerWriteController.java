@@ -20,13 +20,13 @@ import com.bp.app.util.file.FileUploader;
 		maxFileSize = 1024*1024*50,
 		maxRequestSize = 1024*1024*50*5
 		)
-@WebServlet ("/Fpacker/write")
+@WebServlet ("/doFpacker/write")
 public class FpackerWriteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-			req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/writeForm.jsp").forward(req, resp);			
+			req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/doWriteForm.jsp").forward(req, resp);			
 		
 		
 	}
@@ -38,7 +38,7 @@ public class FpackerWriteController extends HttpServlet{
 			Part f = req.getPart("boardListThumbnail");
 
 			if(f.getSubmittedFileName()!=null&&f.getSubmittedFileName()!="") {
-				String path = req.getServletContext().getRealPath("/static/img/accompany/");
+				String path = req.getServletContext().getRealPath("/static/img/Fpacker/");
 				AttachmentVo attachmentVo = FileUploader.saveFile(path,f);	
 				vo.setMainImg(attachmentVo.getChangeName());
 			}else {
@@ -74,7 +74,7 @@ public class FpackerWriteController extends HttpServlet{
 			
 			//화면
 			if(result==1) {
-				resp.sendRedirect(req.getContextPath()+"/Fpacker/list");
+				resp.sendRedirect(req.getContextPath()+"/doFpacker/list?page=1");
 			}else {
 				throw new Exception();
 			}
