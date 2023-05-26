@@ -165,6 +165,18 @@
     .text-area {
         margin-top: 5px;
     }
+    /* 작은 버튼 구해요 합니다버튼*/
+    .s-btn {
+        border: none;
+        border-top-left-radius: 10px ;
+        border-top-right-radius: 10px;
+        padding: 5px 5px 0px 5px;
+    }
+    .active-btn {
+    	background-color: #94D2E6;
+        color: white;
+    }
+    
 </style>
 </head>
 <body>
@@ -195,8 +207,10 @@
                     </span>
                     <!-- <input type="submit" value="검색"> -->
                 </div>
+                <div><button class="s-btn active-btn">구해요</button><button class="s-btn">합니다</button></div>
                 <div id="middle-area">
-                    <span id="big-text">프패커합니다</span>
+                	
+                    <span id="big-text">프패커</span>
                     <c:if test="${empty loginMember}">
 	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
 	                    <script>

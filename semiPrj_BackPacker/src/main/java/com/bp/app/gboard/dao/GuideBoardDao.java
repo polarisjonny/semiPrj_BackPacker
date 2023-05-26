@@ -159,7 +159,7 @@ public class GuideBoardDao {
 	//목록 보여주기 리스트 가져와서 담기
 	public List<GuideBoardVo> getList(Connection conn, int i, PageVo pvo) throws Exception {
 		//sql
-		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO , GB.SCHEDULER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG ,TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,GB.TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO) WHERE GUIDE_BOARD_CATEGORY_NO =? AND DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql ="SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO ,GB.TITLE , GB.WRITER_NO , GB.SCHEDULER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG ,TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,TO_CHAR(GB.TRAVEL_EXPENSE,'999,999,999,999') AS TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO) WHERE GUIDE_BOARD_CATEGORY_NO =? AND DELETE_YN = 'N' AND MATCHING_STATE = 'N' ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, i);
 		pstmt.setInt(2, pvo.getBeginRow());
@@ -280,6 +280,113 @@ public class GuideBoardDao {
 		JDBCTemplate.close(pstmt);
 		
 		return cnt;
+	}
+
+	public List<GuideBoardVo> getList(Connection conn, int i, PageVo pvo, String searchType, String searchValue) throws Exception {
+		//sql
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM( SELECT GB.GUIDE_BOARD_NO ,GB.SCHEDULER_NO ,GB.TITLE , GB.WRITER_NO , M.ID , M.NICK , M.AGE , M.PROFILE_IMAGE , M.GENDER ,GB.MAIN_IMG , TO_CHAR(S.START_DATE,'YYYY-MM-DD')AS START_DATE ,TO_CHAR(S.END_DATE,'YYYY-MM-DD')AS END_DATE ,GB.GUIDE_BOARD_CATEGORY_NO ,GB.CONTENT ,GB.ENROLL_DATE ,GB.MODIFY_DATE ,GB.HIT ,GB.MATCHING_STATE ,TO_CHAR(GB.TRAVEL_EXPENSE,'999,999,999,999,999') AS TRAVEL_EXPENSE ,GB.DELETE_YN ,GB.REPORT_CNT ,C.CATEGORY_NAME FROM GUIDE_BOARD GB JOIN MEMBER M ON (GB.WRITER_NO = M.MEMBER_NO) JOIN SCHEDULER S ON(S.SCHEDULER_NO=GB.SCHEDULER_NO) JOIN GUIDE_BOARD_CATEGORY C ON(GB.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO) WHERE DELETE_YN = 'N' AND MATCHING_STATE = 'N' AND ";
+		if(searchType.equals("title")) {
+			sql+="GB.TITLE LIKE '%'||?||'%' ";
+		}else if(searchType.equals("writerId")) {
+			sql+="M.ID LIKE '%'||?||'%' ";
+			
+		}else if(searchType.equals("writerNick")) {
+			sql+="M.NICK LIKE '%'||?||'%' ";
+			
+		}else {
+			return getList(conn,i,pvo);
+		}
+		sql+="ORDER BY GUIDE_BOARD_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pvo.getBeginRow());
+		pstmt.setInt(3, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		List<GuideBoardVo> bvoList = new ArrayList<>(); 
+		while(rs.next()) {
+			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
+			String title = rs.getString("TITLE");
+			String id = rs.getString("ID");
+			String nick = rs.getString("NICK");
+			String age = rs.getString("AGE");
+			String profileImage = rs.getString("PROFILE_IMAGE");
+			String gender = rs.getString("GENDER");
+			String writerNo = rs.getString("WRITER_NO");
+			String mainImg = rs.getString("MAIN_IMG");
+			String shedulerNo = rs.getString("SCHEDULER_NO");
+			if(gender=="M") {
+				gender="남성";
+			}else {
+				gender="여성"; 
+			}
+			
+			String startDate_ = rs.getString("START_DATE");
+			String endDate_ = rs.getString("END_DATE");
+			
+			String guideBoardCategoryNo = rs.getString("GUIDE_BOARD_CATEGORY_NO");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+			String matchingState = rs.getString("MATCHING_STATE");
+			String travelExpense = rs.getString("TRAVEL_EXPENSE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String reportCnt = rs.getString("REPORT_CNT");
+			String categoryName = rs.getString("CATEGORY_NAME");
+			
+			GuideBoardVo bvo = new GuideBoardVo();
+			bvo.setGuideBoardCategoryNo(guideBoardCategoryNo);
+			bvo.setContent(content);
+			bvo.setEnrollDate(enrollDate);
+			bvo.setModifyDate(modifyDate);
+			bvo.setHit(hit);
+			bvo.setMatchingState(matchingState);
+			bvo.setTravelExpense(travelExpense);
+			bvo.setDeleteYn(deleteYn);
+			bvo.setReportCnt(reportCnt);
+			bvo.setCategoryName(categoryName);
+			
+			bvo.setGuideBoardNo(guideBoardNo);
+			bvo.setTitle(title);
+			bvo.setId(id);
+			bvo.setNick(nick);
+			bvo.setAge(age);
+			bvo.setProfileImage(profileImage);
+			bvo.setWriterNo(writerNo);
+			bvo.setSchedulerNo(shedulerNo);
+			
+			bvo.setGender(gender);
+			bvo.setMainImg(mainImg);
+			
+			//5월11일 이런식으로 데이터를 가공
+			if(startDate_==null) {
+				
+			}else {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				Date startDate = formatter.parse(startDate_);
+				Date endDate =formatter.parse(endDate_);
+				SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
+				String startDateStr = format.format(startDate);
+				String endDateStr = format.format(endDate);
+				
+				
+				bvo.setStartDate(startDateStr);
+				bvo.setEndDate(endDateStr);
+			}
+			
+			
+			bvoList.add(bvo);
+			
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return bvoList;
 	}
 
 }
