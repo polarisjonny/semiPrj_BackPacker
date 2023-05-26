@@ -97,9 +97,9 @@ main{
 		display:grid;
 		grid-template-columns: 5fr 1fr;
 		margin : auto;
-		width:50%;
-		margin-bottom:50px;
-		
+		width:30%;
+		margin-bottom:20px;
+		margin-top: 20px;
 	}
 	
 	#reply-area button{
@@ -126,14 +126,29 @@ main{
 		font-weight: 1000;
 		color: gray;
 	}
-	
-	
+
+	#comment-list-area{
+		display: grid;
+		justify-content: center;
+		margin-bottom: 20px;
+
+	}
 	
 	.list-profile {
 		width: 45px;
 		height: 45px;
 		border-radius: 70%;
 	}
+
+	.comment-del{
+		border-radius: 7px;
+		border:1px solid #99ccff;
+		background-color:  #99ccff;
+		color: white;
+		
+	}
+
+	
 </style>
 </head>
 <body>
@@ -189,39 +204,40 @@ main{
 				${vo.content}
 			</div>
 			
+			
+			
+			<div id="buttons">
+				
+				<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
+					<span id="review-btn">
+						<button class="edit-btn">수정하기</button>
+						<button onclick="reviewDelete();">삭제하기</button>
+						
+					</span>
+					
+					
+				</c:if>
+				
+				<span>
+					<c:if test="${not empty loginMember }">
+						<button class="report-btn disable-btn">신고하기</button>
+					</c:if>
+					<button onclick="history.back();">목록으로</button>
+				</span>
+			</div>
+			
 			<div id="reply-area">
 				
 				<c:if test="${not empty loginMember}">
 					<textarea name="content" style="resize:none;" placeholder="댓글은 50자 이내로 작성해주세요"></textarea>
 					<button onclick="writeReply();">댓글작성</button>
 				</c:if>
-				<div id="comment-list-area">
-					<a>더보기</a>
-				</div>
 				
 			</div>
 
-			<div id="buttons">
-			
-				<c:if test="${loginMember.id == 'ADMIN' || loginMember.id == vo.writerId}">
-					<span id="review-btn">
-							<button class="edit-btn">수정하기</button>
-							<button onclick="reviewDelete();">삭제하기</button>
-							
-					</span>
-					
-			
-				</c:if>
-						
-						<span>
-							<c:if test="${not empty loginMember }">
-								<button class="report-btn disable-btn">신고하기</button>
-							</c:if>
-							<button onclick="history.back();">목록으로</button>
-						</span>
-			</div>
-			
+			<div id="comment-list-area">
 
+			</div>
 			
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		</main>
@@ -296,7 +312,7 @@ main{
 				
 			// });
 
-			loadComment();
+			
 
 			//댓글 보여주기
 			function loadComment(){
@@ -309,17 +325,11 @@ main{
 				success : function(data){
 					const x  = JSON.parse(data);
 					const commentArea = document.querySelector("#comment-list-area");
-					commentArea.innerHTML="";
+					commentArea.innerHTML = "";
 					let str = "";
 					for(let i=0; i<x.length; i++){
 						str+='<div class="comment">';
-						if(x.profileImage != ""){
-							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profileImage+'" alt=""></div>';
-						}else if(x.profileImage == un){
-							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/profile_default.jpg" alt=""></div>';
-						}else{
-
-						}
+						str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profileImage+'" alt=""></div>';
 						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].infoNo+'">';
 						str+='<div class="comment-list-id">'+x[i].writerNick+'</div>';
 						str+='<div class="comment-list-content">'+x[i].content+'</div>';
@@ -341,6 +351,7 @@ main{
 
 		}
 
+		loadComment();
 		//댓글삭제
 		function delComment(replyNo) {
 			const result = confirm('댓글을 삭제할까요?');

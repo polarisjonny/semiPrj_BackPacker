@@ -208,9 +208,7 @@ footer, header, hgroup, menu, nav, section {
 			<div id="review">여행후기</div>
 			   
 	        <div id="hit">
-				<a href="#">조회순</a>  
-				 <span id="line">|</span>   
-				<a href="#">등록순</a>     
+				<a href="#">조회순으로 보기</a>  
 	        </div>
         </div>
 

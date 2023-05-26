@@ -30,6 +30,7 @@ public class TravelReviewReplyListController extends HttpServlet{
 			Gson gson = new Gson();
 			String jsonStr = gson.toJson(replyList);
 			
+			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();
 			out.write(jsonStr);
 			
