@@ -146,7 +146,7 @@
     }
 
     .content-area > img{
-        object-fit: none;
+        object-fit: cover;
         width: 100%;
         height: 90%;
         border-radius: 30px;
@@ -182,6 +182,7 @@
     .current-page {
     	color :  #D7ECF2;
     }
+   
 </style>
 </head>
 <body>
@@ -215,7 +216,7 @@
 	                    <!-- <input type="submit" value="검색"> -->                	
                 	</form>
                 </div>
-                <div><button class="s-btn">구해요</button><button class="s-btn active-btn">합니다</button></div>
+                <div><button class="s-btn" type="button" onclick="location.href='${root}/findFpacker/list?page=1'">구해요</button><button class="s-btn active-btn">합니다</button></div>
                 <div id="middle-area">
                     <span id="big-text">프패커게시판</span>
                     <c:if test="${empty loginMember}">
