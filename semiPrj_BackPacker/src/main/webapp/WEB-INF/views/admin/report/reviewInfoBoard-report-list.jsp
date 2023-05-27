@@ -131,7 +131,7 @@
                <hr>
                 	<c:forEach items="${voList}" var="vo">
 	                    <div class="classdiv">
-	                        <div><button onclick="goBoard(${vo.infoNo},${vo.writerNo})" value="${vo.infoNo}">${vo.infoNo}</button></div>
+	                        <div><button onclick="goBoard(${vo.infoNo})" value="${vo.infoNo}">${vo.infoNo}</button></div>
 	                        <div>${vo.categoryName}</div>
 	                        <div class="titles">${vo.title}</div>
 	                        <div>${vo.writerId}</div>
@@ -173,9 +173,9 @@
 </html>
 <script>
 
-	//function goBoard(no,writerNo){
-	//window.location.href = '${root}/accompany/detail?no='+no+'&writerNo='+writerNo;
-	//}	
+	function goBoard(infoNo){
+	window.location.href = '${root}/notice/travelInformationDetail?infoNo='+infoNo;
+	}	
 	const searchType = '${searchVo.searchType}';
 	const searchValue = '${searchVo.searchValue}';
 	
@@ -240,9 +240,4 @@
 	
 	
 	
-	const tbody = document.querySelector("tbody");
-	tbody.addEventListener("click" , function(e){
-	  const no = e.target.parentNode.children[0].innerText;
-	  location.href = "${pageContext.request.contextPath}/accompany/detail?infoBoardNo=" + no;
-	});
 </script>
