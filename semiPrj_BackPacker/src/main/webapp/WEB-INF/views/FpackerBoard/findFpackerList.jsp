@@ -146,7 +146,7 @@
     }
 
     .content-area > img{
-        object-fit: none;
+        object-fit: cover;
         width: 100%;
         height: 90%;
         border-radius: 30px;
@@ -207,7 +207,7 @@
                     </span>
                     <!-- <input type="submit" value="검색"> -->
                 </div>
-                <div><button class="s-btn active-btn">구해요</button><button class="s-btn">합니다</button></div>
+                <div><button class="s-btn active-btn">구해요</button><button class="s-btn" type="button" onclick="location.href='${root}/doFpacker/list?page=1'">합니다</button></div>
                 <div id="middle-area">
                 	
                     <span id="big-text">프패커</span>
@@ -220,103 +220,47 @@
 	                    </script>
                     </c:if>
                     <c:if test="${not empty loginMember}">
-	                    <button id="write-btn" type="button" onclick="location.href='${root}/Fpacker/write'">게시글 작성</button>
+	                    <button id="write-btn" type="button" onclick="location.href='${root}/findFpacker/write'">게시글 작성</button>
                     </c:if>
                 
                 </div>
                 
                 
                 <div id="main-area">
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        
-                        
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
-                    <div class="content-area">
-                        <img src="${root}/static/img/middle-img.png" alt="">
-                        <div class="text-area">
-                            <div class="text-small content-small-bold">취향따라 골라 즐기는 경복궁 한복 체험</div>
-                            <div class="text-small">최저가 ￦15,000/인</div>
-                        </div>
-                    </div>
+                	<c:forEach items="${gbvoList}" var="vo">
+	                    <div class="content-area">
+	                        <img class="thum-Img" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="">
+	                        <div class="text-area">
+	                            <div class="text-small content-small-bold">${vo.title}</div>
+	                            <div class="text-small">작성자  ${vo.nick}</div>
+	                        </div>
+	                    </div>
+                	</c:forEach>
 
-
-                    
                 </div>
 
             </div>
             <div id="ca2"></div>
         </div>
-        <div id="page-area">
-            <a href="#"><<</a>
-            <a href="#"><</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">></a>
-            <a href="#">>></a>
+       <div id="page-area">
+        	<c:if test="${pv.currentPage >1}">
+	            <a href="${root}/doFpacker/list?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><<</a>
+	            <a href="${root}/doFpacker/list?page=${pv.currentPage -1 }&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"><</a>
+        	</c:if>
+            
+            <c:forEach begin="${ pv.startPage }" end="${ pv.endPage }" step="1" var="i">
+            	<c:if test="${pv.currentPage != i}">
+	 	           <a href="${root}/doFpacker/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+           		</c:if>
+           		<c:if test="${pv.currentPage == i}">
+	 	           <a class="current-page">${i}</a>
+           		</c:if>
+            </c:forEach>
+            
+            <c:if test="${pv.currentPage < pv.maxPage }">
+	            <a href="${root}/doFpacker/list?pa  ge=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">></a>
+	            <a href="${root}/doFpacker/list?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">>></a>            
+            </c:if>
         </div>
 	</main>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

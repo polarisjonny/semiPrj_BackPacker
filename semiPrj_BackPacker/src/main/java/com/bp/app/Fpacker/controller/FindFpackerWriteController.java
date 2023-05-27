@@ -20,13 +20,13 @@ import com.bp.app.util.file.FileUploader;
 		maxFileSize = 1024*1024*50,
 		maxRequestSize = 1024*1024*50*5
 		)
-@WebServlet ("/doFpacker/write")
-public class FpackerWriteController extends HttpServlet{
+@WebServlet ("/findFpacker/write")
+public class FindFpackerWriteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-			req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/doWriteForm.jsp").forward(req, resp);			
+			req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/findWriteForm.jsp").forward(req, resp);			
 		
 		
 	}
@@ -47,7 +47,6 @@ public class FpackerWriteController extends HttpServlet{
 			}
 			
 			
-			String categoryNo = req.getParameter("categoryValue");
 			
 			
 			//로그인 멤버 얻기
@@ -58,15 +57,15 @@ public class FpackerWriteController extends HttpServlet{
 			String content = req.getParameter("content");
 			String startDate = req.getParameter("startDate");
 			String endDate = req.getParameter("endDate");
-			String expense =  req.getParameter("expense");
+			
 			
 			//데이터뭉치기
-			vo.setGuideBoardCategoryNo(categoryNo);
+			vo.setGuideBoardCategoryNo("2");
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setStartDate(startDate);
 			vo.setEndDate(endDate);
-			vo.setTravelExpense(expense);
+			
 			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
@@ -74,7 +73,7 @@ public class FpackerWriteController extends HttpServlet{
 			
 			//화면
 			if(result==1) {
-				resp.sendRedirect(req.getContextPath()+"/doFpacker/list?page=1");
+				resp.sendRedirect(req.getContextPath()+"/findFpacker/list?page=1");
 			}else {
 				throw new Exception();
 			}

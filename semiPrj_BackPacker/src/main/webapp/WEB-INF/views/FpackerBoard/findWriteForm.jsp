@@ -108,8 +108,8 @@
 	<div id="main-box">
 		<div class="main-blank"></div>
 		<div id="main-area">
-			<div id="big-text">프패커합니다 게시글 작성</div>
-			<form action="${root}/Fpacker/write" method="post" enctype="multipart/form-data">
+			<div id="big-text">프패커구해요 게시글 작성</div>
+			<form action="${root}/findFpacker/write" method="post" enctype="multipart/form-data">
 				<div id="Thum-parent">
 					<img id="imgUpload">
 					<div id="Thumnail">
@@ -138,9 +138,7 @@
 					<div>종료날짜</div>
 					<input type="date" name="endDate">
 				</div>
-				<div id="addInput-area">
-					<input type="number" value="0" name="expense">원
-				</div>
+				
 				<div>
 					<input id="submit-btn" type="submit" value="작성완료">	
 				</div>
@@ -174,17 +172,7 @@
 		preview.src ="";
 		}
 	})
-	//카테고리가 프패커합니다면 아래 금액인풋태그가 보이게
-	const categoryValueTag = document.querySelector("select[name=categoryValue]");
-	const inputArea = document.querySelector("#addInput-area")
-	categoryValueTag.addEventListener("change",function(){
-		if(categoryValueTag.value ==2){
-			inputArea.style.visibility = 'hidden';
-		}else {
-			inputArea.style.visibility = 'visible';
-		}
-
-	});
+	
 	
 	
 
