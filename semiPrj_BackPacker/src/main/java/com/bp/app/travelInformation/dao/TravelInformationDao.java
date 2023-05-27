@@ -190,4 +190,17 @@ public class TravelInformationDao {
 		return tiList;
 	}
 
+	//여행정보 게시글 삭제
+	public int del(Connection conn, String infoNo) throws Exception {
+
+		String sql = "UPDATE INFO_BOARD SET DELETE_YN = 'Y' WHERE INFO_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, infoNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 }
