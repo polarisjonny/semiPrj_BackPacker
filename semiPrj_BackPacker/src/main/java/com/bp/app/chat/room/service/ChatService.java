@@ -24,12 +24,13 @@ public class ChatService {
 	public ChatService() {
 		dao=new ChatDao();
 	}
-	public ChattingRoomVo openNewChatRoom(ChattingRoomVo crv) throws Exception {
+	public ChattingRoomVo openNewChatRoom(ChattingRoomVo crv, String loginMemberNo) throws Exception {
 		ChattingRoomVo vo = null;
 		Connection conn = JDBCTemplate.getConnection()	;
 			//UPDATE
-		int result = dao.openNewChatRoom(conn, crv);
-		if(result != 1) {
+		int result = dao.openNewChatRoom(conn, crv ,loginMemberNo);
+		System.out.println(result);
+		if(result < 1) {
 			JDBCTemplate.rollback(conn);
 			throw new Exception();
 		}
@@ -41,20 +42,38 @@ public class ChatService {
 		return vo; 
 		
 	}
-	public ChattingRoomVo openOldChatRoom(ChattingRoomVo crv) throws Exception {
+	public ChattingRoomVo openOldChatRoom(ChattingRoomVo crv, String loginMemberNo) throws Exception {
 		ChattingRoomVo vo = null;
 		Connection conn = JDBCTemplate.getConnection()	;
 			
 		//SELECT
-		
+		int result = dao.deleteCnt(conn,crv,loginMemberNo);
 		vo = dao.getOldChatRoom(conn, crv);
+		if(result >=1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
 		JDBCTemplate.close(conn);
 		return vo; 
 	}
-	public int selectCnt(String searchType, String searchValue) throws Exception {
+	public int selectCnt1(String searchType, String searchValue, String no) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.selectCnt(conn, searchType, searchValue);
+		int cnt = dao.selectCnt2(conn, searchType, searchValue,no);
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+	}
+	public int selectCnt2(String searchType, String searchValue, String no) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int cnt = dao.selectCnt1(conn, searchType, searchValue,no);
 		
 		//close
 		
@@ -65,7 +84,7 @@ public class ChatService {
 	public List<ChattingRoomVo> openRoomList(PageVo pv, ChattingRoomVo crv) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 	      
-		List<ChattingRoomVo> roomList =  dao.openRoomList(conn,crv,pv);
+		List<ChattingRoomVo> roomList =  dao.openRoomList1(conn,crv,pv);
 	      
 	      //close
 	      JDBCTemplate.close(conn);
@@ -74,20 +93,87 @@ public class ChatService {
 	}
 	public List<ChattingRoomVo> openRoomList(PageVo pv, String searchType, String searchValue, ChattingRoomVo crv) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
-		List<ChattingRoomVo> roomList =  dao.openRoomList(conn,crv,pv,searchType, searchValue);
+		List<ChattingRoomVo> roomList =  dao.openRoomList1(conn,crv,pv,searchType, searchValue);
 		
 		JDBCTemplate.close(conn);
 		return roomList;
 	}
-	public ChattingRoomVo openOldChatRoomByRoomNo(ChattingRoomVo crv) throws Exception {
+	public ChattingRoomVo openOldChatRoomByRoomNo(ChattingRoomVo crv, String loginMemberNo) throws Exception {
 		ChattingRoomVo vo = null;
 		Connection conn = JDBCTemplate.getConnection()	;
 			
 		//SELECT
-		
+		System.out.println("서비스");
+		int result = dao.deleteCnt(conn,crv,loginMemberNo);
+		System.out.println(result);
 		vo = dao.getOldChatRoomByRoomNo(conn, crv);
+		if(result >=1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return vo; 
+	}
+	public int outChatRoom(ChattingRoomVo vo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.outChatRoom(conn, vo);
+		
+		//close
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int outMyBoardChatRoom(ChattingRoomVo vo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.outMyBoardChatRoom(conn, vo);
+		
+		//close
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	public int submitMyBoardChatRoom(ChattingRoomVo vo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		System.out.println("내서비스 시작");
+		int result = dao.submitMyBoardChatRoom(conn, vo);
+		
+		//close
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		System.out.println("서내비스 끝");
+		return result;
+	}
+	public int submitChatRoom(ChattingRoomVo vo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.submitChatRoom(conn, vo);
+		
+		//close
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}
 	
 	

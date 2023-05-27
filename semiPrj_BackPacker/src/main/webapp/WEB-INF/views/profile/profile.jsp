@@ -22,9 +22,9 @@
    <style type="text/css">
 
         .profileWrap{
-           padding-top: 50px;
+           padding-top: 10px;
            width: 600px;
-           height: 800px;
+           height: 700px;
            margin: auto;
        }
        .profileTop{
@@ -149,7 +149,7 @@
        		display: flex;
    			 align-items: flex-start;
        		overflow : auto;
-           font-size: 18px;
+           font-size: 15px;
        }
        .dateIdNick{
           font-size : 12px;
@@ -241,7 +241,7 @@
             </div>
             <br>
             <div>
-               <c:forEach items="${ selectMemberReviewlist }" var="reviewList" end="3">
+               <c:forEach items="${ selectMemberReviewlist }" var="reviewList" end="1">
                 <table id="reviewTable">
                     <tr>
 		                  <td hidden>
@@ -250,16 +250,16 @@
                         <td class = "imgInput " rowspan="2"  >
                           
                           <c:if test="${not empty reviewList.giverProfile}">
-                              <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewList.giverProfile}" alt="" onclick="imgClick(event)" >
+                              <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/${reviewList.giverProfile}" alt="" onclick="goProfile(  ${reviewList.giverNo})" >
 		                               
 	       					</c:if>
 	       					<c:if test="${empty reviewList.giverProfile}">
-	       						 <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick(event)" >
+	       						 <img   width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="goProfile(  ${reviewList.giverNo})" >
 	       					</c:if>
                           
 
                         </td>
-                        <td class="comentContent" >${reviewList.boardTitle} <br> ${reviewList.content}</td>
+                        <td class="comentContent" >${reviewList.boardTitle} <br><br> ${reviewList.content}</td>
                     </tr>
                     <tr>
                         
@@ -287,15 +287,7 @@
 
 
 <script>
-   function imgClick(e) {
-      const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
-      const width = 800;
-      const height = 1000;
-      const left = (screen.width / 2) - (width / 2);
-      const top = 0;
-      window.location.href ='${root}/click/profile?selectMemberNo='+no;
-   }
-   
+ 
    const more = document.querySelector("#more");
    more.addEventListener('click',function(e){
       const no1 = e.target.parentNode.children[0].innerText; //게시글 작성자 번호
@@ -311,6 +303,12 @@
       
    }
    
+   function goProfile(e){
+	   
+	
+	   window.location.href = '${root}/click/profile?selectMemberNo='+e;
+	};
+
   
    
    

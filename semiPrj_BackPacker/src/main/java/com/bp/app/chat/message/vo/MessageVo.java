@@ -4,6 +4,7 @@ public class MessageVo {
 	
 	private String messageNo;
 	private String senderNo;
+	private String receiverNo;
 	private String chattingRoomNo;
 	private String content;
 	private String enrollDate;
@@ -21,6 +22,12 @@ public class MessageVo {
 	}
 	public void setSenderNo(String senderNo) {
 		this.senderNo = senderNo;
+	}
+	public String getReceiverNo() {
+		return receiverNo;
+	}
+	public void setReceiverNo(String receiverrNo) {
+		this.receiverNo = receiverrNo;
 	}
 	public String getChattingRoomNo() {
 		return chattingRoomNo;
@@ -60,15 +67,17 @@ public class MessageVo {
 	}
 	@Override
 	public String toString() {
-		return "MessageVo [messageNo=" + messageNo + ", senderNo=" + senderNo + ", chattingRoomNo=" + chattingRoomNo
-				+ ", content=" + content + ", enrollDate=" + enrollDate + ", checkYn=" + checkYn + ", senderNick="
-				+ senderNick + ", senderProfileImage=" + senderProfileImage + "]";
+		return "MessageVo [messageNo=" + messageNo + ", senderNo=" + senderNo + ", receiverrNo=" + receiverNo
+				+ ", chattingRoomNo=" + chattingRoomNo + ", content=" + content + ", enrollDate=" + enrollDate
+				+ ", checkYn=" + checkYn + ", senderNick=" + senderNick + ", senderProfileImage=" + senderProfileImage
+				+ "]";
 	}
-	public MessageVo(String messageNo, String senderNo, String chattingRoomNo, String content, String enrollDate,
-			String checkYn, String senderNick, String senderProfileImage) {
+	public MessageVo(String messageNo, String senderNo, String receiverrNo, String chattingRoomNo, String content,
+			String enrollDate, String checkYn, String senderNick, String senderProfileImage) {
 		super();
 		this.messageNo = messageNo;
 		this.senderNo = senderNo;
+		this.receiverNo = receiverrNo;
 		this.chattingRoomNo = chattingRoomNo;
 		this.content = content;
 		this.enrollDate = enrollDate;

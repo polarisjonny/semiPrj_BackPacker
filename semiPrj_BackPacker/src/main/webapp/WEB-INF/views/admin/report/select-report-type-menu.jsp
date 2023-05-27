@@ -29,7 +29,7 @@
     #guideBoard{
         width: 200px;
         height: 150px;
-        background-color: rgba(176, 237, 241, 0.842);
+        background-color: rgb(214, 248, 246);
         border-radius: 50px;
         text-align: center;
         font-size: 26px;
@@ -46,7 +46,7 @@
     #review{
         width: 200px;
         height: 150px;
-        background-color: rgba(176, 237, 241, 0.842);
+        background-color: rgb(214, 248, 246);
         border-radius: 50px;
         text-align: center;
         font-size: 26px;

@@ -21,7 +21,8 @@
 	.chatWrap{
 	    background-color: rgb(214, 248, 246);
 	    margin: auto;
-	    width: 450px;
+	    width: 350px;
+	    height : 500px;
 	  border-radius: 10px;
 	  
 	}
@@ -29,10 +30,10 @@
 	    font-size: 20px;
 	    margin: auto;
 	  display: grid;
-	  grid-template-columns: 8fr 1fr 1fr;
+	  grid-template-columns: 9fr 1fr ;
 	  background-color: white;
 	  gap: 10px;
-	  width: 450px;
+	  width: 350px;
 	  height: 40px;
 	  
 	}
@@ -46,7 +47,7 @@
 	    
 	  	overflow-y: scroll;
 	    gap: 10px;
-	    height : 500px;
+	    height : 450px;
 	   
 	}
 	
@@ -73,19 +74,38 @@
 	}
 
 	.write-area-btn{
-		wirdth : 450px;
+		display : grid;
+		grid-template-columns: 5fr 1fr;
+		wirdth : 350px;
+		height : 55px;
 	}
-	.write-area-btn > textarea{
-		width : 450px;
+
+	.content{
+		overflow: visible;
+		resize: none;
 	}
-	.write-area-btn > input{
-		width : 450px;
+	#chat{
+		height : 50px;
 	}
-	
+	.submit-out-btn{
+		display : grid;
+		grid-template-columns: 1fr 1fr;
+	}
+	#out{
+		display:none;
+	}
+
+	.item{
+		height : 30px;
+	}
+	#toggleButton{
+		border : 0px;
+		height :40px;
+		background-color:white;
+	}
 </style>
 <body>
 	<div class="chatWrap">
-		${loginMember.nick } 님 환영합니다
         <div class="container">
         	<c:if test="${loginMember.nick == vo.chattingUser2Nick}">
         		<div class="item">${vo.chattingUserNick }님과의 대화방</div>
@@ -93,19 +113,24 @@
              <c:if test="${loginMember.nick != vo.chattingUser2Nick}">
         		<div class="item">${vo.chattingUser2Nick }님과의 대화방</div>
        		</c:if>
-            <div class="item">♡</div>
-            <div class="item">↕</div>
+             <input id="toggleButton" type="button" value="〓" onclick="toggleChat()">
             
         </div>  
-        <br>
+        
 			<div class="receive-chat-area">
 			
 			</div>
            
-		<div class= "write-area-btn">
+           
+		<div class= "write-area-btn" id="ta">
 		
-						<textarea name="chat" style="resize: none;" placeholder="채팅칸." ></textarea>
-						<input type="button" value="채팅작성" onclick="writeChat()">
+						<textarea  name="chat" style="resize: none;" placeholder="채팅칸." ></textarea>
+						<input id ="wc" type="button" value="채팅작성" onclick="writeChat()">
+		</div>
+		<div class = "submit-out-btn" id="out">
+				<input id="submit" type="button" value="🤝" onclick="submitChat()">
+				<input id="" type="button" value="나가기" onclick="outChat()">
+					
 		</div>
 		<br>
 		<br>
@@ -113,15 +138,262 @@
            
        
     </div>
+
+
+
+
     <script>
-   		setInterval(loadChat,100);
+
+
+	
+    
+    
+    
+    let toggleButton = document.querySelector('#toggleButton');
+    let out = document.querySelector('#out');
+    
+    let ta = document.querySelector('#ta');
+    
+    let isChatVisible = true;
+
+    function toggleChat() {
+        if (isChatVisible) {
+        	out.style.display = 'grid';  // 채팅 요소 보이게 함
+        	ta.style.display = 'none';  // 채팅 요소 숨김
+            isChatVisible = false;
+        } else {
+        	
+        	out.style.display = 'none';  // 채팅 요소 숨김
+          	ta.style.display = 'grid';  // 채팅 요소 보이게 함
+            isChatVisible = true;
+        }
+    }
+    
+    
+    
+    function outChat(){
+
+		$.ajax({
+				url : "${root}/chat/room/out",
+				type : "POST",
+				data : {
+				
+					chattingRoomNo :'${vo.chattingRoomNo}',
+					chattingUserNo :'${vo.chattingUserNo}',
+					chattingUser2No :'${vo.chattingUser2No}',
+					chattingStatus :'${vo.chattingStatus}',
+					
+				},
+				success: (x)=>{
+					
+					console.log(x);
+					if(x == 'ok'){
+					
+						 window.close();
+					}else {
+						alert('아웃실패...');
+					}
+				},
+				error: ()=>{
+					console.log("채팅작성실패...");
+				} ,
+			});
+    	
+    	
+    }
+
+    function submitChat(){
+
+		$.ajax({
+				url : "${root}/chat/room/submit",
+				type : "POST",
+				data : {
+				
+					chattingRoomNo :'${vo.chattingRoomNo}',
+					chattingUserNo :'${vo.chattingUserNo}',
+					chattingUser2No :'${vo.chattingUser2No}',
+					chattingStatus :'${vo.chattingStatus}',
+					
+				},
+				success: (x)=>{
+					
+					console.log(x);
+					if(x == 'ok'){
+						submitMessage();
+						setTimeout(function() {
+							  window.close();
+							}, 1000);
+						
+					}else {
+						alert('서브밋 실패...');
+					}
+				},
+				error: ()=>{
+				} ,
+			});
+    	
+    	
+    }
+    
+    /*
+    
+    
+   		let interval;
+
+	   	// 마우스 클릭 상태를 나타내는 변수
+	   	let isMouseDown = false;
+	   	const chatArea = document.querySelector(".chatWrap");
+	   	const receiveChatArea=  document.querySelector(".receive-chat-area");
+	   	// 스크롤바 클릭 시 Interval 멈춤
+	   	function stopInterval() {
+	   	    clearInterval(interval);
+	   	}
+	
+	   	// 스크롤바 해제 시 Interval 다시 시작
+	   	function startInterval() {
+	   	    interval = setInterval(loadChat, 1000);
+	   	}
+	   	
+	
+		 // 마우스 다운 이벤트 리스너 등록
+	   	chatArea.addEventListener("mousedown", function() {
+	   	    isMouseDown = true;
+	   	    stopInterval();
+	   	});
+
+	   	// 마우스 업 이벤트 리스너 등록
+	   	chatArea.addEventListener("mouseup", function() {
+	   	    isMouseDown = false;
+	   	    startInterval();
+	   	});
+
+	   	// 마우스가 스크롤바 밖으로 벗어날 때 이벤트 리스너 등록
+	   	chatArea.addEventListener("mouseleave", function() {
+	   	    if (isMouseDown) {
+	   	    	startInterval();
+	   	    }
+	   	});
+
+	   	// 마우스가 스크롤바 안으로 진입할 때 이벤트 리스너 등록
+	   	chatArea.addEventListener("mouseenter", function() {
+	   	    if (isMouseDown) {
+	   	        
+	   	     stopInterval();
+	   	    }
+	   	});
+	   	let scrollTimer;
+	   	chatArea.addEventListener("wheel", function() {
+	   	    stopInterval();
+
+	   	    // 마우스 휠 이벤트가 끝난 후 일정 시간이 지난 뒤에 setInterval 다시 시작
+	   	    clearTimeout(scrollTimer);
+	   	    scrollTimer = setTimeout(startInterval, 2000); // 500ms 후에 setInterval 다시 시작
+	   	});
+
+	   	// 마우스 휠 이벤트 리스너 등록 (크로스 브라우징을 위한 코드)
+	   	chatArea.addEventListener("mousewheel", function() {
+	   	    stopInterval();
+
+	   	    // 마우스 휠 이벤트가 끝난 후 일정 시간이 지난 뒤에 setInterval 다시 시작
+	   	    clearTimeout(scrollTimer);
+	   	    scrollTimer = setTimeout(startInterval, 2000); // 500ms 후에 setInterval 다시 시작
+	   	});
+	   	
+	   	
+	   	
+	   	receiveChatArea.addEventListener("mousedown", function() {
+	   	    isMouseDown = true;
+	   	    stopInterval();
+	   	});
+
+	   	// 마우스 업 이벤트 리스너 등록
+	   	receiveChatArea.addEventListener("mouseup", function() {
+	   	    isMouseDown = false;
+	   	    startInterval();
+	   	});
+
+	   	// 마우스가 스크롤바 밖으로 벗어날 때 이벤트 리스너 등록
+	   	receiveChatArea.addEventListener("mouseleave", function() {
+	   	    if (isMouseDown) {
+	   	    	startInterval();
+	   	    }
+	   	});
+
+	   	// 마우스가 스크롤바 안으로 진입할 때 이벤트 리스너 등록
+	   	receiveChatArea.addEventListener("mouseenter", function() {
+	   	    if (isMouseDown) {
+	   	        
+	   	     stopInterval();
+	   	    }
+	   	});
+	   	receiveChatArea.addEventListener("wheel", function() {
+	   	    stopInterval();
+
+	   	    // 마우스 휠 이벤트가 끝난 후 일정 시간이 지난 뒤에 setInterval 다시 시작
+	   	    clearTimeout(scrollTimer);
+	   	    scrollTimer = setTimeout(startInterval, 2000); // 500ms 후에 setInterval 다시 시작
+	   	});
+
+	   	// 마우스 휠 이벤트 리스너 등록 (크로스 브라우징을 위한 코드)
+	   	receiveChatArea.addEventListener("mousewheel", function() {
+	   	    stopInterval();
+
+	   	    // 마우스 휠 이벤트가 끝난 후 일정 시간이 지난 뒤에 setInterval 다시 시작
+	   	    clearTimeout(scrollTimer);
+	   	    scrollTimer = setTimeout(startInterval, 2000); // 500ms 후에 setInterval 다시 시작
+	   	});
+	   	// 초기에 Interval 시작
+	   	//startInterval();
+	
+
+*/
+
+
+
  		loadChat();
     	
 		//댓글작성
+		function submitMessage(){
+			
+		
+			$.ajax({
+				url : "${root}/chat/room/send",
+				type : "POST",
+				data : {
+					guideBoardNo : '${vo.guideBoardNo}',
+					content : "매칭확인" ,
+					chattingRoomNo :'${vo.chattingRoomNo}',
+					chattingUserNo :'${vo.chattingUserNo}',
+					chattingUser2No :'${vo.chattingUser2No}',
+					matchingCheck :'${vo.matchingCheck}',
+					matchingCheck2 :'${vo.matchingCheck2}',
+					chattingStatus :'${vo.chattingStatus}',
+					chattingUserNick :'${vo.chattingUserNick}',
+					chattingUser2Nick :'${vo.chattingUser2Nick}',
+				},
+				success: (x)=>{
+					const chatArea = document.querySelector(".receive-chat-area");
+					console.log(x);
+					if(x == 'ok'){
+						document.querySelector("textarea[name=chat]").value='';
+						chatArea.scrollTop = chatArea.scrollHeight;
+						loadChat();
+						
+					}else {
+						alert('확정실패...');
+					}
+				},
+				error: ()=>{
+					console.log("확정실패..");
+				} ,
+			});
+		}
+		
+		
 		let chat = null;
 		function writeChat(){
 			chat = document.querySelector("textarea[name=chat]").value;
-			console.log(chat);
+		
 			$.ajax({
 				url : "${root}/chat/room/send",
 				type : "POST",
@@ -136,10 +408,10 @@
 					chattingStatus :'${vo.chattingStatus}',
 					chattingUserNick :'${vo.chattingUserNick}',
 					chattingUser2Nick :'${vo.chattingUser2Nick}',
+					writerNo : '${loginMember.memberNo}',
 				},
 				success: (x)=>{
 					const chatArea = document.querySelector(".receive-chat-area");
-					console.log(x);
 					if(x == 'ok'){
 						document.querySelector("textarea[name=chat]").value='';
 						chatArea.scrollTop = chatArea.scrollHeight;
@@ -174,24 +446,24 @@
 					console.log(x);
 					for(let i=j-1; i>=0; i--){
 						let no = x[i].senderNo;
-						console.log(no);
-						if(no == ${loginMember.memberNo}){
-							str+='<div class="chat-area">';
+						console.log(no !=${loginMember.memberNo});
+						if(no != ${loginMember.memberNo}){
+							str+='<div class="chat-area content">';
 							str+='<input type="hidden" value="'+x[i].messageNo+'">';
-							str+='<div class="profileImage" style="text-align:center;"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:70px; border-radius:30px; "><div>'+x[i].senderNick+'</div></div>';
-							str+='<div class="content" style="border : 1px solid black; background-color : white; border-radius:10px; margin-right:50px; padding-left : 10px;">'+x[i].content+'</div>';
-							str+='<div></div>';
+							str+='<div class="profileImage" style="text-align:center;"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:60px; border-radius:30px; "></div>';
+							str+='<div class = "content" style="width : 250px;"><textarea class="content" style="border : 1px solid black;  background-color : white; border-radius:10px;  margin-right:50px; padding-left : 10px;">'+x[i].content+'</textarea></div>';
+							str+='<div>'+x[i].senderNick+'</div>';
 							str+='<div class="enrollDate" style="font-size : 12px; text-align:right; margin-right:50px;">'+x[i].enrollDate;
 				
 							str+='</div>';
 							str+='</div><br><br>';
-						}else{
-							str+='<div class="chat-area">';
+						}else if(no == ${loginMember.memberNo}){
+							str+='<div class="chat-area content">';
 							str+='<input type="hidden" value="'+x[i].messageNo+'">';
 							str+='<div class="profileImage" style="text-align:center;"></div>';
-							str+='<div class="content" style="border : 1px solid black; background-color : white; border-radius:10px; margin-left:70px; padding-left : 10px;">'+x[i].content+'</div>';
+							str+='<div class = "content" style="width : 250px;"><textarea class="content" style="border : 1px solid black;  background-color : white; border-radius:10px; margin-left:70px; padding-left : 10px;">'+x[i].content+'</textarea></div>';
 							str+='<div></div>';
-							str+='<div class="enrollDate" style="font-size : 12px; text-align:left; margin-left:70px;">'+x[i].enrollDate;
+							str+='<div class="enrollDate" style="font-size : 12px; text-align:left; margin-left:50px;">'+x[i].enrollDate;
 				
 							str+='</div>';
 							str+='</div><br><br>';
@@ -216,6 +488,7 @@
 
 			});
 		}
+	
 		
 </script>
 </body>

@@ -57,6 +57,23 @@
       display: flex;
       justify-content: space-evenly; 
    }
+#board1{
+	display : grid;
+	grid-template-columns:1fr 1fr 1fr;
+	width : 100%;
+}
+.cif{
+		display : grid;
+		grid-template-columns:1fr 1fr 1fr;
+		width : 100%;
+}
+.rcontent{
+	height :100px;
+	padding-top : 10px;
+}
+#boardWr{
+	height : 600px;
+}
 </style>
 </head>
 <body>
@@ -72,69 +89,70 @@
                     <input type="hidden" value="1" name="page">
                     <select name="searchType" id="opt" >
                     	
-                        <option value="writerName">작성자 이름</option>
-                        <option value="writerNick" >작성자 닉네임</option>
-                        <option value="writerId" >작성자 아이디</option>
+                        <option value="writerName">신고자 이름</option>
+                        <option value="writerNick" >신고자 닉네임</option>
+                        <option value="writerId" >신고자 아이디</option>
                         <option value="content">신고내용</option>
                         
                     </select>
                     <input type="hidden"  value="${selectGuideBoardNo}" name = "selectGuideBoardNo">
                     <input class = "searchValueElem " type = "text" name = "searchValue" value = "${searchVo.searchValue}" placeholder="검색할 내용">
-                    <input type="submit">
+                    <input type="submit" value="검색">
                     
                 </form>
 
             </div>
-        <div id="board1">
+        <div id="boardWr">
             
-	            <table id="acbtable">
-	                <thead>
-	                    <tr>
-	                        <th>신고자 아이디</th>
-	                        <th>신고자 닉네임</th>
-	                        <th>신고자 이름</th>
-	                        
-	                    </tr>
-	                </thead>
-	                 <tbody>
-	                	<c:forEach items="${voList}" var="vo">
-		                    <tr style="border-bottom: 0px;">
-		                        <td hidden>${vo.reportNo}</td>
-		                        <td hidden>${vo.memberNo}</td>
-		                        <td hidden>${vo.guideBoardNo}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerId}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerNick}</td>
-		                        <td style="border-bottom: 0px;">${vo.writerName}</td>
+	            	<div id="board1">
+						<div>
+							<h4>신고자 아이디</h4>
+						</div>	                        
+						<div>
+							<h4>신고자 닉네임</h4>
+						</div>	               
+						<div>
+							<h4>신고자 이름</h4>
+						</div>	               
+	            	</div>
+						<hr>
+	                	<c:forEach items="${voList}" var="vo" end="2">
+			            	<div class="cif">
+		                        <div hidden>${vo.reportNo} </div>   
+		                        <div hidden>${vo.memberNo} </div>   
+		                        <div hidden>${vo.guideBoardNo} </div>   
+		                        <div >${vo.writerId} </div>   
+		                        <div >${vo.writerNick} </div>   
+		                        <div >${vo.writerName} </div>   
 		                       
-		                    </tr>        
-		                    <tr style="border-top: 0px;">
+		                    </div>        
+		                    <div>
 		                    
 		                  
-		                        <td colspan="4" style="border-top: 0px; text-align: left; overflow: auto;"> <strong>내용 : </strong>  ${vo.reportContent}</td>
-		                    </tr>
+		                        <div class="rcontent"> <strong>내용 : </strong>  ${vo.reportContent}</div>
+		                    </div>
+			            	<hr>
 	                	</c:forEach>
-	                </tbody>
 	                
-	            </table>
            
             <br><br>
+        </div>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?selectGuideBoardNo=${selectGuideBoardNo}&page=${pv.currentPage -1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
             	</c:if>
 	           	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
 	           		<c:if test="${pv.currentPage != i}">
-		            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?selectGuideBoardNo=${selectGuideBoardNo}&page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
 	           		</c:if>
 	           		<c:if test="${pv.currentPage == i}">
 		            	<a class ="btn btn-outline-info" >${i}</a>
 	           		</c:if>
 	           	</c:forEach>
 	           	<c:if test="${pv.currentPage != pv.maxPage}">
-	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
+	            	<a class ="btn btn-outline-info" href="${root}/admin/guideBoard/report?selectGuideBoardNo=${selectGuideBoardNo}&page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
 	           	</c:if>
             </div>
-        </div>
     </div>
 </body>
 
@@ -161,45 +179,8 @@
 	
 	//서치 타입 변경시 함수 실행
 	
-	const searchTypeTag = document.querySelector('select[name="searchType"]');
-	searchTypeTag.addEventListener("change", setSearchValueTag);
+
 	
-	function setSearchValueTag(){
-	    const searchType =  searchTypeTag.value;
-	    //현재 타입이 신고수인지 확인 하고 맞으면 select 로 변경 아니면 원래 input 으로
-	    if(searchType == 'reportCnt'){
-	        setSearchValueTagSelect()
-	    }else{
-	        setSearchValueTagInput()
-	    }
-	}
-	
-	//검색값 영역을 select로 변경 (타입이 reportCnt일 때)
-	function setSearchValueTagSelect(){
-	    searchValueSelectTag.classList.add("active");
-	    searchValueSelectTag.disabled = false;
-	    searchValueInputTag.classList.remove("active");
-	    searchValueInputTag.disabled = true;
-	
-	    searchValueInputTag.value = '';
-	
-	    
-	}
-	//검색값 영역을 input 으로 변경 (타입이 reportCnt가 아닐 떄)
-	function setSearchValueTagInput(){
-	    searchValueInputTag.classList.add("active");
-	    searchValueInputTag.disabled = false;
-	    searchValueSelectTag.classList.remove("active");
-	    searchValueSelectTag.disabled = true;
-	}
-	//reportCnt 검색 이후 값이 유지되도록
-	function initSearchValueSelect(){
-	    if(searchType !='reportCnt'){
-	        return;
-	    }
-	    const optionTag = document.querySelector("option[value = '" + searchValue  + "']");
-	    optionTag.selected = true;
-	}
 	setSearchValueTag();//첫화면부터 검색하ㅏ세요 보이게
 	initSearchValueSelect();
 

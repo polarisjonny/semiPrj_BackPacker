@@ -35,6 +35,7 @@
 	.big-text {
 		font-size: 1.3em;
 	}
+	
 	.middle-text {
 		text-align: center;
 	}
@@ -204,6 +205,7 @@
 	
 	/* 가장큰 프로필 사진 */
 	#profile-box {
+	
 		margin-bottom: 20px;
 	}
 	/* ------------------------- */
@@ -218,6 +220,10 @@
 		width: 60px;
 		height: 60px;
 		border-radius: 70%;
+		cursor: pointer;
+	}
+	.profile{
+			cursor: pointer;
 	}
 	
 	.comment > div:first-child {
@@ -346,7 +352,7 @@
 					
 					<div id="profile-box">
 						 <input type="hidden" value="${writerMember.memberNo}">
-						 <div id="profile-area" class="profile">
+						 <div id="profile-area" class="profile" onclick="goProfile(${writerMember.memberNo})">
 						 	<c:if test="${not empty writerMember.profileImage}">
 								<img class="imgToProfileWindow" src="${root}/static/img/member/profile/${writerMember.profileImage}" alt="">
 						 	</c:if>
@@ -394,7 +400,7 @@
 						<div>
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
-						<button class="btn-blue " id="openChat">동행신청하기</button>
+						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
@@ -419,59 +425,29 @@
 <script>
 
 		
-		const imgToProfileTag= document.querySelector('.imgToProfileWindow');
-		imgToProfileTag.addEventListener('click', function(e) {
-			const no =  '${writerMember.memberNo}'; //작성자 번호
-		const width = 800;
-		const height = 1000;
-		const left = (screen.width / 2) - (width / 2);
-		const top = 0;
-		window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-		});
+	
 
-		let openChat = null;
-		openChat = document.querySelector("#openChat");
-		openChat.addEventListener('click', function(e) {
-			
-		    const guideBoardNo = e.target.parentNode.children[0].innerText;
-		    const writerNo = e.target.parentNode.children[1].innerText;
-		    e.preventDefault();
-		    // 창 옵션 설정
-		    const windowFeatures = `
-		      width=600,
-		      height=700,
-		      left=(screen.width / 2) - 275,
-		      top=0,
-		      toolbar=no,
-		      location=no,
-		      status=no,
-		      menubar=no,
-		      scrollbars=yes,
-		      resizable=no`;
-
-		    // 새 창 열기
-		    const newWindow = window.open('${root}/chat/room/open?guideBoardNo=${gbvo.guideBoardNo}&writerNo=${writerMember.memberNo}', '', windowFeatures);
-
-		    // 새 창이 로드되면 스크롤바 스타일 설정
-		    newWindow.addEventListener('load', () => {
-		      const style = document.createElement('style');
-		      style.textContent = `
-		        /* 스크롤바 스타일 설정 */
-		        ::-webkit-scrollbar {
-		          width: 10px;
-		          background-color: white;/* 연한 하늘색 배경색 */
-		        }
-		        ::-webkit-scrollbar-thumb {
-		          background-color:  #E0F2FE; /* 연한 하늘색 스크롤바 색상 */
-		          border-radius: 5px; /* 스크롤바를 둥글게 보이도록 설정 */
-		        }
-		        ::-webkit-scrollbar-thumb:hover {
-		          background-color: #64B5F6; /* 마우스 오버 시 스크롤바 색상 변경 */
-		        }
-		      `;
-		      newWindow.document.head.appendChild(style);
-		    });
-		});
+		function openNewChatByUsersNo(g,m,l){
+			 const windowFeatures = `
+				    width=370,
+				    height=600,
+				    left=(screen.width / 2) - 275,
+				    top=0,
+				    toolbar=no,
+				    location=no,
+				    status=no,
+				    menubar=no,
+				    resizable=no`;
+				if(m==l){
+					alert("내가쓴글은 채팅창 안됩니다")
+				}else{
+					
+			 	const newWindow = window.open('${root}/chat/room/open?guideBoardNo='+g+'&writerNo='+m +'&type=new'+'&loginMemberNo='+l , '', windowFeatures);
+				}
+	        	
+	    }
+		
+		
 		
 		
 		loadComment();
@@ -545,9 +521,9 @@
 						str+='<div class="comment">';
 
 						if(x[i].profile==null||x[i].profile==""){
-							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/profile_default.jpg" alt=""></div>';
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="goProfile('+x[i].writerNo+')"></div>';
 						}else {
-							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt=""></div>';
+							str+='<div><img class="list-profile" src="${root}/static/img/member/profile/'+x[i].profile+'" alt="" onclick="goProfile('+x[i].writerNo+')"></div>';
 						}
 						str+='<div class="comment-list-text"><input type="hidden" value="'+x[i].guideBoardNo+'">';
 						str+='<div class="comment-list-id">'+x[i].nick+'</div>';

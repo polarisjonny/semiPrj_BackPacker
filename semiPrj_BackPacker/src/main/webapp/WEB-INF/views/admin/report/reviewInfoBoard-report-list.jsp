@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    #wrapt{
+     #wrapt{
         width: 800px;
         margin-top: 100px;
         margin-left: auto;
@@ -25,40 +25,57 @@
     #thi{
         text-align: center;
     }
-    #acbtable {
+    #board1{
+    	height : 600px;
+    }
+    #acbdiv {
     width: 800px;
-    height : 450px;
-    border-collapse: collapse;
-    border-spacing: 10px;
+    height : 50px;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
+    display : grid;
+  	 grid-template-columns: 1fr 3fr 7fr 4fr 4fr 2fr 2fr;
     }
 
-    #acbtable th{
-    
-    border-bottom: 1px solid black;
-    }
-    #acbtable td{
-    padding-top: 10px; 
-    padding-bottom: 10px;
-    border-bottom: 1px solid black;
-    }
-
+   
     #page-area-acb{
       width : 300px;
       margin: auto;
       display: flex;
       justify-content: space-evenly; 
 }
+ 
   #page-area{
       width : 500px;
       margin: auto;
       display: flex;
       justify-content: space-evenly; 
    }
-     tbody > tr:hover{
-    	background-color: rgba(176, 237, 241, 0.842);
-    	cursor: pointer;
+    
+    
+    .classdiv{
+    	
+	    width: 800px;
+	    height:70px;
+	    text-align: center;
+	    font-size: 16px;
+	    display : grid;
+	  	 grid-template-columns:  1fr 3fr 7fr 4fr 4fr 2fr 2fr;
+    }
+    button{
+    	width : 30px;
+    	height : 30px;
+    	border : 0px;
+    	background-color:white;
+    	font-size:12px;
+    }
+    button:hover{
+    	background-color:rgb(214, 248, 246);
+    }
+    .titles{
+    	text-align:start; 
+    	padding-left : 10px;
+    	
     }
 </style>
 </head>
@@ -99,39 +116,38 @@
             </div>
         <div id="board1">
             
-            <table id="acbtable">
-                <thead>
-                    <tr>
-                        <th>게시판 이름</th>
-                        <th>게시판 번호</th>
-                        <th>제목</th>
-                        <th>작성자 id</th>
-                        <th>작성자 nick</th>
-                        <th>신고수</th>
-                         <th>신고내용</th>
-                    </tr>
-                </thead>
-                 <tbody>
+            <div id="acbdiv">
+                
+                  
+                        <div>Go</div>
+                        <div>종류</div>
+                        <div>제목</div>
+                        <div>ID</div>
+                        <div>NICK</div>
+                        <div>신고수</div>
+                        <div>내용</div>
+                
+               </div>        
+               <hr>
                 	<c:forEach items="${voList}" var="vo">
-	                    <tr>
-	                        <td>${vo.categoryName}</td>
-	                        <td>${vo.infoNo}</td>
-	                        <td>${vo.title}</td>
-	                        <td>${vo.writerId}</td>
-	                        <td>${vo.writerNick}</td>
-	                        <td>${vo.reportCnt}</td>
-	                         <td>
+	                    <div class="classdiv">
+	                        <div><button onclick="goBoard(${vo.infoNo},${vo.writerNo})" value="${vo.infoNo}">${vo.infoNo}</button></div>
+	                        <div>${vo.categoryName}</div>
+	                        <div class="titles">${vo.title}</div>
+	                        <div>${vo.writerId}</div>
+	                        <div>${vo.writerNick}</div>
+	                        <div>${vo.reportCnt}</div>
+	                        <div>
 	                        	<form action="${root}/admin/reviewInfoBoard/report" method="get">
                                     <input type="hidden" value="${vo.infoNo}" name="selectReviewInfoBoardNo">
-                                    <input type="submit" value="신고내용">
+                                    <input type="submit" value="내용">
 
                                 </form>
-	                        </td>
-	                    </tr>        
+	                        </div>
+	                        </div>
+	                        <hr>
                 	</c:forEach>
-                </tbody>
-                
-            </table>
+                </div>
             <br><br>
            <div id="page-area">
             	<c:if test="${pv.currentPage >1}">
@@ -156,6 +172,10 @@
 </body>
 </html>
 <script>
+
+	//function goBoard(no,writerNo){
+	//window.location.href = '${root}/accompany/detail?no='+no+'&writerNo='+writerNo;
+	//}	
 	const searchType = '${searchVo.searchType}';
 	const searchValue = '${searchVo.searchValue}';
 	

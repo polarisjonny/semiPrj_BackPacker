@@ -20,7 +20,8 @@
 <title>Insert title here</title>
 <style>
    .detail{
-      margin-top: 100px;
+   		width : 660px;
+     	 margin-top: 100px;
    }
       #page-area{
       width : 500px;
@@ -84,11 +85,11 @@
                     </td>
                     <td class = "imgInput " rowspan="2">
                     	<c:if test="${not empty reviewListDetail.giverProfile}">
-                              <img  width="50px" height="50px"  class="btnimg profile-border"src="${root}/static/img/member/profile/${reviewListDetail.giverProfile}" alt="" onclick="imgClick(event)">
+                              <img  width="40px" height="40px"  class="btnimg profile-border"src="${root}/static/img/member/profile/${reviewListDetail.giverProfile}" alt="" onclick="imgClick(event)">
 		                               
        					</c:if>
        					<c:if test="${empty reviewListDetail.giverProfile}">
-       						 <img  width="50px" height="50px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick(event)">
+       						 <img  width="40px" height="40px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick(event)">
        					</c:if>
                     </td>
                     <td class="comentContent" >${reviewListDetail.content}</td>

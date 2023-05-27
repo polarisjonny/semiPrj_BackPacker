@@ -27,6 +27,9 @@
 
 
 <style>
+.logo{
+    cursor: pointer;
+}
 	header {
 		background-color: white;
 	}
@@ -34,16 +37,19 @@
 		outline: none;
 		box-shadow: none;
 	}
+	.gotoChat{
+	 cursor: pointer;
+	}
 </style>
 
 <header>
     <div class="logo">
-           <img width="212px" height="66px" src="${root}/static/img/logo/b_logo.png" alt="">
+           <img width="212px" height="66px" src="${root}/static/img/logo/b_logo.png" alt="" onclick="goHome()">
     </div>
     <div class="menu">
 		
 		<c:if test="${not empty loginMember}">
-			<div id="gotoChat">
+			<div class="gotoChat" onclick="goChatList()">
 				<i class="fa-regular fa-comments fa-2xl chat-logo" style="color: #000000;"></i>
 			</div>
 		</c:if>
@@ -57,12 +63,12 @@
        	<c:if test="${not empty loginMember }">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="">
+				  <img width="50px" height="50px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="" >
 				</button>
 				<ul class="dropdown-menu">
 				 <li hidden>${loginMember.memberNo}</li>
 				  <li><a class="dropdown-item" href="${root}/member/myPage">MY PAGE</a></li>
-				  <li><a class="dropdown-item imgToProfile" href="#">PROFILE</a></li>
+				  <li><a class="dropdown-item imgToProfile" href="#" onclick="goProfile(${loginMember.memberNo})">PROFILE</a></li>
 				 <li><a class="dropdown-item" href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
 			  </div>
@@ -72,64 +78,64 @@
     </div>
 </header>
 <script >
- let logo ;
- logo = document.querySelector('.logo');
- logo.addEventListener('click', ()=>{
 
-   window.location.href = `${root}/home`;
+function goHome(e) {
+    
 
- });
+  window.location.href = `${root}/home`;
 
-// let chatLogo;
-// chatLogo = document.querySelector('.chat-logo');
-// chatLogo.addEventListener('click', () => {
+};
 
-//   // 창 옵션 설정
-//   const windowFeatures = `
-//     width=600,
-//     height=700,
-//     left=(screen.width / 2) - 275,
-//     top=0,
-//     toolbar=no,
-//     location=no,
-//     status=no,
-//     menubar=no,
-//     scrollbars=yes,
-//     resizable=no`;
+function goChatList() {
+	 const width = 517;
+	 const height = 820;
+	 const left = (window.innerWidth / 2) - (width / 2);
+	 const top = 100;
+  	window.open('${root}/chat/room/list/open', '','width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 
-//   // 새 창 열기
-//   const newWindow = window.open('${root}/chat/room/list', '', windowFeatures);
 
-//   // 새 창이 로드되면 스크롤바 스타일 설정
-//   newWindow.addEventListener('load', () => {
-//     const style = document.createElement('style');
-//     style.textContent = `
-//       /* 스크롤바 스타일 설정 */
-//       ::-webkit-scrollbar {
-//         width: 10px;
-//         background-color: white;/* 연한 하늘색 배경색 */
-//       }
-//       ::-webkit-scrollbar-thumb {
-//         background-color:  #E0F2FE; /* 연한 하늘색 스크롤바 색상 */
-//         border-radius: 5px; /* 스크롤바를 둥글게 보이도록 설정 */
-//       }
-//       ::-webkit-scrollbar-thumb:hover {
-//         background-color: #64B5F6; /* 마우스 오버 시 스크롤바 색상 변경 */
-//       }
-//     `;
-//     newWindow.document.head.appendChild(style);
-//   });
-// });
-</script>
-<script>
-let imgToProfile;
-imgToProfile= document.querySelector('.imgToProfile');
-imgToProfile.addEventListener('click', function(e) {
-   const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
-   const width = 800;
-   const height = 1000;
+};
+
+function goProfile(e){
+   
+   const width = 650;
+   const height = 800;
    const left = (screen.width / 2) - (width / 2);
    const top = 0;
-   window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-});
+   window.open('${root}/click/profile?selectMemberNo='+e, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+};
+
+function cntNewMessage(){
+	$.ajax({
+				url : "${root}/chat/cnt/",
+				type : "POST",
+				dataType :"json",
+				data : {
+					loginMemberNo : "100",
+				},
+				success: function(data){
+					let cnt ="";
+					cnt = JSON.parse(data);
+					console.log(cnt);
+					if(cnt >0){
+						let gotoChat = document.querySelector(".gotoChat");						
+						let str = "";
+						str+= '<div style="text-align:center; color:red;">'+cnt+'</div>';
+						gotoChat.innerHTML+=str;
+						
+						
+					}else {
+					}
+				},
+				error: ()=>{
+					console.log("에러요 로드 실패...");
+				} ,
+			});
+    	
+};
+
+cntNewMessage();
+	
+
+
 </script>

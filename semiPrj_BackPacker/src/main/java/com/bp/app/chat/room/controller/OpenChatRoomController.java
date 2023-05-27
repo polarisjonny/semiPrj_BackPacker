@@ -26,9 +26,25 @@ public class OpenChatRoomController extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-			String chattingUserNo = loginMember.getMemberNo();
-			String chattingUser2No = req.getParameter("writerNo");
-			if(chattingUserNo == chattingUser2No) {
+			String loginMemberNo = loginMember.getMemberNo();
+			String chattingUser2No = null;;
+			String chattingUserNo = null;
+			if(req.getParameter("chattingUserNo") != null) {
+				 chattingUserNo = req.getParameter("chattingUserNo");
+			}else {
+				 chattingUserNo = loginMember.getMemberNo();
+			}
+			if(req.getParameter("chattingUser2No") != null) {
+				
+				chattingUser2No = req.getParameter("chattingUser2No");
+			}else {
+				
+				chattingUser2No = req.getParameter("writerNo");
+			}
+			System.out.println("loginMember.No"+chattingUserNo);
+			System.out.println(chattingUser2No);
+			String type = req.getParameter("type");
+			if("new".equals(type) && chattingUserNo.equals(chattingUser2No)) {
 				req.setAttribute("errorMsg", "이거 니가쓴글이야 정신차려");
 				
 				throw new Exception("이거 니가쓴 글이다");
@@ -44,21 +60,29 @@ public class OpenChatRoomController extends HttpServlet {
 			crv.setChattingUserNo(chattingUserNo);
 			crv.setChattingUser2No(chattingUser2No);
 			crv.setGuideBoardNo(guideBoardNo);
-			
+			System.out.println("USER1NO"+chattingUserNo);
+			System.out.println("USER2NO"+chattingUser2No);
+			System.out.println(loginMemberNo);
 			ChatService cs = new ChatService();
 			ChattingRoomVo vo = null;
+			System.out.println("채팅방번호"+chattingRoomNo);
 			if(chattingRoomNo != null) {
 				crv.setChattingRoomNo(chattingRoomNo);
-				vo = cs.openOldChatRoomByRoomNo(crv);
+				vo = cs.openOldChatRoomByRoomNo(crv,loginMemberNo);
 			}else {
-				System.out.println("기존 채팅방 게시판에서 입장");
-				vo = cs.openOldChatRoom(crv);
+				vo = cs.openOldChatRoom(crv,loginMemberNo);
+				System.out.println("1");
 				if(vo.getChattingRoomNo()==null) {
-					System.out.println("새 채팅방 생성");
-					vo = cs.openNewChatRoom(crv);
+					System.out.println("2");
+					System.out.println("crv"+crv);
+					vo = cs.openNewChatRoom(crv,loginMemberNo);
+					System.out.println("3");
 					
 				}
+				System.out.println("4");
 			}
+			System.out.println(vo);
+			System.out.println(loginMember);
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room.jsp").forward(req, resp);
 		}catch(Exception e) {

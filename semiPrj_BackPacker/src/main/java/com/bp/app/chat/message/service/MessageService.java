@@ -48,5 +48,27 @@ public class MessageService {
 		//close
 		
 		return list;
+	}
+	public int newMessageCnt(String receiverNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int cnt = dao.newMessageCnt(conn,receiverNo );
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+	}
+	public int newMessageCnt(String receiverNo, String chattingRoomNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int cnt = dao.newMessageCnt(conn,receiverNo ,chattingRoomNo);
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
+		return cnt;
 	}	
 }

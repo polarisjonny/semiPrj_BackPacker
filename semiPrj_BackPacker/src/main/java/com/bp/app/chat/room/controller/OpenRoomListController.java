@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bp.app.chat.message.service.MessageService;
 import com.bp.app.chat.room.service.ChatService;
 import com.bp.app.chat.room.vo.ChattingRoomVo;
 import com.bp.app.common.page.PageVo;
 import com.bp.app.gboard.service.GuideBoardService;
 import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.vo.MemberVo;
+import com.google.gson.Gson;
 @WebServlet("/chat/room/list/open")
 public class OpenRoomListController extends HttpServlet {
 	
@@ -30,23 +32,26 @@ public class OpenRoomListController extends HttpServlet {
 		    String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			ChatService cs = new ChatService();
-			int listCount = cs.selectCnt(searchType, searchValue );
+			HttpSession session = req.getSession();
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+//			String chattingUserNo = loginMember.getMemberNo();
+//			String chattingUser2No = loginMember.getMemberNo();
+			String no =loginMember.getMemberNo();
+			int listCount1 = cs.selectCnt1(searchType, searchValue,no);
+			int listCount2 = cs.selectCnt2(searchType, searchValue,no);
+			int listCount = listCount1 + listCount2;
             String page = req.getParameter("page");
             if(page == null) page = "1";
             int currentPage = Integer.parseInt(page);
             int pageLimit = 5;
-            int boardLimit= 10;
+            int boardLimit= 5;
             PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
             
-			HttpSession session = req.getSession();
-			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-			String chattingUserNo = loginMember.getMemberNo();
-			String chattingUser2No = loginMember.getMemberNo();
 			
 			List<ChattingRoomVo> roomList = null;
 			ChattingRoomVo crv = new ChattingRoomVo();
-			crv.setChattingUserNo(chattingUserNo);
-			crv.setChattingUser2No(chattingUser2No);
+			crv.setChattingUserNo(no);
+//			crv.setChattingUser2No(chattingUser2No);
 			
 			if(searchType == null || searchType.equals("")) {
 				
@@ -73,6 +78,37 @@ public class OpenRoomListController extends HttpServlet {
 		}
 	}
 
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			HttpSession session = req.getSession();
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+			String receiverNo = null;
+			
+			receiverNo = loginMember.getMemberNo();
+			
+			MessageService ms = new MessageService();
+			String chattingRoomNo = null;
+			chattingRoomNo = req.getParameter("chattingRoomNo");
+			System.out.println("채팅방번호" + chattingRoomNo);
+			int cnt = ms.newMessageCnt(receiverNo,chattingRoomNo);
+			System.out.println("카운트" +cnt);
+			if (chattingRoomNo !=null) {
+				
+				Gson gson= new Gson();
+				String  cnt1= gson.toJson(cnt);
+				resp.setCharacterEncoding("UTF-8");
+				PrintWriter out = resp.getWriter();
+				out.write(cnt1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
 
