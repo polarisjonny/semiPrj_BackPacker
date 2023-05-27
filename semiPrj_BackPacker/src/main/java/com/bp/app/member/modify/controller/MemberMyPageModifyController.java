@@ -53,13 +53,15 @@ public class MemberMyPageModifyController extends HttpServlet {
 			System.out.println(address);
 			System.out.println(age);
 			System.out.println(introMessage);
-			System.out.println(attachmentVo.getChangeName());
+			
+			
 			
 			//데이터 뭉치기
 			MemberVo vo = new MemberVo();
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getMemberNo();
+			String profileImage = loginMember.getProfileImage();
 			
 			vo.setMemberNo(memberNo);
 			vo.setPhoneNumber(phoneNumber);
@@ -70,6 +72,9 @@ public class MemberMyPageModifyController extends HttpServlet {
 			if (attachmentVo != null) {
                 vo.setProfileImage(attachmentVo.getChangeName());
             }
+			else if(attachmentVo == null) {
+				vo.setProfileImage(profileImage);
+			}
 			
 			MemberService ms = new MemberService();
 			MemberVo updatedMember = ms.editMemberInfo(vo);

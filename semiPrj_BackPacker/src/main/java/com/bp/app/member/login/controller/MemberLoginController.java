@@ -15,7 +15,11 @@ import com.bp.app.member.vo.MemberVo;
 public class MemberLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/member/loginForm.jsp").forward(req, resp);
+		 // 로그인 페이지로 이동하기 전에 이전 페이지 URL을 세션에 저장
+        String previousPage = req.getHeader("Referer");
+        req.getSession().setAttribute("previousPage", previousPage);
+        
+        req.getRequestDispatcher("/WEB-INF/views/member/loginForm.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -43,8 +47,8 @@ public class MemberLoginController extends HttpServlet {
 				req.getSession().setAttribute("loginMember", loginMember);
 				System.out.println(loginMember);
 				
-				String root = req.getContextPath();
-				resp.sendRedirect(root+"/home");
+				String previousPage = (String) req.getSession().getAttribute("previousPage");
+				resp.sendRedirect(previousPage);
 			} else {
 				throw new Exception("로그인 실패");
 			}

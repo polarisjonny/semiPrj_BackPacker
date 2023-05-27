@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
       #joinTitle {
             text-align: center;
@@ -368,39 +369,138 @@
 		        });
 		        return false;
 		    }
-
+		    
+		    const passwordInput = document.querySelector('input[name="password"]');
+		    const passwordAgainInput = document.querySelector('input[name="passwordAgain"]');
+		  
+		    if (passwordInput.value.trim() !== passwordAgainInput.value.trim()) {
+		        Swal.fire({
+		            icon: 'error',
+		            title: '비밀번호 오류',
+		            text: '비밀번호가 일치하지 않습니다.',
+		        });
+		        return false;
+		    }
+		    
+		    Swal.fire({
+				  icon: 'success',
+				  title: '회원가입 성공',
+				  text: '환영합니다!',
+				});
+		    
 		    return true;
 		}
+		
+		
 
 	</script>
 	
 	<script>
-    // 아이디 중복 확인
+    // 아이디 중복확인
     const checkIdButton = document.querySelector("#checkId");
-    checkIdButton.addEventListener("click", checkId);
-
-    function checkId() {
+    checkIdButton.addEventListener("click", function() {
         const idInput = document.querySelector("#id");
         const id = idInput.value.trim();
+		
+        //add regex here
+         const idRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
 
-        // 아이디 유효성 검사
-        if (!validateId(id)) {
-            alert("아이디는 8~16자로, 영문과 숫자를 조합해야 합니다.");
-            return;
+            if (id === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '입력 오류',
+                    text: '아이디를 입력하세요.',
+                });
+            } else if (!idRegex.test(id)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '입력 오류',
+                    text: '아이디는 8~16자로, 영문과 숫자만 조합해야 합니다.',
+                });
+            }  else {
+            $.ajax({
+                url: "${root}/member/join/checkId",
+                data: { 'id': id },
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                	console.log(data);
+                    if (data === false) {
+                        Swal.fire({
+                            title : '아이디 사용 불가',
+                            icon: 'warning',
+                            text: id+'는 이미 사용중입니다.'
+                            
+                        });
+                    } else {
+                        Swal.fire({
+                            title : '아이디 사용 가능',
+                            icon: 'success',
+                            text: id+'는 사용 가능합니다:)'
+                            
+                        });
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         }
-
-        // 아이디 중복 확인 요청 및 처리
-        // 여기에 서버와 통신하는 코드를 작성하면 됩니다.
-        // 예시로 alert 창에 결과를 표시하도록 작성하였습니다.
-        alert(`아이디 중복 확인 - 아이디: ${id}`);
-    }
-
-    // 아이디 유효성 검사 함수
-    function validateId(id) {
-        const idPattern = /^[a-zA-Z0-9]{8,16}$/;
-        return idPattern.test(id);
-    }
+    });
 </script>
+
+
+<script>
+//닉네임 중복확인
+const checkNickButton = document.querySelector("#checkNick");
+checkNickButton.addEventListener("click", function() {
+    const nickInput = document.querySelector("#nick");
+    const nick = nickInput.value.trim();
+	
+
+
+
+        if (nick === '') {
+            Swal.fire({
+                icon: 'error',
+                title: '입력 오류',
+                text: '닉네임을 입력하세요.',
+            });
+        }  else {
+		        $.ajax({
+		            url: "${root}/member/join/checkNick",
+		            data: { 'nick': nick },
+		            method: "POST",
+		            dataType: "json",
+		            success: function(data) {
+		            	console.log(data);
+		                if (data === false) {
+		                    Swal.fire({
+		                        title : '닉네임 사용 불가',
+		                        icon: 'warning',
+		                        text: nick+'는 이미 사용중입니다.'
+		                        
+		                    });
+                } else {
+                    Swal.fire({
+                        title : '닉네임 사용 가능',
+                        icon: 'success',
+                        text: nick+'는 사용 가능합니다:)'
+                        
+                    });
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+});
+</script>
+
+
+    
+
 	
 </body>
 </html>

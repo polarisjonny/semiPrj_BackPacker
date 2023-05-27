@@ -349,4 +349,44 @@ public class MemberDao {
 		
 		return tempMember;
 	}
+
+	public boolean checkId(Connection conn, String id) throws Exception {
+		//sql
+		String sql = "SELECT ID FROM MEMBER WHERE ID = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		
+		boolean result = true;
+		
+		//tx || rs
+		if(rs.next()) {
+			result = false;
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	public boolean checkNick(Connection conn, String nick) throws Exception {
+		String sql = "SELECT NICK FROM MEMBER WHERE NICK = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  nick);
+		ResultSet rs = pstmt.executeQuery();
+		boolean result = true;
+		
+		//tx || rs
+		if(rs.next()) {
+			result = false;
+		}
+		
+ 		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
 }//class
