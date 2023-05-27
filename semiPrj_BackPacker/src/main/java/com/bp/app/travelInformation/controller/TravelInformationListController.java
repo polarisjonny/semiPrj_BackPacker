@@ -1,7 +1,9 @@
 package com.bp.app.travelInformation.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,7 @@ public class TravelInformationListController extends HttpServlet{
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			//데이터 뭉치기
-			int listCnt = tis.selectCnt();
+			int listCnt = tis.selectCnt(searchType , searchValue);
 			String page = req.getParameter("page");
 			if(page == null) {
 				page = "1";
@@ -37,8 +39,18 @@ public class TravelInformationListController extends HttpServlet{
 			
 			PageVo pv = new PageVo(listCnt, currentPage, pageLimit, boardLimit);
 			
-			List<TravelReviewVo> tiList = tis.selectList(pv);
+			List<TravelReviewVo> tiList = null;
+			if(searchType == null || searchType.equals("")) {
+				tiList = tis.selectList(pv);
+			}else {
+				tiList = tis.selectList(pv,searchType , searchValue);
+			}
 			
+			Map<String,String> map = new HashMap<>();
+			map.put("searchType", searchType);
+			map.put("searchValue", searchValue);
+			
+			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pv);
 			req.setAttribute("tiList", tiList);
 			req.getRequestDispatcher("/WEB-INF/views/notice/travelInformation.jsp").forward(req, resp);

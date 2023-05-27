@@ -17,11 +17,11 @@ public class TravelReviewService {
 
 	private final TravelReviewDao dao = new TravelReviewDao();
 
-	public int selectCnt() throws Exception {
+	public int selectCnt(String searchType, String searchValue) throws Exception {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.selectCnt(conn);
+		int cnt = dao.selectCnt(conn , searchType , searchValue);
 		
 		JDBCTemplate.close(conn);
 		

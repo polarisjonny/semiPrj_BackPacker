@@ -17,11 +17,11 @@ public class TravelInformationService {
 	private final TravelInformationDao dao = new TravelInformationDao();
 	
 	//페이지 개수
-	public int selectCnt() throws Exception {
+	public int selectCnt(String searchType, String searchValue) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.selectCnt(conn);
+		int cnt = dao.selectCnt(conn , searchType , searchValue);
 		
 		JDBCTemplate.close(conn);
 		
@@ -58,6 +58,18 @@ public class TravelInformationService {
 		JDBCTemplate.close(conn);
 		
 		return vo;
+	}
+
+	//여행정보 제목으로 검색
+	public List<TravelReviewVo> selectList(PageVo pv, String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<TravelReviewVo> tilist = dao.selectList(conn, pv, searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return tilist;
 	}
 
 }

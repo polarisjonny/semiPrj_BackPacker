@@ -193,22 +193,19 @@ footer, header, hgroup, menu, nav, section {
 		<br>
 		
         <div id="review-search-area">
-            <form action="${root}/notice/travelInformation">
+            <form action="${root}/notice/travelInformation" method="get">
+				 <input type="hidden" name="page" value="1">
                 <select name="searchType">
                         <option value="title">제목</option>
-                        <option value="writer">여행지 이름</option>
                 </select>
                	
                <span class="input-area">
 	               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-	               	<input type="text" placeholder="검색할 단어를 입력하세요.">
-               </span>
+					   <input name="searchValue" type="text" placeholder="검색할 단어를 입력하세요." value="${searchVo.searchValue }">
+					</span>
         
             </form>
             
-	         <%-- <div class="noticeBtn">
-		        <button onclick="location.href='${root}/notice/travelInformationWrite'">게시글 작성</button>
-	        </div> --%>
         </div>
         
         <div id="content-area">
@@ -238,38 +235,29 @@ footer, header, hgroup, menu, nav, section {
         <br>
         
         <div id="page-area">
-            	 <c:if test="${pv.currentPage > 1}">
-				  <c:set var="previousPage" value="${pv.currentPage - 2}" />
-				  <c:choose>
-				    <c:when test="${backPage < 1}">
-				      <c:set var="previousPage" value="1" />
-				    </c:when>
-				  </c:choose>
-				  <a style="color:#99ccff" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-				  <a style="color:#99ccff" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+
+				<c:if test="${pv.currentPage > 1}">
+					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
 				</c:if>
     
-            	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
-            		</c:if>
             		
-            		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a style="color:#99ccff">${i}</a>
-            		</c:if>
-            	</c:forEach>
+				
+				<c:forEach var="i" step="1" begin="${pv.startPage}" end="${pv.endPage }">
+					<c:if test="${pv.currentPage != i}">
+						<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a> 
+					</c:if>	
+
+						<c:if test="${pv.currentPage == i}">
+							<a style="color:#99ccff">${i}</a>
+						</c:if>
+				</c:forEach>
             	
-            	 <c:if test="${pv.currentPage < pv.maxPage}">
-				  <c:set var="nextPage" value="${pv.currentPage + 2}" />
-				  <c:choose>
-				    <c:when test="${nextPage > pv.maxPage}">
-				      <c:set var="nextPage" value="${pv.maxPage}" />
-				    </c:when>
-				  </c:choose>
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
-				</c:if>
-            </div>
+					<c:if test="${pv.currentPage < pv.maxPage}">
+						<a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+						<a style="color:#99ccff" href="${root}/notice/travelReview?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
+					</c:if>
+        </div>
    
     
     </main>
@@ -279,7 +267,21 @@ footer, header, hgroup, menu, nav, section {
     
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
+	<script>
 
+		// const searchValue = '${searchVo.searchValue}';
+		// const searchType = '${searchVo.searchType}';
+		
+		// if(searchType.length > 1){
+		// 	initSearchType();
+		// }
+
+		// function initSearchType(params) {
+		// 	const x = document.querySelector('select > option[value="' + searchType + '"]');
+		// 	x.selected = true;
+		// }
+
+	</script>
 	
 
 </body>
