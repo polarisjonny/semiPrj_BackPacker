@@ -55,10 +55,10 @@ public class GuideBoardReportDetailController extends HttpServlet{
 			req.setAttribute("selectGuideBoardNo", selectGuideBoardNo);
 			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-detail.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] 게시글 목록 조회에러");
+			System.out.println("[ERROR] 동행,가이드 신고 상세조회 에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "목록조회실패");
+			req.setAttribute("errorMsg", "동행,가이드 신고 상세조회 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}

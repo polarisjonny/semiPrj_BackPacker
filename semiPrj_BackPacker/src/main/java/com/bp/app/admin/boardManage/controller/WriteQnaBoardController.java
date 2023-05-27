@@ -47,7 +47,7 @@ public class WriteQnaBoardController extends HttpServlet{
 			System.out.println("[ERROR]문의게시판 작성 중 에러 발생");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "문의게시판 작성 실패");
+			req.setAttribute("errorMsg", "문의게시판 작성 중 에러 발생");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

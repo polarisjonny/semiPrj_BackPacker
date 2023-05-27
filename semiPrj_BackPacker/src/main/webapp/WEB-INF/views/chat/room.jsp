@@ -195,7 +195,7 @@
 					}
 				},
 				error: ()=>{
-					console.log("채팅작성실패...");
+					console.log("아웃실패...");
 				} ,
 			});
     	
@@ -235,7 +235,7 @@
     	
     }
     
-    /*
+    
     
     
    		let interval;
@@ -346,7 +346,7 @@
 	   	//startInterval();
 	
 
-*/
+
 
 
 

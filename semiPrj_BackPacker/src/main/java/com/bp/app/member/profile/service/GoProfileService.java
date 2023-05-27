@@ -37,9 +37,7 @@ public class GoProfileService {
       //conn
       Connection conn = JDBCTemplate.getConnection();
          //update
-        System.out.println("service" + selectMemberNo);
       MemberReviewVolist = dao.selectMemberReadReview(conn , selectMemberNo);
-      System.out.println("service2" + selectMemberNo);
          
       JDBCTemplate.close(conn);
       return MemberReviewVolist;

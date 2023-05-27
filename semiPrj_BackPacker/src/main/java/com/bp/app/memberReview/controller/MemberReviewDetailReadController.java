@@ -50,7 +50,6 @@ public class MemberReviewDetailReadController extends HttpServlet{
             req.setAttribute("pv" , pv);
             req.getRequestDispatcher("/WEB-INF/views/profile/detail-review.jsp").forward(req, resp);
 //         }else {
-//            System.out.println("else");
 //            throw new Exception();
 //         }
       }catch(Exception e) {

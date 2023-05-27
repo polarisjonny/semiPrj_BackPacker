@@ -57,49 +57,14 @@ public class AdminMemberManageController extends HttpServlet {
 			req.setAttribute("searchVo", map);
             req.getRequestDispatcher("/WEB-INF/views/admin/member/member-list.jsp").forward(req, resp);
          } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+        	 System.out.println("[ERROR] 회원 목록 조회 실패");
+        	 e.printStackTrace();
+            req.setAttribute("errorMsg", "회원 목록 조회 실패");
+            
          } 
       
    }
 
-//   @Override
-//   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//      try {
-//         
-//    	  
-//         List<MemberVo> adminMemberVoList = null;
-//         
-//         AdminMemberService ams = new AdminMemberService();
-//         String searchType = req.getParameter("searchType");
-//         String searchValue = req.getParameter("searchValue");
-//         int cnt = ams.getMemberListCnt(searchType , searchValue);
-//         int page = Integer.parseInt(req.getParameter("page"));
-//         PageVo pv = new PageVo(cnt, page, 5, 10);
-//         if(searchType == null || searchType.equals("")) {
-//            adminMemberVoList = ams.getMemberList(pv);
-//         }else {
-//            adminMemberVoList = ams.getMemberList(pv, searchType, searchValue);
-//         }
-//         Map<String, String> map = new HashMap<>();
-//         map.put("searchType", searchType);
-//         map.put("searchValue", searchValue);
-//         //화면
-//         req.setAttribute("searchVo", map);
-//         req.setAttribute("pv", pv);
-//         req.setAttribute("adminMemberVoList", adminMemberVoList);
-//      
-//      }catch(Exception e) {
-//         System.out.println("[ERROR] 게시글 목록 조회 에러 ...");
-//         e.printStackTrace();
-//         
-//         req.setAttribute("errorMsg" , "목록 조회 실패 ..");
-//         req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
-//         return;
-//         
-//      }
-//      req.getRequestDispatcher("/WEB-INF/views/admin/member-list.jsp").forward(req, resp);
-//      
-//   
-//   }
+
 }

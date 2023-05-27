@@ -34,6 +34,7 @@
 			
 
 <script>
+
 function goBack() {
   history.back();
 }

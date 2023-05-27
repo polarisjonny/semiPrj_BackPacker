@@ -29,10 +29,6 @@ public class OutChatRoomController extends HttpServlet{
 			String chattingStatus =  req.getParameter("chattingStatus");
 			String chattingUserNo =  req.getParameter("chattingUserNo");
 			String chattingUser2No =  req.getParameter("chattingUser2No");
-			System.out.println(chattingRoomNo);
-			System.out.println(chattingStatus);
-			System.out.println("user"+chattingUserNo);
-			System.out.println(chattingUser2No);
 			//데뭉
 			ChattingRoomVo vo = new ChattingRoomVo();
 			
@@ -40,7 +36,6 @@ public class OutChatRoomController extends HttpServlet{
 			vo.setChattingStatus(chattingStatus);;
 			vo.setChattingUserNo(chattingUserNo);
 			vo.setChattingUser2No(chattingUser2No);
-			System.out.println("login"+loginMember.getMemberNo());
 			
 			//서비스
 			ChatService cs = new ChatService();
@@ -53,7 +48,6 @@ public class OutChatRoomController extends HttpServlet{
 				
 				result = cs.outChatRoom(vo);
 			}
-			System.out.println(result);
 			
 			//화면
 			PrintWriter out = resp.getWriter();
@@ -61,8 +55,10 @@ public class OutChatRoomController extends HttpServlet{
 				out.write("ok");
 			}
 		} catch (Exception e) {
-			
-			
+			e.printStackTrace();
+			System.out.println("[ERROR] 채팅방 나가기 에러");
+			req.setAttribute("errorMsg","채팅방 나가기 에러");
+			 req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		
 	}

@@ -35,8 +35,6 @@ public class SendMessageController extends HttpServlet{
 			String chattingUser2No = req.getParameter("chattingUser2No");
 			String content =  req.getParameter("content");
 			String senderNo =  req.getParameter("writerNo");
-			System.out.println(content);
-			System.out.println(chattingRoomNo);
 			//데뭉
 			MessageVo vo = new MessageVo();
 			if(writerNo.equals(chattingUserNo)) {
@@ -61,7 +59,11 @@ public class SendMessageController extends HttpServlet{
 				out.write("ok");
 			}
 		} catch (Exception e) {
-			
+			System.out.println("[ERROR] 채팅 전송 에러");
+			e.printStackTrace();
+		
+			req.setAttribute("errorMsg","채팅 전송 에러");
+			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 			
 		}
 		
