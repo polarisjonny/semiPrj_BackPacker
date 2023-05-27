@@ -71,7 +71,6 @@ public class PlaceAddController extends HttpServlet {
 			vo.setPlaceLat(placeLat);
 			vo.setPlaceLng(placeLng);
 			vo.setPlaceName(placeName);
-			System.out.println(vo.getPlaceCategory());
 			PlaceManageService pms = new PlaceManageService();
 			int result = pms.addPlace(vo);
 			
@@ -87,11 +86,10 @@ public class PlaceAddController extends HttpServlet {
 			
 			
 		}catch(Exception e ) {
-			System.out.println("[ERROR] add fail ...");
-			e.printStackTrace();
-			
-			req.setAttribute("errorMsg", "여행지추가 실패...");
-			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
+			System.out.println("[ERROR] 여행지 추가 실패");
+       	 e.printStackTrace();
+         req.setAttribute("errorMsg", "여행지 추가 실패");
+         req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 
 		

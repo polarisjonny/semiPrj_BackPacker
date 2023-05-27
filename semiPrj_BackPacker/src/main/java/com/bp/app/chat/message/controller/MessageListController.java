@@ -37,8 +37,11 @@ public class MessageListController extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			out.write(jsonStr);
 		} catch (Exception e) {
-			System.out.println("[ERROR] notice reply error~~");
+			System.out.println("[ERROR] 채팅방 목록조회 error~~");
 			e.printStackTrace();
+		
+			req.setAttribute("errorMsg","채팅방 목록조회");
+			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		
 		

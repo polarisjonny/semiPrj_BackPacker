@@ -29,7 +29,6 @@ public class ChatService {
 		Connection conn = JDBCTemplate.getConnection()	;
 			//UPDATE
 		int result = dao.openNewChatRoom(conn, crv ,loginMemberNo);
-		System.out.println(result);
 		if(result < 1) {
 			JDBCTemplate.rollback(conn);
 			throw new Exception();
@@ -103,9 +102,7 @@ public class ChatService {
 		Connection conn = JDBCTemplate.getConnection()	;
 			
 		//SELECT
-		System.out.println("서비스");
 		int result = dao.deleteCnt(conn,crv,loginMemberNo);
-		System.out.println(result);
 		vo = dao.getOldChatRoomByRoomNo(conn, crv);
 		if(result >=1) {
 			JDBCTemplate.commit(conn);
@@ -146,7 +143,6 @@ public class ChatService {
 	}
 	public int submitMyBoardChatRoom(ChattingRoomVo vo) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
-		System.out.println("내서비스 시작");
 		int result = dao.submitMyBoardChatRoom(conn, vo);
 		
 		//close
@@ -157,7 +153,6 @@ public class ChatService {
 		}
 		
 		JDBCTemplate.close(conn);
-		System.out.println("서내비스 끝");
 		return result;
 	}
 	public int submitChatRoom(ChattingRoomVo vo) throws Exception {

@@ -57,7 +57,10 @@ public class SubmitChatController extends HttpServlet {
 			}
 		} catch (Exception e) {
 			
-			
+			e.printStackTrace();
+			System.out.println("[ERROR] 채팅방 매칭수락 에러");
+			req.setAttribute("errorMsg","채팅방 매칭수락 에러");
+			 req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}
 }

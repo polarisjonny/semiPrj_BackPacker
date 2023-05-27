@@ -51,10 +51,10 @@ public class ReviewInfoBoardManageController extends HttpServlet {
 			req.setAttribute("searchVo", map);
 			req.getRequestDispatcher("/WEB-INF/views/admin/report/reviewInfoBoard-report-list.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] 게시글 목록 조회에러");
+			System.out.println("[ERROR] 정보, 후기 게시판 목록 조회 에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "목록조회실패");
+			req.setAttribute("errorMsg", "정보, 후기 게시판 목록 조회 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

@@ -52,10 +52,10 @@ public class GuideBoardManageController extends HttpServlet {
 			req.setAttribute("searchVo", map);
 			req.getRequestDispatcher("/WEB-INF/views/admin/report/guideBoard-report-list.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] 게시글 목록 조회에러");
+			System.out.println("[ERROR] 동행,가이드 게시판 목록 조회 실패");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "목록조회실패");
+			req.setAttribute("errorMsg", "동행,가이드 게시판 목록  조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

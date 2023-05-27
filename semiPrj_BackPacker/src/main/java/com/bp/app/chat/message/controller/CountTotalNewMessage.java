@@ -32,7 +32,6 @@ public class CountTotalNewMessage extends HttpServlet{
 			int cnt = ms.newMessageCnt(receiverNo);
 			String no = null;
 			no = req.getParameter("loginMemberNo");
-			System.out.println(no);
 			if (no !=null) {
 				
 				Gson gson= new Gson();
@@ -42,8 +41,11 @@ public class CountTotalNewMessage extends HttpServlet{
 				out.write(cnt1);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("[ERROR] 여행지 목록 조회에러");
 			e.printStackTrace();
+			
+			req.setAttribute("errorMsg", "여행지 목록 조회에러");
+			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}
 }

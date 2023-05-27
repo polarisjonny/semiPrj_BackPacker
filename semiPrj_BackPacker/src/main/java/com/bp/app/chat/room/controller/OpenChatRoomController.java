@@ -41,8 +41,6 @@ public class OpenChatRoomController extends HttpServlet {
 				
 				chattingUser2No = req.getParameter("writerNo");
 			}
-			System.out.println("loginMember.No"+chattingUserNo);
-			System.out.println(chattingUser2No);
 			String type = req.getParameter("type");
 			if("new".equals(type) && chattingUserNo.equals(chattingUser2No)) {
 				req.setAttribute("errorMsg", "이거 니가쓴글이야 정신차려");
@@ -60,33 +58,23 @@ public class OpenChatRoomController extends HttpServlet {
 			crv.setChattingUserNo(chattingUserNo);
 			crv.setChattingUser2No(chattingUser2No);
 			crv.setGuideBoardNo(guideBoardNo);
-			System.out.println("USER1NO"+chattingUserNo);
-			System.out.println("USER2NO"+chattingUser2No);
-			System.out.println(loginMemberNo);
 			ChatService cs = new ChatService();
 			ChattingRoomVo vo = null;
-			System.out.println("채팅방번호"+chattingRoomNo);
 			if(chattingRoomNo != null) {
 				crv.setChattingRoomNo(chattingRoomNo);
 				vo = cs.openOldChatRoomByRoomNo(crv,loginMemberNo);
 			}else {
 				vo = cs.openOldChatRoom(crv,loginMemberNo);
-				System.out.println("1");
 				if(vo.getChattingRoomNo()==null) {
-					System.out.println("2");
-					System.out.println("crv"+crv);
 					vo = cs.openNewChatRoom(crv,loginMemberNo);
-					System.out.println("3");
 					
 				}
-				System.out.println("4");
 			}
-			System.out.println(vo);
-			System.out.println(loginMember);
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] chat reply error");
+			System.out.println("[ERROR] 채팅방 입장 에러");
+			req.setAttribute("errorMsg","채팅방 입장 에러");
 			e.printStackTrace();
 	        req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 			

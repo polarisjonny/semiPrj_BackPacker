@@ -21,8 +21,6 @@ public class AdminMemberEditStatusController extends HttpServlet {
       //데꺼member
       String status = req.getParameter("memberStatus");
       String memberNo = req.getParameter("memberNo");
-      System.out.println(status);
-      System.out.println(memberNo);
       //데뭉
       MemberVo vo = new MemberVo();
       vo.setMemberStatus(status);;
@@ -39,8 +37,9 @@ public class AdminMemberEditStatusController extends HttpServlet {
       }
       
       }catch (Exception e) {
-      System.out.println("[ERROR] notice reply errr~~~");
+      System.out.println("[ERROR] 회원 상태 변경 실패");
       e.printStackTrace();
+  	 req.setAttribute("errorMsg", "회원 상태 변경 실패 발생");
       
       //view ~~~
       }

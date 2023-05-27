@@ -31,7 +31,7 @@ public class PlaceDeleteController extends HttpServlet {
 			System.out.println("[ERROR] 여행지 삭제 에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "삭제실패");
+			req.setAttribute("errorMsg", "여행지 삭제 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 			

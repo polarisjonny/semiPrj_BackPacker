@@ -33,11 +33,8 @@ public class GoProfileController extends HttpServlet{
          selectMemberNo = req.getParameter("selectMemberNo");
          //데뭉
          //서비스
-         System.out.println(selectMemberNo);
-         System.out.println(selectMemberNo);
          
          selectMember = gps.selectMemberToProfile(selectMemberNo);
-         System.out.println(selectMember);
          
 
          //서비스
@@ -55,15 +52,14 @@ public class GoProfileController extends HttpServlet{
 //            req.setAttribute("pv" , pv);
             req.getRequestDispatcher("/WEB-INF/views/profile/profile.jsp").forward(req, resp);
          }else {
-            System.out.println("else");
             throw new Exception();
          }
       }catch(Exception e) {
-         System.out.println("catch");
-         System.out.println("[ERROR] go prfile errr....");
+         System.out.println("[ERROR] 프로필 조회 에러");
          e.printStackTrace();
          
-         req.setAttribute("errorMsg", "프로필조회실패");
+         req.setAttribute("errorMsg", " 프로필 조회 에러");
+         req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
          
       }
       

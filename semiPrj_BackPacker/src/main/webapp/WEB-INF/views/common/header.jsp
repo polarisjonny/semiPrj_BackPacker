@@ -116,7 +116,6 @@ function cntNewMessage(){
 				success: function(data){
 					let cnt ="";
 					cnt = JSON.parse(data);
-					console.log(cnt);
 					if(cnt >0){
 						let gotoChat = document.querySelector(".gotoChat");						
 						let str = "";

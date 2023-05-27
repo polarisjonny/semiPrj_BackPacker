@@ -60,7 +60,6 @@ public class OpenRoomListController extends HttpServlet {
 				
 				roomList = cs.openRoomList(pv,searchType, searchValue, crv);
 			}
-			System.out.println(roomList);
 			
 			
 			Map<String, String> map = new HashMap<>();
@@ -72,9 +71,9 @@ public class OpenRoomListController extends HttpServlet {
 			req.setAttribute("searchVo", map);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room-list.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] chat reply error");
 			e.printStackTrace();
-			
+			System.out.println("[ERROR] 채팅방 목록 보기 에러");
+			req.setAttribute("errorMsg","채팅방 목록 보기 에러");
 		}
 	}
 
@@ -93,9 +92,7 @@ public class OpenRoomListController extends HttpServlet {
 			MessageService ms = new MessageService();
 			String chattingRoomNo = null;
 			chattingRoomNo = req.getParameter("chattingRoomNo");
-			System.out.println("채팅방번호" + chattingRoomNo);
 			int cnt = ms.newMessageCnt(receiverNo,chattingRoomNo);
-			System.out.println("카운트" +cnt);
 			if (chattingRoomNo !=null) {
 				
 				Gson gson= new Gson();
@@ -105,8 +102,10 @@ public class OpenRoomListController extends HttpServlet {
 				out.write(cnt1);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("[ERROR] 채팅방 목록 보기 에러");
+			req.setAttribute("errorMsg","채팅방 목록 보기 에러");
+			 req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}
 	

@@ -152,12 +152,11 @@ function cntNewMessage(){
 				type : "POST",
 				dataType :"json",
 				data : {
-					loginMemberNo : "100" ,
+					loginMemberNo : "-1" ,
 				},
 				success: function(data){
 					let cnt ="";
 					cnt = JSON.parse(data);
-					console.log(cnt);
 					if(cnt >0){
 						let gotoChat = document.querySelector(".gotoChat");						
 						let str = "";

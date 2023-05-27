@@ -54,10 +54,10 @@ public class PlaceListController extends HttpServlet {
 			req.setAttribute("searchVo", map);
 			req.getRequestDispatcher("/WEB-INF/views/admin/place/place-list.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR] 게시글 목록 조회에러");
+			System.out.println("[ERROR] 여행지 목록 조회에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "목록조회실패");
+			req.setAttribute("errorMsg", "여행지 목록 조회에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

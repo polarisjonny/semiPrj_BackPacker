@@ -17,9 +17,6 @@ public class ChatDao {
 	public int openNewChatRoom(Connection conn, ChattingRoomVo crv, String loginMemberNo) throws Exception {
 		String sql = "INSERT INTO CHATTING_ROOM( CHATTING_ROOM_NO, CHATTING_USER_NO, CHATTING_USER2_NO, GUIDE_BOARD_NO ) VALUES(SEQ_CHATTING_ROOM_NO.NEXTVAL ,? ,? ,?) ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		System.out.println(crv.getChattingUserNo());
-		System.out.println(crv.getChattingUser2No());
-		System.out.println(crv.getGuideBoardNo());
 		
 		pstmt.setString(1, crv.getChattingUserNo());
 		pstmt.setString(2, crv.getChattingUser2No());
@@ -508,7 +505,6 @@ public class ChatDao {
 
 	public int deleteCnt(Connection conn, ChattingRoomVo crv, String loginMemberNo) throws Exception {
 		String sql = "UPDATE MESSAGE SET CHECK_YN = 'Y' WHERE CHATTING_ROOM_NO = ?  AND RECEIVER_NO = ? AND CHECK_YN ='N'";
-		System.out.println();
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, crv.getChattingRoomNo());
