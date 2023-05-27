@@ -72,4 +72,25 @@ public class TravelInformationService {
 		return tilist;
 	}
 
+	//여행정보 게시글 삭제
+	public int del(String infoNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.del(conn , infoNo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+		
+	
+	}
+
 }

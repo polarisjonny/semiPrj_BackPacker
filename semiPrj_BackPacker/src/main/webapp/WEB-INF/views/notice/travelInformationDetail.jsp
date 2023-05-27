@@ -157,7 +157,13 @@ main{
 		<script>
 
 			function del(params) {
-				alert('123')
+				
+				const result = confirm('게시글을 삭제할까요 ?')
+
+				if(result){
+					location.href = "${root}/notice/informationDelete?infoNo="+'${vo.infoNo}'
+					alert('게시글이 삭제되었습니다.');
+				}
 
 			}
 
