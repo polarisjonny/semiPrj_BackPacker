@@ -195,7 +195,33 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return tempMember;
-	} 
-	
+	}
 
+	public boolean checkId(String id) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkId(conn, id);
+		
+		
+		JDBCTemplate.close(conn);
+		
+		
+		//return
+		return result;	
+	}
+
+	public boolean checkNick(String nick) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkNick(conn, nick);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		//return
+		return result; 
+	}
 }//class
