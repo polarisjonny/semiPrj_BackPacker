@@ -48,7 +48,7 @@ public class TravelInformationListController extends HttpServlet{
 			
 			Map<String,String> map = new HashMap<>();
 			map.put("searchType", searchType);
-			map.put("SearchValue", searchValue);
+			map.put("searchValue", searchValue);
 			
 			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pv);
