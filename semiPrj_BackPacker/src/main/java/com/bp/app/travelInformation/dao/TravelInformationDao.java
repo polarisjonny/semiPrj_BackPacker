@@ -14,11 +14,12 @@ import com.bp.app.travelReview.vo.TravelReviewVo;
 public class TravelInformationDao {
 
 	//페이징 처리
-	public int selectCnt(Connection conn) throws Exception {
+	public int selectCnt(Connection conn, String searchType, String searchValue) throws Exception {
 
 		//sql
-		String sql ="SELECT COUNT(*) FROM INFO_BOARD WHERE DELETE_YN = 'N' AND INFO_CATEGORY_NO = 2";
+		String sql ="SELECT COUNT(*) FROM INFO_BOARD WHERE DELETE_YN = 'N' AND INFO_CATEGORY_NO = 2 AND TITLE LIKE '%'||?||'%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
 		ResultSet rs = pstmt.executeQuery();
 		
 		//tx | rs
@@ -135,6 +136,58 @@ public class TravelInformationDao {
 		
 		JDBCTemplate.close(pstmt);
 		return result;
+	}
+
+	//여행정보 제목으로 검색
+	public List<TravelReviewVo> selectList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+
+		String sql ="";
+		
+		if(searchType.equals("title")) {
+			sql ="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG ,C.INFO_CATEGORY_NAME , M.NICK FROM INFO_BOARD I JOIN INFO_BOARD_CATEGORY C ON (I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO) JOIN MEMBER M ON (I.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND I.TITLE LIKE '%'||?||'%' AND I.INFO_CATEGORY_NO = 2 ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		}else {
+			return selectList(conn,pv);
+		}
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<TravelReviewVo> tiList = new ArrayList<>();
+		while(rs.next()) {
+			String infoNo = rs.getString("INFO_NO");
+			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+			String deleteYn = rs.getString("DELETE_YN");
+			String writerNick = rs.getString("NICK");
+			String mainImg = rs.getString("MAIN_IMG");
+			String infoCategoryName = rs.getString("INFO_CATEGORY_NAME");
+			
+			
+			TravelReviewVo vo = new TravelReviewVo();
+			vo.setInfoNo(infoNo);
+			vo.setInfoCategoryNo(infoCategoryNo);
+			vo.setWriterNo(writerNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setHit(hit);
+			vo.setDeleteYn(deleteYn);
+			vo.setWriterNick(writerNick);
+			vo.setMainImg(mainImg);
+			vo.setInfoCategoryName(infoCategoryName);
+			
+			tiList.add(vo);
+		}
+		return tiList;
 	}
 
 }

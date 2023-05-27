@@ -144,7 +144,7 @@ main{
 			
 			<div id="review-btn">
 				<c:if test="${loginMember.id == 'ADMIN' }">
-					<button class="edit-btn">수정하기</button>
+					<button onclick="del();">삭제하기</button>
 				</c:if>
 					<button onclick="history.back();">목록으로</button>
 			</div>
@@ -153,6 +153,15 @@ main{
 	
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		
+
+		<script>
+
+			function del(params) {
+				alert('123')
+
+			}
+
+		</script>
 
 </body>
 </html>

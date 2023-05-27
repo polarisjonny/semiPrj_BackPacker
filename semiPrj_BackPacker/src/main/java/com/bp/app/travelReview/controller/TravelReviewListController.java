@@ -30,7 +30,7 @@ public class TravelReviewListController extends HttpServlet{
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			//데이터 뭉치기
-			int listCnt = trs.selectCnt();
+			int listCnt = trs.selectCnt(searchType , searchValue);
 			String page = req.getParameter("page");
 			if(page == null) {
 				page = "1";
