@@ -13,11 +13,12 @@ import com.bp.app.common.db.JDBCTemplate;
 public class MessageDao {
 
 	public int sendMessage(Connection conn, MessageVo vo) throws Exception {
-		String sql = "INSERT INTO MESSAGE(MESSAGE_NO, SENDER_NO, CHATTING_ROOM_NO,CONTENT) VALUES(SEQ_MESSAGE_NO.NEXTVAL, ? ,?,?)";
+		String sql = "INSERT INTO MESSAGE(MESSAGE_NO, SENDER_NO,RECEIVER_NO, CHATTING_ROOM_NO,CONTENT) VALUES(SEQ_MESSAGE_NO.NEXTVAL, ? ,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getSenderNo());
-		pstmt.setString(2, vo.getChattingRoomNo());
-		pstmt.setString(3, vo.getContent());
+		pstmt.setString(2, vo.getReceiverNo());
+		pstmt.setString(3, vo.getChattingRoomNo());
+		pstmt.setString(4, vo.getContent());
 		int result = pstmt.executeUpdate();
 		
 		//close
@@ -39,7 +40,7 @@ public class MessageDao {
 			String content = rs.getString("CONTENT");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String checkYn = rs.getString("CHECK_YN");
-			
+			String receiverNo = rs.getString("RECEIVER_NO");
 			String senderNick = rs.getString("SENDERNICK");
 			String senderProfileImage = rs.getString("SENDERPROFILEIMAGE");
 			
@@ -52,6 +53,7 @@ public class MessageDao {
 			vo.setSenderNo(senderNo);
 			vo.setSenderProfileImage(senderProfileImage);
 			vo.setSenderNick(senderNick);
+			vo.setReceiverNo(receiverNo);
 			
 			list.add(vo);
 			
@@ -61,6 +63,45 @@ public class MessageDao {
 		JDBCTemplate.close(pstmt);
 		
 		return list;
+	}
+
+	public int newMessageCnt(Connection conn, String receiverNo) throws Exception {
+		String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_STATUS < 3 AND  M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y') )  S";
+	
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receiverNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//tx||rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+	}
+
+	public int newMessageCnt(Connection conn, String receiverNo, String chattingRoomNo) throws Exception {
+String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_ROOM_NO=? AND C.CHATTING_STATUS < 3 AND M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y') )  S";
+	
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receiverNo);
+		pstmt.setString(2, chattingRoomNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//tx||rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
 	}
 
 }

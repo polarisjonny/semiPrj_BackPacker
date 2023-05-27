@@ -17,6 +17,9 @@
 <meta charset="UTF-8">
 
 <style>
+.logo{
+    cursor: pointer;
+}
 body{
 margin: 0px;
 padding: 0px;
@@ -69,18 +72,22 @@ header{
 .menu > div:first-child {
     margin-right: 30px;
 }
+	.gotoChat{
+	 cursor: pointer;
+	}
 </style>
 
 
 <header>
     <div class="logo">
-           <img  width="212px" height="66px" src="${root}/static/img/logo/w_logo.png" alt="">
+           <img  width="212px" height="66px" src="${root}/static/img/logo/w_logo.png" alt="" onclick="goHome()">
     </div>
     <div class="menu">
 		
 		<c:if test="${not empty loginMember}">
-			<div>
-				<i class="fa-regular fa-comments fa-2xl chat-logo" style="color: #000000;"></i>
+			<div class="gotoChat" onclick="goChatList()">
+				
+				<i class="fa-regular fa-comments fa-2xl chat-logo"style="color: #000000;"></i>
 			</div>
 		</c:if>
         <a href="${root}/notice/inquiry">ABOUT</a>
@@ -93,7 +100,7 @@ header{
        	<c:if test="${not empty loginMember}">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" id="profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="">
+				  <img width="60px" height="60px" id="profile-border" src="${root}/static/img/member/profile/${empty loginMember.profileImage ? 'profile_default.jpg' : loginMember.profileImage}" alt="" >
 				</button>
 				<ul class="dropdown-menu">
 					 <li hidden>${loginMember.memberNo}</li>
@@ -101,7 +108,7 @@ header{
 				<li><a class="dropdown-item" href="${root}/member/myPage">MY PAGE</a></li>
 
 
-				<li><a class="dropdown-item imgToProfile" >PROFILE</a></li>
+				<li><a class="dropdown-item imgToProfile" onclick="goProfile(${loginMember.memberNo})">PROFILE</a></li>
 
 				<li><a class="dropdown-item " href="${root}/member/logout">LOGOUT</a></li>
 				</ul>
@@ -111,38 +118,64 @@ header{
     </div>
 </header>
 <script >
-let logo ;
-logo = document.querySelector('.logo');
-logo.addEventListener('click', ()=>{
+
+function goHome(e) {
+    
 
   window.location.href = `${root}/home`;
 
-});
+};
 
 
-let chatLogo;
-chatLogo = document.querySelector('.chat-logo');
-chatLogo.addEventListener('click', () => {
-  
-  
-  window.open('${root}/chat/room/list/open', '');
+ 
+function goChatList() {
+	 const width = 517;
+	 const height = 820;
+	 const left = (window.innerWidth / 2) - (width / 2);
+	 const top = 100;
+ 
+ window.open('${root}/chat/room/list/open', '','width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 
 
-  });
-
-</script>
-
-<script>
-let imgToProfile;
-imgToProfile= document.querySelector('.imgToProfile');
-imgToProfile.addEventListener('click', function(e) {
-   const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
-   const width = 800;
-   const height = 1000;
+};
+function goProfile(e){
+   
+   const width = 650;
+   const height = 800;
    const left = (screen.width / 2) - (width / 2);
    const top = 0;
-   window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-});
+   window.open('${root}/click/profile?selectMemberNo='+e, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+};
+function cntNewMessage(){
+	$.ajax({
+				url : "${root}/chat/cnt/",
+				type : "POST",
+				dataType :"json",
+				data : {
+					loginMemberNo : "100" ,
+				},
+				success: function(data){
+					let cnt ="";
+					cnt = JSON.parse(data);
+					console.log(cnt);
+					if(cnt >0){
+						let gotoChat = document.querySelector(".gotoChat");						
+						let str = "";
+						str+= '<div style="text-align:center; color:red;">'+cnt+'</div>';
+						gotoChat.innerHTML+=str;
+						
+						
+					}else {
+					}
+				},
+				error: ()=>{
+					console.log("에러요 로드 실패...");
+				} ,
+			});
+    	
+};
+
+cntNewMessage();
 </script>
 
 

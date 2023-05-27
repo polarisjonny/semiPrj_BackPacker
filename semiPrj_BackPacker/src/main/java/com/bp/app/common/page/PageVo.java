@@ -20,8 +20,9 @@ public class PageVo {
 		this.currentPage = currentPage;
 		this.pageLimit = pageLimit;
 		this.boardLimit = boardLimit;
-		
+		System.out.println(listCount);
 		this.maxPage = (int) Math.ceil((double)listCount / boardLimit);
+		System.out.println(maxPage);
 		this.startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		this.endPage = startPage + pageLimit - 1;
 		if(endPage > maxPage) {

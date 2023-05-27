@@ -13,37 +13,10 @@ public class ChattingRoomVo {
    private String chattingUser2Nick;
    private String chattingUserProfile;
    private String chattingUser2Profile;
+   private String chattingUserId;
+   private String chattingUser2Id;
    private String boardTitle;
-public ChattingRoomVo() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-public ChattingRoomVo(String chattingRoomNo, String chattingUserNo, String chattingUser2No, String guideBoardNo,
-		String matchingCheck, String matchingCheck2, String chattingStatus, String chattingUserNick,
-		String chattingUser2Nick, String chattingUserProfile, String chattingUser2Profile, String boardTitle) {
-	super();
-	this.chattingRoomNo = chattingRoomNo;
-	this.chattingUserNo = chattingUserNo;
-	this.chattingUser2No = chattingUser2No;
-	this.guideBoardNo = guideBoardNo;
-	this.matchingCheck = matchingCheck;
-	this.matchingCheck2 = matchingCheck2;
-	this.chattingStatus = chattingStatus;
-	this.chattingUserNick = chattingUserNick;
-	this.chattingUser2Nick = chattingUser2Nick;
-	this.chattingUserProfile = chattingUserProfile;
-	this.chattingUser2Profile = chattingUser2Profile;
-	this.boardTitle = boardTitle;
-}
-@Override
-public String toString() {
-	return "ChattingRoomVo [chattingRoomNo=" + chattingRoomNo + ", chattingUserNo=" + chattingUserNo
-			+ ", chattingUser2No=" + chattingUser2No + ", guideBoardNo=" + guideBoardNo + ", matchingCheck="
-			+ matchingCheck + ", matchingCheck2=" + matchingCheck2 + ", chattingStatus=" + chattingStatus
-			+ ", chattingUserNick=" + chattingUserNick + ", chattingUser2Nick=" + chattingUser2Nick
-			+ ", chattingUserProfile=" + chattingUserProfile + ", chattingUser2Profile=" + chattingUser2Profile
-			+ ", boardTitle=" + boardTitle + "]";
-}
+   private String boardCategoryName;
 public String getChattingRoomNo() {
 	return chattingRoomNo;
 }
@@ -110,10 +83,66 @@ public String getChattingUser2Profile() {
 public void setChattingUser2Profile(String chattingUser2Profile) {
 	this.chattingUser2Profile = chattingUser2Profile;
 }
+public String getChattingUserId() {
+	return chattingUserId;
+}
+public void setChattingUserId(String chattingUserId) {
+	this.chattingUserId = chattingUserId;
+}
+public String getChattingUser2Id() {
+	return chattingUser2Id;
+}
+public void setChattingUser2Id(String chattingUser2Id) {
+	this.chattingUser2Id = chattingUser2Id;
+}
 public String getBoardTitle() {
 	return boardTitle;
 }
 public void setBoardTitle(String boardTitle) {
 	this.boardTitle = boardTitle;
 }
+public String getBoardCategoryName() {
+	return boardCategoryName;
+}
+public void setBoardCategoryName(String boardCategoryName) {
+	this.boardCategoryName = boardCategoryName;
+}
+@Override
+public String toString() {
+	return "ChattingRoomVo [chattingRoomNo=" + chattingRoomNo + ", chattingUserNo=" + chattingUserNo
+			+ ", chattingUser2No=" + chattingUser2No + ", guideBoardNo=" + guideBoardNo + ", matchingCheck="
+			+ matchingCheck + ", matchingCheck2=" + matchingCheck2 + ", chattingStatus=" + chattingStatus
+			+ ", chattingUserNick=" + chattingUserNick + ", chattingUser2Nick=" + chattingUser2Nick
+			+ ", chattingUserProfile=" + chattingUserProfile + ", chattingUser2Profile=" + chattingUser2Profile
+			+ ", chattingUserId=" + chattingUserId + ", chattingUser2Id=" + chattingUser2Id + ", boardTitle="
+			+ boardTitle + ", boardCategoryName=" + boardCategoryName + "]";
+}
+public ChattingRoomVo(String chattingRoomNo, String chattingUserNo, String chattingUser2No, String guideBoardNo,
+		String matchingCheck, String matchingCheck2, String chattingStatus, String chattingUserNick,
+		String chattingUser2Nick, String chattingUserProfile, String chattingUser2Profile, String chattingUserId,
+		String chattingUser2Id, String boardTitle, String boardCategoryName) {
+	super();
+	this.chattingRoomNo = chattingRoomNo;
+	this.chattingUserNo = chattingUserNo;
+	this.chattingUser2No = chattingUser2No;
+	this.guideBoardNo = guideBoardNo;
+	this.matchingCheck = matchingCheck;
+	this.matchingCheck2 = matchingCheck2;
+	this.chattingStatus = chattingStatus;
+	this.chattingUserNick = chattingUserNick;
+	this.chattingUser2Nick = chattingUser2Nick;
+	this.chattingUserProfile = chattingUserProfile;
+	this.chattingUser2Profile = chattingUser2Profile;
+	this.chattingUserId = chattingUserId;
+	this.chattingUser2Id = chattingUser2Id;
+	this.boardTitle = boardTitle;
+	this.boardCategoryName = boardCategoryName;
+}
+public ChattingRoomVo() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+ 
+   
+
 }

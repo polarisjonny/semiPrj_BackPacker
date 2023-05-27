@@ -31,19 +31,28 @@ public class SendMessageController extends HttpServlet{
 			//데꺼
 //			String guideBoardNo = req.getParameter("guideBoardNo");
 			String chattingRoomNo = req.getParameter("chattingRoomNo");
+			String chattingUserNo = req.getParameter("chattingUserNo");
+			String chattingUser2No = req.getParameter("chattingUser2No");
 			String content =  req.getParameter("content");
+			String senderNo =  req.getParameter("writerNo");
 			System.out.println(content);
 			System.out.println(chattingRoomNo);
 			//데뭉
 			MessageVo vo = new MessageVo();
+			if(writerNo.equals(chattingUserNo)) {
+				vo.setReceiverNo(chattingUser2No);
+				vo.setSenderNo(chattingUserNo);
+			}else {
+				vo.setReceiverNo(chattingUserNo);
+				vo.setSenderNo(chattingUser2No);
+			}
+			
 			vo.setContent(content);
-			vo.setSenderNo(writerNo);
 			vo.setChattingRoomNo(chattingRoomNo);
 			
 			
 			//서비스
 			MessageService ms = new MessageService();
-			System.out.println("smc vo"+vo);
 			int result = ms.sendMessage(vo);
 			
 			//화면

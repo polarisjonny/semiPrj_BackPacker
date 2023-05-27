@@ -30,12 +30,14 @@
    }
  
    #selopt{
-       background-color: rgba(0, 102, 255, 0.211);
+       background-color: rgb(214, 248, 246);
        border-radius: 15px;
    }
    #searchValue{
-       background-color: rgba(0, 102, 255, 0.211);
-       border-radius: 1px;
+       background-color: rgb(214, 248, 246);
+       border-radius: 10px;
+       border : 0px;
+       padding-left: 5px;
    }
    #adMemTable table {
        width: 800px;
