@@ -182,7 +182,9 @@
     .current-page {
     	color :  #D7ECF2;
     }
-   
+   	.small-text {
+   		font-size : 12px;
+   	}
 </style>
 </head>
 <body>
@@ -236,11 +238,17 @@
               
                 <div id="main-area">
                 	<c:forEach items="${gbvoList}" var="vo">
-	                    <div class="content-area">
+	                    <div class="content-area" onclick="location.href ='${root}/doFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}+'&schedulerNo='+${vo.schedulerNo}">
 	                        <img class="thum-Img" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="">
 	                        <div class="text-area">
 	                            <div class="text-small content-small-bold">${vo.title}</div>
 	                            <div class="text-small">최저가  ￦${vo.travelExpense}/인</div>
+	                            <c:if test="${not empty vo.startDate}">
+		                          <div class="small-text">${vo.startDate}~${vo.endDate}</div>
+	                            </c:if>
+	                            <c:if test="${empty vo.startDate}">
+		                          <div class="small-text">확정된 일정이 없습니다.</div>	                                
+	                            </c:if>
 	                        </div>
 	                    </div>
                 	</c:forEach>
