@@ -26,7 +26,11 @@
 		grid-template-rows: 1fr 1fr;
 		margin-top: 20px;
 		justify-items: center;
+		height: 250px;
+		overflow: auto;
 	}
+	
+	
 	#trip-date {
 	    text-align: center;
 	    margin-top: 10px; 
