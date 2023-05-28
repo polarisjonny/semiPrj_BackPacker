@@ -154,8 +154,8 @@
 			                <td>${vo.locationCategory} </td>
 			                <td> ${vo.placeCategory} </td>
 			                <td> ${vo.placeName}</td>
-			                <td> <button id="editbtn" ><a href="${root}/admin/place/edit?placeNo=${vo.placeNo}">수정</a></button></td>
-			                <td> <button id="deletebtn">삭제</a></button></td>
+			                <td> <button onclick="editbtn(${vo.placeNo})" >수정</button></td>
+			                <td> <button onclick="deletebtn(${vo.placeNo})">삭제</button></td>
 		                </tr>
 	                
             	   </c:forEach>
@@ -181,20 +181,21 @@
 </body>
 </html>
 <script>
-		
-		const deletebtn = document.querySelector("#deletebtn");
-		deletebtn.addEventListener("click", function(e){
-		    e.preventDefault(); // 기본 동작인 링크 이동을 중지
+		function deletebtn(e){
 		
 		    if (confirm("정말로 삭제하시겠습니까?")) {
 		    	
-		    	const no = e.target.parentNode.parentNode.children[0].innerText;
-			    var link = "${root}/admin/place/delete?placeNo="+no;
-		    	window.location.href = link; // 링크로 이동
+		    	const no = e;
+		    	window.location.href = "${root}/admin/place/delete?placeNo="+no;
 			}
-		});
+		};
 
 
+		function editbtn(e){
+			const no = e;
+	    	window.location.href="${root}/admin/place/edit?placeNo="+no;
+			
+		}
 
 		const openModals = document.querySelectorAll('.bi-info-circle');
 		const closeModals = document.querySelectorAll('.close');

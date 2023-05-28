@@ -16,5 +16,11 @@ public class WriteInfoBoardController extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/admin/infoBoard/write-info.jsp").forward(req, resp);
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
+	}
+	
 
 }

@@ -71,19 +71,31 @@
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">여행정보 게시글 작성</div>
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="${root }/admin/infoBoard/write" method="post" enctype="multipart/form-data">
 			
 				<div id="imgUpload">
 					<label for="imgFile">
 						썸네일 사진 올리기
 					</label>
-					<input type="file" id="imgFile">
+					<input type="file" id="imgFile" name="f">
 				</div>
 				<div id="title-area">
-					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요." >
+					<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요." name="title">
 				</div>
-				<div id="summernote"></div>
-			    <script>
+				<div>
+				<textarea  id="summernote">
+				</textarea>
+			    
+				</div>
+				<input id="submit" type="submit" value="작성완료">
+			</form>	
+		</div>
+		<div class="main-blank"></div>
+	</div>
+		
+	
+	</main>
+	<script>
 			      $('#summernote').summernote({
 			        placeholder: 'Hello stand alone ui',
 			        tabsize: 2,
@@ -98,14 +110,6 @@
 			          ['view', ['fullscreen', 'codeview', 'help']]
 			        ]
 			      });
-			    </script>
-				<input id="submit" type="submit" value="작성완료">
-			</form>	
-		</div>
-		<div class="main-blank"></div>
-	</div>
-		
-	
-	</main>
+	    </script>
 </body>
 </html>
