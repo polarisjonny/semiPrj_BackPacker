@@ -15,8 +15,8 @@ import com.bp.app.member.vo.MemberVo;
 import com.bp.app.scheduler.service.SchedulerService;
 import com.bp.app.scheduler.vo.TimetableVo;
 
-@WebServlet ("/doFpacker/detail")
-public class DoFpackerDetailController extends HttpServlet {
+@WebServlet ("/findFpacker/detail")
+public class FindFpackerDetailController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -51,12 +51,12 @@ public class DoFpackerDetailController extends HttpServlet {
 				if(timetableVo==null||timetableVo.equals("")) {
 					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("writerMember", writerMember);
-					req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/doFpackerDetail.jsp").forward(req, resp);								
+					req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/findFpackerDetail.jsp").forward(req, resp);								
 				}else {
 					req.getSession().setAttribute("gbvo", gbvo);
 					req.setAttribute("writerMember", writerMember);
 					req.setAttribute("timetableVo", timetableVo);
-					req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/doFpackerDetail.jsp").forward(req, resp);
+					req.getRequestDispatcher("/WEB-INF/views/FpackerBoard/findFpackerDetail.jsp").forward(req, resp);
 				}
 			}else {
 				throw new Exception();
