@@ -389,4 +389,20 @@ public class GuideBoardDao {
 		return bvoList;
 	}
 
+	public int modify(Connection conn, GuideBoardVo vo) throws Exception {
+		//sql
+		String sql = "UPDATE GUIDE_BOARD SET TITLE =? ,CONTENT = ? , MODIFY_DATE = SYSDATE WHERE GUIDE_BOARD_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		pstmt.setString(3, vo.getGuideBoardNo());
+		
+		
+		int result = pstmt.executeUpdate();
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+				
+	}
+
 }

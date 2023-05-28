@@ -224,13 +224,9 @@ public class GuideBoardService {
 	public int modify(GuideBoardVo vo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-		//sql
-		String sql = "UPDATE GUIDE_BOARD SET TITLE =? ,CONTENT = ? , MODIFY_DATE = SYSDATE WHERE GUIDE_BOARD_NO = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getTitle());
-		pstmt.setString(2, vo.getContent());
-		pstmt.setString(3, vo.getGuideBoardNo());
-		int result = pstmt.executeUpdate();
+		
+		GuideBoardDao dao = new GuideBoardDao();
+		int result = dao.modify(conn,vo);
 		
 		//tx
 		if(result==1) {
@@ -240,7 +236,7 @@ public class GuideBoardService {
 		}
 		
 		//close
-		JDBCTemplate.close(pstmt);
+		
 		JDBCTemplate.close(conn);
 		
 		return result;
