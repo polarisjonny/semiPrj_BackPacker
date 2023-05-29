@@ -59,7 +59,7 @@ public class TravelReviewDao {
 	//여행후기 조회
 	public List<TravelReviewVo> selectReviewList(Connection conn, PageVo pv) throws Exception {
 		
-		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG ,M.ID AS ID ,M.NICK AS NICK FROM INFO_BOARD I JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' AND INFO_CATEGORY_NO = 1 ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG FROM INFO_BOARD I JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' AND INFO_CATEGORY_NO = 1 ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pv.getBeginRow());
 		pstmt.setInt(2, pv.getLastRow());
@@ -77,8 +77,8 @@ public class TravelReviewDao {
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String hit = rs.getString("HIT");
 			String deleteYn = rs.getString("DELETE_YN");
-			String writerId = rs.getString("ID");
-			String writerNick = rs.getString("NICK");
+//			String writerId = rs.getString("ID");
+//			String writerNick = rs.getString("NICK");
 			String mainImg = rs.getString("MAIN_IMG");
 			
 			
@@ -92,8 +92,8 @@ public class TravelReviewDao {
 			vo.setModifyDate(modifyDate);
 			vo.setHit(hit);
 			vo.setDeleteYn(deleteYn);
-			vo.setWriterId(writerId);
-			vo.setWriterNick(writerNick);
+//			vo.setWriterId(writerId);
+//			vo.setWriterNick(writerNick);
 			vo.setMainImg(mainImg);
 			
 			trList.add(vo);
@@ -360,6 +360,51 @@ public class TravelReviewDao {
 		JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	public List<TravelReviewVo> TopHit(Connection conn) throws Exception {
+
+		String sql="SELECT * FROM INFO_BOARD WHERE INFO_CATEGORY_NO = 1 AND DELETE_YN='N' ORDER BY HIT DESC";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<TravelReviewVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String infoNo = rs.getString("INFO_NO");
+			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+			String deleteYn = rs.getString("DELETE_YN");
+//			String writerId = rs.getString("ID");
+//			String writerNick = rs.getString("NICK");
+			String mainImg = rs.getString("MAIN_IMG");
+			
+			
+			TravelReviewVo vo = new TravelReviewVo();
+			vo.setInfoNo(infoNo);
+			vo.setInfoCategoryNo(infoCategoryNo);
+			vo.setWriterNo(writerNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setHit(hit);
+			vo.setDeleteYn(deleteYn);
+//			vo.setWriterId(writerId);
+//			vo.setWriterNick(writerNick);
+			vo.setMainImg(mainImg);
+			
+			list.add(vo);
+		}
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			return list;
+	
 	}
 
 	

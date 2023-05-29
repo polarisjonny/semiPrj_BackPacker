@@ -1,6 +1,6 @@
 package com.bp.app.inquiry.vo;
 
-public class QNABoardVo {
+public class InquiryVo {
 	
 	private String qnaNo;
 	private String writerNo;
@@ -95,7 +95,7 @@ public class QNABoardVo {
 				+ deleteYn + ", qnaCategoryName=" + qnaCategoryName + ", name=" + name + ", nick=" + nick + ", id=" + id
 				+ "]";
 	}
-	public QNABoardVo(String qnaNo, String writerNo, String qnaCategoryNo, String title, String content, String answer,
+	public InquiryVo(String qnaNo, String writerNo, String qnaCategoryNo, String title, String content, String answer,
 			String enrollDate, String deleteYn, String qnaCategoryName, String name, String nick, String id) {
 		super();
 		this.qnaNo = qnaNo;
@@ -111,7 +111,7 @@ public class QNABoardVo {
 		this.nick = nick;
 		this.id = id;
 	}
-	public QNABoardVo() {
+	public InquiryVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

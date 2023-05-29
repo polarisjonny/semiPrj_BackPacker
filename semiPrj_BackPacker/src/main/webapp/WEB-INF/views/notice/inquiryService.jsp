@@ -170,9 +170,6 @@
 				<form action="${root}/notice/">
 					<select name="search-type">
 		
-						<option value="notice">공지사항</option>
-						<option value="faq">FAQ</option>
-						<option value="inquiry">1:1문의</option>
 						<option value="service" selected>서비스문의</option>
 						
 					</select>
@@ -186,16 +183,9 @@
 	
 			<div id="main-content">
 				<div id="main-inquiry">
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요 dsafsadfsdfdsfa</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[서비스문의] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
+				<c:forEach items="${list}" var="item">
+					<div class="inquiry-item">[${item.qnaCategoryName}] ${item.title }</div> 
+				</c:forEach>
 				</div>
 			</div>
 				

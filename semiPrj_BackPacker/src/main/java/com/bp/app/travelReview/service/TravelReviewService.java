@@ -203,6 +203,18 @@ public class TravelReviewService {
 		return result;
 	}
 
+	public List<TravelReviewVo> TopHit() throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<TravelReviewVo> list = dao.TopHit(conn);
+	
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}//tophit
+
 	
 
 	

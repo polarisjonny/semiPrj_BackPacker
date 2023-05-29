@@ -19,7 +19,7 @@
 	
 	#mainImg-area > img{
 		width:100vw;
-		height:400px;
+		height:300px;
 	}
 
 	#mainImg-text{
@@ -129,10 +129,10 @@
 			
 			<div id="mainImg-text">
 				<div id="img-text">무엇을 도와드릴까요?</div>
-				<span class="input-area">
+				<!-- <span class="input-area">
 		               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 		               	<input type="text" placeholder="여행지로 검색">
-	            </span>
+	            </span> -->
 			</div>
 		
 		</div>
@@ -158,7 +158,7 @@
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=1"> 공지사항 더보기> </a></li>
+							<li><a href="${root}/notice/inquiryBoard?page=1&QnaCategoryNo=1"> 공지사항 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -174,7 +174,7 @@
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
+							<li><a href="${root}/notice/inquiryFAQ?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -190,7 +190,7 @@
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=3"> 서비스문의 더보기> </a></li>
+							<li><a href="${root}/notice/inquiryService?page=1&QnaCategoryNo=3"> 서비스문의 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">

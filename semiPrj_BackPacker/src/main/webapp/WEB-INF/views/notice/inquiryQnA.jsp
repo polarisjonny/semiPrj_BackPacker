@@ -167,10 +167,7 @@
 				<form action="${root}/notice/">
 					<select name="search-type">
 		
-						<option value="notice">공지사항</option>
-						<option value="faq">FAQ</option>
 						<option value="inquiry" selected>1:1문의</option>
-						<option value="service">서비스문의</option>
 						
 					</select>
 					
