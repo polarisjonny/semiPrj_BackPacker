@@ -154,7 +154,7 @@ main{
 <body>
 
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+	    
 		<main>
 		
 		<c:if test="${empty vo.changeName}">
