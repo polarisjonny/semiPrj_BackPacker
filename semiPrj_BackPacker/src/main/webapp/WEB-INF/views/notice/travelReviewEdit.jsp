@@ -1,14 +1,19 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 제이쿼리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/794ac64f16.js" crossorigin="anonymous"></script>
+
+<!-- 으음.썸머노트 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style >
@@ -46,12 +51,7 @@
 	}
 	
 
-	textarea {
-		width: 600px;
-		height: 600px;
-		line-height: 25px;
-		outline: none;
-	}
+	
 	#btn {
 		width: 600px;
 	}
@@ -79,7 +79,7 @@
 			내용 수정하기
 			</div>
 			<div>
-			<textarea name="content" style="resize: none;">${vo.content}</textarea>
+			<textarea id="summernote" name="content" style="resize:none;">${vo.content}</textarea>
 			</div>
 			<div id="btn">
 				<div id="left"><i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>자기소개는 마이페이지에서 변경할 수 있습니다.</div>
@@ -88,6 +88,53 @@
 		</div>
 
 		<script>
+		
+		$('#summernote').summernote({
+	    	  placeholder: 'Hello stand alone ui',
+	    	  tabsize: 2,
+	    	  height: 450,
+	    	  callbacks : {
+	              onImageUpload : f01
+	            } ,
+	    	  toolbar: [
+	    	    ['style', ['style']],
+	    	    ['font', ['bold', 'underline', 'clear']],
+	    	    ['color', ['color']],
+	    	    ['para', ['ul', 'ol', 'paragraph']],
+	    	    ['table', ['table']],
+	    	    ['insert', ['link', 'picture', 'video']],
+	    	    ['view', ['fullscreen', 'codeview', 'help']]
+	    	  ]
+	    	});
+		 //파일업로드 발생 시 동작
+        function f01(fileList){
+
+          const fd = new FormData();
+          for(let file of fileList){
+            fd.append("f" , file);
+          }
+
+          $.ajax({
+            url : '${root}/upload' ,
+            type : 'post' ,
+            data : fd ,
+            processData : false ,
+            contentType : false ,
+            dataType : 'json' ,
+            success : function(changeNameList){
+              console.log(changeNameList);
+              for(let changeName of changeNameList){
+                $('#summernote').summernote('insertImage' , '${root}/static/img/travelReview/' + changeName);
+              }
+
+            } ,
+            error : function(error){
+              console.log(error);
+            } ,
+          });
+
+        }
+		
 			const editBtn = document.querySelector('.edit-btn');
 
 			editBtn.addEventListener('click' , function() {
