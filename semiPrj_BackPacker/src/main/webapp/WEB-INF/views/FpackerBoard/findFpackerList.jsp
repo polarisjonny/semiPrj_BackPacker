@@ -197,17 +197,22 @@
         <div id="content-area">
             <div id="ca1"></div>
             <div id="c-main">
-                <div>동행구하기 게시판으로 이동하기</div>
+                <div><a href="${root}/accompany/list?page=1">동행구하기 게시판으로 이동하기</a></div>
                 <div id="search-area">
-                    <select name="category" id="category-area">
-                        <option value="title">제목</option>
-                        <option value="writer">작성자</option>
-                    </select>
-                    <span id="input-box">
-                        <i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-                        <input type="text" placeholder="검색어를 입력하세요.">
-                    </span>
+                	<form action="${root}/findFpacker/list" method="get">
+                    	<input type="hidden" name="page" value="1">
+	                    <select name="searchType" id="category-area">
+	                        <option value="title">제목</option>
+	                        <option value="writerId">아이디</option>
+	                        <option value="writerNick">닉네임</option>
+	                    </select>
+	                    <span id="input-box">
+	                        <i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
+	                        <input type="text" name="searchValue" placeholder="검색어를 입력하세요." value="${searchVo.searchValue}">
+	                    </span>
                     <!-- <input type="submit" value="검색"> -->
+                    </form>
+                    
                 </div>
                 <div><button class="s-btn active-btn">구해요</button><button class="s-btn" type="button" onclick="location.href='${root}/doFpacker/list?page=1'">합니다</button></div>
                 <div id="middle-area">
@@ -275,5 +280,16 @@
 	</div>
 </body>
 </html>
-
+<script>
+    const searchType = '${searchVo.searchType}';
+    const searchValue = '${searchVo.searchValue}';
+    function initSearchType(){
+		const x = document.querySelector('select > option[value="' + searchType + '"]');
+		x.selected = true;
+	}
+    if(searchType.length > 1){
+		initSearchType();
+	}
+   
+</script>
 

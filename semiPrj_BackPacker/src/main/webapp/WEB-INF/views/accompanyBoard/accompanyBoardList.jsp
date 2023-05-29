@@ -213,7 +213,17 @@
                 
                 <div id="middle-area">
                     <span id="big-text">동행을 찾아보세요</span>
-                    <button id="write-btn" type="button" onclick="location.href='${root}/accompany/write'">게시글 작성</button>
+                    <c:if test="${empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
+	                    <script>
+	                    	function f01(){
+	                    		alert('로그인 먼저 해주세요.');
+	                    	}
+	                    </script>
+                    </c:if>
+                    <c:if test="${not empty loginMember}">
+	                    <button id="write-btn" type="button" onclick="location.href='${root}/accompany/write'">게시글 작성</button>
+                    </c:if>                
                 </div>
                 
                
