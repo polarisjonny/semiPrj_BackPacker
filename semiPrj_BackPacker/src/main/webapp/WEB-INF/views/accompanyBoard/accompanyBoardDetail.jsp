@@ -409,9 +409,20 @@
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
-								disableBtn[0].disabled = true;
+							if('${loginMember ==null}'){				
+									disableBtn[0].disabled = true;
+									alert('${loginMember.nick}');
+									
+										
+							}else {
+								if('${writerMember.memberNo}'!='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
+									disableBtn[0].disabled = true;	
+									
+								}
+								
+								disableBtn[0].disable = false;
 							}
+							
 						</script>
 					</div>
 					<div id="botton-area">
