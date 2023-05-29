@@ -26,8 +26,8 @@ public class MessageVo {
 	public String getReceiverNo() {
 		return receiverNo;
 	}
-	public void setReceiverNo(String receiverrNo) {
-		this.receiverNo = receiverrNo;
+	public void setReceiverNo(String receiverNo) {
+		this.receiverNo = receiverNo;
 	}
 	public String getChattingRoomNo() {
 		return chattingRoomNo;
@@ -67,17 +67,17 @@ public class MessageVo {
 	}
 	@Override
 	public String toString() {
-		return "MessageVo [messageNo=" + messageNo + ", senderNo=" + senderNo + ", receiverrNo=" + receiverNo
+		return "MessageVo [messageNo=" + messageNo + ", senderNo=" + senderNo + ", receiverNo=" + receiverNo
 				+ ", chattingRoomNo=" + chattingRoomNo + ", content=" + content + ", enrollDate=" + enrollDate
 				+ ", checkYn=" + checkYn + ", senderNick=" + senderNick + ", senderProfileImage=" + senderProfileImage
 				+ "]";
 	}
-	public MessageVo(String messageNo, String senderNo, String receiverrNo, String chattingRoomNo, String content,
+	public MessageVo(String messageNo, String senderNo, String receiverNo, String chattingRoomNo, String content,
 			String enrollDate, String checkYn, String senderNick, String senderProfileImage) {
 		super();
 		this.messageNo = messageNo;
 		this.senderNo = senderNo;
-		this.receiverNo = receiverrNo;
+		this.receiverNo = receiverNo;
 		this.chattingRoomNo = chattingRoomNo;
 		this.content = content;
 		this.enrollDate = enrollDate;
@@ -89,6 +89,7 @@ public class MessageVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	
 }

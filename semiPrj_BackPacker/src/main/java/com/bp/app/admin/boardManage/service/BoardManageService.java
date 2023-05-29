@@ -187,6 +187,22 @@ public class BoardManageService {
 		return result;
 				
 	}
+	public int write(TravelReviewVo trvo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.write(conn , trvo);
+		
+		if(result == 1 ) {
+			JDBCTemplate.commit(conn);
+		}
+		else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	
+	}
 
 }
