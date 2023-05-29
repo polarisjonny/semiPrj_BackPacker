@@ -19,7 +19,7 @@
 	
 	#mainImg-area > img{
 		width:100vw;
-		height:400px;
+		height:300px;
 	}
 
 	#mainImg-text{
@@ -65,7 +65,7 @@
         }
         
         #wrap-title{
-        	font-size:3em;
+        	font-size:2em;
         	font-weight:bold;
         	display:flex;
         	justify-content:center;
@@ -101,6 +101,7 @@
         #content-area{
             display: flex;
             border-bottom : 1px solid gray;
+			height: 400px;
         }
         #content{
             margin: 10px;
@@ -110,7 +111,7 @@
         #answer{
             display: flex;
             align-items: center;
-            font-size: 2em;
+            font-size: 1.5em;
         }
         
         #answer-content{
@@ -159,32 +160,32 @@
 			
 			<div id="mainImg-text">
 				<div id="img-text">무엇을 도와드릴까요?</div>
-				<span class="input-area">
+				<!-- <span class="input-area">
 		               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 		               	<input type="text" placeholder="여행지로 검색">
-	               </span>
+	               </span> -->
 			</div>
 		
 	</div>
 	
 		<div id="wrap">
-        <div id="wrap-title">1:1문의</div>
+        <div id="wrap-title">공지사항</div>
 
-        <div id="main-title">거리점수 얻는 방법은 뭐예요?</div>
+        <div id="main-title">${vo.title}</div>
         
         <div id="info-area">
-            <div id="writer">작성자 : 김찬진</div>
-            <div id="date">작성일시 : 2022.04.25</div>
+            <div id="writer">작성자 : ${vo.nick}</div>
+            <div id="date">작성일시 : ${vo.enrollDate}</div>
         </div>
 
         <div id="content-area">
-            <div id="content">거리점수거리점수거리점수거리점수거리점수</div>
+            <div id="content">${vo.content}</div>
         </div>
 
-        <div id="answer">문의답변 ></div>
+        <!-- <div id="answer">문의답변 ></div>
 
             <textarea id ="answer-content" style="resize:none;">
-            </textarea>
+            </textarea> -->
 
     </div>
 		
@@ -201,12 +202,12 @@
 		</div>
 
 
-		<c:if test="${loginMember.id == 'ADMIN' }">
+		<!-- <c:if test="${loginMember.id == 'ADMIN' }">
 				<div id="review-btn">
-						<a href="${root}/notice/inquiryEdit?no=${vo.no}">수정하기</a>
-						<a href="${root}/notice/inquiryDelete?no=${vo.no}">삭제하기</a>
+						<a href="#">수정하기</a>
+						<a href="#">삭제하기</a>
 				</div>
-			</c:if>
+			</c:if> -->
 		
 	
 	</main>

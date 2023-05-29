@@ -146,4 +146,51 @@ public class InquiryService {
 		
 	}
 
+	//1:1 문의 상세조회
+	public InquiryVo detail(String qnaNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		InquiryVo vo = dao.detail(conn,qnaNo);
+		
+		JDBCTemplate.close(conn);
+		return vo;
+	}
+
+	//서비스 문의 상세 조회
+	public InquiryVo serviceDetail(String qnaNo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		InquiryVo vo = dao.serviceDetail(conn,qnaNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
+	//FAQ 상세 조회
+	public InquiryVo FAQdetail(String qnaNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		InquiryVo vo = dao.FAQdetail(conn,qnaNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
+	//공지사항 상세 조회
+	public InquiryVo BoardDetail(String qnaNo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		InquiryVo vo = dao.BoardDetail(conn,qnaNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
 }

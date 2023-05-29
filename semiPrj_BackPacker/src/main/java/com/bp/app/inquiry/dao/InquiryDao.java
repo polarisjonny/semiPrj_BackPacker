@@ -329,6 +329,159 @@ public class InquiryDao {
 		return result;
 	}
 
+	//1:1 문의 상세조회
+	public InquiryVo detail(Connection conn, String qnaNo) throws Exception {
+
+		String sql ="SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,M.NICK FROM QNA_BOARD Q JOIN MEMBER M ON (Q.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND QNA_CATEGORY_NO =4 AND QNA_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, qnaNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		InquiryVo vo = null;
+		while(rs.next()) {
+			qnaNo = rs.getString("QNA_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String qnaCategoryNo = rs.getString("QNA_CATEGORY_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String answer = rs.getString("ANSWER");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String nick = rs.getString("NICK");
+			
+			vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setNick(nick);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return vo;
+	}
+
+	//서비스 문의 상세 조회
+	public InquiryVo serviceDetail(Connection conn, String qnaNo) throws Exception {
+
+		String sql ="SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,M.NICK FROM QNA_BOARD Q JOIN MEMBER M ON (Q.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND QNA_CATEGORY_NO =3 AND QNA_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, qnaNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		InquiryVo vo = null;
+		while(rs.next()) {
+			qnaNo = rs.getString("QNA_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String qnaCategoryNo = rs.getString("QNA_CATEGORY_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String answer = rs.getString("ANSWER");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String nick = rs.getString("NICK");
+			
+			vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setNick(nick);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return vo;
+	}
+
+	//FAQ상세 조회
+	public InquiryVo FAQdetail(Connection conn, String qnaNo) throws Exception {
+
+		String sql ="SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,M.NICK FROM QNA_BOARD Q JOIN MEMBER M ON (Q.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND QNA_CATEGORY_NO =2 AND QNA_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, qnaNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		InquiryVo vo = null;
+		while(rs.next()) {
+			qnaNo = rs.getString("QNA_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String qnaCategoryNo = rs.getString("QNA_CATEGORY_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String answer = rs.getString("ANSWER");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String nick = rs.getString("NICK");
+			
+			vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setNick(nick);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return vo;
+	}
+
+	//공지사항 상세조회
+	public InquiryVo BoardDetail(Connection conn, String qnaNo) throws Exception {
+
+		String sql ="SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,M.NICK FROM QNA_BOARD Q JOIN MEMBER M ON (Q.WRITER_NO = M.MEMBER_NO) WHERE DELETE_YN ='N' AND QNA_CATEGORY_NO =1 AND QNA_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, qnaNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		InquiryVo vo = null;
+		while(rs.next()) {
+			qnaNo = rs.getString("QNA_NO");
+			String writerNo = rs.getString("WRITER_NO");
+			String qnaCategoryNo = rs.getString("QNA_CATEGORY_NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String answer = rs.getString("ANSWER");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String deleteYn = rs.getString("DELETE_YN");
+			String nick = rs.getString("NICK");
+			
+			vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setNick(nick);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return vo;
+	
+	}
+
 	
 
 	
