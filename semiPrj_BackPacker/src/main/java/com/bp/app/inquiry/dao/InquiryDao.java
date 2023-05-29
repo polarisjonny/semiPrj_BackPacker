@@ -673,6 +673,36 @@ public class InquiryDao {
 		
 	}
 
+	//서비스 문의 답변 달기
+	public int answer(Connection conn, InquiryVo vo) throws Exception {
+
+		String sql="UPDATE QNA_BOARD SET ANSWER = ? WHERE QNA_NO = ? AND QNA_CATEGORY_NO = 3";
+	
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getAnswer());
+		pstmt.setString(2, vo.getQnaNo());
+		int result = pstmt.executeUpdate();
+
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	//1:1문의 답변달기
+	public int qnaAnswer(Connection conn, InquiryVo vo) throws Exception {
+
+		String sql="UPDATE QNA_BOARD SET ANSWER = ? WHERE QNA_NO = ? AND QNA_CATEGORY_NO = 4";
+	
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getAnswer());
+		pstmt.setString(2, vo.getQnaNo());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 	
 
 	

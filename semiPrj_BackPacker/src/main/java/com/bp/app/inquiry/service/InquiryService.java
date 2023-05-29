@@ -242,4 +242,40 @@ public class InquiryService {
 		return list;
 	}
 
+	//서비스 문의 답변달기
+	public int answer(InquiryVo vo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.answer(conn,vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+	
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//1:1 문의 답변달기
+	public int qnaAnswer(InquiryVo vo) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = dao.qnaAnswer(conn,vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }

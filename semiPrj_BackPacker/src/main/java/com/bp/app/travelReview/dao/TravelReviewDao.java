@@ -261,7 +261,6 @@ public class TravelReviewDao {
 		pstmt.setString(2, vo.getContent());
 		pstmt.setString(3, vo.getInfoNo());
 		int result = pstmt.executeUpdate();
-		System.out.println(vo);
 		
 		JDBCTemplate.close(pstmt);
 		

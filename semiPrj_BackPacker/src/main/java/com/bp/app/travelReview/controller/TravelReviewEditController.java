@@ -39,6 +39,8 @@ public class TravelReviewEditController extends HttpServlet{
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			
+			System.out.println(infoNo);
+			
 			TravelReviewVo vo = new TravelReviewVo();
 			vo.setInfoNo(infoNo);
 			vo.setTitle(title);
