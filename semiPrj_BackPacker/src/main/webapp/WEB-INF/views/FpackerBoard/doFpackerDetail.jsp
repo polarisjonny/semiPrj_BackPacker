@@ -289,7 +289,7 @@
 					<c:if test="${not empty timetableVo}">
 							<div id="shedule-area">
 							
-							    <div class="bold-text big-text">일정표</div>
+								<div class="bold-text big-text">일정표</div>
 							    
 								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 					    			<c:set var="firstTimetable" value="${timetableVo[0]}" />
@@ -297,7 +297,12 @@
 								<div class="carousel-inner">
 									
 											<c:forEach begin="1" end="${endValue}" var="index">
-								            <div class="carousel-item active">
+								            <c:if test="${index == 1}">
+												<div class="carousel-item active">
+											</c:if>
+											<c:if test="${index != 1}">
+												<div class="carousel-item">
+											</c:if>
 								            <!-- 이미지 대신 shedule박스 넣기 -->
 												<div id="shedule-box" class="d-block">
 													<div class="big-text bold-text middle-text">DAY${index}</div>
@@ -334,11 +339,11 @@
 									<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 										<span class="visually-hidden">Previous</span>
-									  </button>
-									  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+									</button>
+									<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
 										<span class="carousel-control-next-icon" aria-hidden="true"></span>
 										<span class="visually-hidden">Next</span>
-									  </button>
+									</button>
 								</div>
 
 
