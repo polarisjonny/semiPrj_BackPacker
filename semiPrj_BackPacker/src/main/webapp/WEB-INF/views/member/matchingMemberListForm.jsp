@@ -75,7 +75,13 @@
     	<c:forEach items="${matchingList}" var="vo">
     		 <div id="first-member-area" class="member-area" data-member-no="${vo.memberNo}">
     		 	<div hidden>${vo.memberNo}</div>
-             	<div onclick="openProfile(this)" class="profile-img-style" id="imgToProfile2" style="background-image: url('${root}/static/img/member/profile/${vo.profileImage}');"></div>
+    		 	<c:if test="${not empty vo.profileImage}">
+						<div onclick="openProfile(this)" class="profile-img-style" id="imgToProfile2" style="background-image: url('${root}/static/img/member/profile/${vo.profileImage}');"></div>                   
+	              	</c:if>
+					<c:if test="${empty vo.profileImage}">
+						 <div onclick="openProfile(this)" class="profile-img-style" id="imgToProfile2" style="background-image: url('${root}/static/img/member/profile/profile_default.jpg');"></div>
+					</c:if>
+             	
             	<div>${vo.nick}</div>
         	</div>
     	</c:forEach>
