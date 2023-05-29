@@ -366,7 +366,7 @@
 								<div id="name-area">${writerMember.nick}(${writerMember.id})</div>
 								<div id="btn-area">
 									<button class="s-btn btn-blue modify-btn">수정</button>
-									<button class="s-btn btn-red">삭제</button>
+									<button class="s-btn btn-red" onclick="location.href='${root}/accompany/del?no=${gbvo.guideBoardNo}'">삭제</button>
 									<script>
 										const sBtn = document.querySelectorAll(".s-btn");
 										if('${loginMember.memberNo}'!='${writerMember.memberNo}'){
