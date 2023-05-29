@@ -193,4 +193,16 @@ public class InquiryService {
 		return vo;
 	}
 
+	//공지사항 검색조회
+	public List<InquiryVo> boardList(PageVo pv, String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InquiryVo> list = dao.boardList(conn, pv , searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+
 }
