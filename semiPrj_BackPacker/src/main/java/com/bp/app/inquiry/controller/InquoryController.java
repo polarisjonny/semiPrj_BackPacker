@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bp.app.inquiry.service.QNAService;
-import com.bp.app.inquiry.vo.QNABoardVo;
+import com.bp.app.inquiry.service.InquiryService;
+import com.bp.app.inquiry.vo.InquiryVo;
 
 @WebServlet("/notice/inquiry")
 public class InquoryController extends HttpServlet{
@@ -19,8 +19,8 @@ public class InquoryController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			QNAService qs = new QNAService();
-			List<QNABoardVo>list = qs.getTotalList();
+			InquiryService qs = new InquiryService();
+			List<InquiryVo>list = qs.getTotalList();
 			
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/WEB-INF/views/notice/inquiry.jsp").forward(req, resp);

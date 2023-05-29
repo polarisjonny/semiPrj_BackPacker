@@ -186,16 +186,9 @@
 	
 			<div id="main-content">
 				<div id="main-inquiry">
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요 dsafsadfsdfdsfa</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
-					<div class="inquiry-item">[FAQ] 일본 여행지에 나리타리나바나 여행지 추가해주세요</div> 
+					<c:forEach items="${list}" var="item">
+					<div class="inquiry-item">[${item.qnaCategoryName}] ${item.title }</div> 
+					</c:forEach>
 				</div>
 			</div>
 				

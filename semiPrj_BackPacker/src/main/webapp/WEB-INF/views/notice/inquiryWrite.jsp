@@ -19,7 +19,7 @@
 	
 	#mainImg-area > img{
 		width:100vw;
-		height:400px;
+		height:300px;
 	}
 
 	#mainImg-text{
@@ -60,7 +60,7 @@
   		display:flex;
   		justify-content:center;
   		align-items:center;
-		font-size: 4em;
+		font-size: 3em;
 		font-weight: bold;
 		margin-bottom:20px;
 	}
@@ -138,10 +138,10 @@
 			
 			<div id="mainImg-text">
 				<div id="img-text">무엇을 도와드릴까요?</div>
-				<span class="input-area">
+				<!-- <span class="input-area">
 		               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 		               	<input type="text" placeholder="여행지로 검색">
-	               </span>
+	               </span> -->
 			</div>
 		
 		</div>
@@ -149,11 +149,11 @@
 		<div id="main-content-title"> 문의 작성</div>
 
 			<div id="main-content">
-				<form action="" method="post">
+				<form action="${root}/notice/inquiryWrite" method="post">
 					
-					<select id="category-area">
-						<option value="">1:1 문의</option>
-						<option value="">서비스 문의</option>
+					<select id="category-area" name="categoryType">
+						<option value="QNA">1:1 문의</option>
+						<option value="service">서비스 문의</option>
 					</select>
 
 					<div id="input-area">

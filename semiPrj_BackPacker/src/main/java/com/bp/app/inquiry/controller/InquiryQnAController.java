@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.common.page.PageVo;
-import com.bp.app.inquiry.service.QNAService;
-import com.bp.app.inquiry.vo.QNABoardVo;
+import com.bp.app.inquiry.service.InquiryService;
+import com.bp.app.inquiry.vo.InquiryVo;
 
 @WebServlet("/notice/inquiryQnA")
 public class InquiryQnAController extends HttpServlet{
@@ -22,8 +22,8 @@ public class InquiryQnAController extends HttpServlet{
 		try {
 			String QnaCategoryNo=req.getParameter("QnaCategoryNo");
 			
-			QNAService qs = new QNAService();
-			int cnt =  qs.qnaCnt(QnaCategoryNo);
+			InquiryService is = new InquiryService();
+			int cnt =  is.qnaCnt(QnaCategoryNo);
 			int page=1;
 			
 			if(req.getParameter("page")!= null) {
@@ -33,7 +33,7 @@ public class InquiryQnAController extends HttpServlet{
 			}
 			PageVo pv = new PageVo(cnt,page,5,10);
 			
-			List<QNABoardVo>list = qs.qnaList(pv,QnaCategoryNo);
+			List<InquiryVo>list = is.qnaList(pv,QnaCategoryNo);
 			
 			
 			req.setAttribute("pv", pv);

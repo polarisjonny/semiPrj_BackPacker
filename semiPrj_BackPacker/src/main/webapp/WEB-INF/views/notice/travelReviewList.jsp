@@ -208,7 +208,7 @@ footer, header, hgroup, menu, nav, section {
 			<div id="review">여행후기</div>
 			   
 	        <div id="hit">
-				<a href="#">조회순으로 보기</a>  
+				<a href="javascript:void(0);" onclick="viewHit();">인기순으로 보기</a>  
 	        </div>
         </div>
 
@@ -227,7 +227,6 @@ footer, header, hgroup, menu, nav, section {
         
         <br>
         
-       
         
         <div id="page-area">
             	
@@ -269,8 +268,35 @@ footer, header, hgroup, menu, nav, section {
 			const x = document.querySelector('select > option[value="' + searchType + '"]');
 			x.selected = true;
 		}
-
 		
+		function viewHit() {
+			// var ajax ={
+			// 	url : '${root}/notice/review-top-hit',
+			// 	type : 'get',
+			// 	dataType : 'html',
+			// 	success : function(data) {
+			// 		console.log(data);
+			// 	},
+			// 	error : function name(e) {
+			// 		console.log(e);
+			// 	},
+			// }
+
+			$.ajax({
+				url : '${root}/notice/review-top-hit',
+				type : 'get',
+				success : function(data) {
+					$('#reviewList').html(data);
+				},
+				error : function name(e) {
+					console.log(e);
+				},
+			})
+				
+			
+			
+		};
+
 
 	</script>
     
