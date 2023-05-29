@@ -60,10 +60,11 @@ public class InquiryDao {
 	}
 
 	//문의게시판 공지사항 페이징
-	public int boardCnt(Connection conn) throws Exception {
+	public int boardCnt(Connection conn , String searchValue) throws Exception {
 
-		String sql="SELECT COUNT(*) FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 1 AND DELETE_YN='N'";
+		String sql="SELECT COUNT(*) FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 1 AND DELETE_YN='N' AND TITLE LIKE '%'||?||'%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
 		ResultSet rs = pstmt.executeQuery();
 		
 		int cnt=0;
@@ -78,11 +79,11 @@ public class InquiryDao {
 	}//boardCnt
 	
 	//문의게시판 1:1문의 페이징
-	public int qnaCnt(String qnaCategoryNo, Connection conn) throws Exception {
+	public int qnaCnt(Connection conn , String searchValue) throws Exception {
 
-		String sql="SELECT COUNT(*)FROM QNA_BOARD WHERE QNA_CATEGORY_NO=? AND DELETE_YN='N'";
+		String sql="SELECT COUNT(*)FROM QNA_BOARD WHERE QNA_CATEGORY_NO=4 AND DELETE_YN='N' AND TITLE LIKE '%'||?||'%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,qnaCategoryNo );
+		pstmt.setString(1, searchValue);
 		ResultSet rs = pstmt.executeQuery();
 		int cnt=0;
 		if(rs.next()) {
@@ -94,10 +95,11 @@ public class InquiryDao {
 	}//qnaCnt
 	
 	//문의게시판 FAQ 페이징 
-	public int FAQCnt(Connection conn) throws Exception {
+	public int FAQCnt(Connection conn , String searchValue) throws Exception {
 
-		String sql="SELECT COUNT(*)FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 2 AND DELETE_YN='N'";
+		String sql="SELECT COUNT(*)FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 2 AND DELETE_YN='N' AND TITLE LIKE '%'||?||'%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
 		ResultSet rs = pstmt.executeQuery();
 		int cnt= 0;
 		if(rs.next()) {
@@ -110,10 +112,11 @@ public class InquiryDao {
 	}
 	
 	//문의게시판 서비스문의 페이징
-	public int ServiceCnt(Connection conn) throws Exception {
+	public int ServiceCnt(Connection conn , String searchValue) throws Exception {
 		
-		String sql = "SELECT COUNT(*) FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 3 AND DELETE_YN ='N'";
+		String sql = "SELECT COUNT(*) FROM QNA_BOARD WHERE QNA_CATEGORY_NO = 3 AND DELETE_YN ='N' AND TITLE LIKE '%'||?||'%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
 		ResultSet rs = pstmt.executeQuery();
 		int cnt =0;
 		if(rs.next()) {
@@ -171,20 +174,18 @@ public class InquiryDao {
 	}
 
 	//문의게시판에서 1:1문의 더보기 조회
-	public List<InquiryVo> qnaList(PageVo pv, String qnaCategoryNo, Connection conn) throws Exception {
+	public List<InquiryVo> qnaList(PageVo pv, Connection conn) throws Exception {
 
-		String sql="SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.ID ,M.NICK ,M.NAME FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = ? ORDER BY QNA_CATEGORY_NO DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		String sql="SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.ID ,M.NICK ,M.NAME FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 4 ORDER BY QNA_NO DESC )T) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, qnaCategoryNo);
-		pstmt.setInt(2, pv.getBeginRow());
-		pstmt.setInt(3, pv.getLastRow());
+		pstmt.setInt(1, pv.getBeginRow());
+		pstmt.setInt(2, pv.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<InquiryVo>list=new ArrayList<>();
 		while(rs.next()) {
 			String  qnaNo = rs.getString("QNA_NO");
 			String writerNo  = rs.getString("WRITER_NO");
-			qnaCategoryNo= rs.getString("QNA_CATEGORY_NO");
 			String  title = rs.getString("TITLE");
 			String  content = rs.getString("CONTENT");
 			String  answer = rs.getString("ANSWER");
@@ -198,7 +199,6 @@ public class InquiryDao {
 			InquiryVo vo = new InquiryVo();
 			vo.setQnaNo(qnaNo);
 			vo.setWriterNo(writerNo);
-			vo.setQnaCategoryNo(qnaCategoryNo);
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setAnswer(answer);
@@ -485,11 +485,16 @@ public class InquiryDao {
 	//공지사항 검색해서 조회
 	public List<InquiryVo> boardList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
 
-		String sql="SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 1 AND Q.TITLE LIKE '%'||?||'%' ORDER BY ENROLL_DATE DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		String sql="";
+		if(searchType.equals("title")) {
+			sql="SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 1 AND Q.TITLE LIKE '%'||?||'%' ORDER BY QNA_NO DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		}else {
+			return boardList(conn, pv);
+		}
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, searchValue);
-		pstmt.setInt(1, pv.getBeginRow());
-		pstmt.setInt(2, pv.getLastRow());
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<InquiryVo> list = new ArrayList<>();
@@ -524,7 +529,148 @@ public class InquiryDao {
 		JDBCTemplate.close(pstmt);
 		JDBCTemplate.close(rs);
 		
-		return null;
+		return list;
+	}
+
+	//FAQ 검색 조회
+	public List<InquiryVo> FAQList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+
+		String sql = "SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 2 AND Q.TITLE LIKE '%'||?||'%' ORDER BY ENROLL_DATE DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<InquiryVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String  qnaNo = rs.getString("QNA_NO");
+			String  writerNo  = rs.getString("WRITER_NO");
+			String  qnaCategoryNo= rs.getString("QNA_CATEGORY_NO");
+			String  title = rs.getString("TITLE");
+			String  content = rs.getString("CONTENT");
+			String  answer = rs.getString("ANSWER");
+			String  enrollDate = rs.getString("ENROLL_DATE");
+			String  deleteYn = rs.getString("DELETE_YN");
+			String  qnaCategoryName = rs.getString("QNA_CATEGORY_NAME");
+			String  nick = rs.getString("NICK");
+			
+			InquiryVo vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setQnaCategoryName(qnaCategoryName);
+			vo.setNick(nick);
+			
+			
+			list.add(vo);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return list;
+		
+	}
+
+	//1:1문의 검색 조회
+	public List<InquiryVo> qnaList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+
+		String sql = "SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 4 AND Q.TITLE LIKE '%'||?||'%' ORDER BY QNA_NO DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<InquiryVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String  qnaNo = rs.getString("QNA_NO");
+			String  writerNo  = rs.getString("WRITER_NO");
+			String  qnaCategoryNo= rs.getString("QNA_CATEGORY_NO");
+			String  title = rs.getString("TITLE");
+			String  content = rs.getString("CONTENT");
+			String  answer = rs.getString("ANSWER");
+			String  enrollDate = rs.getString("ENROLL_DATE");
+			String  deleteYn = rs.getString("DELETE_YN");
+			String  qnaCategoryName = rs.getString("QNA_CATEGORY_NAME");
+			String  nick = rs.getString("NICK");
+			
+			InquiryVo vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setQnaCategoryName(qnaCategoryName);
+			vo.setNick(nick);
+			
+			
+			list.add(vo);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return list;
+	
+	}
+
+	//서비스 문의 검색조회
+	public List<InquiryVo> ServiceList(PageVo pv, Connection conn, String searchType, String searchValue) throws Exception {
+
+		String sql = "SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 3 AND Q.TITLE LIKE '%'||?||'%' ORDER BY QNA_NO DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(2, pv.getBeginRow());
+		pstmt.setInt(3, pv.getLastRow());
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<InquiryVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String  qnaNo = rs.getString("QNA_NO");
+			String  writerNo  = rs.getString("WRITER_NO");
+			String  qnaCategoryNo= rs.getString("QNA_CATEGORY_NO");
+			String  title = rs.getString("TITLE");
+			String  content = rs.getString("CONTENT");
+			String  answer = rs.getString("ANSWER");
+			String  enrollDate = rs.getString("ENROLL_DATE");
+			String  deleteYn = rs.getString("DELETE_YN");
+			String  qnaCategoryName = rs.getString("QNA_CATEGORY_NAME");
+			String  nick = rs.getString("NICK");
+			
+			InquiryVo vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setQnaCategoryName(qnaCategoryName);
+			vo.setNick(nick);
+			
+			
+			list.add(vo);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return list;
+		
 	}
 
 	

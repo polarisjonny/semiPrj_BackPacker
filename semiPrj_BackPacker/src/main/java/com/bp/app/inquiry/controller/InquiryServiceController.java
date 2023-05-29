@@ -1,7 +1,9 @@
 package com.bp.app.inquiry.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +22,11 @@ public class InquiryServiceController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+			String searchType = req.getParameter("searchType");
+			String searchValue = req.getParameter("searchValue");
+			
 			InquiryService is = new InquiryService();
-			int listCnt = is.ServiceCnt();
+			int listCnt = is.ServiceCnt(searchValue);
 			String page = req.getParameter("page");
 			if(page == null) {
 				page ="1";
@@ -32,8 +37,18 @@ public class InquiryServiceController extends HttpServlet{
 			
 			PageVo pv = new PageVo(listCnt, currentPage, pageLimit, boardLimit);
 			
-			List<InquiryVo> list = is.ServiceList(pv);
+			List<InquiryVo> list = null;
+			if(searchType == null || searchType.equals("")) {
+				list = is.ServiceList(pv);
+			}else {
+				list = is.ServiceList(pv,searchType,searchValue);
+			}
 			
+			Map<String,String> map = new HashMap<>();
+			map.put("searchValue", searchValue);
+			map.put("searchType", searchType);
+			
+			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pv);
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/WEB-INF/views/notice/inquiryService.jsp").forward(req, resp);

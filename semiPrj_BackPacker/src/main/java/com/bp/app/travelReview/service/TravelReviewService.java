@@ -45,6 +45,7 @@ public class TravelReviewService {
 	//여행 후기 검색해서 리스트 조회하기
 	public List<TravelReviewVo> selectReviewList(PageVo pv, String searchType, String searchValue) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
+		
 		List<TravelReviewVo> trList = dao.selectReviewList(conn, pv, searchType, searchValue);
 		
 		JDBCTemplate.close(conn);
