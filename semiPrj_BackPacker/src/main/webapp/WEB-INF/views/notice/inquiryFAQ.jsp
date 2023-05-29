@@ -20,7 +20,7 @@
 	
 	#mainImg-area > img{
 		width:100vw;
-		height:400px;
+		height:300px;
 	}
 
 	#mainImg-text{
@@ -155,10 +155,10 @@
 			
 			<div id="mainImg-text">
 				<div id="img-text">무엇을 도와드릴까요?</div>
-				<span class="input-area">
+				<!-- <span class="input-area">
 		               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
 		               	<input type="text" placeholder="여행지로 검색">
-	               </span>
+	               </span> -->
 			</div>
 		</div>
 		
@@ -170,10 +170,7 @@
 				<form action="${root}/notice/">
 					<select name="search-type">
 		
-						<option value="notice">공지사항</option>
 						<option value="faq" selected>FAQ</option>
-						<option value="inquiry">1:1문의</option>
-						<option value="service">서비스문의</option>
 						
 					</select>
 					
@@ -186,8 +183,8 @@
 	
 			<div id="main-content">
 				<div id="main-inquiry">
-					<c:forEach items="${list}" var="item">
-					<div class="inquiry-item">[${item.qnaCategoryName}] ${item.title }</div> 
+					<c:forEach items="${list}" var="list">
+						<a href="${root}/notice/inquiryFAQDetail?QnANo=${list.qnaNo}"><div class="inquiry-item">[${list.qnaCategoryName}] ${list.title}</div> </a>	
 					</c:forEach>
 				</div>
 			</div>

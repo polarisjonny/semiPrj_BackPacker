@@ -83,7 +83,7 @@
   		list-style:none;
   	}
   	
-  	.inquiry-item > ul > li > a{
+  	.inquiry-item > ul > li > .list{
   		color : #99ccff;
   	}
   	
@@ -153,12 +153,12 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '1'}"> 
 									<c:if test="${count < 5}"> 
-										<li>${item.title}</li>
+										<li><a href="${root}/notice/inquiryBoardDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryBoard?page=1&QnaCategoryNo=1"> 공지사항 더보기> </a></li>
+							<li ><a class="list" href="${root}/notice/inquiryBoard?page=1&QnaCategoryNo=1"> 공지사항 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -169,12 +169,12 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '2'}"> 
 									<c:if test="${count < 5}"> 
-										<li>${item.title}</li>
+										<li><a href="${root}/notice/inquiryFAQDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryFAQ?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
+							<li ><a class="list" href="${root}/notice/inquiryFAQ?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -185,12 +185,12 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '3'}"> 
 									<c:if test="${count < 5}"> 
-										<li>${item.title}</li>
+										<li><a href="${root}/notice/inquiryServiceDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryService?page=1&QnaCategoryNo=3"> 서비스문의 더보기> </a></li>
+							<li><a class="list" href="${root}/notice/inquiryService?page=1&QnaCategoryNo=3"> 서비스문의 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -201,12 +201,12 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '4'}"> 
 									<c:if test="${count < 5}"> 
-										<li>${item.title}</li>
+										<li><a href="${root}/notice/inquiryQnADetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li><a href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=4"> 1:1 문의 더보기> </a></li>
+							<li ><a class="list" href="${root}/notice/inquiryQnA?page=1&QnaCategoryNo=4"> 1:1 문의 더보기> </a></li>
 						</ul>
 					</li>
 
