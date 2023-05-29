@@ -109,7 +109,7 @@
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">프패커합니다 게시글 작성</div>
-			<form action="${root}/Fpacker/write" method="post" enctype="multipart/form-data">
+			<form action="${root}/doFpacker/write" method="post" enctype="multipart/form-data">
 				<div id="Thum-parent">
 					<img id="imgUpload">
 					<div id="Thumnail">
@@ -139,7 +139,7 @@
 					<input type="date" name="endDate">
 				</div>
 				<div id="addInput-area">
-					<input type="number" value="0" name="expense">원
+					소요경비 :  <input style="width: 150px;" type="number" value="0" name="expense">원
 				</div>
 				<div>
 					<input id="submit-btn" type="submit" value="작성완료">	

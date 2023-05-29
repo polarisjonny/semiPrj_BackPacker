@@ -124,7 +124,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 40px;
+        font-size: 70px;
         position: absolute;
         top: 100px;
         left: 50px;

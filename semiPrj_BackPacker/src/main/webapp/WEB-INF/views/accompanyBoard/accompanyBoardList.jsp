@@ -167,7 +167,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 40px;
+        font-size: 80px;
         position: absolute;
         top: 100px;
         left: 50px;
@@ -179,7 +179,21 @@
         margin-right: 0px;
     }
      /* 작은 버튼 구해요 합니다버튼*/
-  
+  /* 작은 버튼 구해요 합니다버튼*/
+  .s-btn {
+        border: none;
+        border-top-left-radius: 10px ;
+        border-top-right-radius: 10px;
+        padding: 5px 5px 0px 5px;
+        font-size: 20px;
+    }
+    .s-btn:hover {
+    	background-color: #94D2E6;
+        color: white;
+    }
+   	.small-text {
+   		font-size : 12px;
+   	}    
 </style>
 </head>
 <body>
@@ -194,7 +208,7 @@
         <div id="content-area">
             <div id="ca1"></div>
             <div id="c-main">
-                <div><a href="${root}/doFpacker/list?page=1">프패커게시판으로 이동하기</a></div>
+                <!-- <div><a href="${root}/doFpacker/list?page=1">프패커게시판으로 이동하기</a></div> -->
                 <div id="search-area">
                 	<form action="${root}/accompany/list" method="get">
                 		<input type="hidden" name="page" value="1">
@@ -210,7 +224,9 @@
 	                    <!-- <input type="submit" value="검색"> -->                	
                 	</form>
                 </div>
+                <div><button class="s-btn active-btn" onclick="location.href='${root}/findFpacker/list?page=1'">프패커구해요</button><button class="s-btn" type="button" onclick="location.href='${root}/doFpacker/list?page=1'">프패커합니다</button></div>
                 
+                <div><i class="fa-solid fa-circle-info" style="color: #94D2E6;"></i>좀 더 전문적인 동행을 구해보세요!</div>
                 <div id="middle-area">
                     <span id="big-text">동행을 찾아보세요</span>
                     <c:if test="${empty loginMember}">
