@@ -164,16 +164,17 @@
 
 			<div id="board-search-area">
 	
-				<form action="${root}/notice/">
+				<form action="${root}/notice/inquiryQnA" method="get">
+					<input type="hidden" name="page" value="1">
 					<select name="searchType">
 		
-						<option value="QnA" selected>1:1문의</option>
+						<option value="title" selected>1:1문의</option>
 						
 					</select>
 					
 						<span class="board-input-area">
 			               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-			               	<input type="text" placeholder="문의 제목 검색..">
+			               	<input name="searchValue" type="text" placeholder="문의 제목 검색.." value="${searchVo.searchValue}">
 		               </span>
 				</form>
 			</div>
@@ -189,37 +190,26 @@
 				
 				 <div id="page-area">
             	
-            	<%-- <c:if test="${pv.currentPage > 1}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage - 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
-            	<%-- </c:if> --%>
+            	<c:if test="${pv.currentPage > 1}">
+	            	<a style="color:#99ccff" href="${root}/notice/inquiryQnA?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+	            	<a style="color:#99ccff" href="${root}/notice/inquiryQnA?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+            	</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">1</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">2</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">3</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">4</a>
-            		</c:if>
-            		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReviewList?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">5</a>
+		            	<a href="${root}/notice/inquiryQnA?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             		</c:if>
             		
+            		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a>${i}</a>
+            	      	<a style="color:#99ccff">${i}</a>
             		</c:if>
             	</c:forEach>
             	
-            	<%-- <c:if test="${pv.currentPage < pv.maxPage}"> --%>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-	            	<a style="color:#99ccff" href="${root}/notice/travelReviewList?page=${pv.currentPage + 2}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
-            	<%-- </c:if> --%>
+            	<c:if test="${pv.currentPage < pv.maxPage}"> 
+	            	<a style="color:#99ccff" href="${root}/notice/inquiryQnA?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+	            	<a style="color:#99ccff" href="${root}/notice/inquiryQnA?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+            	</c:if> 
             	
             </div>
 		

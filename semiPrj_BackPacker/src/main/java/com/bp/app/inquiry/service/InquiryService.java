@@ -31,11 +31,11 @@ public class InquiryService {
 	}
 
 	//문의게시판 1:1문의 화면 페이징
-	public int qnaCnt(String qnaCategoryNo) throws Exception {
+	public int qnaCnt(String searchValue) throws Exception {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.qnaCnt(qnaCategoryNo,conn);
+		int cnt = dao.qnaCnt(conn , searchValue);
 		
 		JDBCTemplate.close(conn);
 		
@@ -43,11 +43,11 @@ public class InquiryService {
 	}
 
 	// 문의게시판 1:1문의더보기 조회
-	public List<InquiryVo> qnaList(PageVo pv, String qnaCategoryNo) throws Exception {
+	public List<InquiryVo> qnaList(PageVo pv) throws Exception {
 	
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<InquiryVo> list = dao.qnaList(pv,qnaCategoryNo,conn);
+		List<InquiryVo> list = dao.qnaList(pv,conn);
 		
 		
 		JDBCTemplate.close(conn);
@@ -56,11 +56,11 @@ public class InquiryService {
 	}
 
 	//문의게시판 공지사항 페이징처리
-	public int boardCnt() throws Exception {
+	public int boardCnt(String searchValue) throws Exception {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.boardCnt(conn);
+		int cnt = dao.boardCnt(conn, searchValue);
 		
 		JDBCTemplate.close(conn);
 		return cnt;
@@ -80,11 +80,11 @@ public class InquiryService {
 	}//boardList
 
 	//문의게시판 FAQ 페이징처리
-	public int FAQCnt() throws Exception {
+	public int FAQCnt(String searchValue) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.FAQCnt(conn);
+		int cnt = dao.FAQCnt(conn , searchValue);
 		
 		JDBCTemplate.close(conn);
 		
@@ -104,11 +104,11 @@ public class InquiryService {
 	}
 
 	//문의게시판 서비스문의 페이징
-	public int ServiceCnt() throws Exception {
+	public int ServiceCnt(String searchValue) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.ServiceCnt(conn);
+		int cnt = dao.ServiceCnt(conn,searchValue);
 		
 		JDBCTemplate.close(conn);
 		
@@ -199,6 +199,43 @@ public class InquiryService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		List<InquiryVo> list = dao.boardList(conn, pv , searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+
+	//FAQ 검색조회
+	public List<InquiryVo> FAQList(PageVo pv, String searchType, String searchValue) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InquiryVo> list = dao.FAQList(conn, pv , searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+
+	//1:1문의 검색 조회
+	public List<InquiryVo> qnaList(PageVo pv,String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InquiryVo> list = dao.qnaList(conn, pv , searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+
+	//서비스문의 검색 조회
+	public List<InquiryVo> ServiceList(PageVo pv, String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<InquiryVo> list = dao.ServiceList(pv, conn , searchType,searchValue);
 		
 		JDBCTemplate.close(conn);
 		

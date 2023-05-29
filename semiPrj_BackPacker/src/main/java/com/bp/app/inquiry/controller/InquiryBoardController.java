@@ -1,7 +1,9 @@
 package com.bp.app.inquiry.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +26,10 @@ public class InquiryBoardController extends HttpServlet{
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			
+			System.out.println(searchType);
+			System.out.println(searchValue);
 			InquiryService is = new InquiryService();
-			int listCnt = is.boardCnt();
+			int listCnt = is.boardCnt(searchValue);
 			String page = req.getParameter("page");
 			if(page == null) {
 				page ="1";
@@ -43,6 +47,11 @@ public class InquiryBoardController extends HttpServlet{
 				list = is.boardList(pv,searchType , searchValue);
 			}
 			
+			Map<String,String> map = new HashMap<>();
+			map.put("searchType", searchType);
+			map.put("searchValue", searchValue);
+			
+			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pv);
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/WEB-INF/views/notice/inquiryBoard.jsp").forward(req, resp);
