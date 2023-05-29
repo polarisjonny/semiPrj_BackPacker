@@ -25,7 +25,7 @@ public class InquriyServiceDetailController extends HttpServlet{
 			InquiryVo vo = is.serviceDetail(qnaNo);
 			
 			if(vo !=null) {
-				req.setAttribute("vo", vo);
+				req.getSession().setAttribute("vo", vo);
 				req.getRequestDispatcher("/WEB-INF/views/notice/inquiryServiceDetail.jsp").forward(req, resp);
 			}else {
 				throw new IllegalStateException();

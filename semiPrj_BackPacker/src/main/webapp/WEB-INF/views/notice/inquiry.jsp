@@ -216,7 +216,7 @@
 		</div>
 		
 		<div class="noticeBtn">
-            	<span>도움이 더 필요하시면</span>
+            	<!-- <span>도움이 더 필요하시면</span> -->
 			        <button onclick="location.href='${root}/notice/inquiryWrite'">문의 등록하기</button>
 	    </div>
 		

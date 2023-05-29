@@ -127,7 +127,7 @@
   		}
   		
   		#help-btn > span{
-  			font-size: 1.4em;
+  			font-size: 1.2em;
   		}
   		
   		#help-btn > button{
@@ -135,23 +135,41 @@
         border: 1px solid #99ccff;
         background-color:  #99ccff;
         color:white;
-        padding:10px;
+        padding:7px;
         margin:0px 10px 10px;
   		}
   		
   		#help-btn i{
 			font-size: 20px;
   		}
+  		
+  		#insertAnswer{
+			display:flex;
+			justify-content:center;
+			margin-top:20px;
+		}
+		
+		#insertAnswer > button{
+			border-radius: 10px;
+	        border: 1px solid #99ccff;
+	        background-color:  #99ccff;
+	        color:white;
+	        padding:10px;
+		}
+
+		textarea:focus , input:focus{
+			outline: none;
+		}
 	
-	
-	
-</style>
+		
+	</style>
 </head>
 <body>
-
+	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 	<main>
+		
 	
 	<div id="mainImg-area">
 		
@@ -183,36 +201,50 @@
 
         <div id="answer">문의답변 ></div>
 
-            <textarea id ="answer-content" style="resize:none;">
-            </textarea>
+<textarea id ="answer-content" style="resize:none;" readonly>
+${vo.answer}
+</textarea>
 
     </div>
 		
-		<div id="help-btn">
-			<span>도움이 되었습니까?</span>
-			<button id="frist" onclick="location.href='${root}/notice/inquiry'">
-				<i class="bi bi-hand-thumbs-up-fill"></i>
-			</button>
-			
-			<button id="secend" onclick="location.href='${root}/notice/inquiryWrite'">
-				<i class="bi bi-hand-thumbs-down"></i>
-			</button>
-			
-		</div>
-
-
-		<%-- <c:if test="${loginMember.id == 'ADMIN' }">
-				<div id="review-btn">
-						<a href="#">수정하기</a>
-						<a href="#">삭제하기</a>
-				</div>
-			</c:if> --%>
+		<c:if test="${loginMember.id == 'ADMIN' }">
+			<div id="insertAnswer">
+			<button class="Answer">답변 등록</button>
+			</div>
+		</c:if>
 		
-	
+		<c:if test="${loginMember.id !='ADMIN'}">
+			<div id="help-btn">
+				<span>도움이 되었습니까?</span>
+				<button id="frist" onclick="location.href='${root}/notice/inquiry'">
+					<i class="bi bi-hand-thumbs-up-fill"></i>
+				</button>
+				
+				<button id="secend" onclick="location.href='${root}/notice/inquiryWrite'">
+					<i class="bi bi-hand-thumbs-down"></i>
+				</button>
+				
+			</div>
+		
+		</c:if>
+
 	</main>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		
+	<script>
+
+		const answer = document.querySelector('.Answer');
+		answer.addEventListener('click' , function(params) {
+				const no ='${vo.qnaNo}'
+				const width = 800;
+				const height = 1000;
+				const left = (screen.width/2) - (width/2);
+				const top = 0;
+				window.open('${root}/notice/inquiryServiceAnswer?QnaNo='+no ,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top )
+		})
+
+	</script>
 
 </body>
 </html>

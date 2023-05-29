@@ -26,7 +26,7 @@ public class InquiryQnADetailController extends HttpServlet{
 			InquiryVo vo = is.detail(qnaNo);
 			
 			if(vo !=null) {
-				req.setAttribute("vo", vo);
+				req.getSession().setAttribute("vo", vo);
 				req.getRequestDispatcher("/WEB-INF/views/notice/inquiryQnADetail.jsp").forward(req, resp);
 			}else {
 				throw new IllegalStateException();
