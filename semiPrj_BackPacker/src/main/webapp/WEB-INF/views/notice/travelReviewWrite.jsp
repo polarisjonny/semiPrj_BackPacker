@@ -142,7 +142,7 @@
 						<input type="text" name="title" id="write-title"placeholder="제목을 20자 이내로 적어주세요.">
 						<br>
 						
-						<textarea class="summernote" name="content" style="resize:none;" ></textarea>
+						<textarea id="summernote" name="content" style="resize:none;" ></textarea>
 						
 						<div id="submit">
 							<input type="submit" value="작성 완료">
