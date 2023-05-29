@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
+
 import com.bp.app.admin.boardManage.dao.BoardManageDao;
 import com.bp.app.common.db.JDBCTemplate;
 import com.bp.app.common.page.PageVo;
@@ -264,6 +266,27 @@ public class GuideBoardService {
 		//close
 		
 		// TODO Auto-generated method stub
+		return result;
+	}
+
+
+	public int delete(String no) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		GuideBoardDao dao = new GuideBoardDao();
+		int result = dao.delete(conn,no);
+		//tx
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		
+		JDBCTemplate.close(conn);
+		
 		return result;
 	}
 

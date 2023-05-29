@@ -366,7 +366,7 @@
 								<div id="name-area">${writerMember.nick}(${writerMember.id})</div>
 								<div id="btn-area">
 									<button class="s-btn btn-blue modify-btn">수정</button>
-									<button class="s-btn btn-red">삭제</button>
+									<button class="s-btn btn-red" type="button" onclick="location.href='${root}/accompany/del?no=${gbvo.guideBoardNo}'">삭제</button>
 									<script>
 										const sBtn = document.querySelectorAll(".s-btn");
 										if('${loginMember.memberNo}'!='${writerMember.memberNo}'){
@@ -553,6 +553,7 @@
 			const top = 0;
 			window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 		});
+		
 
 		let reportBtn = document.querySelector('.report-btn');
 		reportBtn.addEventListener('click',function(){

@@ -405,4 +405,14 @@ public class GuideBoardDao {
 				
 	}
 
+	public int delete(Connection conn, String no) throws Exception {
+		//sql
+		String sql = "UPDATE GUIDE_BOARD SET DELETE_YN ='Y' WHERE GUIDE_BOARD_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		int result = pstmt.executeUpdate();
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
 }
