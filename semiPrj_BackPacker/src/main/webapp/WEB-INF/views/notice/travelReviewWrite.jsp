@@ -116,7 +116,6 @@
 
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<main>
@@ -160,10 +159,13 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
     <script>
-    	$('.summernote').summernote({
+    	$('#summernote').summernote({
     	  placeholder: 'Hello stand alone ui',
     	  tabsize: 2,
     	  height: 450,
+          callbacks : {
+              onImageUpload : f01
+            } ,
     	  toolbar: [
     	    ['style', ['style']],
     	    ['font', ['bold', 'underline', 'clear']],
@@ -174,6 +176,35 @@
     	    ['view', ['fullscreen', 'codeview', 'help']]
     	  ]
     	});
+    	
+        //파일업로드 발생 시 동작
+        function f01(fileList){
+
+          const fd = new FormData();
+          for(let file of fileList){
+            fd.append("f" , file);
+          }
+
+          $.ajax({
+            url : '${root}/upload' ,
+            type : 'post' ,
+            data : fd ,
+            processData : false ,
+            contentType : false ,
+            dataType : 'json' ,
+            success : function(changeNameList){
+              console.log(changeNameList);
+              for(let changeName of changeNameList){
+                $('#summernote').summernote('insertImage' , '${root}/static/img/travelReview/' + changeName);
+              }
+
+            } ,
+            error : function(error){
+              console.log(error);
+            } ,
+          });
+
+        }
               
 		const fileTag = document.querySelector("#imgFile");
 		const Thumnail = document.querySelector('#Thumnail');
