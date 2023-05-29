@@ -482,6 +482,51 @@ public class InquiryDao {
 	
 	}
 
+	//공지사항 검색해서 조회
+	public List<InquiryVo> boardList(Connection conn, PageVo pv, String searchType, String searchValue) throws Exception {
+
+		String sql="SELECT * FROM (SELECT  ROWNUM RNUM , T.* FROM ( SELECT Q.QNA_NO ,Q.WRITER_NO ,Q.QNA_CATEGORY_NO ,Q.TITLE ,Q.CONTENT ,Q.ANSWER ,Q.ENROLL_DATE ,Q.DELETE_YN ,C.QNA_CATEGORY_NAME ,M.NICK FROM QNA_BOARD Q JOIN QNA_CATEGORY C ON (Q.QNA_CATEGORY_NO = C.QNA_CATEGORY_NO) JOIN MEMBER M ON(Q.WRITER_NO = M.MEMBER_NO) WHERE Q.DELETE_YN='N' AND Q.QNA_CATEGORY_NO = 1 AND Q.TITLE LIKE '%'||?||'%' ORDER BY ENROLL_DATE DESC )T) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, searchValue);
+		pstmt.setInt(1, pv.getBeginRow());
+		pstmt.setInt(2, pv.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<InquiryVo> list = new ArrayList<>();
+		while(rs.next()) {
+			String  qnaNo = rs.getString("QNA_NO");
+			String  writerNo  = rs.getString("WRITER_NO");
+			String  qnaCategoryNo= rs.getString("QNA_CATEGORY_NO");
+			String  title = rs.getString("TITLE");
+			String  content = rs.getString("CONTENT");
+			String  answer = rs.getString("ANSWER");
+			String  enrollDate = rs.getString("ENROLL_DATE");
+			String  deleteYn = rs.getString("DELETE_YN");
+			String  qnaCategoryName = rs.getString("QNA_CATEGORY_NAME");
+			String  nick = rs.getString("NICK");
+			
+			InquiryVo vo = new InquiryVo();
+			vo.setQnaNo(qnaNo);
+			vo.setWriterNo(writerNo);
+			vo.setQnaCategoryNo(qnaCategoryNo);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setAnswer(answer);
+			vo.setEnrollDate(enrollDate);
+			vo.setDeleteYn(deleteYn);
+			vo.setQnaCategoryName(qnaCategoryName);
+			vo.setNick(nick);
+			
+			
+			list.add(vo);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return null;
+	}
+
 	
 
 	

@@ -168,7 +168,7 @@
 			<div id="board-search-area">
 	
 				<form action="${root}/notice/">
-					<select name="search-type">
+					<select name="searchType">
 		
 						<option value="notice" selected>공지사항</option>
 						
@@ -176,7 +176,7 @@
 					
 						<span class="board-input-area">
 			               	<i class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-			               	<input type="text" placeholder="문의 제목 검색..">
+			               	<input name="searchValue" type="text" placeholder="문의 제목 검색..">
 		               </span>
 				</form>
 			</div>

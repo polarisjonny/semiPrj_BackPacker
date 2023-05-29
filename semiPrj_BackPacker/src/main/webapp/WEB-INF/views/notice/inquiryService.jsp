@@ -168,7 +168,7 @@
 			<div id="board-search-area">
 	
 				<form action="${root}/notice/">
-					<select name="search-type">
+					<select name="searchType">
 		
 						<option value="service" selected>서비스문의</option>
 						

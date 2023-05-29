@@ -21,6 +21,9 @@ public class InquiryBoardController extends HttpServlet{
 
 
 		try {
+			String searchType = req.getParameter("searchType");
+			String searchValue = req.getParameter("searchValue");
+			
 			InquiryService is = new InquiryService();
 			int listCnt = is.boardCnt();
 			String page = req.getParameter("page");
@@ -33,7 +36,12 @@ public class InquiryBoardController extends HttpServlet{
 			
 			PageVo pv = new PageVo(listCnt, currentPage, pageLimit, boardLimit);
 			
-			List<InquiryVo> list = is.boardList(pv);
+			List<InquiryVo> list = null;
+			if(searchType == null || searchType.equals("")) {
+				list = is.boardList(pv);
+			}else {
+				list = is.boardList(pv,searchType , searchValue);
+			}
 			
 			req.setAttribute("pv", pv);
 			req.setAttribute("list", list);
