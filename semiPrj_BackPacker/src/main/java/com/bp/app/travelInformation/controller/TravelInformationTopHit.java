@@ -13,23 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.common.page.PageVo;
 import com.bp.app.travelInformation.service.TravelInformationService;
+import com.bp.app.travelReview.service.TravelReviewService;
 import com.bp.app.travelReview.vo.TravelReviewVo;
 
-@WebServlet("/notice/travelInformation")
-public class TravelInformationListController extends HttpServlet{
+@WebServlet("/notice/informationTopHit")
+public class TravelInformationTopHit extends HttpServlet{
 
 	private final TravelInformationService tis = new TravelInformationService();
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		try {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			
-			//데이터 뭉치기
-			int listCnt = tis.selectCnt(searchType , searchValue);
+			int cnt = tis.cnt(searchType,searchValue);
 			String page = req.getParameter("page");
 			if(page == null) {
 				page = "1";
@@ -37,14 +37,13 @@ public class TravelInformationListController extends HttpServlet{
 			int currentPage = Integer.parseInt(page);
 			int pageLimit = 5;
 			int boardLimit = 4;
+			PageVo pv = new PageVo(cnt, currentPage, pageLimit, boardLimit);
 			
-			PageVo pv = new PageVo(listCnt, currentPage, pageLimit, boardLimit);
-			
-			List<TravelReviewVo> tiList = null;
+			List<TravelReviewVo> list = null;
 			if(searchType == null || searchType.equals("")) {
-				tiList = tis.selectList(pv);
+				list = tis.TopHitList(pv);
 			}else {
-				tiList = tis.selectList(pv,searchType , searchValue);
+				list = tis.TopHitList(pv,searchType,searchValue);
 			}
 			
 			Map<String,String> map = new HashMap<>();
@@ -53,17 +52,16 @@ public class TravelInformationListController extends HttpServlet{
 			
 			req.setAttribute("searchVo", map);
 			req.setAttribute("pv", pv);
-			req.setAttribute("tiList", tiList);
-			req.getRequestDispatcher("/WEB-INF/views/notice/travelInformation.jsp").forward(req, resp);
-			
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("/WEB-INF/views/notice/TravelInformationTopHit.jsp").forward(req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "여행정보 조회 에러");
+			req.setAttribute("errorMsg", "여행정보 인기순으로 보기 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
+
 		
-	
-	}//doget
+	}//service
 	
 }

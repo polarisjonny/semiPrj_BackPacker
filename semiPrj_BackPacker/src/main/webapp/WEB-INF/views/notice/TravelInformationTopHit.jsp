@@ -193,7 +193,7 @@ footer, header, hgroup, menu, nav, section {
 		<br>
 		
         <div id="review-search-area">
-            <form action="${root}/notice/travelInformation" method="get">
+            <form action="${root}/notice/informationTopHit" method="get">
 				 <input type="hidden" name="page" value="1">
                 <select name="searchType">
                         <option value="title">제목</option>
@@ -215,16 +215,16 @@ footer, header, hgroup, menu, nav, section {
 			   
 	        
 	        <div id="hit">
-				<a href="${root}/notice/informationTopHit">인기순으로 보기</a>  
+				<a href="${root}/notice/travelInformation">최신순으로 보기</a>  
 	        </div>
         </div>
 
       <div id="reviewList">
-      	<c:forEach items="${tiList}" var="tiList">
+      	<c:forEach items="${list}" var="list">
         <div class="review-area">
-        	<a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${tiList.mainImg}"></a>
+        	<a href="${root}/notice/travelInformationDetail?infoNo=${list.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${list.mainImg}"></a>
            	<div>
-            <a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}">${tiList.title}</a>
+            <a href="${root}/notice/travelInformationDetail?infoNo=${list.infoNo}">${list.title}</a>
            	</div>
         </div>
       	</c:forEach>
@@ -237,15 +237,15 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
 
 				<c:if test="${pv.currentPage > 1}">
-					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+					<a style="color:#99ccff" href="${root}/notice/informationTopHit?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+					<a style="color:#99ccff" href="${root}/notice/informationTopHit?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
 				</c:if>
     
             		
 				
 				<c:forEach var="i" step="1" begin="${pv.startPage}" end="${pv.endPage }">
 					<c:if test="${pv.currentPage != i}">
-						<a href="${root}/notice/travelInformation?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a> 
+						<a href="${root}/notice/informationTopHit?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a> 
 					</c:if>	
 
 						<c:if test="${pv.currentPage == i}">
@@ -254,8 +254,8 @@ footer, header, hgroup, menu, nav, section {
 				</c:forEach>
             	
 					<c:if test="${pv.currentPage < pv.maxPage}">
-						<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-						<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
+						<a style="color:#99ccff" href="${root}/notice/informationTopHit?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+						<a style="color:#99ccff" href="${root}/notice/informationTopHit?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
 					</c:if>
         </div>
    

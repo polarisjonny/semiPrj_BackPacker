@@ -93,4 +93,44 @@ public class TravelInformationService {
 	
 	}
 
+	//인기순으로 보기 페이징
+	public int cnt(String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int cnt = dao.cnt(conn , searchType , searchValue);
+		
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+		
+	
+	}
+
+	//인기순으로 보기 게시글 조회
+	public List<TravelReviewVo> TopHitList(PageVo pv) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<TravelReviewVo> list = dao.TopHitList(conn,pv);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	
+	}
+
+	//인기순으로 보기 제목 검색 조회
+	public List<TravelReviewVo> TopHitList(PageVo pv, String searchType, String searchValue) throws Exception {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<TravelReviewVo> list = dao.TopHitList(conn, pv , searchType , searchValue);
+	
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+
 }
