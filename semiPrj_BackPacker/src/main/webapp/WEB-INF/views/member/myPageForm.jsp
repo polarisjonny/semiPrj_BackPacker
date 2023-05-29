@@ -193,8 +193,8 @@
         <h2 id="my-page-modify-title">개인정보 수정 및 프패커 등록</h2> 
          <div id="data-area">
            <div id="personal-data-area">
-                <div>이름</div>
-                <div>${loginMember.name}</div>
+                <div>닉네임</div>
+                <div>${loginMember.nick}</div>
                 <div>연령대</div>
                 <div>${loginMember.age}대</div>
                 <div>이메일</div>
@@ -288,7 +288,12 @@
     
             <c:forEach items="${matchingList}" var="mVo" begin="0" end="3">
             	<div class="matching-member-area" id="first-member-area" data-member-no="${mVo.memberNo}">
-                	<img onclick="openProfile(this)" class="matching-complete-member-image" src="${root}/static/img/member/${mVo.profileImage}" alt="프로필 사진">
+                	<c:if test="${not empty mVo.profileImage}">
+						<img onclick="openProfile(this)" class="matching-complete-member-image" src="${root}/static/img/member/profile/${mVo.profileImage}" alt="프로필 사진">                   
+	              	</c:if>
+					<c:if test="${empty mVo.profileImage}">
+						 <img onclick="openProfile(this)" class="matching-complete-member-image" src="${root}/static/img/member/profile/profile_default.jpg" alt="">
+					</c:if>
                 	<span>${mVo.nick}</span>
             	</div>
             </c:forEach>

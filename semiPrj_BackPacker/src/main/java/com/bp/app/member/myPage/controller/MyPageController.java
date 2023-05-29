@@ -38,7 +38,8 @@ public class MyPageController extends HttpServlet {
 			//매칭 완료된 회원 목록 가져오기
 			MyPageMatchingMemberService mpms = new MyPageMatchingMemberService();
 			List<MemberVo> matchingList = mpms.selectMatchingMemberList(memberNo);
-			
+			MemberVo vo = matchingList.get(0);
+			System.out.println(vo.getProfileImage());
 			
 			
 			System.out.println(gbList);

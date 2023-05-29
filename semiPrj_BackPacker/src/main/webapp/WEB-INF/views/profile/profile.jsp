@@ -40,7 +40,7 @@
        		font-size : 22px;
            grid-row: 1/3;
            text-align: left;
-           color:  rgba(0, 174, 255, 0.438);
+           color:  #94d2e6;
        }
        
      
@@ -60,7 +60,7 @@
        }
    
        #profileTopRightUp button{
-           background-color: rgba(255, 0, 0, 0.397);
+          background-color : #F16F6F;
            color: white;
            width: 135px;
            height: 30px;
@@ -68,9 +68,10 @@
            border: 0px;
            border-radius: 10px;
        }
+       
        #profileTopRightDown button{
            border: 0px;
-           background-color: rgba(0, 174, 255, 0.438);
+           background-color: #94d2e6;
            color: white;
            margin: auto;
            width: 65px;
@@ -106,12 +107,12 @@
        }
        #profileMidRightUpDistance{
            font-size: 25px;
-           color:  rgba(0, 174, 255, 0.438);
+           color:  #94d2e6;
        }
        #profileMidRightUpKm{
            font-size: 18px;
            letter-spacing: 1px;
-           color:  rgba(0, 174, 255, 0.438);
+           color:  #94d2e6;
        }
        #profileMidRightDown{
           word-wrap: break-word;
@@ -136,14 +137,14 @@
            border: 0px;
            font-size: 15px;
            border-radius: 10px;
-           background-color: rgba(0, 174, 255, 0.438);
+           background-color: #94d2e6;
            color: white;
        }
        #profileBottomTitle{
            margin-left: 60px;
            font-size: 24px;
            letter-spacing: 1px;
-           color:  rgba(0, 174, 255, 0.438);
+            color:  #94d2e6;
        }
        .comentContent{
        		display: flex;
@@ -216,7 +217,7 @@
             <div id="profileMidRightUp">
                 <div id="profileMidRightUpDistance">
                     <b>
-                        <img width="30px" height="30px" src="${root}/static/img/profile/airplane.jpg" alt=""> 이동한거리
+                       ✈ 이동한 거리
                     </b>
                 </div>
                 <div id="profileMidRightUpKm">

@@ -208,7 +208,7 @@ footer, header, hgroup, menu, nav, section {
 			<div id="review">여행후기</div>
 			   
 	        <div id="hit">
-				<a href="${root}/notice/review-top-hit?page=1">인기순으로 보기</a>  
+				<a href="${root}/notice/travelReview?page=1">최신순으로 보기</a>  
 	        </div>
         </div>
 
@@ -231,13 +231,13 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
             	
             	<c:if test="${pv.currentPage > 1}">
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
 				</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
             		<c:if test="${pv.currentPage != i }"> 	<!-- != 현재 페이지랑 일치하지 않는경우 -->
-		            	<a href="${root}/notice/travelReview?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
+		            	<a href="${root}/notice/review-top-hit?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
             		</c:if>
             		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
@@ -246,8 +246,8 @@ footer, header, hgroup, menu, nav, section {
             	</c:forEach>
             	
             	<c:if test="${pv.currentPage < pv.maxPage}">
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-				  <a style="color:#99ccff" href="${root}/notice/travelReview?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
 				</c:if>
             </div>
    
@@ -269,7 +269,9 @@ footer, header, hgroup, menu, nav, section {
 			x.selected = true;
 		}
 		
-		
+		function viewHit() {
+			location.href = '';	
+		}
 
 
 	</script>
@@ -280,4 +282,4 @@ footer, header, hgroup, menu, nav, section {
 	
 
 </body>
-</html>
+</html>ml>

@@ -19,7 +19,7 @@
 </head>
 <style>
 	.chatWrap{
-	    background-color: rgb(214, 248, 246);
+	    background-color: #94d2e6;
 	    margin: auto;
 	    width: 350px;
 	    height : 500px;
@@ -102,6 +102,14 @@
 		border : 0px;
 		height :40px;
 		background-color:white;
+	}
+	
+	#wc {
+		border-radius: 10px;
+		background-color: white;
+		color: #94d2e6;
+		border: 3px solid lightgray;
+		font-weight: bold;
 	}
 </style>
 <body>

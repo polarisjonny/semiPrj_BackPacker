@@ -89,7 +89,7 @@
         #sendReivewBtn{
             margin-left: 150px;
             text-align: center;
-            background-color:  rgba(0, 174, 255, 0.438);
+            background-color:  #94d2e6;
             color: white;
             border: 0px;
             border-radius: 5px;

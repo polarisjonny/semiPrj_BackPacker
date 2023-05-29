@@ -24,7 +24,7 @@
     #topnothing{
         height: 80px;
         padding-top: 30px;
-        background-color: rgb(214, 248, 246);
+        background-color: #94d2e6;
         
     }
     .chatlist{
@@ -65,7 +65,7 @@
       
    }
     #searchValue{
-       background-color: rgb(214, 248, 246);
+       background-color: white;
        border : 0.2px solid rgb(214, 248, 246);
        padding-left: 5px;
        border-radius: 10px;
@@ -77,7 +77,8 @@
    	height : 25px;
    	border : 0px;
    	border-radius : 30px;
-   	 background-color: rgb(214, 248, 246);
+   	 background-color: #94d2e6;
+   	 color: white;
    }
    
 
