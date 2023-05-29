@@ -24,6 +24,7 @@ public class FindFpackerListController extends HttpServlet {
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
 			
+			System.out.println("searchType"+searchType);
 			//데이터꺼내기
 			//클라로부터 게시판카테고리를 받아와야함.
 
