@@ -30,6 +30,9 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			String guideBoardNo = req.getParameter("accomNo");
 			String comment =  req.getParameter("content");
 			
+			
+			
+			
 			//데뭉
 			GuideReplyVo rvo = new GuideReplyVo();
 			rvo.setContent(comment);
@@ -44,9 +47,11 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			//매칭 스테이터스불러오Y이면...실패하기로 하기...
 			
 			
-			//화면
+			//코멘트가 널이거나 빈문자열이면 out으로 오류메세지 내보내기
 			PrintWriter out = resp.getWriter();
-			if(result==1&&!status.equals("Y")) {
+			if(comment==null||comment.equals("")) {
+				out.write("empty");
+			}else if(result==1&&!status.equals("Y")) {
 				out.write("ok");
 			}else if(status.equals("Y")) {
 				out.write("no");

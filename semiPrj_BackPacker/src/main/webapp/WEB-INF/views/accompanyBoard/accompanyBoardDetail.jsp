@@ -498,6 +498,8 @@
 						loadComment();
 					}else if (x=='no'){
 						alert("매칭마감됨. 댓글작성불가");
+					}else if (x=='empty'){
+						alert("내용을 입력해주세요.");
 					}else {
 						alert('댓글작성실패...');
 					}
