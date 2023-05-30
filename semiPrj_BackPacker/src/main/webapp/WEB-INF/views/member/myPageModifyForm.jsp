@@ -213,6 +213,11 @@
     justify-content: center;
     height: 100%;
     	}	
+    	
+    	
+    	#profile-area {
+    		cursor: pointer;
+    	}
     </style>
 </head>
 <body>

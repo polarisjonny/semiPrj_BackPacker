@@ -118,6 +118,7 @@
             width: 50%;
             height: 80%;
             margin: auto;
+            cursor: pointer;
         }
 
         .article-text-style {
@@ -145,6 +146,7 @@
             width: 50%;
             height: 50%;
             margin: auto;
+            cursor: pointer;
             
         }
 
@@ -259,8 +261,38 @@
          <c:if test="${not empty gbList}">
 			<div id="my-article-list-area">
             <c:forEach items="${gbList}" var="vo" begin="0" end="3">
-            	<div id="first-article-area" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
-                <img class="article-image" src="${root}/static/img/accompany/${vo.mainImg}" alt="여행지 샘플 사진" >
+            	<div id="first-article-area">
+                
+                <!-- 프패커 합니다 이미지 -->
+            		<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '1'}">
+                		<img  class="article-image" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/doFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 합니다 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '1'}">
+                		<img class="article-image" src="${root}/static/img/Fpacker/fpacker_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/doFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 구해요 이미지 -->
+                	<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '2'}">
+                		<img class="article-image" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/findFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 구해요 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '2'}">
+                		<img class="article-image" src="${root}/static/img/Fpacker/fpacker_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/findFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                
+	       
+	                <!-- 동행 게시판 이미지 -->
+                	<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '3'}">
+                		<img class="article-image" src="${root}/static/img/accompany/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 동행 게시판 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '3'}">
+                		<img class="article-image" src="${root}/static/img/accompany/accom_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
                 <div id="article-title">${vo.title}........</div>
                 <div class="article-text-style" id="article-page">${vo.categoryName}</div>
                 <div class="article-text-style" id="article-enroll-date">작성일 ${vo.enrollDate}</div>

@@ -26,6 +26,7 @@
             display: grid;
             grid-template-rows: 1fr 1fr;
             grid-template-columns: 1fr 1fr 1fr 1fr;
+            cursor: pointer;
         }
 
 
@@ -89,14 +90,26 @@
     <div id="board-list-area">
     	<c:forEach items="${tList}" var="vo">
     		<div class="write-style" id="first-write-area" onclick="location.href='${root}/notice/travelReviewDetail?infoNo=${vo.infoNo}'">
-            	<div><img class="board-write-img-style" src="${root}/static/img/travelReview/${vo.mainImg}" alt=""></div>
+            	<div>
+            		<!-- 여행후기 이미지 -->
+            		<c:if test="${not empty vo.mainImg && vo.infoCategoryNo == '1'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/travelReview/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/notice/travelReviewDetail?infoNo=${vo.infoNo}'">
+                	</c:if>
+                	
+                	
+                
+                	<!-- 여행후기 기본 이미지 -->
+	                <c:if test="${empty vo.mainImg && vo.infoCategoryNo == '1'}">
+	                	<img  class="board-write-img-style" src="${root}/static/img/travelReview/travelReviewMain.jpg" onclick="location.href='${root}/notice/travelReviewDetail?infoNo=${vo.infoNo}'" alt="여행지 샘플 사진">
+	                </c:if>
+            	</div>
             	<div>${vo.title}.......</div>
-             	<div class="my-board-list-font-style">${vo.categoryName}</div>
+             	<div class="my-board-list-font-style">${vo.infoCategoryName}</div>
              	<div class="my-board-list-font-style">작성일 ${vo.enrollDate}</div>
         	</div>
     	</c:forEach>
     </div>
-
+	
     
     <div id="page-list-area">
     <c:if test="${pv.currentPage > 1}">

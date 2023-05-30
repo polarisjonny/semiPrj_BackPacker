@@ -75,6 +75,10 @@
         #page-list-area {
         	margin-top: 3%;
         }
+        
+        .write-style {
+        	cursor: pointer;
+    	}
     </style>
 
 </head>
@@ -88,8 +92,40 @@
 	<br>
     <div id="board-list-area">
     	<c:forEach items="${gvList}" var="vo">
-    		<div class="write-style" id="first-write-area" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
-            	<div><img class="board-write-img-style" src="${root}/static/img/accompany/${vo.mainImg}" alt=""></div>
+    		<div class="write-style" id="first-write-area" >
+            	<div>
+            		<!-- 프패커 합니다 이미지 -->
+            		<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '1'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/doFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 합니다 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '1'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/Fpacker/fpacker_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/doFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 구해요 이미지 -->
+                	<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '2'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/findFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 프패커 구해요 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '2'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/Fpacker/fpacker_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/findFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                
+	       
+	                <!-- 동행 게시판 이미지 -->
+                	<c:if test="${not empty vo.mainImg && vo.guideBoardCategoryNo == '3'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/accompany/${vo.mainImg}" alt="여행지 샘플 사진" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+                	
+                	<!-- 동행 게시판 기본 이미지 -->
+                	<c:if test="${empty vo.mainImg && vo.guideBoardCategoryNo == '3'}">
+                		<img  class="board-write-img-style" src="${root}/static/img/accompany/accom_basic.jpg" alt="여행지 샘플 사진" onclick="location.href='${root}/accompany/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}">
+                	</c:if>
+	                 
+            	</div>
             	<div>${vo.title}.......</div>
              	<div class="my-board-list-font-style">${vo.categoryName}</div>
              	<div class="my-board-list-font-style">작성일 ${vo.enrollDate}</div>
@@ -97,7 +133,6 @@
     	</c:forEach>
     </div>
 
-    
     <div id="page-list-area">
     <c:if test="${pv.currentPage > 1}">
 	            <a id="previous-deco" class="page-list-style" href="/semi/member/myPage/myBoardList?page=1"><<</a>

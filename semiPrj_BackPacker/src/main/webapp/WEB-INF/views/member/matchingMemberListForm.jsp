@@ -28,6 +28,7 @@
             display: grid;
             grid-template-rows: 1fr 1fr;
             grid-template-columns: 1fr 1fr 1fr 1fr;
+            
         }
 
 
@@ -60,6 +61,10 @@
 
         #after-deco {
             color: #94d2e6;
+        }
+        
+        #first-member-area {
+        	cursor: pointer;
         }
     </style>
 </head>
