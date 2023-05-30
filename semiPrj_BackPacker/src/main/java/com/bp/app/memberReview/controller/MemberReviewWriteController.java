@@ -1,6 +1,7 @@
 package com.bp.app.memberReview.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -97,6 +98,8 @@ public class MemberReviewWriteController extends HttpServlet{
          e.printStackTrace();
       
          req.setAttribute("errorMsg", "후기는 1번 매칭마다 1번만 가능합니다");
+         
+		
          req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
       
       }

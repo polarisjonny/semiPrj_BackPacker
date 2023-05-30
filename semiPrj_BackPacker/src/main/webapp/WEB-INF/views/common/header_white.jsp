@@ -134,7 +134,7 @@ function goChatList() {
 	 const left = (window.innerWidth / 2) - (width / 2);
 	 const top = 100;
  
- window.open('${root}/chat/room/list/open', '','width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+ window.open('${root}/chat/room/list/open?page=1', '','width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 
 
 };

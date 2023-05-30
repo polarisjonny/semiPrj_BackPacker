@@ -80,16 +80,16 @@
             <table id="reviewTable">
             <c:forEach items="${ selectMemberReviewlistDetail }" var="reviewListDetail" >
                 <tr>
-                    <td hidden>
+                    <td class="giverNo"hidden>
                         ${reviewListDetail.giverNo}
                     </td>
                     <td class = "imgInput " rowspan="2">
                     	<c:if test="${not empty reviewListDetail.giverProfile}">
-                              <img  width="40px" height="40px"  class="btnimg profile-border"src="${root}/static/img/member/profile/${reviewListDetail.giverProfile}" alt="" onclick="imgClick(event)">
+                              <img  width="40px" height="40px"  class="btnimg profile-border"src="${root}/static/img/member/profile/${reviewListDetail.giverProfile}" alt="" onclick="imgClick( ${reviewListDetail.giverNo})">
 		                               
        					</c:if>
        					<c:if test="${empty reviewListDetail.giverProfile}">
-       						 <img  width="40px" height="40px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick(event)">
+       						 <img  width="40px" height="40px"  class="btnimg profile-border" src="${root}/static/img/member/profile/profile_default.jpg" alt="" onclick="imgClick( ${reviewListDetail.giverNo})">
        					</c:if>
                     </td>
                     <td class="comentContent" >${reviewListDetail.content}</td>
@@ -123,10 +123,10 @@
 </body>
 </html>
 <script type="text/javascript">
-function imgClick(e) {
-     const no = e.target.parentNode.parentNode.children[0].innerText; //게시글 작성자 번호
-     const width = 800;
-     const height = 1000;
+function imgClick(no) {
+     //게시글 작성자 번호
+     const width = 650;
+     const height = 800;
      const left = (screen.width / 2) - (width / 2);
      const top = 0;
      window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);

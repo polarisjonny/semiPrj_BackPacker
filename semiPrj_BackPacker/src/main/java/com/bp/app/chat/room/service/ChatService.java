@@ -61,7 +61,7 @@ public class ChatService {
 	public int selectCnt1(String searchType, String searchValue, String no) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.selectCnt2(conn, searchType, searchValue,no);
+		int cnt = dao.selectCnt1(conn, searchType, searchValue,no);
 		
 		//close
 		
@@ -72,7 +72,7 @@ public class ChatService {
 	public int selectCnt2(String searchType, String searchValue, String no) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int cnt = dao.selectCnt1(conn, searchType, searchValue,no);
+		int cnt = dao.selectCnt2(conn, searchType, searchValue,no);
 		
 		//close
 		
@@ -87,7 +87,7 @@ public class ChatService {
 	      
 	      //close
 	      JDBCTemplate.close(conn);
-	      
+	      System.out.println("서비스"+roomList);
 	      return roomList;
 	}
 	public List<ChattingRoomVo> openRoomList(PageVo pv, String searchType, String searchValue, ChattingRoomVo crv) throws Exception {
