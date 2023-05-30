@@ -37,15 +37,26 @@ public class DoFpackerDetailController extends HttpServlet {
 			SchedulerService ss = new SchedulerService();
 			
 			MemberVo writerMember = gbs.selectMemberByNo(bvo);
-			//조회수 버그 고치기 위한.. 
+			//조회수 버그 고치기 위한..
 			GuideBoardVo gbvo =null;
 			if(loginMember==null||loginMember.equals("")) {
 				gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				if(gbvo.getMatchingState().equals("N")) {
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				}
 			}else {
-				String lmNo = loginMember.getMemberNo();	
+				String lmNo = loginMember.getMemberNo();
 				gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				if(gbvo.getMatchingState().equals("N")){
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				}	
 			}
 			List<TimetableVo>timetableVo = ss.totalTimetable(req);
+			System.out.println("writerMember"+writerMember);
+			System.out.println("gbvo"+gbvo);
+
 			//화면
 			if(writerMember!=null&&gbvo!=null) {
 				if(timetableVo==null||timetableVo.equals("")) {
