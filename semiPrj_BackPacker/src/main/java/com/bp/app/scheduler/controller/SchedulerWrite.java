@@ -55,6 +55,7 @@ public class SchedulerWrite extends HttpServlet{
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
+			GuideBoardVo bgVo = new GuideBoardVo();
 			//데이터 꺼내기
 			String writerNo = loginMember.getMemberNo();
 			String category = req.getParameter("category");
@@ -66,20 +67,34 @@ public class SchedulerWrite extends HttpServlet{
 			//사진저장
 			String path=null;
 			//경로 변경
-			if("3".equals(category)) {
-				path = req.getServletContext().getRealPath("/static/img/accompany/");
-			}else {
-				path = req.getServletContext().getRealPath("/static/img/Fpacker/");
-			}
 			
 			
 			Part f = req.getPart("f");
+			if(f.getSubmittedFileName()!=null&&f.getSubmittedFileName()!="") {
+				
+				if("3".equals(category)) {
+					path = req.getServletContext().getRealPath("/static/img/accompany/");
+					AttachmentVo attachmentVo = FileUploader.saveFile(path,f);	
+					bgVo.setMainImg(attachmentVo.getChangeName());
+				}else {
+					path = req.getServletContext().getRealPath("/static/img/Fpacker/");
+					AttachmentVo attachmentVo = FileUploader.saveFile(path,f);	
+					bgVo.setMainImg(attachmentVo.getChangeName());
+				}
+				
+			}else {
+				if("3".equals(category)) {
+					String changeName = "accom_basic.jpg";
+					bgVo.setMainImg(changeName);
+				}else {
+					String changeName = "fpacker_basic.jpg";
+					bgVo.setMainImg(changeName);
+				}
+			}
 			
-			AttachmentVo attVo = FileUploader.saveFile(path, f);
 			
 			
 			//데이터 뭉치기
-			GuideBoardVo bgVo = new GuideBoardVo();
 			//로그인멤버 셋팅
 			bgVo.setWriterNo(writerNo);
 			bgVo.setSchedulerNo(schedulerNo);
@@ -87,7 +102,6 @@ public class SchedulerWrite extends HttpServlet{
 			bgVo.setTitle(title);
 			bgVo.setContent(content);
 			bgVo.setTravelExpense(expense);
-            bgVo.setMainImg(attVo.getChangeName());
             
             
 			

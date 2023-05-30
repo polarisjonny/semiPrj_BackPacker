@@ -841,7 +841,8 @@
 									str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
 									str+=	'<div id="area">';
 										str+=		'<div class="place">장소명 : '+x[i].bespokePlace+' </div>';
-										str+=		'<div class="time"><div>소요시간 : '+x[i].placeTime+' 분</div>';
+										str+=		'<div class="money">소요경비 : '+x[i].placeExpense+' 원</div>';
+										str+=		'<div class="time">소요시간 : '+x[i].placeTime+' 분</div>';
 										str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 										str+=	'</div>';
 										str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
@@ -853,9 +854,10 @@
 										str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
 										str+=	'<div id="area">';
 											str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
-											str+=		'<div class="time"><div>소요시간 : '+x[i].placeTime+'분</div>';
+											str+=		'<div class="money">소요경비 : '+x[i].placeExpense+'원</div>';
+											str+=		'<div class="time">소요시간 : '+x[i].placeTime+'분</div>';
 											str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
-											str+=	'</div>';
+										str+=	'</div>';
 											str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
 											str+= '</div>';
 									str+='</div>';

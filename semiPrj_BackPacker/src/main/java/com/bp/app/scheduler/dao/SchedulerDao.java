@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +143,7 @@ public class SchedulerDao {
 	public List<TimetableVo> getTimetable(HttpServletRequest req, Connection conn) throws Exception {
 
 		//sql
-		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
+		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,M.PLACE_EXPENSE ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME ,P.PLACE_EXPENSE FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, req.getParameter("schedulerNo"));
 		pstmt.setString(2,req.getParameter("timetableDate"));
@@ -160,6 +161,7 @@ public class SchedulerDao {
 			String placeName = rs.getString("PLACE_NAME");
 			String palceImage = rs.getString("PLACE_IMAGE");
 			String palceTime = rs.getString("PLACE_TIME");
+			String placeExpense = rs.getString("PLACE_EXPENSE");
 			String startDate = rs.getString("START_DATE");
 			String endDate = rs.getString("END_DATE");
 			
@@ -174,6 +176,7 @@ public class SchedulerDao {
 			tVo.setPlaceName(placeName);
 			tVo.setPlaceImage(palceImage);
 			tVo.setPlaceTime(palceTime);
+			tVo.setPlaceExpense(placeExpense);
 			tVo.setStartDate(startDate);
 			tVo.setEndDate(endDate);
 			
@@ -247,7 +250,7 @@ public class SchedulerDao {
 
 	public List<TimetableVo> totalTimetable(HttpServletRequest req, Connection conn) throws Exception {
 		
-		String sql = "SELECT * FROM ( SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLAY_TIME,M.TOTAL_DATE ,M.MEMBER_NO ,M.START_DATE ,M.END_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME,T.PLAY_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE ,S.MEMBER_NO ,TO_CHAR(S.START_DATE, 'yyyy-mm-dd') AS START_DATE ,TO_CHAR(S.END_DATE, 'yyyy-mm-dd') AS END_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?) K JOIN PLACE P ON( K.PLACE_NO = P.PLACE_NO)";
+		String sql = "SELECT * FROM ( SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLAY_TIME,M.TOTAL_DATE ,M.MEMBER_NO ,M.START_DATE ,M.END_DATE FROM ( SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME,T.PLAY_TIME ,TO_CHAR(CAST(EXTRACT(DAY FROM (S.END_DATE - S.START_DATE))+1 AS VARCHAR2(10))) AS TOTAL_DATE ,S.MEMBER_NO ,TO_CHAR(S.START_DATE, 'yyyy-mm-dd') AS START_DATE ,TO_CHAR(S.END_DATE, 'yyyy-mm-dd') AS END_DATE FROM TIMETABLE T JOIN SCHEDULER S ON T.SCHEDULER_NO = S.SCHEDULER_NO )M WHERE M.SCHEDULER_NO=?) K JOIN PLACE P ON( K.PLACE_NO = P.PLACE_NO) ORDER BY TIMETABLE_START_TIME ASC";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		//로그인멤버도 체크할거면 AND M.MEMBER_NO=?
 		pstmt.setString(1, req.getParameter("schedulerNo"));
@@ -264,9 +267,12 @@ public class SchedulerDao {
 			String totalDate = rs.getString("TOTAL_DATE");
 			String placeName = rs.getString("PLACE_NAME");
 			String placeImage = rs.getString("PLACE_IMAGE");
+			String placeExpense = rs.getString("PLACE_EXPENSE");
 			String startDate = rs.getString("START_DATE");
 			String endDate = rs.getString("END_DATE");
 			String playTime = rs.getString("PLAY_TIME");
+			
+
 			
 			TimetableVo vo = new TimetableVo();
 			vo.setTimetableNo(timetableNo);
@@ -279,6 +285,7 @@ public class SchedulerDao {
 			vo.setTotalDate(totalDate);
 			vo.setPlaceName(placeName);
 			vo.setPlaceImage(placeImage);
+			vo.setPlaceExpense(placeExpense);
 			vo.setStartDate(startDate);
 			vo.setEndDate(endDate);
 			vo.setPlayTime(playTime);
