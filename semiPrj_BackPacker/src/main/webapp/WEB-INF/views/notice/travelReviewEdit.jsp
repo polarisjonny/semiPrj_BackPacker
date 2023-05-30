@@ -10,6 +10,9 @@
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/794ac64f16.js" crossorigin="anonymous"></script>
 
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <!-- 으음.썸머노트 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -157,15 +160,23 @@
 					success : function (x) {
 						if(x=='ok'){
 							window.opener.parent.location.reload();
-							alert('수정완료되었습니다.')
+							Swal.fire({
+								title : '수정을 완료했습니다.',
+								icon: 'success',
+		                        text: '',
+							})
 							setTimeout(() => {
 								window.close();
-							}, 1000);
+							}, 1300);
 						}else{
-							alert('수정실패하였습니다.')
-						setTimeout(() => {
-							window.close();
-						}, 1000);
+							Swal.fire({
+								title : '수정을 실패하였습니다.',
+								icon: 'warning',
+		                        text: '',
+							})
+							setTimeout(() => {
+								window.close();
+							}, 1300);
 						}
 					},
 					error : function(e) {
