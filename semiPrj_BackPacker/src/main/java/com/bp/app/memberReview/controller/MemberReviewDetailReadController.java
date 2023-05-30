@@ -35,7 +35,6 @@ public class MemberReviewDetailReadController extends HttpServlet{
          PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
          MemberVo selectMemberDetail = mrs.selectMemberToProfile(selectMemberNo);
          
-
          //서비스
          List<MemberReviewVo> selectMemberReviewlistDetail = mrs.selectMemberReviewDetail(selectMemberNo , pv);
          //화면

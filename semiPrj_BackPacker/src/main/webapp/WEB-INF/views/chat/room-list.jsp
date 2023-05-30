@@ -136,7 +136,7 @@
     	<div >
           
                
-			<c:forEach items="${ roomList }" var="room" end="3" >
+			<c:forEach items="${ roomList }" var="room"  >
 				<div  class= "list-wrap">
                    	<div hidden>
                  	   ${room.chattingRoomNo}

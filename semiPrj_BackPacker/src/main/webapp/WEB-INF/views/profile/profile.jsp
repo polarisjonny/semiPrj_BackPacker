@@ -11,7 +11,7 @@
 
 <!-- 폰트어썸 cdn -->
 <script src="https://kit.fontawesome.com/794ac64f16.js" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
@@ -236,7 +236,9 @@
 
         <div class="profileBottom">
             <div id="profileBottomTitle">
-            <div hidden>${selectMember.memberNo}</div>
+            <div class="memberNoDiv" hidden>${selectMember.memberNo}</div>
+            <div class="loginMemberDiv" hidden>${loginMember.memberNo}</div>
+            <div class="crvDiv" hidden>${crv}</div>
                 <b>${selectMember.nick}님이 받은 평가</b>
                 <button id="more">더보기</button>
             </div>
@@ -296,14 +298,33 @@
       e.preventDefault();
         window.location.href ='${root}/click/profile/review/detail?selectMemberNo='+no1;
    });
-
-   function writeReview() {
-      
-      
-      window.location.href = '${root}/click/profile/review?selectMemberNo=${selectMember.memberNo}&loginMemberNo=${loginMember.memberNo}';
-      
-   }
    
+   
+   function writeReview() {
+	   let memberNoDiv = null;
+	   memberNoDiv = document.querySelector(".memberNoDiv");
+	   let memberNo = null;
+       memberNo = memberNoDiv.innerText;
+       const loginMemberDiv = document.querySelector(".loginMemberDiv")
+       const loginMemberNo = loginMemberDiv.innerText;
+       
+       if (memberNo == loginMemberNo) {
+           Swal.fire({
+               icon: 'error',
+               title: '본인',
+               text: '작성자 본인은 작성이 불가능합니다.',
+           });
+       }else {
+    	   
+                	   window.location.href = '${root}/click/profile/review?selectMemberNo=${selectMember.memberNo}&loginMemberNo=${loginMember.memberNo}';
+               
+	     
+       
+       }
+      
+   };
+
+
    function goProfile(e){
 	   
 	

@@ -37,14 +37,14 @@ public class OpenRoomListController extends HttpServlet {
 //			String chattingUserNo = loginMember.getMemberNo();
 //			String chattingUser2No = loginMember.getMemberNo();
 			String no =loginMember.getMemberNo();
-			int listCount1 = cs.selectCnt1(searchType, searchValue,no);
-			int listCount2 = cs.selectCnt2(searchType, searchValue,no);
-			int listCount = listCount1 + listCount2;
+			int listCount = cs.selectCnt1(searchType, searchValue,no);
+//			int listCount2 = cs.selectCnt2(searchType, searchValue,no);
+//			int listCount = listCount1 + listCount2;
             String page = req.getParameter("page");
             if(page == null) page = "1";
             int currentPage = Integer.parseInt(page);
             int pageLimit = 5;
-            int boardLimit= 5;
+            int boardLimit= 4;
             PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
             
 			
