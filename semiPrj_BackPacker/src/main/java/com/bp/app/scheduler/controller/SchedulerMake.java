@@ -1,7 +1,10 @@
 package com.bp.app.scheduler.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,22 +23,25 @@ public class SchedulerMake extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-//			String countryNo = req.getParameter("countryNo");
-//			String locationNo = req.getParameter("locationNo");
-//			
-//			PlaceVo vo = new PlaceVo();
-//			vo.setCountryNo(countryNo);
-//			vo.setLocationNo(locationNo);
+			
+			double lat=0;
+			double lng=0;
+			
+			if("1".equals(req.getParameter("countryNo"))){
+				lat = 33.4996213;
+				lng = 126.5311884;
+			}else if("2".equals(req.getParameter("countryNo"))) {
+				lat=34.6936;
+				lng=135.502;
+			}
+			
 			
 			
 			SchedulerService ss = new SchedulerService();
 			List<PlaceVo>placeList = ss.selectPlace(req);
 			
-//			HttpSession session = req.getSession();
-//			session.setAttribute("placeList",placeList);
-			
-			
-//			req.getSession().setAttribute("placeList", placeList);
+			req.setAttribute("lat", lat);
+			req.setAttribute("lng", lng);
 			req.setAttribute("placeList", placeList);
 			req.getRequestDispatcher("/WEB-INF/views/scheduler/makeScheduler.jsp").forward(req, resp);
 			

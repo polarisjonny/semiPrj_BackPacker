@@ -230,10 +230,10 @@
 				
 				<div id="check">
 	
-					<select name="category" id="select">
+					<select name="category" id="select" onchange="pickDo()" >
 						<option value="3">일정표를 참조하여 동행구하기</option>
 						<option value="2">일정표를 참조하여 프패커구하기</option>
-						<option value="1">일정표를 참조하여 백패커구하기</option>
+						<option value="1">일정표를 참조하여 프패커합니다</option>
 					</select>
 	
 				</div>
@@ -247,7 +247,7 @@
 
 				</div>
 	
-				<div>
+				<div >
 					<h3 style="padding:20px">
 						게시글 내용을 작성해주세요
 					</h3>
@@ -270,6 +270,10 @@
 
 (1000자 이내)"
 					></textarea>
+
+				<div style="padding:20px; display:none;" id="checkp" >
+					소요경비 : <input type="number" value="0" name="expense">원
+				</div>
 
 				</div>
 		
@@ -306,6 +310,20 @@
 			thumbnail.src = "";
 		}
 		});
+
+
+		function pickDo(){
+
+			var select = document.querySelector("select[name=category]").value;
+			var checkp = document.querySelector("#checkp");
+
+			if(select=="1"){
+				checkp.style.display="block";
+			}
+
+
+		}
+
 
 
 

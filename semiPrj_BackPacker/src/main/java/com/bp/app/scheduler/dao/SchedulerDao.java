@@ -71,14 +71,15 @@ public class SchedulerDao {
 	public int gbWrite(GuideBoardVo bgVo, Connection conn) throws Exception {
 
 		//sql
-		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,SCHEDULER_NO,TITLE,CONTENT,MAIN_IMG,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,?,?,?,?,SYSDATE)";
+		String sql="INSERT INTO GUIDE_BOARD (GUIDE_BOARD_NO,WRITER_NO,GUIDE_BOARD_CATEGORY_NO,SCHEDULER_NO,TITLE,CONTENT,TRAVEL_EXPENSE,MAIN_IMG,ENROLL_DATE)VALUES(SEQ_GUIDE_BOARD_NO.NEXTVAL,?,?,?,?,?,?,?,SYSDATE)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, bgVo.getWriterNo());
 		pstmt.setString(2, bgVo.getGuideBoardCategoryNo());
 		pstmt.setString(3, bgVo.getSchedulerNo());
 		pstmt.setString(4, bgVo.getTitle());
 		pstmt.setString(5, bgVo.getContent());
-		pstmt.setString(6, bgVo.getMainImg());
+		pstmt.setString(6, bgVo.getTravelExpense());
+		pstmt.setString(7, bgVo.getMainImg());
 		
 		int result = pstmt.executeUpdate();
 		//tx

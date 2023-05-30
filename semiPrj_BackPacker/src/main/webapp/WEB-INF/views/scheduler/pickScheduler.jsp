@@ -82,34 +82,13 @@
         transition: background-color 0.3s ease;
 
     }
+    .ja-area ,.ch-area,.si-area,.pi-area{display: none;}
  
     
 
 
 </style>
-<script defer>
-    function changeBackgroundColor(element){
-        element.style.backgroundColor = "rgb(68, 170, 203)";
-        element.style.color = "white";
-    }
-    function restoreBackgroundColor(element){
-        element.style.backgroundColor = "white";
-        element.style.color = "black";
-    }
-
-    function enlargeImage(element) {
-        element.style.transform = "scale(1.2)";
-    }
-
-    function resetImageSize(element) {
-        element.style.transform = "scale(1)";
-    }  
-
-    //a태그로 submit
-    function submitForm() {
-        document.getElementById('myForm').submit();
-    }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <body>
 
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -122,7 +101,7 @@
             <h5>여행지를 골라주세요</h5>
         </div>
 
-
+        
         <div id="country-pick">
             <div class="country" id="ko" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 한국
@@ -130,29 +109,220 @@
             <div class="country" id="ja" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 일본
             </div>
-            <div class="country" id="ch" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
+            <div class="country noReady" id="ch" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 중국
             </div>
-            <div class="country" id="si" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
+            <div class="country noReady" id="si" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 싱가폴
             </div>
-            <div class="country" id="pl" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
+            <div class="country noReady" id="pi" onmouseover="changeBackgroundColor(this)" onmouseout="restoreBackgroundColor(this)" >
                 필리핀
             </div>
         </div>
 
 
         <div id="place-location-area">
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            
+            <!--                    한국시작                           -->
+            <div id="place-location-ko" class="ko-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
                     <div>JEJU</div>
+                    <div class="place-location">
+                            <img src="${root}/static/img/location/jeju000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            
+            <div id="place-location-ko" class="ko-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>SEOUL</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/seoul000.jpg" alt="">
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div id="place-location-ko" class="ko-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>BUSAN</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/busan000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ko-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+               <!-- <a href=""> -->
+                   <div>GANGWON</div>
+                   <div class="place-location">
+                       <img src="${root}/static/img/location/ganwon000.jpg" alt="">
+                   </div>
+               </a>
+            </div>
+
+            <div id="place-location-ko" class="ko-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>YEOSU</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/yeosu000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ko-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>INCHEON</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/incheon000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            <!--                    한국 끝                           -->
+
+
+
+
+
+            
+            <!--                    일본 시작                           -->
+            <div id="place-location-ko" class="ja-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a  href="/semi/schedulermake?countryNo=2&locationNo=201">
+                    <div>OSAKA</div>
+                    <div class="place-location">
+                            <img src="${root}/static/img/location/osaka.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            
+            <div id="place-location-ko" class="ja-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>TOKYO</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/dokyo.jpg" alt="">
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div id="place-location-ko" class="ja-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>HIROSHIMA</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/히로시마.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ja-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+               <!-- <a href=""> -->
+                   <div>SAPPORO</div>
+                   <div class="place-location">
+                       <img src="${root}/static/img/location/삿포로.jpg" alt="">
+                   </div>
+               </a>
+            </div>
+
+            <div id="place-location-ko" class="ja-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>NAGOYA</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/나고야.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ja-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <!-- <a href=""> -->
+                    <div>YOKOHAMA</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/location/요코하마.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            <!--                    일본 끝                           -->
+
+
+
+
+
+
+
+
+            <!--                    중국 시작                           -->
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
+                    <div>BEIJING</div>
                     <div class="place-location">
                             <img src="${root}/static/img/jeju000.jpg" alt="">
                     </div>
                 </a>
             </div>
             
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>SHANGHAI</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/seoul000.jpg" alt="">
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>GUANZHOU</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/busan000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+               <a href="">
+                   <div>CHONGQING</div>
+                   <div class="place-location">
+                       <img src="${root}/static/img/ganwon000.jpg" alt="">
+                   </div>
+               </a>
+            </div>
+
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>HARBIN</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/yeosu000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="ch-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>TIANJIN</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/incheon000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            <!--                    중국 끝                           -->
+
+
+
+
+
+
+
+            <!--                    싱가폴 시작                           -->
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
+                    <div>2</div>
+                    <div class="place-location">
+                            <img src="${root}/static/img/jeju000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>SEOUL</div>
                     <div class="place-location">
@@ -162,7 +332,7 @@
                 
             </div>
             
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>BUSAN</div>
                     <div class="place-location">
@@ -171,7 +341,7 @@
                 </a>
             </div>
 
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                <a href="">
                    <div>GANGWON</div>
                    <div class="place-location">
@@ -180,7 +350,7 @@
                </a>
             </div>
 
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>YEOSU</div>
                     <div class="place-location">
@@ -189,7 +359,7 @@
                 </a>
             </div>
 
-            <div id="place-location-ko" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a href="">
                     <div>INCHEON</div>
                     <div class="place-location">
@@ -197,9 +367,75 @@
                     </div>
                 </a>
             </div>
-        
+            <!--                    싱가폴 끝                           -->
 
-		
+
+
+
+
+
+
+
+
+            <!--                    필리핀 시작                           -->
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a  href="/semi/schedulermake?countryNo=1&locationNo=101">
+                    <div>JEJU</div>
+                    <div class="place-location">
+                            <img src="${root}/static/img/jeju000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>1</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/seoul000.jpg" alt="">
+                    </div>
+                </a>
+                
+            </div>
+            
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>BUSAN</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/busan000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+               <a href="">
+                   <div>GANGWON</div>
+                   <div class="place-location">
+                       <img src="${root}/static/img/ganwon000.jpg" alt="">
+                   </div>
+               </a>
+            </div>
+
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>YEOSU</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/yeosu000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div id="place-location-ko" class="pi-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+                <a href="">
+                    <div>INCHEON</div>
+                    <div class="place-location">
+                        <img src="${root}/static/img/incheon000.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            <!--                    필리핀 끝                           -->
+
+
+        
         </div>
         </div>
         
@@ -211,7 +447,125 @@
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
+    <script defer>
+         function changeBackgroundColor(element){
+            element.style.backgroundColor = "rgb(68, 170, 203)";
+            element.style.color = "white";
+        }
+        function restoreBackgroundColor(element){
+            element.style.backgroundColor = "white";
+            element.style.color = "black";
+        }
+    
+        function enlargeImage(element) {
+            element.style.transform = "scale(1.2)";
+        }
+    
+        function resetImageSize(element) {
+            element.style.transform = "scale(1)";
+        }  
+    
+        //a태그로 submit
+        function submitForm() {
+            document.getElementById('myForm').submit();
+        }
 
+
+        var ko = document.querySelector("#ko");
+        var ja = document.querySelector("#ja");
+        var ch = document.querySelector("#ch");
+        var si = document.querySelector("#si");
+        var pi = document.querySelector("#pi");
+    
+        var koArea = document.querySelectorAll(".ko-area");
+        var jaArea = document.querySelectorAll(".ja-area");
+        var chArea = document.querySelectorAll(".ch-area");
+        var siArea = document.querySelectorAll(".si-area");
+        var piArea = document.querySelectorAll(".pi-area");
+    
+        ja.addEventListener("click",function(){
+            for (var i = 0; i < koArea.length; i++) {
+                koArea[i].style.display = "none";
+                chArea[i].style.display = "none";
+                piArea[i].style.display = "none";
+                siArea[i].style.display = "none";
+            }
+            for (var j = 0; j < jaArea.length; j++) {
+                jaArea[j].style.display = "block";
+            }
+        })
+        ko.addEventListener("click",function(){
+            for (var i = 0; i < koArea.length; i++) {
+                jaArea[i].style.display = "none";
+                chArea[i].style.display = "none";
+                piArea[i].style.display = "none";
+                siArea[i].style.display = "none";
+            }
+            for (var j = 0; j < jaArea.length; j++) {
+                koArea[j].style.display = "block";
+            }
+        })
+
+        
+        // ch.addEventListener("click",function(){
+        //     // for (var i = 0; i < koArea.length; i++) {
+        //     //     koArea[i].style.display = "none";
+        //     //     jaArea[i].style.display = "none";
+        //     //     piArea[i].style.display = "none";
+        //     //     siArea[i].style.display = "none";
+        //     // }
+        //     // for (var j = 0; j < jaArea.length; j++) {
+        //     //     chArea[j].style.display = "block";
+        //     // }
+        //     alert("아직 준비중입니다 조만간 업로드하겠습니다");
+        // })
+
+        // pi.addEventListener("click",function(){
+        //     // for (var i = 0; i < koArea.length; i++) {
+        //     //     koArea[i].style.display = "none";
+        //     //     chArea[i].style.display = "none";
+        //     //     jaArea[i].style.display = "none";
+        //     //     siArea[i].style.display = "none";
+        //     // }
+        //     // for (var j = 0; j < jaArea.length; j++) {
+        //     //     piArea[j].style.display = "block";
+        //     // }
+        //     alert("아직 준비중입니다 조만간 업로드하겠습니다");
+        // })
+
+    
+        // si.addEventListener("click",function(){
+        //     // for (var i = 0; i < koArea.length; i++) {
+        //     //     koArea[i].style.display = "none";
+        //     //     chArea[i].style.display = "none";
+        //     //     piArea[i].style.display = "none";
+        //     //     jaArea[i].style.display = "none";
+        //     // }
+        //     // for (var j = 0; j < jaArea.length; j++) {
+        //     //     siArea[j].style.display = "block";
+        //     // }
+        //     alert("아직 준비중입니다 조만간 업로드하겠습니다");
+        // })
+        
+        $().ready(function () {
+            $(".noReady").click(function () {
+                Swal.fire({
+                    icon: 'error',
+                    text: '아직 준비중입니다 조만간 업로드하겠습니다',
+                });
+            });
+        });
+    
+    
+
+    
+    
+    
+    
+    
+    
+       
+    </script>
 
 
 </body>

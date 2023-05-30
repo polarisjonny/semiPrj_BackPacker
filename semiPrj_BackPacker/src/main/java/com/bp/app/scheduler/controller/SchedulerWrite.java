@@ -56,22 +56,27 @@ public class SchedulerWrite extends HttpServlet{
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			//데이터 꺼내기
-			String path = req.getServletContext().getRealPath("/static/img/accompany/");
-			Part f = req.getPart("f");
-			
-			AttachmentVo attachmentVo = null;
-			
-			if(f != null && f.getSize() > 0) {
-				attachmentVo = FileUploader.saveFile(path, f);
-			}
-			
-			
-			
 			String writerNo = loginMember.getMemberNo();
 			String category = req.getParameter("category");
 			String schedulerNo = req.getParameter("schedulerNo");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+			String expense = req.getParameter("expense");
+			
+			//사진저장
+			String path=null;
+			//경로 변경
+			if("3".equals(category)) {
+				path = req.getServletContext().getRealPath("/static/img/accompany/");
+			}else {
+				path = req.getServletContext().getRealPath("/static/img/Fpacker/");
+			}
+			
+			
+			Part f = req.getPart("f");
+			
+			AttachmentVo attVo = FileUploader.saveFile(path, f);
+			
 			
 			//데이터 뭉치기
 			GuideBoardVo bgVo = new GuideBoardVo();
@@ -81,9 +86,10 @@ public class SchedulerWrite extends HttpServlet{
 			bgVo.setGuideBoardCategoryNo(category);
 			bgVo.setTitle(title);
 			bgVo.setContent(content);
-			if (attachmentVo != null) {
-                bgVo.setProfileImage(attachmentVo.getChangeName());
-            }
+			bgVo.setTravelExpense(expense);
+            bgVo.setMainImg(attVo.getChangeName());
+            
+            
 			
 			//서비스
 			SchedulerService ss = new SchedulerService();
@@ -97,11 +103,11 @@ public class SchedulerWrite extends HttpServlet{
 				}
 
 				if("2".equals(category)) {
-					resp.sendRedirect("/semi/accompany/list?page=1");
+					resp.sendRedirect("/semi/findFpacker/list?page=1");
 					
 				}
 				if("1".equals(category)) {
-					resp.sendRedirect("/semi/accompany/list?page=1");
+					resp.sendRedirect("/semi/doFpacker/list?page=1");
 
 					
 				}

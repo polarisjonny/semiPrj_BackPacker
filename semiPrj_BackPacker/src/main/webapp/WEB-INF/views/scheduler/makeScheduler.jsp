@@ -61,6 +61,7 @@
 	#scheduler-place-area {
 		display: flex;
 		align-items: center;
+		flex-direction: column;
 	}
 
 	#scheduler-place {
@@ -299,14 +300,20 @@
 	.carousel-control-prev>span{width: 80px;color: black;}
 
 	.cursor{cursor: pointer;}
+
+	#no-member{
+		position: relative;
+    	top: 250px;
+		text-align: center;
+	}
     
 	
     
 	</style>
 <body>
 	
-	
-	
+	<input type="hidden" id="mapLat" value="${lat}">
+	<input type="hidden" id="mapLng" value="${lng}">
 	
 	<main>
 	
@@ -316,20 +323,35 @@
 	
 	
 	    <div id="sidebarLeft" >
-			
-			<div id="tripDate">
-				기간선택 : &nbsp; <input type="text" name="daterange" />
-				<input type="hidden" name="startDate" >
-				<input type="hidden" name="endDate" >
-			</div>
 
-				<div id="test">
+			<c:if test="${not empty loginMember}">
+				<div id="tripDate">
+					기간선택 : &nbsp; <input type="text" name="daterange" />
+					<input type="hidden" name="startDate" >
+					<input type="hidden" name="endDate" >
 				</div>
-			
+	
+					<div id="test">
+					</div>
 				
-				<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
-					여행기간을 설정하시오   
+					
+					<div id="intro">            <%-- 여행기간 설정하면 사라지도록 --%>
+						여행기간을 설정하시오   
+					</div>
+			</c:if>
+
+			<c:if test="${ empty loginMember}">
+
+				<div id="no-member">
+					회원가입 혹은 로그인후
+					<br>
+					여행일정을 만들어보세요
+					<br><br>
+					<a href="${root}/member/login"> <로그인 , 회원가입하러가기> </a>
 				</div>
+
+			</c:if>
+			
 				
 		
 	
@@ -471,12 +493,6 @@
 			var button = document.querySelector('.btnn'); 
 
 			
-			
-			
-			
-			
-			
-			
 	        $(function() {
 				
 				$('input[name="daterange"]').daterangepicker({
@@ -570,7 +586,7 @@
 						let sstr="";
 						for(let i = 0; i<s.length; i++){
 
-							sstr+=	'<div id="place" data-lng="'+s[i].placeLng+'" data-lat="'+s[i].placeLat+'">'
+							sstr+=	'<div id="place" class="latlng" data-lng="'+s[i].placeLng+'" data-lat="'+s[i].placeLat+'">'
 								sstr+= '<img id="place-img" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
 								sstr+=	'<div id="p-place">'+s[i].placeName+'</div>'
 								sstr+=	'<div id="p-area">'
@@ -623,11 +639,11 @@
 						});
 						////모달
 
+
 					//+버튼
 						$('.bi-plus-circle').on('click', function () {
 							datadayValue = $(".carousel-item:visible").find('#dataday');
 							
-							// 날짜에 일수를 더함
 							
 							setTimeTable($(this).data('placeno'));
 							
@@ -815,12 +831,17 @@
 						let str="";
 						for(let i =0 ; i<x.length ; i++){
 							if(x[i].placeNo==1){
+
+								if(x[i].bespokePlace==null){
+									x[i].bespokePlace=='사용자 지정 여행지'
+								}
+
 								str+='<div id="scheduler-place-area">';
 								str+='<div id="scheduler-place">';
 									str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
 									str+=	'<div id="area">';
 										str+=		'<div class="place">장소명 : '+x[i].bespokePlace+' </div>';
-										str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
+										str+=		'<div class="time"><div>소요시간 : '+x[i].placeTime+' 분</div>';
 										str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 										str+=	'</div>';
 										str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
@@ -832,7 +853,7 @@
 										str+='	<img id="sc-img" height="80px" width="80px" src="${root}/static/img/place/'+x[i].placeImage+'" alt="">';
 										str+=	'<div id="area">';
 											str+=		'<div class="place">장소명 : '+x[i].placeName+' </div>';
-											str+=		'<div class="time"><div>소요시간 :</div> <input type="text" value="'+x[i].placeTime+'">분</div>';
+											str+=		'<div class="time"><div>소요시간 : '+x[i].placeTime+'분</div>';
 											str+=	'<div class="class-time">시작시간 : <input type="time" value="'+x[i].timetableStartTime+'" data-timetableNo="'+x[i].timetableNo+'"></div>';
 											str+=	'</div>';
 											str+=	'<div ><i class="bi bi-trash cursor" data-placeno="'+x[i].placeNo+'" data-timetableDate="'+x[i].timetableDate+'" data-timetableNo="'+x[i].timetableNo+'" ></i></div>';
@@ -931,15 +952,19 @@
 			
 			
 			let map;
+
+			let lat = parseFloat(document.querySelector("#mapLat").value);
+			let lng = parseFloat(document.querySelector("#mapLng").value) ;
+
+			console.log(lat,lng);
+
 			const placeList = '${placeList}';
 			const dataList = placeList.split("],");
 			const markers = []; // 마커를 저장할 배열
 
-			console.log(placeList);
-
 			function initMap() {
 				map = new google.maps.Map(document.getElementById("map"), {
-					center: { lat: 33.4996213, lng: 126.5311884 },
+					center: { lat: lat, lng: lng },
 					zoom: 10.5,
 				});
 
@@ -1009,11 +1034,9 @@
 			var divElement = document.getElementsByClassName("latlng");
 			for (var i = 0; i < divElement.length; ++i) {
 				divElement[i].addEventListener("click", function() {
-					// 호버 이벤트 핸들러 내부 코드
 					var placeLat = parseFloat(this.dataset.lat);
 					var placeLng = parseFloat(this.dataset.lng);
 					
-					// 호버한 위치로 지도를 이동시킵니다.
 						if (!isNaN(placeLat) && !isNaN(placeLng)) {
 						var zoomPosition = new google.maps.LatLng(placeLat, placeLng);
 						map.setCenter(zoomPosition);
