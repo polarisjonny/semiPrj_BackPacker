@@ -414,24 +414,26 @@
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
-						
+						<h1>${loginMember}</h1>
 						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
 							<button class="btn-gray" type="button" onclick="location.href='${root}/accompany/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
 						</c:if>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${loginMember ==null}'){				
+							const MemberId= '${loginMember.id}'; 
+							const writerMember ='${writerMember.memberNo}';
+							const memberNo = '${loginMember.memberNo}'
+							console.log(writerMember);
+							console.log(MemberId);
+							if('${loginMember == null}' == 'true'){				
 									disableBtn[0].disabled = true;
-					
-									
-										
+
 							}else {
-								if('${writerMember.memberNo}'!='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
+								if(writerMember==memberNo||MemberId=="ADMIN"){
 									disableBtn[0].disabled = true;	
 									
 								}
-								
-								disableBtn[0].disable = false;
+								disableBtn[0].disabled = false;
 							}
 							
 						</script>
@@ -514,11 +516,14 @@
 				type: "post",
 				data : {
 					replyNo : guideReplyNo,
+					boardNo : '${gbvo.guideBoardNo}'
 				},
 				success : (x)=>{
 					if(x=='ok'){
 						alert('댓글삭제성공!');
 						loadComment();
+					}else if(x=='finished'){
+						alert('마감된 글입니다. 댓글 삭제 불가합니다.');
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -577,10 +582,7 @@
 		modifyBtn.addEventListener('click',f01);
 		
 		function f01(){
-			alert("${gbvo.matchingState != 'N'}");
 			
-			console.log("${gbvo.matchingState != 'N'}");
-			console.log(false);
 			const no = '${gbvo.guideBoardNo}'
 			const width =800;
 			const height=1000;
@@ -590,7 +592,7 @@
 				window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 				
 			}else {
-				
+				alert('마감된 글입니다. 수정이 불가합니다.');
 			}
 			
 			
