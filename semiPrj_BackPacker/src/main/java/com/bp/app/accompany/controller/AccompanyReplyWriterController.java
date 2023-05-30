@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bp.app.gboard.service.GuideBoardService;
+import com.bp.app.gboard.vo.GuideBoardVo;
 import com.bp.app.gboard.vo.GuideReplyVo;
 import com.bp.app.member.vo.MemberVo;
 
@@ -26,24 +27,30 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			
 			
 			//데꺼
-			String GuideBoardNo = req.getParameter("accomNo");
+			String guideBoardNo = req.getParameter("accomNo");
 			String comment =  req.getParameter("content");
 			
 			//데뭉
 			GuideReplyVo rvo = new GuideReplyVo();
 			rvo.setContent(comment);
 			rvo.setWriterNo(writerNo);
-			rvo.setGuideBoardNo(GuideBoardNo);
+			rvo.setGuideBoardNo(guideBoardNo);
 			
 			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
 			int result = gbs.replyWrite(rvo);
+			String status = gbs.getStatus(guideBoardNo);
+			//매칭 스테이터스불러오Y이면...실패하기로 하기...
+			
 			
 			//화면
 			PrintWriter out = resp.getWriter();
-			if(result==1) {
+			if(result==1&&!status.equals("Y")) {
 				out.write("ok");
+			}else if(status.equals("Y")) {
+				out.write("no");
+				
 			}
 		} catch (Exception e) {
 			System.out.println("[ERROR] notice reply error");

@@ -263,6 +263,10 @@
 		color :black;
 		text-decoration: none;
 	}
+	/* 그레이색찐하게 */
+	.btn-gray {
+		background-color: #B7B7B7;
+	}
 </style>
 </head>
 <body>
@@ -276,6 +280,9 @@
 				<div id="main-area">
 					<div>조회수 : ${gbvo.hit}</div>
 					<div id="title">${gbvo.title}</div>
+					<c:if test="${gbvo.matchingState=='Y'}">
+						<h2>매칭 마감된 글입니다. 수정과 댓글작성이 불가</h2>
+					</c:if>
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>						
 						<textarea class="content-text" readonly style="resize: none;">${writerMember.introMessage}</textarea>
@@ -378,8 +385,8 @@
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
 											if('${loginMember.id}'=='ADMIN'){
-												sBtn[0].style.display = 'block';
-												sBtn[1].style.display = 'block';
+												sBtn[0].style.display = 'inline-block';
+												sBtn[1].style.display = 'inline-block';
 											}
 										}
 									</script>
@@ -407,6 +414,10 @@
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						
+						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
+							<button class="btn-gray" type="button" onclick="location.href='${root}/accompany/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
+						</c:if>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
 							if('${loginMember ==null}'){				
@@ -483,6 +494,8 @@
 						alert("댓글작성 성공!");
 						document.querySelector("textarea[name=comment]").value='';
 						loadComment();
+					}else if (x=='no'){
+						alert("매칭마감됨. 댓글작성불가");
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -561,16 +574,28 @@
 			});
 		}
 		let modifyBtn = document.querySelector('.modify-btn');
-		modifyBtn.addEventListener('click',function(){
+		modifyBtn.addEventListener('click',f01);
+		
+		function f01(){
+			alert("${gbvo.matchingState != 'N'}");
+			
+			console.log("${gbvo.matchingState != 'N'}");
+			console.log(false);
 			const no = '${gbvo.guideBoardNo}'
 			const width =800;
 			const height=1000;
 			const left = (screen.width/2)-(width/2);
 			const top = 0;
-			window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-		});
+			if('${gbvo.matchingState}' != 'Y'){
+				window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+				
+			}else {
+				
+			}
+			
+			
+		}
 		
-
 		let reportBtn = document.querySelector('.report-btn');
 		reportBtn.addEventListener('click',function(){
 			const no = '${gbvo.guideBoardNo}'

@@ -290,4 +290,61 @@ public class GuideBoardService {
 		return result;
 	}
 
+	//매칭 스테이터스 y 로 변경 게시글 번호를 가져와서.. o로 변경하자...
+	public int setMatchingStatus(String boardNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		GuideBoardDao dao = new GuideBoardDao();
+		int result =dao.setMatchingStatus(conn,boardNo);
+		
+		//tx
+		if(result>=1) {
+			JDBCTemplate.commit(conn);
+			result=1;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//게시글 마감
+	public int finish(String boardNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		GuideBoardDao dao = new GuideBoardDao();
+		int result = dao.finish(conn,boardNo);
+		
+		return result;
+	}
+
+	//게시판번호로 매칭상태불러오기
+	public String getStatus(String guideBoardNo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//sql
+		String sql = "SELECT MATCHING_STATE FROM GUIDE_BOARD WHERE GUIDE_BOARD_NO =?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, guideBoardNo);
+		ResultSet rs = pstmt.executeQuery();
+		//rs
+		String matchingStatus=null;
+		if(rs.next()) {
+			matchingStatus = rs.getString(1);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(conn);
+		
+		return matchingStatus;
+		//close
+	}
+
 }
