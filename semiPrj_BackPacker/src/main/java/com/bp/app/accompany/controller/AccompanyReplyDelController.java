@@ -17,23 +17,31 @@ public class AccompanyReplyDelController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-			//데꺼
-			String replyNo = req.getParameter("replyNo");
-			//서비스
-			GuideBoardService gbs = new GuideBoardService();
-			int result=0;
 			try {
-				result = gbs.deleteReply(replyNo);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("댓글삭제중 에러발생");
-			}
-			
+				//데꺼
+				String replyNo = req.getParameter("replyNo");
+				String boardNo = req.getParameter("boardNo");
+				//서비스
+				GuideBoardService gbs = new GuideBoardService();
+				int result=0;
+				try {
+					result = gbs.deleteReply(replyNo);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("댓글삭제중 에러발생");
+				}
+				
+				String status = gbs.getStatus(boardNo);
 
-			//화면
-			PrintWriter out = resp.getWriter();
-			if(result==1) {
-				out.write("ok");
+				//화면
+				PrintWriter out = resp.getWriter();
+				if(result==1&&!status.equals("Y")) {
+					out.write("ok");
+				}else if(status.equals("Y")) {
+					out.write("finished");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 		
 	}

@@ -514,11 +514,14 @@
 				type: "post",
 				data : {
 					replyNo : guideReplyNo,
+					boardNo : '${gbvo.guideBoardNo}'
 				},
 				success : (x)=>{
 					if(x=='ok'){
 						alert('댓글삭제성공!');
 						loadComment();
+					}else if(x=='finished'){
+						alert('마감된 글입니다. 댓글 삭제 불가합니다.');
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -577,10 +580,7 @@
 		modifyBtn.addEventListener('click',f01);
 		
 		function f01(){
-			alert("${gbvo.matchingState != 'N'}");
 			
-			console.log("${gbvo.matchingState != 'N'}");
-			console.log(false);
 			const no = '${gbvo.guideBoardNo}'
 			const width =800;
 			const height=1000;
@@ -590,7 +590,7 @@
 				window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
 				
 			}else {
-				
+				alert('마감된 글입니다. 수정이 불가합니다.');
 			}
 			
 			
