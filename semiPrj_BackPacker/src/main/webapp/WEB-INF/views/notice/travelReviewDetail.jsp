@@ -6,15 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-main{
+body {
+		overflow-x :hidden;	
+	}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+	main {
+		width: 100vw;
 		margin-top: 66px;
-		padding: 0px;
-		width:100%;
-		height: 1300px; 
 	}
 	
 	#mainReviewImg > img{
-		width:100%;
+		width:100vw;
 		height:300px;
 	}
 	
@@ -48,7 +53,7 @@ main{
 	}
 	
 	#notice-content-area{
-		height:700px;
+		height:900px;
 		width:100%;
 		text-align:center;
 	}
@@ -97,7 +102,7 @@ main{
 		display:grid;
 		grid-template-columns: 5fr 1fr;
 		margin : auto;
-		width:30%;
+		width:63%;
 		margin-bottom:20px;
 		margin-top: 20px;
 	}
@@ -116,10 +121,9 @@ main{
 	}
 	
 	.comment {
-		font-size: 13px;
+		font-size: 15px;
 		display: grid;
 		grid-template-columns : 0.7fr 6.8fr;
-		
 	}
 	
 	.comment-list-id {
@@ -128,16 +132,19 @@ main{
 	}
 
 	#comment-list-area{
-		display: grid;
-		justify-content: center;
+		margin-right: 10px;
+		position: relative;
+		left: 18%;
 		margin-bottom: 20px;
-
+		width: 500px;
 	}
+
 	
 	.list-profile {
-		width: 45px;
-		height: 45px;
+		width: 50px;
+		height: 50px;
 		border-radius: 70%;
+		margin-right: 20px;
 	}
 
 	.comment-del{
@@ -229,6 +236,7 @@ main{
 			<div id="reply-area">
 				
 				<c:if test="${not empty loginMember}">
+					
 					<textarea name="content" style="resize:none;" placeholder="댓글은 50자 이내로 작성해주세요"></textarea>
 					<button onclick="writeReply();">댓글작성</button>
 				</c:if>

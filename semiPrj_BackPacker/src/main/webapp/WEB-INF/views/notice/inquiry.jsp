@@ -6,11 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	main{
+	body {
+		overflow-x :hidden;	
+	}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+	main {
+		width: 100vw;
 		margin-top: 66px;
-		padding: 0px;
-		width:100vw;
-		height: 1100px; 
 	}
 	
 	#mainImg-area{
@@ -113,6 +118,18 @@
         color:white;
         padding:10px;
     }
+
+	.liTxt{
+		overflow: hidden;
+   		text-overflow: ellipsis;
+    	white-space: nowrap;
+    	max-width: 200px; 
+	}
+
+	.liTxt > a{
+		font-size: 17px;
+		font-weight: 350;
+	}
   	
   	
 </style>
@@ -153,7 +170,7 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '1'}"> 
 									<c:if test="${count < 5}"> 
-										<li><a href="${root}/notice/inquiryBoardDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
+										<li class="liTxt"><a href="${root}/notice/inquiryBoardDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
@@ -169,12 +186,12 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '2'}"> 
 									<c:if test="${count < 5}"> 
-										<li><a href="${root}/notice/inquiryFAQDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
+										<li class="liTxt"><a href="${root}/notice/inquiryFAQDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
 							</c:forEach>
-							<li ><a class="list" href="${root}/notice/inquiryFAQ?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
+							<li><a class="list" href="${root}/notice/inquiryFAQ?page=1&QnaCategoryNo=2"> FAQ 더보기> </a></li>
 						</ul>
 					</li>
 					<li class="inquiry-item">
@@ -185,7 +202,7 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '3'}"> 
 									<c:if test="${count < 5}"> 
-										<li><a href="${root}/notice/inquiryServiceDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
+										<li class="liTxt"><a href="${root}/notice/inquiryServiceDetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
@@ -201,7 +218,7 @@
 							<c:forEach var="item" items="${list}">
 								<c:if test="${item.qnaCategoryNo == '4'}"> 
 									<c:if test="${count < 5}"> 
-										<li><a href="${root}/notice/inquiryQnADetail?QnANo=${item.qnaNo}">${item.title}</a></li>
+										<li class="liTxt"><a href="${root}/notice/inquiryQnADetail?QnANo=${item.qnaNo}">${item.title}</a></li>
 										<c:set var="count" value="${count + 1}" /> 
 									</c:if>
 								</c:if>
@@ -227,6 +244,10 @@
 		
 		</main>
 
+		<script>
+
+
+		</script>
 		
 </body>
 </html>

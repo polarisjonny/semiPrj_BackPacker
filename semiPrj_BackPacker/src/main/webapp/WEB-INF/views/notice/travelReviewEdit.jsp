@@ -121,13 +121,17 @@
             processData : false ,
             contentType : false ,
             dataType : 'json' ,
-            success : function(changeNameList){
-              console.log(changeNameList);
-              for(let changeName of changeNameList){
-                $('#summernote').summernote('insertImage' , '${root}/static/img/travelReview/' + changeName);
-              }
-
-            } ,
+			success: function(changeNameList) {
+			console.log(changeNameList);
+			for (let changeName of changeNameList) {
+				const imageUrl = '${root}/static/img/travelReview/' + changeName;
+				$('<img>').on('load', function() {
+				$(this).attr('width', '300'); // Set the desired width
+				$(this).attr('height', '200'); // Set the desired height
+				$('#summernote').summernote('insertNode', this);
+				}).attr('src', imageUrl);
+			}
+			},
             error : function(error){
               console.log(error);
             } ,

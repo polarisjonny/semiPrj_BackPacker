@@ -33,11 +33,16 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-	main{
+	body {
+		overflow-x :hidden;	
+	}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+	main {
+		width: 100vw;
 		margin-top: 66px;
-		padding: 0px;
-		width:100%;
-		height: 1100px; 
 	}
 
     #mainImg-area{
@@ -66,7 +71,7 @@ footer, header, hgroup, menu, nav, section {
 		grid-template-columns: 1fr 1fr;
 		justify-content:space-around;
 		margin:auto;
-		width:1000px;
+		width:900px;
     }
     
     #review-search-area > .noticeBtn{
@@ -96,7 +101,7 @@ footer, header, hgroup, menu, nav, section {
     
     #content-area{
         display:grid;
-        width:1000px;
+        width:900px;
         grid-template-columns: 1fr 1fr 1fr;
         margin:auto;
     }
@@ -109,11 +114,16 @@ footer, header, hgroup, menu, nav, section {
     #line{color:lightgray;}
     
     
-    #review{font-size: 2em}
+    #review{
+		font-size: 2em;
+		color : #333;
+		font-weight: bolder;
+		letter-spacing: 2px;
+	}
     
 	#reviewList{
 		margin:auto;
-		width:1000px;
+		width:900px;
 		display:grid;
 		grid-template-rows: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
@@ -121,10 +131,11 @@ footer, header, hgroup, menu, nav, section {
         grid-row-gap:30px;
         margin:auto;
         justify-content: space-around;
+		margin-top: 15px;
 	}    
 	
 	#reviewList img{
-		width:500px;
+		width:450px;
 		height:200px;
 		border-radius:30px;
 	}
@@ -161,6 +172,12 @@ footer, header, hgroup, menu, nav, section {
 		left: 20px;
 		z-index: 1;
   	}
+
+	#hit > a:hover{
+		cursor: pointer;
+		color: #99ccff;
+		transition-duration: 0.5s;
+	}
   	
   		
 </style>
