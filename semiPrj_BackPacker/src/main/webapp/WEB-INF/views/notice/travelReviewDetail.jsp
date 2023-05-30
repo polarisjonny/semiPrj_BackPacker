@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -155,6 +158,10 @@ body {
 		
 	}
 
+	.note-editor{
+		margin: auto;
+	}
+
 	
 </style>
 </head>
@@ -208,7 +215,9 @@ body {
 			
 			<div id="notice-content-area">
 			
-				${vo.content}
+				<textarea id="summernote" style="resize:none;">${vo.content}</textarea>
+
+
 			</div>
 			
 			
@@ -248,9 +257,25 @@ body {
 			</div>
 			
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+			<!-- 썸머노트 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 		</main>
 
 		<script>
+
+				$('#summernote').summernote({
+	    	  placeholder: 'Hello stand alone ui',
+	    	  tabsize: 2,
+	    	  height: 800,
+			  width: 800,
+	    	  callbacks : {
+	            } ,
+	    	  toolbar: [
+	    	    
+	    	  ]
+	    	});
 
 			//후기삭제
 			function reviewDelete(params) {
@@ -259,6 +284,12 @@ body {
 				if(!result){
 					return;
 				}
+
+				Swal.fire({
+					title : '게시글을 삭제하였습니다.',
+					icon: 'success',
+					text: '',
+				})
 
 				location.href='${root}/notice/reviewDelete?infoNo='+'${vo.infoNo}';
 
@@ -286,25 +317,37 @@ body {
 			//댓글 작성
 			function writeReply(params) {
 				const content = document.querySelector('textarea[name=content]').value;
-				$.ajax({
-
-					url : '${root}/notice/replyWrite',
-					type : 'post',
-					data : {
-						infoNo : '${vo.infoNo}',
-						content : content,
-					},
-					success : function (x) {
-						if(x=='ok'){
-							alert('댓글 작성이 완료되었습니다.');
-							document.querySelector('textarea[name=content]').value = '';
-							loadComment();
-						}
-					},
-					error : function (e) {
-						alert(e+"댓글 작성 실패");
-					},
-				});
+				if(content === ""){
+					Swal.fire({
+						title : '댓글을 작성해주세요',
+						icon: 'warning',
+						text: '빈칸으로는 작성할수 없습니다.',
+					});
+				}else{
+					$.ajax({
+	
+						url : '${root}/notice/replyWrite',
+						type : 'post',
+						data : {
+							infoNo : '${vo.infoNo}',
+							content : content,
+						},
+						success : function (x) {
+							if(x=='ok'){
+								Swal.fire({
+									title : '댓글 작성을 성공하였습니다.',
+									icon: 'success',
+									text: '',
+								})
+								document.querySelector('textarea[name=content]').value = '';
+								loadComment();
+							}
+						},
+						error : function (e) {
+							alert(e+"댓글 작성 실패");
+						},
+					});
+				}
 
 			}
 
@@ -378,7 +421,11 @@ body {
 					success : function (data) {
 						
 						if(data == 'ok'){
-							alert('삭제되었습니다.')
+							Swal.fire({
+								title : '댓글을 삭제하였습니다.',
+								icon: 'success',
+		                        text: '',
+							})
 							loadComment();
 						}
 					},
@@ -404,7 +451,9 @@ body {
 				
 			});
 		
-
+			
+			
+	
 		</script>
 	
 		

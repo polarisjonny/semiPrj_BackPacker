@@ -94,10 +94,14 @@
 					},
 					success : function(x) {
 						if(x=='ok'){
-							alert('신고가 접수되었습니다.');
+							Swal.fire({
+								title : '신고를 접수하였습니다.',
+								icon: 'success',
+		                        text: '',
+							})
 							setTimeout(() => {
 								window.close();
-							}, 1000);
+							}, 1300);
 						}else{
 							Swal.fire({
 								title : '신고를 접수할수 없습니다.',
@@ -106,7 +110,7 @@
 							})
 							setTimeout(() => {
 								window.close();
-							}, 2000);
+							}, 1300);
 						}
 						
 					},

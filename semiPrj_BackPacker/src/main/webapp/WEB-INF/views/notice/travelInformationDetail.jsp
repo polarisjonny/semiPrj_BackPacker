@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -167,7 +169,11 @@ body {
 
 				if(result){
 					location.href = "${root}/notice/informationDelete?infoNo="+'${vo.infoNo}'
-					alert('게시글이 삭제되었습니다.');
+					Swal.fire({
+						title : '게시글을 삭제하였습니다.',
+						icon: 'success',
+						text: '',
+					})
 				}
 
 			}
