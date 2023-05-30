@@ -101,6 +101,11 @@
 					setTimeout(()=>{
 						window.close();
 					},1000)
+				}else if(x=='constraint'){
+					alert("이미 한번 신고한 게시글 입니다.");
+					setTimeout(()=>{
+						window.close();
+					},1000)
 				}else{
 					alert("신고 실패, 관리자에게 문의하세요.");
 					setTimeout(()=>{

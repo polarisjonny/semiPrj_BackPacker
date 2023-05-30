@@ -256,7 +256,7 @@ public class GuideBoardService {
 		//tx
 		
 		int result=0;
-		if(result1==result2) {
+		if(result1==1&&result2==1) {
 			JDBCTemplate.commit(conn);
 			result=1;
 		}else {
