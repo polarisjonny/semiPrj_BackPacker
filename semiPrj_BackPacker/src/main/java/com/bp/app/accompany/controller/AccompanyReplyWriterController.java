@@ -42,8 +42,7 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
-			int result = gbs.replyWrite(rvo);
-			String status = gbs.getStatus(guideBoardNo);
+			
 			//매칭 스테이터스불러오Y이면...실패하기로 하기...
 			
 			
@@ -51,13 +50,16 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			PrintWriter out = resp.getWriter();
 			if(comment==null||comment.equals("")) {
 				out.write("empty");
-			}else if(result==1&&!status.equals("Y")) {
-				out.write("ok");
-			}else if(status.equals("Y")) {
-				out.write("no");
-				
-			}
-		} catch (Exception e) {
+			}else {
+				int result = gbs.replyWrite(rvo);
+				String status = gbs.getStatus(guideBoardNo);
+				if(result==1&&!status.equals("Y")) {
+					out.write("ok");
+				}else if(status.equals("Y")) {
+					out.write("no");
+				}
+			} 
+		}catch (Exception e) {
 			System.out.println("[ERROR] notice reply error");
 			e.printStackTrace();
 			
