@@ -1,9 +1,0 @@
-diff a/semiPrj_BackPacker/src/main/webapp/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp b/semiPrj_BackPacker/src/main/webapp/WEB-INF/views/accompanyBoard/accompanyBoardDetail.jsp	(rejected hunks)
-@@ -411,7 +411,6 @@
- 							const disableBtn = document.querySelectorAll(".disable-btn");
- 							if('${loginMember ==null}'){				
- 									disableBtn[0].disabled = true;
--									alert('${loginMember.nick}');
- 									
- 										
- 							}else {

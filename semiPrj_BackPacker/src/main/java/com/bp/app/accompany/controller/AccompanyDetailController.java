@@ -37,16 +37,32 @@ public class AccompanyDetailController extends HttpServlet{
 			GuideBoardService gbs = new GuideBoardService();
 			SchedulerService ss = new SchedulerService();
 			
+			//매칭상태를업데이트 서비스
+			//채팅룸의 값을select 해서 값이둘다Y이면 매칭스테이터스 y로 수정하는 구문... 
+			
+			
 			MemberVo writerMember = gbs.selectMemberByNo(bvo);
 			//조회수 버그 고치기 위한.. 
 			GuideBoardVo gbvo =null;
 			if(loginMember==null||loginMember.equals("")) {
 				gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				if(gbvo.getMatchingState().equals("N")) {
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				}
 			}else {
-				String lmNo = loginMember.getMemberNo();	
+				String lmNo = loginMember.getMemberNo();
 				gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				if(gbvo.getMatchingState().equals("N")){
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				}	
 			}
 			List<TimetableVo>timetableVo = ss.totalTimetable(req);
+			
+			
+			
+			
 			//화면
 			if(writerMember!=null&&gbvo!=null) {
 				if(timetableVo==null||timetableVo.equals("")) {
