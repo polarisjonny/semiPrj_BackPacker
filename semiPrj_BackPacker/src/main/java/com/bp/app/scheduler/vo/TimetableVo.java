@@ -18,30 +18,14 @@ public class TimetableVo {
 	private String startDate;
 	private String endDate;
 	private String totalDate;
+	private String placeExpense;
 	
-	
-	
+	//자바에서 계산한 날짜 
+	private String day;
 	
 	//국가
 	private String countryNo;
 	private String countryName;
-	
-	
-	public String getCountryNo() {
-		return countryNo;
-	}
-	public void setCountryNo(String countryNo) {
-		this.countryNo = countryNo;
-	}
-	public String getCountryName() {
-		return countryName;
-	}
-	
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-	
-	
 	public String getTimetableNo() {
 		return timetableNo;
 	}
@@ -126,17 +110,43 @@ public class TimetableVo {
 	public void setTotalDate(String totalDate) {
 		this.totalDate = totalDate;
 	}
+	public String getPlaceExpense() {
+		return placeExpense;
+	}
+	public void setPlaceExpense(String placeExpense) {
+		this.placeExpense = placeExpense;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public String getCountryNo() {
+		return countryNo;
+	}
+	public void setCountryNo(String countryNo) {
+		this.countryNo = countryNo;
+	}
+	public String getCountryName() {
+		return countryName;
+	}
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
 	@Override
 	public String toString() {
 		return "TimetableVo [timetableNo=" + timetableNo + ", placeNo=" + placeNo + ", schedulerNo=" + schedulerNo
 				+ ", timetableDate=" + timetableDate + ", bespokePlace=" + bespokePlace + ", bespokeTime=" + bespokeTime
 				+ ", timetableStartTime=" + timetableStartTime + ", playTime=" + playTime + ", placeName=" + placeName
 				+ ", placeImage=" + placeImage + ", placeTime=" + placeTime + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", totalDate=" + totalDate + "]";
+				+ endDate + ", totalDate=" + totalDate + ", placeExpense=" + placeExpense + ", day=" + day
+				+ ", countryNo=" + countryNo + ", countryName=" + countryName + "]";
 	}
 	public TimetableVo(String timetableNo, String placeNo, String schedulerNo, String timetableDate,
 			String bespokePlace, String bespokeTime, String timetableStartTime, String playTime, String placeName,
-			String placeImage, String placeTime, String startDate, String endDate, String totalDate) {
+			String placeImage, String placeTime, String startDate, String endDate, String totalDate,
+			String placeExpense, String day, String countryNo, String countryName) {
 		super();
 		this.timetableNo = timetableNo;
 		this.placeNo = placeNo;
@@ -152,19 +162,15 @@ public class TimetableVo {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.totalDate = totalDate;
+		this.placeExpense = placeExpense;
+		this.day = day;
+		this.countryNo = countryNo;
+		this.countryName = countryName;
 	}
 	public TimetableVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

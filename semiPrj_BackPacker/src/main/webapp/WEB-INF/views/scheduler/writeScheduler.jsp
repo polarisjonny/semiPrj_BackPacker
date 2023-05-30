@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <style>
 	#wrap{
@@ -14,7 +16,7 @@
 
 	.scheduler{
 		width: 400px;
-		height: 320px;
+		height: 350px;
 		border: 1px solid #E7E6E6;
 		box-shadow: 5px 5px 5px #878787;
 	}
@@ -26,7 +28,7 @@
 		grid-template-rows: 1fr 1fr;
 		margin-top: 20px;
 		justify-items: center;
-		height: 250px;
+		height: 280px;
 		overflow: auto;
 	}
 	#trip-date {
@@ -135,6 +137,8 @@
 		bottom: 113px;
 		display: none;
 	}
+
+	.cursor{cursor: pointer;}
 	
 </style>
 <body>
@@ -146,7 +150,7 @@
 
 			<div class="text">
 				<h1>일정표가 완성되었어요!</h1>
-				<h6>완성된 일정표는 마이페이에 자동으로 저장되어 다시 볼 수 있습니다</h6>
+				<h6>완성된 일정표는 마이페이지에 자동으로 저장되어 다시 볼 수 있습니다</h6>
 		
 			</div>
 
@@ -169,7 +173,8 @@
 					
 					<div class="scheduler radious">
 						<div id="trip-date" style="font-weight: bold; font-size: 1.3em;">
-							DAY${index}   
+							DAY${index}
+							
 						</div>
 			
 						<div class="timetable">
@@ -182,7 +187,9 @@
 											<div id="place-time" style="font-weight: bold;">
 												${item.bespokePlace}
 												<br>
-												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+												<div style="font-size: 0.4em; font-weight: normal;">시작시간 : ${item.timetableStartTime}</div>
+																						
+												<div style="font-size: 0.4em; font-weight: normal;">소요경비 : ${item.placeExpense} 원 </div>											
 											</div>
 										</div>
 									</c:if>
@@ -193,7 +200,9 @@
 											<div id="place-time" style="font-weight: bold;">
 												${item.placeName}
 												<br>
-												<div style="font-size: 0.5em;">시작시간 : ${item.timetableStartTime}</div>											
+												<div style="font-size: 0.4em; font-weight: normal;">시작시간 : ${item.timetableStartTime}</div>
+																							
+												<div style="font-size: 0.4em; font-weight: normal;">소요경비 : ${item.placeExpense} 원</div>											
 											</div>
 										</div>
 									</c:if>
@@ -224,13 +233,13 @@
 	
 		<div id="board" class="text">
 
-			<form action="/semi/schedulerwrite" method="post" enctype="multipart/form-data">
+			<form id="form" action="/semi/schedulerwrite" method="post" enctype="multipart/form-data">
 				<div><h2>게시글 작성 할까요?</h2></div>
 				<input type="hidden" name="schedulerNo" value="${firstTimetable.schedulerNo}">
 				
 				<div id="check">
 	
-					<select name="category" id="select" onchange="pickDo()" >
+					<select name="category" id="select" class="cursor" onchange="pickDo()" >
 						<option value="3">일정표를 참조하여 동행구하기</option>
 						<option value="2">일정표를 참조하여 프패커구하기</option>
 						<option value="1">일정표를 참조하여 프패커합니다</option>
@@ -254,7 +263,7 @@
 				</div>
 
 				<div>
-					<textarea name="content" id="" cols="70" rows="20" 
+					<textarea name="content" id="content" cols="70" rows="20" 
 					placeholder=
 					"1.구할 동행인원
 					
@@ -277,7 +286,7 @@
 
 				</div>
 		
-				<button id="btnstyle" type="submit">작성하기</button>
+				<button id="btnstyle" type="submit" onclick="submitForm()">작성하기</button>
 
 			</form>
 		</div>
@@ -288,7 +297,7 @@
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-	<script>
+	<script defer>
 
 		// 파일 미리보기
 		const fileTag = document.querySelector("input[name=f]");
@@ -319,12 +328,29 @@
 
 			if(select=="1"){
 				checkp.style.display="block";
+			}else{
+				checkp.style.display="none";
 			}
-
 
 		}
 
+		function submitForm() {
+			event.preventDefault();
 
+		var content = document.getElementById('content').value;
+		var title = document.getElementById('title').value;
+		
+			if (content === '' || title === '' ) {
+				Swal.fire({
+                    icon: 'error',
+                    text: '모든값을 입력하세요.',
+                });
+				return false;
+			} else {
+				// 폼을 서버로 제출하는 로직
+				document.getElementById('form').submit();
+			}
+		}
 
 
 
