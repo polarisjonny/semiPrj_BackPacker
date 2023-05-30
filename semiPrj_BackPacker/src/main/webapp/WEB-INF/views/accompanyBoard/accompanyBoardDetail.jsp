@@ -414,24 +414,26 @@
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
-						
+						<h1>${loginMember}</h1>
 						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
 							<button class="btn-gray" type="button" onclick="location.href='${root}/accompany/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
 						</c:if>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${loginMember ==null}'){				
+							const MemberId= '${loginMember.id}'; 
+							const writerMember ='${writerMember.memberNo}';
+							const memberNo = '${loginMember.memberNo}'
+							console.log(writerMember);
+							console.log(MemberId);
+							if('${loginMember == null}' == 'true'){				
 									disableBtn[0].disabled = true;
-					
-									
-										
+
 							}else {
-								if('${writerMember.memberNo}'!='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
+								if(writerMember==memberNo||MemberId=="ADMIN"){
 									disableBtn[0].disabled = true;	
 									
 								}
-								
-								disableBtn[0].disable = false;
+								disableBtn[0].disabled = false;
 							}
 							
 						</script>

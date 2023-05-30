@@ -406,9 +406,11 @@
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
-						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						<button class="btn-red report-btn disable-btn">게시글신고하기222</button>
+						<h1>${writerMember.memberNo} ///// ${loginMember.memberNo}</h1>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
+							
 							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
 								disableBtn[0].disabled = true;
 							}
