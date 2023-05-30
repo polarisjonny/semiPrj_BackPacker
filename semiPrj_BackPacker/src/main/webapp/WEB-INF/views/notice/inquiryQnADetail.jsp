@@ -6,11 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	main{
+	body {
+		overflow-x :hidden;	
+	}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+	main {
+		width: 100vw;
 		margin-top: 66px;
-		padding: 0px;
-		width:100vw;
-		height: 1100px; 
 	}
 	
 	#mainImg-area{

@@ -6,11 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	main{
+	body {
+		overflow-x :hidden;	
+	}
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+	main {
+		width: 100vw;
 		margin-top: 66px;
-		padding: 0px;
-		width:100vw;
-		height: 1100px; 
 	}
 	
 	#mainImg-area{
@@ -157,7 +162,7 @@
 					</select>
 
 					<div id="input-area">
-						<input type="text" name="title" placeholder="제목을 작성해주세요.">
+						<input type="text" name="title" placeholder="제목을 30자 이하로 작성해주세요." maxlength="30">
 						<input type="email" name="email" placeholder="추가 답변이 발생하면 답변받을 이메일을 작성해주세요.">
 						<textarea name="content" style="resize:none;" placeholder="내용을 작성해주세요."></textarea>
 					</div>
@@ -173,7 +178,6 @@
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		</main>
 		
-	
 
 </body>
 </html>

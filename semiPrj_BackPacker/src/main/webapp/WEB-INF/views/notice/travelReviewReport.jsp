@@ -4,6 +4,8 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 	<!-- 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,6 +84,7 @@
 				
 				const infoNo = document.querySelector('input[name=no]').value;
 				const content = document.querySelector('textarea').value;
+				
 				$.ajax({
 					url : '${root}/notice/report',
 					type : 'post',
@@ -93,8 +96,17 @@
 						if(x=='ok'){
 							alert('신고가 접수되었습니다.');
 							setTimeout(() => {
-							window.close();
+								window.close();
 							}, 1000);
+						}else{
+							Swal.fire({
+								title : '신고를 접수할수 없습니다.',
+								icon: 'warning',
+		                        text: '중복 신고는 불가능합니다'
+							})
+							setTimeout(() => {
+								window.close();
+							}, 2000);
 						}
 						
 					},
