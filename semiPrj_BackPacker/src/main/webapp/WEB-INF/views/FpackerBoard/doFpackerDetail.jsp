@@ -263,6 +263,9 @@
 		color :black;
 		text-decoration: none;
 	}
+	.btn-gray {
+		background-color: #B7B7B7;
+	}
 </style>
 </head>
 <body>
@@ -276,6 +279,9 @@
 				<div id="main-area">
 					<div>조회수 : ${gbvo.hit}</div>
 					<div id="title">${gbvo.title}</div>
+					<c:if test="${gbvo.matchingState=='Y'}">
+						<h2>매칭 마감된 글입니다. 수정과 댓글작성이 불가</h2>
+					</c:if>
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>						
 						<textarea class="content-text" readonly style="resize: none;">${writerMember.introMessage}</textarea>
@@ -405,8 +411,11 @@
 						<div>
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
-						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
+						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">프패커매칭하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
+							<button class="btn-gray" type="button" onclick="location.href='${root}/doFpacker/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
+						</c:if>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
 							const MemberId= '${loginMember.id}'; 
@@ -474,10 +483,10 @@
 		function writeComment(){
 			const comment = document.querySelector("textarea[name=comment]").value;
 			$.ajax({
-				url : "${root}/accompany/reply/write",
+				url : "${root}/doFpacker/reply/write",
 				type : "POST",
 				data : {
-					accomNo : '${gbvo.guideBoardNo}',
+					doFpackerNo : '${gbvo.guideBoardNo}',
 					content : comment ,
 				},
 				success: (x)=>{

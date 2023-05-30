@@ -51,10 +51,13 @@ public class AccompanyReplyWriterController extends HttpServlet{
 			if(comment==null||comment.equals("")) {
 				out.write("empty");
 			}else {
-				int result = gbs.replyWrite(rvo);
+				
 				String status = gbs.getStatus(guideBoardNo);
-				if(result==1&&!status.equals("Y")) {
-					out.write("ok");
+				if(!status.equals("Y")) {
+					int result = gbs.replyWrite(rvo);
+					if(result==1) {
+						out.write("ok");
+					}
 				}else if(status.equals("Y")) {
 					out.write("no");
 				}
