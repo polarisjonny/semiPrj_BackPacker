@@ -35,6 +35,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin-bottom: 10%;
+            cursor: pointer;
         }
 
         #second-area {

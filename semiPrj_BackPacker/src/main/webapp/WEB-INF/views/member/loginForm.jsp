@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
        
         #logo-area {
@@ -117,5 +119,40 @@
 
     </form>
     </main>
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form").submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+
+                $.ajax({
+                    type: "POST",
+                    url: "${pageContext.request.contextPath}/member/login",
+                    dataType: 'json',
+                    data: $(this).serialize(), // Serialize the form data
+                    success: function(data) {
+                        console.log(data);
+                        if (data === 'success') {
+                            Swal.fire({
+                                title: '로그인 성공',
+                                icon: 'success'
+                            }).then(function() {
+                                // Redirect to the home page or desired URL
+                                window.location.href = "${pageContext.request.contextPath}/home";
+                            });
+                        } else if (data === 'fail') {
+                            Swal.fire({
+                                title: '로그인 실패',
+                                text: '아이디와 비밀번호를 확인하세요',
+                                icon: 'error',
+                                confirmButtonText: '확인'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

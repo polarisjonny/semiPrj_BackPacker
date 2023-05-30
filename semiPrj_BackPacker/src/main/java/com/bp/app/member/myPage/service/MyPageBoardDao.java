@@ -15,7 +15,7 @@ import com.bp.app.travelReview.vo.TravelReviewVo;
 public class MyPageBoardDao {
 
 	public List<GuideBoardVo> selectGuideBoardList(Connection conn, String memberNo) throws Exception {
-		String sql = "SELECT WRITER_NO, GUIDE_BOARD_NO, CATEGORY_NAME, MAIN_IMG, SUBSTR(TITLE, 1, 7) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ?";
+		String sql = "SELECT WRITER_NO, GUIDE_BOARD_NO, CATEGORY_NAME, CATEGORY_NO, MAIN_IMG, SUBSTR(TITLE, 1, 7) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -29,6 +29,7 @@ public class MyPageBoardDao {
 			String writerNo = rs.getString("WRITER_NO");
 			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
 			String categoryName = rs.getString("CATEGORY_NAME");
+			String categoryNo = rs.getString("CATEGORY_NO");
 			String mainImg = rs.getString("MAIN_IMG");
 			String title = rs.getString("TITLE");
 			String enrollDate = rs.getString("ENROLL_DATE");
@@ -37,6 +38,7 @@ public class MyPageBoardDao {
 			GuideBoardVo vo = new GuideBoardVo();
 			vo.setWriterNo(writerNo);
 			vo.setGuideBoardNo(guideBoardNo);
+			vo.setGuideBoardCategoryNo(categoryNo);
 			vo.setCategoryName(categoryName);
 			vo.setMainImg(mainImg);
 			vo.setTitle(title);
@@ -74,7 +76,7 @@ public class MyPageBoardDao {
 	}
 
 	public List<GuideBoardVo> selectAccompanyBoardList(Connection conn, PageVo pv, String writerNo) throws Exception {
-		String sql = "SELECT G.GUIDE_BOARD_NO AS NO, C.CATEGORY_NAME AS CATEGORY_NAME, G.WRITER_NO AS WRITER_NO, SUBSTR(G.TITLE, 1, 7) AS TITLE, TO_CHAR(G.ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, G.HIT AS HIT, G.MAIN_IMG AS MAIN_IMG FROM (SELECT ROWNUM AS RNUM, T.* FROM (SELECT * FROM GUIDE_BOARD WHERE WRITER_NO = ? AND DELETE_YN = 'N' ORDER BY GUIDE_BOARD_NO DESC) T) G JOIN GUIDE_BOARD_CATEGORY C ON G.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT G.GUIDE_BOARD_NO AS NO, C.CATEGORY_NO AS CATEGORY_NO, C.CATEGORY_NAME AS CATEGORY_NAME, G.WRITER_NO AS WRITER_NO, SUBSTR(G.TITLE, 1, 7) AS TITLE, TO_CHAR(G.ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, G.HIT AS HIT, G.MAIN_IMG AS MAIN_IMG FROM (SELECT ROWNUM AS RNUM, T.* FROM (SELECT * FROM GUIDE_BOARD WHERE WRITER_NO = ? AND DELETE_YN = 'N' ORDER BY GUIDE_BOARD_NO DESC) T) G JOIN GUIDE_BOARD_CATEGORY C ON G.GUIDE_BOARD_CATEGORY_NO = C.CATEGORY_NO WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		int endRow = pv.getCurrentPage() * pv.getBoardLimit();
@@ -94,6 +96,7 @@ public class MyPageBoardDao {
 			String hit = rs.getString("HIT");
 			String mainImg = rs.getString("MAIN_IMG");
 			String categoryName = rs.getString("CATEGORY_NAME");
+			String categoryNo = rs.getString("CATEGORY_NO");
 			
 			GuideBoardVo vo = new GuideBoardVo();
 			vo.setGuideBoardNo(guideBoardNo);
@@ -103,6 +106,7 @@ public class MyPageBoardDao {
 			vo.setHit(hit);
 			vo.setMainImg(mainImg);
 			vo.setCategoryName(categoryName);
+			vo.setGuideBoardCategoryNo(categoryNo);
 			
 			list.add(vo);
 		}
@@ -138,7 +142,7 @@ public class MyPageBoardDao {
 	}
 
 	public List<TravelReviewVo> selectMyTravelReviewList(Connection conn, PageVo pv, String memberNo) throws Exception {
-		String sql = "SELECT I.INFO_NO AS INFO_NO, C.INFO_CATEGORY_NAME AS INFO_CATEGORY_NAME, I.WRITER_NO AS WRITER_NO, SUBSTR(I.TITLE, 1, 7) AS TITLE, TO_CHAR(I.ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, I.HIT AS HIT, I.MAIN_IMG AS MAIN_IMG, I.CONTENT AS CONTENT, I.MODIFY_DATE AS MODIFY_DATE, I.DELETE_YN AS DELETE_YN, I.REPORT_CNT AS REPORT_CNT FROM (SELECT ROWNUM AS RNUM, T.* FROM (SELECT * FROM INFO_BOARD WHERE WRITER_NO = ? AND DELETE_YN = 'N' ORDER BY INFO_NO DESC) T) I JOIN INFO_BOARD_CATEGORY C ON I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT I.INFO_NO AS INFO_NO, I.INFO_CATEGORY_NO AS INFO_CATEGORY_NO, C.INFO_CATEGORY_NAME AS INFO_CATEGORY_NAME, I.WRITER_NO AS WRITER_NO, SUBSTR(I.TITLE, 1, 7) AS TITLE, TO_CHAR(I.ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, I.HIT AS HIT, I.MAIN_IMG AS MAIN_IMG, I.CONTENT AS CONTENT, I.MODIFY_DATE AS MODIFY_DATE, I.DELETE_YN AS DELETE_YN, I.REPORT_CNT AS REPORT_CNT FROM (SELECT ROWNUM AS RNUM, T.* FROM (SELECT * FROM INFO_BOARD WHERE WRITER_NO = ? AND DELETE_YN = 'N' ORDER BY INFO_NO DESC) T) I JOIN INFO_BOARD_CATEGORY C ON I.INFO_CATEGORY_NO = C.INFO_CATEGORY_NO WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		int endRow = pv.getCurrentPage() * pv.getBoardLimit();
 		int startRow = endRow - pv.getBoardLimit() + 1;
@@ -153,6 +157,7 @@ public class MyPageBoardDao {
 		while(rs.next()) {
 			String infoNo = rs.getString("INFO_NO");
 			String infoCategoryName = rs.getString("INFO_CATEGORY_NAME");
+			String infoCategoryNo = rs.getString("INFO_CATEGORY_NO");
 			String writerNo = rs.getString("WRITER_NO");
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
@@ -166,7 +171,8 @@ public class MyPageBoardDao {
 			
 			TravelReviewVo vo = new TravelReviewVo();
 			vo.setInfoNo(infoNo);
-			vo.setCategoryName(infoCategoryName);
+			vo.setInfoCategoryName(infoCategoryName);
+			vo.setInfoCategoryNo(infoCategoryNo);
 			vo.setWriterNo(writerNo);
 			vo.setTitle(title);
 			vo.setContent(content);

@@ -207,15 +207,19 @@
     	
     	#file-input {
     		display: none;
+    		
     	}
     	
     	.button-text {
     		display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+		    align-items: center;
+		    justify-content: center;
+		    height: 100%;
     	}
     	
+    	#profile-area {
+    		cursor: pointer;
+    	}
     </style>
      
    
@@ -380,6 +384,17 @@
 		            text: '비밀번호가 일치하지 않습니다.',
 		        });
 		        return false;
+		    }
+		    
+		    const phoneNumber = document.querySelector('input[name="phoneNumber"]').value;
+		    
+		    if(phoneNumber.length != 11) {
+		    	Swal.fire({
+		    		icon: 'error',
+		    		title : '핸드폰번호 작성 오류',
+		    		text : '핸드폰번호는 11자로 작성하셔야 합니다.'
+		    	});
+		    	return false;
 		    }
 		    
 		    Swal.fire({
