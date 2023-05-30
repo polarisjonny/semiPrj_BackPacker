@@ -24,6 +24,7 @@ public class DoFpackerReportController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+
 			//데꺼
 			String content = req.getParameter("content");
 			String no = req.getParameter("no");
@@ -36,17 +37,25 @@ public class DoFpackerReportController extends HttpServlet{
 			vo.setMemberNo(loginMember.getMemberNo());
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
-			int result = gbs.report(vo);
+			PrintWriter out = resp.getWriter();
+			int result=0;
+			try {
+				result = gbs.report(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.write("constraint");
+			}
 			
 			//화면
-			PrintWriter out = resp.getWriter();
 			if(result==1) {
 				out.write("ok");
-			}else {
-				throw new Exception();
 			}
+	
 		} catch (Exception e) {
 			e.printStackTrace();
+			req.setAttribute("errorMsg", "동행게시판 신고중 에러발생");
+			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
+			
 		}
 		
 	}

@@ -378,8 +378,8 @@
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
 											if('${loginMember.id}'=='ADMIN'){
-												sBtn[0].style.display = 'block';
-												sBtn[1].style.display = 'block';
+												sBtn[0].style.display = 'inline-block';
+												sBtn[1].style.display = 'inline-block';
 											}
 										}
 									</script>
@@ -406,14 +406,26 @@
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">동행신청하기</button>
-						<button class="btn-red report-btn disable-btn">게시글신고하기222</button>
-						<h1>${writerMember.memberNo} ///// ${loginMember.memberNo}</h1>
+						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							
-							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
-								disableBtn[0].disabled = true;
+							const MemberId= '${loginMember.id}'; 
+							const writerMember ='${writerMember.memberNo}';
+							const memberNo = '${loginMember.memberNo}'
+							console.log(writerMember);
+							console.log(MemberId);
+							if('${loginMember == null}' == 'true'){				
+									disableBtn[0].disabled = true;
+
+							}else {
+								if(writerMember==memberNo||MemberId=="ADMIN"){
+									disableBtn[0].disabled = true;	
+									
+								}else {
+									disableBtn[0].disabled = false;
+								}
 							}
+							
 						</script>
 					</div>
 					<div id="botton-area">
@@ -462,10 +474,10 @@
 		function writeComment(){
 			const comment = document.querySelector("textarea[name=comment]").value;
 			$.ajax({
-				url : "${root}/doFpacker/reply/write",
+				url : "${root}/accompany/reply/write",
 				type : "POST",
 				data : {
-					doFpackerNo : '${gbvo.guideBoardNo}',
+					accomNo : '${gbvo.guideBoardNo}',
 					content : comment ,
 				},
 				success: (x)=>{
@@ -474,6 +486,10 @@
 						alert("댓글작성 성공!");
 						document.querySelector("textarea[name=comment]").value='';
 						loadComment();
+					}else if (x=='no'){
+						alert("매칭마감됨. 댓글작성불가");
+					}else if (x=='empty'){
+						alert("내용을 입력해주세요.");
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -488,15 +504,18 @@
 		//댓글삭제
 		function delComment(guideReplyNo){
 			$.ajax({
-				url: "${root}/doFpacker/reply/delete",
+				url: "${root}/accompany/reply/delete",
 				type: "post",
 				data : {
 					replyNo : guideReplyNo,
+					boardNo : '${gbvo.guideBoardNo}'
 				},
 				success : (x)=>{
 					if(x=='ok'){
 						alert('댓글삭제성공!');
 						loadComment();
+					}else if(x=='finished'){
+						alert('마감된 글입니다. 댓글 삭제 불가합니다.');
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -549,14 +568,24 @@
 			});
 		}
 		let modifyBtn = document.querySelector('.modify-btn');
-		modifyBtn.addEventListener('click',function(){
+		modifyBtn.addEventListener('click',f01);
+		
+		function f01(){
+			
 			const no = '${gbvo.guideBoardNo}'
 			const width =800;
 			const height=1000;
 			const left = (screen.width/2)-(width/2);
 			const top = 0;
-			window.open('${root}/doFpacker/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-		});
+			if('${gbvo.matchingState}' != 'Y'){
+				window.open('${root}/accompany/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+				
+			}else {
+				alert('마감된 글입니다. 수정이 불가합니다.');
+			}
+			
+			
+		}
 
 		let reportBtn = document.querySelector('.report-btn');
 		reportBtn.addEventListener('click',function(){
