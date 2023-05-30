@@ -43,7 +43,10 @@ public class MessageDao {
 			String receiverNo = rs.getString("RECEIVER_NO");
 			String senderNick = rs.getString("SENDERNICK");
 			String senderProfileImage = rs.getString("SENDERPROFILEIMAGE");
-			
+			if(senderProfileImage== null || "".equals(senderProfileImage)) {
+				senderProfileImage="profile_default.jpg";
+			}
+			System.out.println(senderProfileImage);
 			MessageVo vo = new MessageVo();
 			vo.setChattingRoomNo(chattingRoomNo);
 			vo.setCheckYn(checkYn);
@@ -66,7 +69,7 @@ public class MessageDao {
 	}
 
 	public int newMessageCnt(Connection conn, String receiverNo) throws Exception {
-		String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_STATUS < 3 AND  M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y') )  S";
+		String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_STATUS <3 AND  M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'O' OR C.MATCHING_CHECK2 = 'O') AND NOT(C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y')  )  S";
 	
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -85,7 +88,7 @@ public class MessageDao {
 	}
 
 	public int newMessageCnt(Connection conn, String receiverNo, String chattingRoomNo) throws Exception {
-String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_ROOM_NO=? AND C.CHATTING_STATUS < 3 AND M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y') )  S";
+String sql = "SELECT COUNT(*) FROM ( SELECT M.MESSAGE_NO, M.SENDER_NO, M.RECEIVER_NO, M.CHATTING_ROOM_NO, M.CONTENT, M.ENROLL_DATE, M.CHECK_YN, C.CHATTING_STATUS, C.MATCHING_CHECK, C.MATCHING_CHECK2 FROM MESSAGE M JOIN CHATTING_ROOM C ON M.CHATTING_ROOM_NO = C.CHATTING_ROOM_NO WHERE M.RECEIVER_NO = ? AND C.CHATTING_ROOM_NO=? AND C.CHATTING_STATUS < 3 AND M.CHECK_YN = 'N' AND  NOT (C.MATCHING_CHECK = 'O' OR C.MATCHING_CHECK2 = 'O')AND NOT(C.MATCHING_CHECK = 'Y' AND C.MATCHING_CHECK2 = 'Y') )  S";
 	
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);

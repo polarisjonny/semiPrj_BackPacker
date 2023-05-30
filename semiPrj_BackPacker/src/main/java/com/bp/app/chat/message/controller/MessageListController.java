@@ -31,7 +31,7 @@ public class MessageListController extends HttpServlet {
 			
 			Gson gson= new Gson();
 			String jsonStr = gson.toJson(list);
-			
+			System.out.println(jsonStr);
 			//문자열 내보내기
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();

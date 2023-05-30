@@ -635,6 +635,25 @@ public class BoardManageDao {
 	
 	}
 
+	public int write(Connection conn, TravelReviewVo trvo) throws Exception {
+		
+		String sql="INSERT INTO INFO_BOARD( INFO_NO ,INFO_CATEGORY_NO ,WRITER_NO ,TITLE ,CONTENT,MAIN_IMG ) VALUES (SEQ_INFO_BOARD_NO.NEXTVAL , 2 , ? , ? , ?,?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, trvo.getWriterNo());
+		pstmt.setString(2, trvo.getTitle());
+		pstmt.setString(3, trvo.getContent());
+		pstmt.setString(4, trvo.getMainImg());
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+		
+		
+	}
+
 
 
 }

@@ -132,8 +132,8 @@
            
 		<div class= "write-area-btn" id="ta">
 		
-						<textarea  name="chat" style="resize: none;" placeholder="채팅칸." ></textarea>
-						<input id ="wc" type="button" value="채팅작성" onclick="writeChat()">
+						<textarea  name="chat" id="chatInput" style="resize: none;" placeholder="채팅칸." onkeydown="handleEnter(event)" ></textarea>
+						<input id ="wc" type="button" value="채팅작성" onclick="writeChat()" disabled>
 		</div>
 		<div class = "submit-out-btn" id="out">
 				<input id="submit" type="button" value="🤝" onclick="submitChat()">
@@ -153,9 +153,38 @@
     <script>
 
 
-	
+    let chatInput = document.querySelector('#chatInput');
+    let chatButton = document.querySelector('#wc');
+    checkTextarea();
+    function checkTextarea() {
+        if (chatInput.value.trim() !== '') {
+            chatButton.disabled = false;
+        } else {
+            chatButton.disabled = true;
+        }
+    }
+
+    chatInput.addEventListener('input', checkTextarea);
+
+    function writeChat() {
+        // 채팅 작성 로직 구현
+        // ...
+
+        // 채팅 작성 후 textarea 비우기
+        chatInput.value = '';
+
+        // 버튼 다시 비활성화
+        chatButton.disabled = true;
+    }
     
-    
+    function handleEnter(event) {
+        if (event.keyCode === 13 && !event.shiftKey) {
+            event.preventDefault();
+            if (chatButton.disabled === false) {
+                writeChat();
+            }
+        }
+    }
     
     let toggleButton = document.querySelector('#toggleButton');
     let out = document.querySelector('#out');
@@ -179,37 +208,44 @@
     
     
     
+  
     function outChat(){
-
+		
+		
 		$.ajax({
-				url : "${root}/chat/room/out",
-				type : "POST",
-				data : {
-				
-					chattingRoomNo :'${vo.chattingRoomNo}',
-					chattingUserNo :'${vo.chattingUserNo}',
-					chattingUser2No :'${vo.chattingUser2No}',
-					chattingStatus :'${vo.chattingStatus}',
-					
-				},
-				success: (x)=>{
-					
-					console.log(x);
-					if(x == 'ok'){
-					
-						 window.close();
-					}else {
-						alert('아웃실패...');
-					}
-				},
-				error: ()=>{
-					console.log("아웃실패...");
-				} ,
-			});
-    	
-    	
-    }
+			url : "${root}/chat/room/out",
+			type : "POST",
+			data : {
 
+				chattingRoomNo :'${vo.chattingRoomNo}',
+				chattingUserNo :'${vo.chattingUserNo}',
+				chattingUser2No :'${vo.chattingUser2No}',
+				chattingStatus :'${vo.chattingStatus}',
+				content : "상대방이 채팅창을 나갔습니다." ,
+				
+			},
+			success: (x)=>{
+				const chatArea = document.querySelector(".receive-chat-area");
+				console.log(x);
+				if(x == 'ok'){
+					document.querySelector("textarea[name=chat]").value='';
+					chatArea.scrollTop = chatArea.scrollHeight;
+					loadChat();
+					 window.close();
+				}else {
+					alert('아웃실패...');
+				}
+				
+			},
+			error: ()=>{
+				console.log("아웃실패..");
+			} ,
+		});
+	}
+	
+    
+    
+    
     function submitChat(){
 
 		$.ajax({
@@ -383,8 +419,10 @@
 					const chatArea = document.querySelector(".receive-chat-area");
 					console.log(x);
 					if(x == 'ok'){
-						document.querySelector("textarea[name=chat]").value='';
+						document.querySelector("#chatInput").value='';
 						chatArea.scrollTop = chatArea.scrollHeight;
+						// 버튼 다시 비활성화
+				        chatButton.disabled = true;
 						loadChat();
 						
 					}else {
@@ -421,8 +459,10 @@
 				success: (x)=>{
 					const chatArea = document.querySelector(".receive-chat-area");
 					if(x == 'ok'){
-						document.querySelector("textarea[name=chat]").value='';
+						document.querySelector("#chatInput").value='';
 						chatArea.scrollTop = chatArea.scrollHeight;
+						// 버튼 다시 비활성화
+				        chatButton.disabled = true;
 						loadChat();
 						
 					}else {

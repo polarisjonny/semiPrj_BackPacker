@@ -70,6 +70,7 @@ public class OpenChatRoomController extends HttpServlet {
 					
 				}
 			}
+			System.out.println(vo);
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room.jsp").forward(req, resp);
 		}catch(Exception e) {
