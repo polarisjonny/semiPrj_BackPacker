@@ -25,7 +25,6 @@ public class FindFpackerFinishController extends HttpServlet {
 			int result = gbs.finish(boardNo,loginMember);
 			
 			if(result==1) {
-				req.setAttribute("alertMsg", "회원점수가 올라갔습니다. 프로필을 통해 확인하세요.");
 				resp.sendRedirect(req.getContextPath()+"/findFpacker/list?page=1");
 			}else {
 				throw new Exception();
