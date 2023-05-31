@@ -29,17 +29,20 @@ public class OpenChatRoomController extends HttpServlet {
 			String loginMemberNo = loginMember.getMemberNo();
 			String chattingUser2No = null;;
 			String chattingUserNo = null;
+			
 			if(req.getParameter("chattingUserNo") != null) {
 				 chattingUserNo = req.getParameter("chattingUserNo");
 			}else {
-				 chattingUserNo = loginMember.getMemberNo();
+				 chattingUserNo = req.getParameter("writerNo");
+				 System.out.println("Writer" +chattingUserNo);
 			}
-			if(req.getParameter("chattingUser2No") != null) {
+			if(req.getParameter("1chattingUser2No") != null) {
 				
 				chattingUser2No = req.getParameter("chattingUser2No");
 			}else {
 				
-				chattingUser2No = req.getParameter("writerNo");
+				chattingUser2No = loginMember.getMemberNo();
+				System.out.println("2loginmemeberno" +chattingUser2No);
 			}
 			String type = req.getParameter("type");
 			if("new".equals(type) && chattingUserNo.equals(chattingUser2No)) {
@@ -65,7 +68,9 @@ public class OpenChatRoomController extends HttpServlet {
 				vo = cs.openOldChatRoomByRoomNo(crv,loginMemberNo);
 			}else {
 				vo = cs.openOldChatRoom(crv,loginMemberNo);
+				
 				if(vo.getChattingRoomNo()==null) {
+					System.out.println("null 인지 확인 " +vo.getChattingRoomNo());
 					vo = cs.openNewChatRoom(crv,loginMemberNo);
 					
 				}
