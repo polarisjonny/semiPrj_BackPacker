@@ -108,7 +108,7 @@ header{
 				<li><a class="dropdown-item" href="${root}/member/myPage">MY PAGE</a></li>
 
 
-				<li><a class="dropdown-item imgToProfile" onclick="goProfile(${loginMember.memberNo})">PROFILE</a></li>
+				<li><a class="dropdown-item imgToProfile logo" onclick="goProfile(${loginMember.memberNo})">PROFILE</a></li>
 
 				<li><a class="dropdown-item " href="${root}/member/logout">LOGOUT</a></li>
 				</ul>

@@ -22,7 +22,7 @@
    <style type="text/css">
 
         .profileWrap{
-           padding-top: 10px;
+           padding-top: 50px;
            width: 600px;
            height: 700px;
            margin: auto;
