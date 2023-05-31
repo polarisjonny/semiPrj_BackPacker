@@ -252,7 +252,10 @@
 		                            </c:if>
 		                            
 	                            </div>
-	                            <div class="text-small">최저가  ￦${vo.travelExpense}/인</div>
+	                            <div class="text-samll">${vo.id}(${vo.nick})</div>
+	                            <div class="small-text">최저가  ￦${vo.travelExpense}/인</div>
+	                            
+	                            
 	                            <c:if test="${not empty vo.startDate}">
 		                          <div class="small-text">${vo.startDate}~${vo.endDate}</div>
 	                            </c:if>
