@@ -179,6 +179,16 @@ footer, header, hgroup, menu, nav, section {
 		color: #94d2e6;
 		transition-duration: 0.5s;
 	}
+
+	.reviewTitle {
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	
   	
   		
 </style>
@@ -237,7 +247,7 @@ footer, header, hgroup, menu, nav, section {
 	        <div id="review-area">
 	        	<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelReview/${trList.mainImg}"></a>
 	           	<div>
-	            <a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
+	            <a class="reviewTitle" href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
 	            <!-- infoNo를 get방식으로 전달하여 req.getParameter에 담김 -->
 	           	</div>
 	        </div>
