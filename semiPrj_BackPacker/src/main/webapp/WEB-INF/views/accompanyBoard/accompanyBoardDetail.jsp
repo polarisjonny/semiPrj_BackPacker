@@ -283,10 +283,7 @@
 					<c:if test="${gbvo.matchingState=='Y'}">
 						<h2>매칭 마감된 글입니다. 수정과 댓글작성이 불가</h2>
 					</c:if>
-					<div id="introduce-area">
-						<div class="bold-text">자기소개</div>						
-						<textarea class="content-text" readonly style="resize: none;">${writerMember.introMessage}</textarea>
-					</div>
+					
 					<div id="content-area">
 						<div class="bold-text">게시글 내용</div>
 						<textarea class="content-text" readonly style="resize: none;">${gbvo.content}</textarea>
