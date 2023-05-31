@@ -50,7 +50,7 @@ public class TravelReviewReportController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "게시글 신고 에러");
+			req.setAttribute("errorMsg", "게시글 신고 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

@@ -58,7 +58,7 @@ public class InquiryBoardController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "공지사항게시판 페이징처리실패");
+			req.setAttribute("errorMsg", "공지사항게시판 불러오기 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	

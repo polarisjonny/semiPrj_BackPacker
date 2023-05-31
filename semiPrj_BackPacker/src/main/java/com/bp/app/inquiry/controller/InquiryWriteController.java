@@ -55,7 +55,7 @@ public class InquiryWriteController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "문의사항 작성실패");
+			req.setAttribute("errorMsg", "문의사항 작성 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	

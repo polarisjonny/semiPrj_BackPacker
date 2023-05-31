@@ -46,7 +46,7 @@ public class InquiryServiceAnswerController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "답변 달기 에러");
+			req.setAttribute("errorMsg", "답변 달기 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

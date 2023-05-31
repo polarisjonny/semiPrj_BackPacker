@@ -52,7 +52,7 @@ public class MemberMyReviewListController extends HttpServlet {
 		} catch(Exception e) {
 			System.out.println("[ERROR] 여행 후기 게시판 조회 오류");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "여행 후기 게시판 조회 오류");
+			req.setAttribute("errorMsg", "여행 후기 게시판 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

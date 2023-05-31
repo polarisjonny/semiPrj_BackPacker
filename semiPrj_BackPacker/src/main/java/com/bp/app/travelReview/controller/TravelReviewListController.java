@@ -60,7 +60,7 @@ public class TravelReviewListController extends HttpServlet{
 			req.setAttribute("trList", trList);
 			req.getRequestDispatcher("/WEB-INF/views/notice/travelReviewList.jsp").forward(req, resp);
 		} catch (Exception e) {
-			req.setAttribute("errorMsg", "리뷰 조회 에러");
+			req.setAttribute("errorMsg", "리뷰 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 			e.printStackTrace();
 		}

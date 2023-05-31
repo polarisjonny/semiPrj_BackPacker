@@ -46,7 +46,7 @@ public class TravelReviewReplyWriteController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "댓글 작성 에러");
+			req.setAttribute("errorMsg", "댓글 작성 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

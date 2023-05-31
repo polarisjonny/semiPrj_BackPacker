@@ -389,4 +389,23 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public boolean checkPhoneNumber(Connection conn, String phoneNumber) throws Exception {
+		String sql = "SELECT PHONE_NUMBER FROM MEMBER WHERE PHONE_NUMBER = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  phoneNumber);
+		ResultSet rs = pstmt.executeQuery();
+		boolean result = true;
+		
+		//tx || rs
+		if(rs.next()) {
+			result = false;
+		}
+		
+ 		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
 }//class

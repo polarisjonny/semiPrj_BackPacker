@@ -52,7 +52,7 @@ public class MyPageController extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("[ERROR] 내가 작성한 글 목록 오류");
-			req.setAttribute("errorMsg", "작성한 글 목록 불러오는 중 오류 발생함, 다시 이용해주세요...");
+			req.setAttribute("errorMsg", "작성한 글 목록 불러오기 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}

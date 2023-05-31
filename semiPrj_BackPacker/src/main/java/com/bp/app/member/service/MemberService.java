@@ -224,4 +224,15 @@ public class MemberService {
 		//return
 		return result; 
 	}
+
+	public boolean checkPhoneNumber(String phoneNumber) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkPhoneNumber(conn, phoneNumber);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 }//class
