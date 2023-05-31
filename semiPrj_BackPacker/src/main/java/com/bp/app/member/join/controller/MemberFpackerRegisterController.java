@@ -52,7 +52,7 @@ public class MemberFpackerRegisterController extends HttpServlet {
 			if(updatedMember != null) {
 				req.getSession().setAttribute("loginMember", updatedMember);
 				String root = req.getContextPath();
-				resp.sendRedirect(root+"/home");
+				resp.sendRedirect(req.getContextPath()+"/member/myPage");
 			} else {
 				throw new Exception("[ERROR] 프패커 등록 실패....");
 			}

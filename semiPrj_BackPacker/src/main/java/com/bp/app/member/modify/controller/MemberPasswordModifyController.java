@@ -35,7 +35,7 @@ public class MemberPasswordModifyController extends HttpServlet{
 			
 			if(updatedMember != null) {
 				req.getSession().setAttribute("loginMember", updatedMember);
-				resp.sendRedirect(req.getContextPath()+"/home");
+				resp.sendRedirect(req.getContextPath()+"/member/myPage");
 			} else {
 				throw new Exception("[ERROR] 비밀번호 변경 실패");
 			}

@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>프패커 등록 페이지</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
         #register-title {
         	margin-top: 5%;
@@ -108,17 +110,41 @@
     <h2 id="id-card-title">신분증 등록</h2>
     <br>
     <br>
-    <form action="${pageContext.request.contextPath}/member/join/fpacker" method="post"  enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/member/join/fpacker" method="post"  enctype="multipart/form-data" >
         <div id="file-area">
-            <input type="file" name="idCard">
+            <input type="file" name="idCard" id="idCard">
             <br>
             <br>
             <br>
             <br>
-            <input id="register-submit-btn" type="submit" value="등록하기">
+            <input id="register-submit-btn" type="submit" value="등록하기" onclick="return validateForm();">
         </div>
     </form>
 
    </main>
+   
+   
+   <script>
+   function validateForm() {
+	    var fileInput = document.getElementById("idCard");
+	    
+	    // Check if a file is selected
+	    if (fileInput.files.length === 0) {
+	        Swal.fire({
+	            icon: 'error',
+	            title: '신분증 등록 실패',
+	            text: '신분증을 등록하셔야 합니다.'
+	        });
+	        return false; // Prevent form submission
+	    }
+	    
+	    Swal.fire({
+            icon: 'success',
+            title: '신분증 등록 성공',
+        });
+	    
+	    return true;
+	}
+    </script>
 </body>
 </html>

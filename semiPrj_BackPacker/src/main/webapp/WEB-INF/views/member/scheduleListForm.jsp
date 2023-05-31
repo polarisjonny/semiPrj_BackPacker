@@ -30,6 +30,7 @@
         }
 
         #first-schedule-area, #second-schedule-area, #third-schedule-area {
+            
             width: 100%;
             height: 300px;
             display: grid;
@@ -84,8 +85,8 @@
             </div>
             </c:forEach>
  --%>            
-
-			 <c:forEach items="${scheduleMap}" var="entry">
+			<c:if test="${not empty scheduleMap}">
+				<c:forEach items="${scheduleMap}" var="entry">
                 <div class="schedule-area-style" id="first-schedule-area">
                     <div id="first-area" onclick="location.href='${root}/member/myPage/schedule/detail?schedulerNo='+${entry.value.schedulerNo}">
                         <img class="schedule-area-img" src="${root}/static/img/place/airplane.jpg" alt="여행지 사진">
@@ -102,6 +103,13 @@
                     </div>
                 </div>
             </c:forEach>
+			</c:if>
+			
+			<c:if test="${empty scheduleMap}">
+				<div style="height: 60vh; display: flex; flex-direction: column;">
+				</div>
+			</c:if>
+			 
 			
 			
             <!-- <div class="schedule-area-style"  id="second-schedule-area">
