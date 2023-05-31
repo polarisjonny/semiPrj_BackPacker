@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -126,7 +127,7 @@
 			<div id="reviewWrite">여행후기 게시글 작성</div>
 		
 			<br>
-				<form action="${root}/notice/travelReviewWrite" method="post" enctype="multipart/form-data">
+				<form name="sub1" action="${root}/notice/travelReviewWrite" method="post" enctype="multipart/form-data">
 					<div id="main">
 						<img id="imgUpload">
 						<div id="Thumnail">
@@ -143,9 +144,10 @@
 						
 						<textarea id="summernote" name="content" style="resize:none;" ></textarea>
 						
-						<div id="submit">
-							<input type="submit" value="작성 완료">
-						</div>
+						
+							<div id="submit">
+								<input type="button" value="작성 완료" onclick="send();">
+							</div>
 				</form>
 
 			
@@ -237,7 +239,26 @@
 			}
 			
 		})
-		
+
+		//후기작성시 제목 안넣었을때 작성 못하게
+		function send(params) {
+			if(document.querySelector('input[name=title]').value==""){
+				Swal.fire({
+				title : '후기 작성을 실패하였습니다.',
+				icon: 'warning',
+				text: '제목을 입력해주세요',
+			})
+				return false;
+			}else{
+				document.querySelector('form[name=sub1]').submit();
+				Swal.fire({
+				title : '후기 작성을 성공하였습니다.',
+				icon: 'success',
+				text: '',
+			
+			})
+		}
+	}		
 
 		
      </script>

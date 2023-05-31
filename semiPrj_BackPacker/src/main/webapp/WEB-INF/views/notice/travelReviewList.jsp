@@ -213,10 +213,12 @@ footer, header, hgroup, menu, nav, section {
                </span>
         
             </form>
-            
-	         <div class="noticeBtn">
-		        <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
-	        </div>
+
+            <c:if test="${not empty loginMember}">
+				<div class="noticeBtn">
+				   <button onclick="location.href='${root}/notice/travelReviewWrite'">게시글 작성</button>
+			   </div>
+			</c:if>
         </div>
         
         <div id="content-area">

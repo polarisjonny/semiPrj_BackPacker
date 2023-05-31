@@ -465,6 +465,19 @@ public class TravelReviewDao {
 		return trList;
 	}
 
+//	//여행후기 작성했을때 거리점수 증가
+//	public int increaseScore(Connection conn , TravelReviewVo trvo) throws Exception {
+//
+//		String sql="UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE + 30 WHERE MEMBER_NO = ?";
+//		PreparedStatement pstmt = conn.prepareStatement(sql);
+//		pstmt.setString(1, trvo.getWriterNo());
+//		int result = pstmt.executeUpdate();
+//		
+//		JDBCTemplate.close(pstmt);
+//		
+//		return result;
+//	}
+
 	
 
 }//class
