@@ -43,19 +43,20 @@ public class AccompanyDetailController extends HttpServlet{
 			
 			MemberVo writerMember = gbs.selectMemberByNo(bvo);
 			//조회수 버그 고치기 위한.. 
+			//0과1은 0일때에는 조회수가 안오르게 해얗
 			GuideBoardVo gbvo =null;
 			if(loginMember==null||loginMember.equals("")) {
-				gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				gbvo =  gbs.selectOneByNo(bvo,"아무거나",0);
 				if(gbvo.getMatchingState().equals("N")) {
 					int result = gbs.setMatchingStatus(boardNo);
-					gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+					gbvo =  gbs.selectOneByNo(bvo,"아무거나",1);
 				}
 			}else {
 				String lmNo = loginMember.getMemberNo();
-				gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				gbvo =  gbs.selectOneByNo(bvo,lmNo,0);
 				if(gbvo.getMatchingState().equals("N")){
 					int result = gbs.setMatchingStatus(boardNo);
-					gbvo =  gbs.selectOneByNo(bvo,lmNo);
+					gbvo =  gbs.selectOneByNo(bvo,lmNo,1);
 				}	
 			}
 			List<TimetableVo>timetableVo = ss.totalTimetable(req);

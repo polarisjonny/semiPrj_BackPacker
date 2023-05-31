@@ -104,15 +104,15 @@ public class GuideBoardService {
 	}
 
 	//게시글 상세조회
-	public GuideBoardVo selectOneByNo(GuideBoardVo bvo, String lmNo) throws Exception {
+	public GuideBoardVo selectOneByNo(GuideBoardVo bvo, String lmNo,int i) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result=0;
 		//작성자가 본 조회수는오르지 않는 코드
-		if(lmNo.equals(bvo.getWriterNo())) {
+		if(lmNo.equals(bvo.getWriterNo())||i==0) {
 			result=1;
-		}else {
+		}else if(i==1){
 			result = dao.increaseHit(conn,bvo);			
 		}
 		GuideBoardVo selectedBvo =  dao.selectOneByNo(conn,bvo);
