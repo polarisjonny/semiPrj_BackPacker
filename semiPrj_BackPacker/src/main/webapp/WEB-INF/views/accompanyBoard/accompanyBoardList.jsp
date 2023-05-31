@@ -197,7 +197,6 @@
 </style>
 </head>
 <body>
-
 	<div id="wrap">
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
@@ -301,6 +300,12 @@
 </body>
 </html>
 <script>
+	let alertMsg = '${alertMsg}';
+	console.log(alertMsg);
+	if(alertMsg!=''){
+		alert(alertMsg);		
+	}
+
     const searchType = '${searchVo.searchType}';
     const searchValue = '${searchVo.searchValue}';
     function initSearchType(){
