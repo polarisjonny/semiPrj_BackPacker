@@ -101,7 +101,7 @@
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">동행게시판 게시글 작성</div>
-			<form action="${root}/accompany/write" method="post" enctype="multipart/form-data">
+			<form action="${root}/accompany/write" method="post" enctype="multipart/form-data" onsubmit="return checkValidation();">
 				<div id="Thum-parent">
 					<img id="imgUpload">
 					<div id="Thumnail">
@@ -120,7 +120,7 @@
 					<input type="text" name="title"placeholder="제목을 20자 이내로 적어주세요.">
 				</div>
 				<div id="content-area">
-					<textarea name="content" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>		
+					<textarea id="text-area" name="content" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>		
 				</div>
 				<div class="travel-date-area">
 					<div>시작날짜</div>
@@ -144,7 +144,48 @@
 	const fileTag =document.querySelector("#imgFile");
 	const Thumnail = document.querySelector("#Thumnail");
 	const preview = document.querySelector("#imgUpload");
+	
+	//내용이 없거나 제목이 길면 제출 안되게 하기
+	function checkValidation(){
+		const titleOk = checkTitle();
+		
+		if(!titleOk){
+			return false;
+		}
+		
+		const contentOk = checkContent();
+		if(!contentOk){
+			alert("내용을 한글자라도 입력하셔야 합니다.");
+			return false;
+		}
+		
+		return true;
+	}
+	function checkTitle(){
+		const title = document.querySelector("input[name=title]").value;
+		if(title.length==0){
+			console.log(title.length);
+			alert("제목을 한 글자라도 입력해주세요.");
+			return false;
+		}else if(title.length>30){
+			console.log(title.length);
+			alert("제목은 30자 이내여야 합니다.");
+			return false;
+		}else {
+			console.log(title.length);
+			return true;
+		}
+	}
 
+	function checkContent(){
+		const content = document.querySelector("#text-area").value;
+		if(content.length==0){
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	fileTag.addEventListener('change',function(params){
 		if(fileTag.files.length>0){
 			const fr = new FileReader();

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -269,7 +270,15 @@
 	                        <div class="middle-content">
 	                            <img class="middle-img" src="${root}/static/img/accompany/${vo.mainImg}" alt="">
 	                        </div>
-	                        <div class="end-content">${vo.title}</div>
+	                        <div class="end-content">
+									<c:set var="titleLength" value="${fn:length(vo.title)}" />
+		                            <c:if test="${titleLength >= 27}">
+		                            ${vo.title}...
+		                            </c:if>
+		                            <c:if test="${titleLength <27 }">
+		                            ${vo.title}
+		                            </c:if>
+	                        </div>
 	                    </div>
                 	</c:forEach>
                     

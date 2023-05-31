@@ -43,6 +43,7 @@ public class DoFpackerListController extends HttpServlet{
 			List<GuideBoardVo> bvoList = null;
 			if(searchType ==null || searchType.equals("")) {
 				bvoList = gbs.getList(1, pvo);
+				
 			}else {
 				bvoList = gbs.getList(1 ,pvo, searchType, searchValue);		
 			}
