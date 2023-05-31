@@ -447,5 +447,57 @@ public class GuideBoardDao {
 		
 		return result;
 	}
+	//채팅방번호당 하나의 행이 생성 리스트에 참여자 목록 넣기 
+	//리스트에 memberVo로 vo정보 넣고.. nono 멤버 번호만 넣으면 되니까..
+	//리스트에서 하나씩 꺼내서 점수 부여...
+	//본인은 바로 점수 부
+	public int giveScore(Connection conn, String chattingMemberNo) throws Exception {
+		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE+50 WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, chattingMemberNo);
+		int result = pstmt.executeUpdate();
+		
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(pstmt);
+		
+		
+		return result;
+	}
+	//1.채팅방 조회해서 게시글 넘버가 1인것들 ... 인데 체크둘다 y인것들..조회하면 참여자1참여자2를구할 수 있는데 로그인 멤버랑 일치하는 멤버를 찾자. 찾은 참여자를 반환 상대방 리스트를 반환. 
+	public List<String> findChatMember(Connection conn, String boardNo,MemberVo loginMember) throws Exception {
+		String sql = "SELECT CHATTING_USER_NO, CHATTING_USER2_NO FROM CHATTING_ROOM WHERE GUIDE_BOARD_NO = ? AND MATCHING_CHECK ='Y' AND MATCHING_CHECK2 ='Y'";
+		PreparedStatement pstmt =conn.prepareStatement(sql);
+		System.out.println(boardNo);
+		pstmt.setString(1, boardNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<String> list = new ArrayList<>();
+		while(rs.next()) {
+			String m1 = rs.getString("CHATTING_USER_NO");
+			System.out.println("user1:"+m1);
+			String m2 = rs.getString("CHATTING_USER2_NO");
+			System.out.println("urer2:"+m2);
+			System.out.println("로그인멤버번허:"+loginMember.getMemberNo());
+			
+			if(m1.equals(loginMember.getMemberNo())) {
+				list.add(m2);
+			}else if(m2.equals(loginMember.getMemberNo())){
+				list.add(m1);
+			}
+			
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		list.add(loginMember.getMemberNo());
+		System.out.println(list);
+		
+		return list;
+	}
 
 }

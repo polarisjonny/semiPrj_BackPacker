@@ -313,14 +313,25 @@ public class GuideBoardService {
 	}
 
 	//게시글 마감
-	public int finish(String boardNo) throws Exception {
+	//1.채팅방 조회해서 게시글 넘버가 1인것들 ... 인데 체크둘다 y인것들..조회하면 참여자1참여자2를구할 수 있는데 로그인 멤버랑 일치하는 멤버를 찾자. 찾은 참여자를 반환 상대방 리스트를 반환. 
+	public int finish(String boardNo,MemberVo loginMember) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		GuideBoardDao dao = new GuideBoardDao();
-		int result = dao.finish(conn,boardNo);
+		int result1 = dao.finish(conn,boardNo);
+		List<String> chattingMemberList = dao.findChatMember(conn,boardNo,loginMember);
+		System.out.println(chattingMemberList.get(0));
+		System.out.println(chattingMemberList.get(1));
+		//로그인 멤버랑 채팅참여자 리스트 넘기
 		
-		return result;
+		for(int i=0; i<chattingMemberList.size();i++) {
+			dao.giveScore(conn,chattingMemberList.get(i));
+		}
+		 
+		
+		return result1;
+		
 	}
 
 	//게시판번호로 매칭상태불러오기

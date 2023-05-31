@@ -384,7 +384,7 @@
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
 											if('${loginMember.id}'=='ADMIN'){
-												sBtn[0].style.display = 'inline-block';
+												sBtn[0].style.display = 'none';
 												sBtn[1].style.display = 'inline-block';
 											}
 										}
@@ -513,7 +513,7 @@
 		//댓글삭제
 		function delComment(guideReplyNo){
 			$.ajax({
-				url: "${root}/accompany/reply/delete",
+				url: "${root}/doFpacker/reply/delete",
 				type: "post",
 				data : {
 					replyNo : guideReplyNo,

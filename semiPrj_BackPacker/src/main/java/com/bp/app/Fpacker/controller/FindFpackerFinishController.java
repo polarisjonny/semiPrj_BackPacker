@@ -12,23 +12,21 @@ import javax.servlet.http.HttpSession;
 import com.bp.app.gboard.service.GuideBoardService;
 import com.bp.app.member.vo.MemberVo;
 
-@WebServlet ("/doFpacker/finish")
-public class DoFpackerFinishController extends HttpServlet {
+@WebServlet ("/findFpacker/finish")
+public class FindFpackerFinishController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String boardNo = req.getParameter("no");
-			System.out.println(boardNo);
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
 			int result = gbs.finish(boardNo,loginMember);
 			
 			if(result==1) {
 				req.setAttribute("alertMsg", "회원점수가 올라갔습니다. 프로필을 통해 확인하세요.");
-				resp.sendRedirect(req.getContextPath()+"/doFpacker/list?page=1");
+				resp.sendRedirect(req.getContextPath()+"/findFpacker/list?page=1");
 			}else {
 				throw new Exception();
 			}
