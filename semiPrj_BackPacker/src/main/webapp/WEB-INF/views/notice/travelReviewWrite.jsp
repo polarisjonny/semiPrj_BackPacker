@@ -81,8 +81,8 @@
 	#submit > input{
 		margin-right:80px;
         border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         height:40px;
         color:white;
         margin-top:10px;

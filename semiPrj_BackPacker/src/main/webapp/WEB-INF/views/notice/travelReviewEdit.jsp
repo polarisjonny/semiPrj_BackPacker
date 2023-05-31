@@ -53,6 +53,11 @@
 		
 	}
 	
+	.edit-btn{
+		background-color: #94d2e6;
+		color: white;
+		border: 1px solid #94d2e6;
+	}
 
 	
 	#btn {

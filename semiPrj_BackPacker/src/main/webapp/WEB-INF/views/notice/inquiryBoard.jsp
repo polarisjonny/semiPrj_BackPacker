@@ -68,13 +68,13 @@
   	#board-search-area select{
   	
   		border-radius: 20px;
-        background-color: #B9eeff;
-        border-color:#B9eeff;
+        background-color: #94d2e6;
+        border-color:#94d2e6;
         width: 150px;
         height:40px;
         text-align:center;
         font-size:18px;
-  	
+		color: white;
   	}
   	
   	.board-input-area > input{
@@ -140,8 +140,8 @@
     
     .noticeBtn>button{
         border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
         padding:10px;
     }
@@ -197,8 +197,8 @@
 				 <div id="page-area">
             	
             	<c:if test="${pv.currentPage > 1 && pv.currentPage != 0}"> 
-	            	<a style="color:#99ccff" href="${root}/notice/inquiryBoard?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-	            	<a style="color:#99ccff" href="${root}/notice/inquiryBoard?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+	            	<a style="color:#94d2e6" href="${root}/notice/inquiryBoard?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+	            	<a style="color:#94d2e6" href="${root}/notice/inquiryBoard?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
             	</c:if> 
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
@@ -208,13 +208,13 @@
             		</c:if>
             		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a style="color:#99ccff">${i}</a>
+            	      	<a style="color:#94d2e6">${i}</a>
             		</c:if>
             	</c:forEach>
             	
             	 <c:if test="${pv.currentPage < pv.maxPage}"> 
-	            	<a style="color:#99ccff" href="${root}/notice/inquiryBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-	            	<a style="color:#99ccff" href="${root}/notice/inquiryBoard?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+	            	<a style="color:#94d2e6" href="${root}/notice/inquiryBoard?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+	            	<a style="color:#94d2e6" href="${root}/notice/inquiryBoard?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
             	 </c:if> 
             	
             </div>

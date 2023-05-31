@@ -76,18 +76,19 @@ body {
 		width:900px;
     }
     
-    #review-search-area > .noticeBtn{
+    /* #review-search-area > .noticeBtn{
     	grid-column-end: 5;
     }
     
     .noticeBtn > button{
     	padding:10px;
-    }
+    } */
     
     #review-search-area select{
         border-radius: 20px;
-        background-color: #B9eeff;
-        border-color:#B9eeff;
+        background-color: #94d2e6;
+        border-color:#94d2e6;
+		color: white;
         width: 77px;
         height:30px;
         
@@ -149,12 +150,12 @@ body {
 	
     
     
-    .noticeBtn>button{
+    /* .noticeBtn>button{
         border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
-    }
+    } */
     
     #page-area{
     	display:flex;
@@ -178,7 +179,7 @@ body {
 
 	  #hit > a:hover{
 		cursor: pointer;
-		color: #99ccff;
+		color: #94d2e6;
 		transition-duration: 0.5s;
 	}
   	
@@ -255,8 +256,8 @@ body {
         <div id="page-area">
 
 				<c:if test="${pv.currentPage > 1}">
-					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-					<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+					<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+					<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${backPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
 				</c:if>
     
             		
@@ -267,13 +268,13 @@ body {
 					</c:if>	
 
 						<c:if test="${pv.currentPage == i}">
-							<a style="color:#99ccff">${i}</a>
+							<a style="color:#94d2e6">${i}</a>
 						</c:if>
 				</c:forEach>
             	
 					<c:if test="${pv.currentPage < pv.maxPage}">
-						<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-						<a style="color:#99ccff" href="${root}/notice/travelInformation?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
+						<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+						<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
 					</c:if>
         </div>
    

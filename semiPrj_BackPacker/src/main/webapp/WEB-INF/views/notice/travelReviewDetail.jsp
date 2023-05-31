@@ -85,8 +85,8 @@ body {
 	
 	#review-btn > button{
 		border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
         padding:10px;
         margin:0px 10px 10px;
@@ -94,8 +94,8 @@ body {
 	
 	span > button {
 		border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
         padding:10px;
         margin:0px 10px 10px;
@@ -112,8 +112,8 @@ body {
 	
 	#reply-area button{
 		border-radius: 10px;
-		border:1px solid #99ccff;
-		background-color:  #99ccff;
+		border:1px solid #94d2e6;
+		background-color:  #94d2e6;
         color:white;
         margin:0px 10px 0px;
 	}
@@ -152,8 +152,8 @@ body {
 
 	.comment-del{
 		border-radius: 7px;
-		border:1px solid #99ccff;
-		background-color:  #99ccff;
+		border:1px solid #94d2e6;
+		background-color:  #94d2e6;
 		color: white;
 		
 	}
