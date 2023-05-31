@@ -411,8 +411,8 @@
 							<img id="place-img" src="${root}/static/img/place/${place.placeImage}" alt="">
 							<div id="p-place">${place.placeName}</div>
 							<div id="p-area">
-								<div id="p-introduce"><i class="bi bi-info-circle plus cursor" ></i></div>
-								<div id="p-pick"><i class="bi bi-plus-circle cursor"  data-placeno="${place.placeNo}" ></i></div>
+								<div id="p-introduce"><i class="bi bi-info-circle cursor" ></i></div>
+								<div id="p-pick"><i class="bi bi-plus-circle plus cursor"  data-placeno="${place.placeNo}" ></i></div>
 							</div>
 						</div>
 						<div id="modal-area" class="modal-area">
