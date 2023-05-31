@@ -56,7 +56,7 @@ public class MemberReviewDetailReadController extends HttpServlet{
          System.out.println("[ERROR] go prfile errr....");
          e.printStackTrace();
          
-         req.setAttribute("errorMsg", "프로필조회실패");
+         req.setAttribute("errorMsg", "프로필 조회 실패");
          
       }
       

@@ -21,7 +21,7 @@
 
         .schedule-area-img {
             width: 100%;
-            height: 500px;
+            height: 300px;
             box-sizing: border-box;
         }
 
@@ -31,7 +31,7 @@
 
         #first-schedule-area, #second-schedule-area, #third-schedule-area {
             width: 100%;
-            height: 500px;
+            height: 300px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin-bottom: 10%;
