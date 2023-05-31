@@ -110,7 +110,7 @@
 						</label>
 						<input type="file" id="imgFile">
 				</div>
-						<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요.">
+						<input type="text" id="title"placeholder="제목을 20자 이내로 적어주세요." maxlength="20">
 						<br>
 						
 						<textarea class="summernote" name="editordata" style="resize:none;" ></textarea>

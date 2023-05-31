@@ -182,6 +182,14 @@ body {
 		color: #94d2e6;
 		transition-duration: 0.5s;
 	}
+
+	.infoTitle {
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
   	
   	
   	
@@ -243,7 +251,7 @@ body {
         <div class="review-area">
         	<a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelInformation/${tiList.mainImg}"></a>
            	<div>
-            <a href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}">${tiList.title}</a>
+            <a class="infoTitle" href="${root}/notice/travelInformationDetail?infoNo=${tiList.infoNo}">${tiList.title}</a>
            	</div>
         </div>
       	</c:forEach>
