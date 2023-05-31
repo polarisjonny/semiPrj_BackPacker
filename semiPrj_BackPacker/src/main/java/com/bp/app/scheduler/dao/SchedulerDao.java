@@ -140,13 +140,13 @@ public class SchedulerDao {
 		return result;
 	}
 
-	public List<TimetableVo> getTimetable(HttpServletRequest req, Connection conn) throws Exception {
+	public List<TimetableVo> getTimetable(String scheduler , String timetableDate, Connection conn) throws Exception {
 
 		//sql
 		String sql="SELECT M.TIMETABLE_NO ,M.PLACE_NO ,M.SCHEDULER_NO ,M.TIMETABLE_DATE ,M.BESPOKE_PLACE ,M.BESPOKE_TIME ,M.TIMETABLE_START_TIME ,M.PLACE_NAME ,M.PLACE_IMAGE ,M.PLACE_TIME ,M.PLACE_EXPENSE ,S.START_DATE ,S.END_DATE FROM (SELECT T.TIMETABLE_NO ,T.PLACE_NO ,T.SCHEDULER_NO ,T.TIMETABLE_DATE ,T.BESPOKE_PLACE ,T.BESPOKE_TIME ,TO_CHAR(T.TIMETABLE_START_TIME , 'HH24:MI') AS TIMETABLE_START_TIME ,P.PLACE_NAME ,P.PLACE_IMAGE ,P.PLACE_TIME ,P.PLACE_EXPENSE FROM TIMETABLE T JOIN PLACE P ON (T.PLACE_NO = P.PLACE_NO))M JOIN SCHEDULER S ON( M.SCHEDULER_NO = S.SCHEDULER_NO) WHERE M.SCHEDULER_NO=? AND TIMETABLE_DATE=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, req.getParameter("schedulerNo"));
-		pstmt.setString(2,req.getParameter("timetableDate"));
+		pstmt.setString(1, scheduler);
+		pstmt.setString(2,timetableDate);
 		ResultSet rs = pstmt.executeQuery();
 		//rs
 		List<TimetableVo> list = new ArrayList<>();
@@ -154,7 +154,7 @@ public class SchedulerDao {
 			String timetableNo= rs.getString("TIMETABLE_NO");
 			String placeNo =rs.getString("PLACE_NO");
 			String schedulerNo= rs.getString("SCHEDULER_NO");
-			String timetableDate= rs.getString("TIMETABLE_DATE");
+			timetableDate= rs.getString("TIMETABLE_DATE");
 			String bespokePlace= rs.getString("BESPOKE_PLACE");
 			String timetableStartTime= rs.getString("TIMETABLE_START_TIME");
 			String bespokeTime= rs.getString("BESPOKE_TIME");
@@ -343,18 +343,19 @@ public class SchedulerDao {
 		return result;
 	}
 
-	public List<PlaceVo> search(HttpServletRequest req, Connection conn) throws Exception {
+	public List<PlaceVo> search(String searchPlace, String countryNo,Connection conn) throws Exception {
 
-		String sql = "SELECT * FROM PLACE WHERE PLACE_NAME LIKE '%'||?||'%'";
+		String sql = "SELECT * FROM PLACE WHERE PLACE_NAME LIKE '%'||?||'%' AND COUNTRY_NO=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,req.getParameter("searchPlace"));
+		pstmt.setString(1,searchPlace);
+		pstmt.setString(2,countryNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<PlaceVo> list = new ArrayList<>();
 		while(rs.next()) {
 			String placeNo =rs.getString("PLACE_NO");
 			String placeCategoryNo =rs.getString("PLACE_CATEGORY_NO");
-			String countryNo =rs.getString("COUNTRY_NO");
+			countryNo =rs.getString("COUNTRY_NO");
 			String locationNo =rs.getString("LOCATION_NO");
 			String placeName =rs.getString("PLACE_NAME");
 			String placeIntroduce =rs.getString("PLACE_INTRODUCE");

@@ -18,10 +18,12 @@ public class DeScheduler extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			SchedulerService ss = new SchedulerService();
-			int result = ss.deScheduler(req);
 			
-			System.out.println(req.getParameter("schedulerNo"));
+			String SchedulerNo = req.getParameter("schedulerNo");
+			
+			SchedulerService ss = new SchedulerService();
+			int result = ss.deScheduler(SchedulerNo);
+			
 			
 			if(result==1) {
 				System.out.println("스케줄 번호 삭제 완료");

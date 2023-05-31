@@ -47,7 +47,7 @@ header{
     display: flex;
     align-items: center;
     justify-content : space-evenly;
-    width : 25vw;
+    width : 27vw;
 	background-color: white;
 
 }
