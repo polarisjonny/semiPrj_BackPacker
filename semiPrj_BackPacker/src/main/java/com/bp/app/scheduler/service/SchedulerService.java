@@ -21,12 +21,12 @@ public class SchedulerService {
 	
 	private final SchedulerDao dao = new SchedulerDao();
 
-	public List<PlaceVo> selectPlace(HttpServletRequest req) throws Exception {
+	public List<PlaceVo> selectPlace(String countryNo,String locationNo) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<PlaceVo>placeList = dao.selectPlace(req,conn);
+		List<PlaceVo>placeList = dao.selectPlace(countryNo,locationNo,conn);
 		
 		JDBCTemplate.close(conn);
 		
