@@ -15,7 +15,7 @@ import com.bp.app.travelReview.vo.TravelReviewVo;
 public class MyPageBoardDao {
 
 	public List<GuideBoardVo> selectGuideBoardList(Connection conn, String memberNo) throws Exception {
-		String sql = "SELECT WRITER_NO, GUIDE_BOARD_NO, CATEGORY_NAME, CATEGORY_NO, MAIN_IMG, SUBSTR(TITLE, 1, 7) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ? ORDER BY GUIDE_BOARD_NO DESC";
+		String sql = "SELECT WRITER_NO, GUIDE_BOARD_NO, CATEGORY_NAME, CATEGORY_NO, MAIN_IMG, SUBSTR(TITLE, 1, 7) AS TITLE, TO_CHAR(ENROLL_DATE, 'YY-MM-DD') AS ENROLL_DATE, HIT FROM GUIDE_BOARD G JOIN GUIDE_BOARD_CATEGORY C ON GUIDE_BOARD_CATEGORY_NO = CATEGORY_NO WHERE WRITER_NO = ? AND DELETE_YN = 'N' ORDER BY GUIDE_BOARD_NO DESC";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();

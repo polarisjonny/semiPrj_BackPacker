@@ -179,7 +179,7 @@ public class MemberDao {
 	
 	public int registerFpacker(String idChangeName, String memberNo, Connection conn) throws Exception {
 		//SQL
-		String sql = "UPDATE MEMBER SET IS_GUIDE = 'O', ID_CARD = ? WHERE MEMBER_NO = ?";
+		String sql = "UPDATE MEMBER SET IS_GUIDE = 'O', ID_CARD = ? WHERE MEMBER_NO = ? AND MEMBER_STATUS ='1'";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, idChangeName);
@@ -281,7 +281,7 @@ public class MemberDao {
  	}
 
 	public int changePassword(Connection conn, String memberNo, String password) throws Exception {
-		String sql = "UPDATE MEMBER SET PASSWORD = ? WHERE MEMBER_NO = ?";
+		String sql = "UPDATE MEMBER SET PASSWORD = ? WHERE MEMBER_NO = ? AND MEMBER_STATUS = '1'";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, password);
@@ -294,7 +294,7 @@ public class MemberDao {
 	}
 
 	public MemberVo findId(Connection conn, String name, String phoneNumber) throws Exception {
-		String sql = "SELECT ID, NICK FROM MEMBER WHERE NAME = ? AND PHONE_NUMBER = ?";
+		String sql = "SELECT ID, NICK FROM MEMBER WHERE NAME = ? AND PHONE_NUMBER = ?  AND MEMBER_STATUS = '1'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, name);
 		pstmt.setString(2, phoneNumber);
@@ -322,7 +322,7 @@ public class MemberDao {
 	}
 
 	public MemberVo findPassword(Connection conn, String id, String phoneNumber, String email) throws Exception {
-		String sql = "SELECT PASSWORD, NICK FROM MEMBER WHERE ID = ? AND PHONE_NUMBER = ? AND EMAIL = ?";
+		String sql = "SELECT PASSWORD, NICK FROM MEMBER WHERE ID = ? AND PHONE_NUMBER = ? AND EMAIL = ?  AND MEMBER_STATUS = '1'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, phoneNumber);
@@ -352,7 +352,7 @@ public class MemberDao {
 
 	public boolean checkId(Connection conn, String id) throws Exception {
 		//sql
-		String sql = "SELECT ID FROM MEMBER WHERE ID = ?";
+		String sql = "SELECT ID FROM MEMBER WHERE ID = ?  AND MEMBER_STATUS = '1'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		ResultSet rs = pstmt.executeQuery();
@@ -372,7 +372,7 @@ public class MemberDao {
 	}
 
 	public boolean checkNick(Connection conn, String nick) throws Exception {
-		String sql = "SELECT NICK FROM MEMBER WHERE NICK = ?";
+		String sql = "SELECT NICK FROM MEMBER WHERE NICK = ? AND MEMBER_STATUS = '1'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,  nick);
 		ResultSet rs = pstmt.executeQuery();
@@ -391,7 +391,7 @@ public class MemberDao {
 	}
 
 	public boolean checkPhoneNumber(Connection conn, String phoneNumber) throws Exception {
-		String sql = "SELECT PHONE_NUMBER FROM MEMBER WHERE PHONE_NUMBER = ?";
+		String sql = "SELECT PHONE_NUMBER FROM MEMBER WHERE PHONE_NUMBER = ? AND MEMBER_STATUS = '1'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,  phoneNumber);
 		ResultSet rs = pstmt.executeQuery();

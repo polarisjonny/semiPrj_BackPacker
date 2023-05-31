@@ -109,8 +109,8 @@
 
 
         .article-image {
-            width: 90%;
-            height: 70%;
+            width: 150px;
+            height: 150px;
         }
 
         #my-article-list-area {
