@@ -134,7 +134,7 @@
 </head>
 <body>
 	<main>
-	<%@ include file="/WEB-INF/views/common/header_white.jsp" %>
+		<%@ include file="/WEB-INF/views/common/header_white.jsp" %>
 		<%@ include file="/WEB-INF/views/common/nav.jsp" %>
 		<div id="first">
 			<div id="left">

@@ -31,14 +31,27 @@ public class SchedulerMake extends HttpServlet{
 				lat = 33.4996213;
 				lng = 126.5311884;
 			}else if("2".equals(req.getParameter("countryNo"))) {
-				lat=34.6936;
-				lng=135.502;
+				lat = 34.6936;
+				lng = 135.502;
+			}else if("3".equals(req.getParameter("countryNo"))) {
+				lat = 39.904211;
+				lng = 116.407395;
+			}else if("4".equals(req.getParameter("countryNo"))) {
+				lat = 1.2800945;
+				lng = 103.8509491;
+			}else if("5".equals(req.getParameter("countryNo"))) {
+				lat = 34.6936;
+				lng = 135.502;
 			}
 			
+			String counrtyNo = req.getParameter("countryNo");
+			String locationNo = req.getParameter("locationNo");
 			
 			
 			SchedulerService ss = new SchedulerService();
-			List<PlaceVo>placeList = ss.selectPlace(req);
+			List<PlaceVo>placeList = ss.selectPlace(counrtyNo,locationNo);
+			
+			System.out.println(placeList);
 			
 			req.setAttribute("lat", lat);
 			req.setAttribute("lng", lng);

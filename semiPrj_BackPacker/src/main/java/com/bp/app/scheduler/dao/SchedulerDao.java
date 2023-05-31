@@ -19,13 +19,14 @@ import com.bp.app.scheduler.vo.TimetableVo;
 
 public class SchedulerDao {
 
-	public List<PlaceVo> selectPlace(HttpServletRequest req, Connection conn) throws Exception {
-
+	public List<PlaceVo> selectPlace(String countryNo,String locationNo, Connection conn) throws Exception {
+		
+		
 		//sql
 		String sql = "SELECT * FROM PLACE WHERE COUNTRY_NO= ? AND LOCATION_NO= ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, req.getParameter("countryNo"));
-		pstmt.setString(2, req.getParameter("locationNo"));
+		pstmt.setString(1, countryNo);
+		pstmt.setString(2, locationNo);
 		ResultSet rs = pstmt.executeQuery();
 		//tx
 		List<PlaceVo>placeList = new ArrayList<>();
@@ -35,8 +36,8 @@ public class SchedulerDao {
 			
 			String placeNo = rs.getString("PLACE_NO");
 			String placeCategoryNo = rs.getString("PLACE_CATEGORY_NO");
-			String countryNo = rs.getString("COUNTRY_NO");
-			String locationNo = rs.getString("LOCATION_NO");
+			countryNo = rs.getString("COUNTRY_NO");
+			locationNo = rs.getString("LOCATION_NO");
 			String placeName = rs.getString("PLACE_NAME");
 			String placeIntroduce = rs.getString("PLACE_INTRODUCE");
 			String placeImage = rs.getString("PLACE_IMAGE");
@@ -65,6 +66,8 @@ public class SchedulerDao {
 		//close
 		JDBCTemplate.close(pstmt);
 		JDBCTemplate.close(rs);
+		
+		System.out.println(placeList);
 		
 		return placeList;
 	}
