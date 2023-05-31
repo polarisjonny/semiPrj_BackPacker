@@ -166,13 +166,13 @@
             <br><br>
             <div id="page-area">
                 <c:if test="${ pv.currentPage > 1 }">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage-1}">이전</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage-1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">이전</a>
                 </c:if>
                 <c:forEach begin="${pv.startPage}" end="${pv.endPage}" var="i">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${i}">${i}</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${i}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">${i}</a>
                 </c:forEach>
                 <c:if test="${ pv.currentPage < pv.maxPage }">
-                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage+1}">다음</a>
+                   <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/admin/place/list?page=${pv.currentPage+1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}">다음</a>
                 </c:if>
              </div>
         </div>

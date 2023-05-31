@@ -191,8 +191,9 @@ public class BoardManageService {
 
 		Connection conn = JDBCTemplate.getConnection();
 		int result = dao.write(conn , trvo);
+//		int result2 = dao.increaseScore(conn,trvo);
 		
-		if(result == 1 ) {
+		if(result == 1) {
 			JDBCTemplate.commit(conn);
 		}
 		else {
@@ -204,5 +205,4 @@ public class BoardManageService {
 		return result;
 	
 	}
-
 }
