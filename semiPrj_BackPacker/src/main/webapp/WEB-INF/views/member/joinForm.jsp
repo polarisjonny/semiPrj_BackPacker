@@ -220,6 +220,16 @@
     	#profile-area {
     		cursor: pointer;
     	}
+    	
+    	/* .preview-area {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        } */
     </style>
      
    
@@ -296,7 +306,7 @@
                         <option value="50">50대</option>
                     </select>
                     <br>
-                    <div id="preview-area">
+                    <div id="preview-area" class="preview-area">
                     	
                     </div>
                 </div>
@@ -329,6 +339,7 @@
 		//사진 미리보기
 		const fileTag = document.querySelector("input[type=file]");
 		const previewArea = document.querySelector("#preview-area");
+		let currentImage;
 		fileTag.onchange = function(e){
 			if(fileTag.files.length == 0) {
 				previewArea.innerHTML = '';
@@ -338,7 +349,6 @@
 			const fr = new FileReader();
 			
 			fr.readAsDataURL(fileTag.files[0]);
-			
 			fr.onload = function(e) {
 				const imgTag = document.createElement('img');
 				imgTag.src = e.target.result;
@@ -346,6 +356,16 @@
 				imgTag.width = 100;
 				imgTag.height = 100;
 				imgTag.style.borderRadius = "50%";
+				
+				
+				 if (currentImage) {
+	                    previewArea.removeChild(currentImage);
+	                }
+
+                // Set the new image as the current image
+                currentImage = imgTag;
+				
+				
 				previewArea.appendChild(imgTag);
 			}
 		};
@@ -547,10 +567,6 @@ checkNickButton.addEventListener("click", function() {
         });
     }
 });
-</script>
-
-
-    
 
 	
 </body>

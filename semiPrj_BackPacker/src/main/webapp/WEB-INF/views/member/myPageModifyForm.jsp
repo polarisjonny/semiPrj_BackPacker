@@ -289,29 +289,40 @@
 
 
 	<script>
-		//사진 미리보기
-		const fileTag = document.querySelector("input[type=file]");
-		const previewArea = document.querySelector("#preview-area");
-		fileTag.onchange = function(e){
-			if(fileTag.files.length == 0) {
-				previewArea.innerHTML = '';
-				return;
-			}
+	const fileTag = document.querySelector("input[type=file]");
+	const previewArea = document.querySelector("#preview-area");
+	let currentImage;
+	fileTag.onchange = function(e){
+		if(fileTag.files.length == 0) {
+			previewArea.innerHTML = '';
+			return;
+		}
+		
+		const fr = new FileReader();
+		
+		fr.readAsDataURL(fileTag.files[0]);
+		fr.onload = function(e) {
+			const imgTag = document.createElement('img');
+			imgTag.src = e.target.result;
+			imgTag.alt = "미리보기 이미지 사진";
+			imgTag.width = 100;
+			imgTag.height = 100;
+			imgTag.style.borderRadius = "50%";
 			
-			const fr = new FileReader();
 			
-			fr.readAsDataURL(fileTag.files[0]);
+			 if (currentImage) {
+                    previewArea.removeChild(currentImage);
+                }
+
+            // Set the new image as the current image
+            currentImage = imgTag;
 			
-			fr.onload = function(e) {
-				const imgTag = document.createElement('img');
-				imgTag.src = e.target.result;
-				imgTag.alt = "미리보기 이미지 사진";
-				imgTag.width = 100;
-				imgTag.height = 100;
-				imgTag.style.borderRadius = "50%";
-				previewArea.appendChild(imgTag);
-			}
-		};
+			
+			previewArea.appendChild(imgTag);
+		}
+	};
+	
+
 		
 		function checkValidation(){
 			const phoneNumber = document.querySelector('input[name="phoneNumber"]').value;
