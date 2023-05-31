@@ -228,7 +228,7 @@
     	   const left = (screen.width / 2) - (width / 2);
     	   const top = 0;
          window.open('${root}/click/profile?selectMemberNo='+e, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-         window.close();
+         
 
     }
 

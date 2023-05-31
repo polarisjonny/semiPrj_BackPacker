@@ -65,6 +65,18 @@
        .profile-border{
          border-radius : 50px;
          }
+         .goBack{
+         	margin-left: auto;
+         	margin-right: auto;
+         	text-align : center;
+         	width : 80px;
+         	height : 30px;
+         	background-color: #94D2E6;
+         	margin-top : 20px;
+         	color: white;
+         	cursor: pointer;
+         	border-radius : 30px;
+         }
 </style>
 </head>
 
@@ -118,6 +130,7 @@
                <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/click/profile/review/detail?selectMemberNo=${selectMemberDetail.memberNo}&page=${pv.currentPage+1}">다음</a>
             </c:if>
          </div>
+        <div class="goBack" onclick="goBack()"> 뒤로가기 </div>
         </div>
      </div>
 </body>
@@ -131,4 +144,8 @@ function imgClick(no) {
      const top = 0;
      window.open('${root}/click/profile?selectMemberNo='+no, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
    }
+   
+function goBack() {
+	  window.history.back();
+	}
 </script>
