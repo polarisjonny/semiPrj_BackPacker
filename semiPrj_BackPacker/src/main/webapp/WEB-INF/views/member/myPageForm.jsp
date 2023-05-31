@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
 		#main-content {
 			margin-top: 10%;
@@ -224,7 +225,7 @@
                     	<div id="guide-message"><i class="fa-solid fa-circle-info" style="color: #94d2e6;"></i> 이미 프패커로 등록된 유저입니다.</div>
                 </c:if>
                 <div id="button-area">
-                    <button id="register-btn" class="mypage-button">프패커 등록</button>
+                    <button id="register-btn" class="mypage-button" onclick="checkFpacker();">프패커 등록</button>
                     <button id="edit-info-btn" class="mypage-button">개인정보 수정</button>
                     <button id="password-edit-btn" class="mypage-button">비밀번호 수정</button>
                 </div>
@@ -391,10 +392,10 @@
    	 		});
    	 	});
    	 	
-   	 	const registerBtn = document.querySelector("#register-btn");
+   	 /* 	const registerBtn = document.querySelector("#register-btn");
    	 	registerBtn.addEventListener("click", function(){
    	 		location.href = "${root}/member/join/fpacker";
-   	 	});
+   	 	}); */
    	 	
    	 	const editInfoBtn = document.querySelector("#edit-info-btn");
    	 	editInfoBtn.addEventListener("click", function(){
@@ -429,6 +430,33 @@
         const top = 0;
         window.open('${root}/click/profile?selectMemberNo=' + memberNo, '', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
     }
+   	
+   	
+   	function checkFpacker() {
+   	    const isGuide = '${loginMember.isGuide}';
+   	    
+   	    if (isGuide === 'O') {
+   	        Swal.fire({
+   	            title: '프패커 등록 실패',
+   	            icon: 'error',
+   	            text: '이미 프패커로 등록된 유저입니다.',
+   	        });
+   	    } else {
+   	        Swal.fire({
+   	            title: '프패커로 등록하시겠습니까?',
+   	            icon: 'question',
+   	            showCancelButton: true,
+   	            confirmButtonText: '예',
+   	            cancelButtonText: '아니오',
+   	        }).then((result) => {
+   	            if (result.isConfirmed) {
+   	                window.location.href = '${root}/member/join/fpacker';
+   	            } else {
+   	                Swal.fire('프패커 등록이 취소되었습니다.', '', 'info');
+   	            }
+   	        });
+   	    }
+   	}
 </script>
     
 </body>
