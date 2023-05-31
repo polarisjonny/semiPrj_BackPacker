@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -154,7 +156,7 @@
 		<div id="main-content-title"> 문의 작성</div>
 
 			<div id="main-content">
-				<form action="${root}/notice/inquiryWrite" method="post">
+				<form name="sub1" action="${root}/notice/inquiryWrite" method="post">
 					
 					<select id="category-area" name="categoryType">
 						<option value="QNA">1:1 문의</option>
@@ -168,7 +170,7 @@
 					</div>
 					
 					<div id="submit-input">
-						<input type="submit" value="문의 제출하기">
+						<input type="button" value="문의 제출하기" onclick="send();">
 					</div>
 					
 				</form>
@@ -177,6 +179,29 @@
 		
 			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		</main>
+
+		<script>
+
+			function send(params) {
+				if(document.querySelector('input[name=title]').value == ""){
+					Swal.fire({
+					title : '문의 등록을 실패하였습니다.',
+					icon: 'warning',
+					text: '제목을 입력해주세요',
+				})
+					return false;
+				}else{
+					document.querySelector('form[name=sub1]').submit();
+					Swal.fire({
+					title : '문의 등록을 성공하였습니다.',
+					icon: 'success',
+					text: '',
+				})
+				}
+
+			}
+
+		</script>
 		
 
 </body>

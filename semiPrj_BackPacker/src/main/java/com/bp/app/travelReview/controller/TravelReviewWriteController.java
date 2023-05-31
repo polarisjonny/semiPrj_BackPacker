@@ -65,7 +65,6 @@ public class TravelReviewWriteController extends HttpServlet{
 
 			//데이터 꺼내기
 			
-			
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			String writerNo = loginMember.getMemberNo();
