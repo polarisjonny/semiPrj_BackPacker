@@ -41,9 +41,17 @@ public class FindFpackerDetailController extends HttpServlet {
 			GuideBoardVo gbvo =null;
 			if(loginMember==null||loginMember.equals("")) {
 				gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				if(gbvo.getMatchingState().equals("N")) {
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,"아무거나");
+				}
 			}else {
-				String lmNo = loginMember.getMemberNo();	
+				String lmNo = loginMember.getMemberNo();
 				gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				if(gbvo.getMatchingState().equals("N")){
+					int result = gbs.setMatchingStatus(boardNo);
+					gbvo =  gbs.selectOneByNo(bvo,lmNo);
+				}	
 			}
 			List<TimetableVo>timetableVo = ss.totalTimetable(req);
 			//화면

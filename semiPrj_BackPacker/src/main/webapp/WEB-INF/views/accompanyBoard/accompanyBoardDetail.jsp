@@ -385,7 +385,7 @@
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
 											if('${loginMember.id}'=='ADMIN'){
-												sBtn[0].style.display = 'inline-block';
+												sBtn[0].style.display = 'none';
 												sBtn[1].style.display = 'inline-block';
 											}
 										}

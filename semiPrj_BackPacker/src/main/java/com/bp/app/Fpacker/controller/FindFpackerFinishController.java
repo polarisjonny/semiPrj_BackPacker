@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bp.app.gboard.service.GuideBoardService;
 
-@WebServlet ("/doFpacker/finish")
-public class DoFpackerFinishController extends HttpServlet {
+@WebServlet ("/findFpacker/finish")
+public class FindFpackerFinishController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -22,7 +22,7 @@ public class DoFpackerFinishController extends HttpServlet {
 			int result = gbs.finish(boardNo);
 			
 			if(result==1) {
-				resp.sendRedirect(req.getContextPath()+"/doFpacker/list?page=1");
+				resp.sendRedirect(req.getContextPath()+"/findFpacker/list?page=1");
 			}else {
 				throw new Exception();
 			}

@@ -263,6 +263,9 @@
 		color :black;
 		text-decoration: none;
 	}
+	.btn-gray {
+		background-color: #B7B7B7;
+	}
 </style>
 </head>
 <body>
@@ -276,6 +279,9 @@
 				<div id="main-area">
 					<div>조회수 : ${gbvo.hit}</div>
 					<div id="title">${gbvo.title}</div>
+					<c:if test="${gbvo.matchingState=='Y'}">
+						<h2>매칭 마감된 글입니다. 수정과 댓글작성이 불가</h2>
+					</c:if>
 					<div id="introduce-area">
 						<div class="bold-text">자기소개</div>						
 						<textarea class="content-text" readonly style="resize: none;">${writerMember.introMessage}</textarea>
@@ -378,8 +384,8 @@
 											sBtn[0].style.display = 'none';
 											sBtn[1].style.display = 'none';
 											if('${loginMember.id}'=='ADMIN'){
-												sBtn[0].style.display = 'block';
-												sBtn[1].style.display = 'block';
+												sBtn[0].style.display = 'none';
+												sBtn[1].style.display = 'inline-block';
 											}
 										}
 									</script>
@@ -407,11 +413,29 @@
 						</div>
 						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">프패커지원하기</button>
 						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
+							<button class="btn-gray" type="button" onclick="location.href='${root}/findFpacker/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
+						</c:if>
 						<script>
 							const disableBtn = document.querySelectorAll(".disable-btn");
-							if('${writerMember.memberNo}'=='${loginMember.memberNo}'||'${loginMember.id}'=='ADMIN'){
-								disableBtn[0].disabled = true;
+							const MemberId= '${loginMember.id}'; 
+							const writerMember ='${writerMember.memberNo}';
+							const memberNo = '${loginMember.memberNo}'
+							console.log(writerMember);
+							console.log(MemberId);
+							if('${loginMember == null}' == 'true'){				
+									disableBtn[0].disabled = true;
+
+							}else {
+								if(writerMember==memberNo||MemberId=="ADMIN"){
+									disableBtn[0].disabled = true;	
+									
+								}else {
+									disableBtn[0].disabled = false;
+								}
 							}
+							
+						</script>
 						</script>
 					</div>
 					<div id="botton-area">
@@ -472,6 +496,10 @@
 						alert("댓글작성 성공!");
 						document.querySelector("textarea[name=comment]").value='';
 						loadComment();
+					}else if (x=='no'){
+						alert("매칭마감됨. 댓글작성불가");
+					}else if (x=='empty'){
+						alert("내용을 입력해주세요.");
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -490,11 +518,14 @@
 				type: "post",
 				data : {
 					replyNo : guideReplyNo,
+					boardNo : '${gbvo.guideBoardNo}'
 				},
 				success : (x)=>{
 					if(x=='ok'){
 						alert('댓글삭제성공!');
 						loadComment();
+					}else if(x=='finished'){
+						alert('마감된 글입니다. 댓글 삭제 불가합니다.');
 					}else {
 						alert('댓글작성실패...');
 					}
@@ -547,14 +578,24 @@
 			});
 		}
 		let modifyBtn = document.querySelector('.modify-btn');
-		modifyBtn.addEventListener('click',function(){
+		modifyBtn.addEventListener('click',f01);
+		
+		function f01(){
+			
 			const no = '${gbvo.guideBoardNo}'
 			const width =800;
 			const height=1000;
 			const left = (screen.width/2)-(width/2);
 			const top = 0;
-			window.open('${root}/findFpacker/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
-		});
+			if('${gbvo.matchingState}' != 'Y'){
+				window.open('${root}/findFpacker/modify?boardNo='+no,'', 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top);
+				
+			}else {
+				alert('마감된 글입니다. 수정이 불가합니다.');
+			}
+			
+			
+		}
 
 		let reportBtn = document.querySelector('.report-btn');
 		reportBtn.addEventListener('click',function(){

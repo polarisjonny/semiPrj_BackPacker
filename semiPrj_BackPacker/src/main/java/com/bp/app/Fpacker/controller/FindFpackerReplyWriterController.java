@@ -26,25 +26,35 @@ public class FindFpackerReplyWriterController extends HttpServlet{
 			
 			
 			//데꺼
-			String GuideBoardNo = req.getParameter("findFpackerNo");
+			String guideBoardNo = req.getParameter("findFpackerNo");
 			String comment =  req.getParameter("content");
 			
 			//데뭉
 			GuideReplyVo rvo = new GuideReplyVo();
 			rvo.setContent(comment);
 			rvo.setWriterNo(writerNo);
-			rvo.setGuideBoardNo(GuideBoardNo);
+			rvo.setGuideBoardNo(guideBoardNo);
 			
 			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
-			int result = gbs.replyWrite(rvo);
 			
-			//화면
+			//코멘트가 널이거나 빈문자열이면 out으로 오류메세지 내보내기
 			PrintWriter out = resp.getWriter();
-			if(result==1) {
-				out.write("ok");
-			}
+			if(comment==null||comment.equals("")) {
+				out.write("empty");
+			}else {
+				
+				String status = gbs.getStatus(guideBoardNo);
+				if(!status.equals("Y")) {
+					int result = gbs.replyWrite(rvo);
+					if(result==1) {
+						out.write("ok");
+					}
+				}else if(status.equals("Y")) {
+					out.write("no");
+				}
+			} 
 		} catch (Exception e) {
 			System.out.println("[ERROR] notice reply error");
 			e.printStackTrace();
