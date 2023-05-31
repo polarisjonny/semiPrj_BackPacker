@@ -51,7 +51,7 @@ public class TravelReviewDeleteController extends HttpServlet{
 			System.out.println("후기 게식글 삭제 에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "후기 삭제 에러");
+			req.setAttribute("errorMsg", "여행후기 게시글 삭제 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		

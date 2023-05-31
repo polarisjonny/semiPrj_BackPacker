@@ -47,9 +47,9 @@ public class SchedulerMake extends HttpServlet{
 			
 			
 		} catch (Exception e) {
-			System.out.println("여행지 가져오는중 에러");
+			System.out.println("여행지 가져오기 실패");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "여행지 가져오는중 에러 ");
+			req.setAttribute("errorMsg", "여행지 가져오기 실패 ");
 			req.getRequestDispatcher("error-page").forward(req, resp);
 		}
 		

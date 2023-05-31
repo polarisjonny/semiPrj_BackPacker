@@ -37,7 +37,7 @@ public class NickCheckController extends HttpServlet{
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("아이디 중복체크 실패");
-			req.setAttribute("errorMsg", "아이디 중복체크 실패");
+			req.setAttribute("errorMsg", "아이디 중복 확인 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	

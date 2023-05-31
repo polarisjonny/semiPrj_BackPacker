@@ -58,7 +58,7 @@ public class GoProfileController extends HttpServlet{
          System.out.println("[ERROR] 프로필 조회 에러");
          e.printStackTrace();
          
-         req.setAttribute("errorMsg", " 프로필 조회 에러");
+         req.setAttribute("errorMsg", " 프로필 조회 실패");
          req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
          
       }

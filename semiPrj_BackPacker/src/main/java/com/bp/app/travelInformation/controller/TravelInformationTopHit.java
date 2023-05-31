@@ -57,7 +57,7 @@ public class TravelInformationTopHit extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "여행정보 인기순으로 보기 에러");
+			req.setAttribute("errorMsg", "여행정보 인기순으로 보기 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 

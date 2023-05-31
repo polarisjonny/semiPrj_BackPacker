@@ -38,7 +38,7 @@ public class TravelReviewDetailController extends HttpServlet{
 			System.out.println("상세조회 에러");
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "상세조회 실패");
+			req.setAttribute("errorMsg", "여행종보 상세 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	}

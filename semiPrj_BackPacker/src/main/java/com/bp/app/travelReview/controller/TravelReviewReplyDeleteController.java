@@ -32,7 +32,7 @@ public class TravelReviewReplyDeleteController extends HttpServlet{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "댓글삭제실패");
+			req.setAttribute("errorMsg", "댓글 삭제 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 	

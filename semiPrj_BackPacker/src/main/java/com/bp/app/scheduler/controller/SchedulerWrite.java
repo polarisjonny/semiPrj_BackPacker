@@ -131,7 +131,7 @@ public class SchedulerWrite extends HttpServlet{
 			
 		} catch (Exception e) {
 
-			req.setAttribute("errorMsg", "동행 게시판 작성중 오류");
+			req.setAttribute("errorMsg", "동행 게시판 작성하기 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		
 		}

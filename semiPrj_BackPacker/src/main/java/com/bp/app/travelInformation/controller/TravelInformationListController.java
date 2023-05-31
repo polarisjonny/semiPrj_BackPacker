@@ -59,7 +59,7 @@ public class TravelInformationListController extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			req.setAttribute("errorMsg", "여행정보 조회 에러");
+			req.setAttribute("errorMsg", "여행정보 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
 		}
 		
