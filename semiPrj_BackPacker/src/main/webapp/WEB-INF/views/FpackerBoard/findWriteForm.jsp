@@ -109,7 +109,7 @@
 		<div class="main-blank"></div>
 		<div id="main-area">
 			<div id="big-text">프패커구해요 게시글 작성</div>
-			<form action="${root}/findFpacker/write" method="post" enctype="multipart/form-data">
+			<form action="${root}/findFpacker/write" method="post" enctype="multipart/form-data" onsubmit="return checkValidation();">
 				<div id="Thum-parent">
 					<img id="imgUpload">
 					<div id="Thumnail">
@@ -126,7 +126,7 @@
 				</div>
 
 				
-				<textarea style="resize: none;" placeholder="내용을입력해주세요." name="content"></textarea>
+				<textarea id="text-area" style="resize: none;" placeholder="내용을입력해주세요." name="content"></textarea>
 				
 				  
 			    
@@ -157,6 +157,47 @@
 	const Thumnail = document.querySelector("#Thumnail");
 	const preview = document.querySelector("#imgUpload");
 
+	//내용이 없거나 제목이 길면 제출 안되게 하기
+	function checkValidation(){
+		const titleOk = checkTitle();
+		
+		if(!titleOk){
+			return false;
+		}
+		
+		const contentOk = checkContent();
+		if(!contentOk){
+			alert("내용을 한글자라도 입력하셔야 합니다.");
+			return false;
+		}
+		
+		return true;
+	}
+	function checkTitle(){
+		const title = document.querySelector("input[name=title]").value;
+		if(title.length==0){
+			console.log(title.length);
+			alert("제목을 한 글자라도 입력해주세요.");
+			return false;
+		}else if(title.length>30){
+			console.log(title.length);
+			alert("제목은 30자 이내여야 합니다.");
+			return false;
+		}else {
+			console.log(title.length);
+			return true;
+		}
+	}
+
+	function checkContent(){
+		const content = document.querySelector("#text-area").value;
+		if(content.length==0){
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	fileTag.addEventListener('change',function(params){
 		if(fileTag.files.length>0){
 			const fr = new FileReader();
