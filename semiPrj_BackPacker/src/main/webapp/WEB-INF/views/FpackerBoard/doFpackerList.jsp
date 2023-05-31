@@ -230,9 +230,18 @@
 	                    	}
 	                    </script>
                     </c:if>
-                    <c:if test="${not empty loginMember}">
+                    <c:if test="${loginMember.isGuide eq 'X'}">
+	                    <button id="write-btn" type="button" onclick="f02();">게시글 작성</button>
+	                	<script>
+	                    	function f02(){
+	                    		alert('가이더로 등록 후 게시글 작성이 가능합니다.');
+	                    	}
+	                    </script>
+                    </c:if>
+                    <c:if test="${loginMember.isGuide eq 'O'}">
 	                    <button id="write-btn" type="button" onclick="location.href='${root}/doFpacker/write'">게시글 작성</button>
                     </c:if>
+                    
                 
                 </div>
                 
