@@ -31,9 +31,6 @@ public class AccompanyModifyController extends HttpServlet {
 			String content = req.getParameter("content");
 			String no = req.getParameter("no");
 			
-			System.out.println(title);
-			System.out.println(content);
-			System.out.println(no);
 			
 			//데뭉
 			GuideBoardVo vo = new GuideBoardVo();
@@ -43,16 +40,39 @@ public class AccompanyModifyController extends HttpServlet {
 			
 			//서비스
 			GuideBoardService gbs = new GuideBoardService();
+			if(title.length()>30) {
+				throw new Exception();
+			}
 			int result = gbs.modify(vo);
-			
 			PrintWriter out =resp.getWriter();
 			if(result==1) {
+			
 				out.write("ok");
+				
 			}else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			
+			
+			PrintWriter out =resp.getWriter();
+			
+			if(title.length()==0) {
+				out.write("noTitle");
+			}else if(title.length()>30) {
+				out.write("tooMuch");
+			}else if(content.length()==0) {
+				out.write("noContent");
+			}else {
+				System.out.println("타이틀길이"+title.length());
+				out.write("no");
+			}
+			
+			
+			
 			// TODO: handle exception
 		}
 		

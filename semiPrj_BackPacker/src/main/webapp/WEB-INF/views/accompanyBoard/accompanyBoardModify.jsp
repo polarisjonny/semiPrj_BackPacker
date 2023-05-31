@@ -112,8 +112,23 @@
 					setTimeout(()=>{
 						window.close();
 					},1000)
+				}else if(x=="noTitle"){
+					alert("제목을 입력해주세요.");
+					setTimeout(()=>{
+						window.close();
+					},1000)
+				}else if(x=="tooMuch"){
+					alert("제목을 30자이내로 작성해주세요.");
+					setTimeout(()=>{
+						window.close();
+					},1000)
+				}else if(x=="noContent"){
+					alert("내용을 입력해주세요.");
+					setTimeout(()=>{
+						window.close();
+					},1000)
 				}else{
-					alert("게시글 수정 실패");
+					alert("게시글 수정 실패. 관리자에게 문의바람.");
 					setTimeout(()=>{
 						window.close();
 					},1000)
