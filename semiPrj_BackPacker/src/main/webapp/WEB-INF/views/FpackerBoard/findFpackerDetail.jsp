@@ -53,6 +53,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
+		overflow : auto;
 	}
 
 	#img-area  > div{
@@ -249,7 +250,7 @@
 	}
 	.content-text {
 		width: 100%;
-		height: 300px;
+		height : 100%;
 		border: none;
 		outline: none;
 	}
@@ -265,6 +266,20 @@
 	}
 	.btn-gray {
 		background-color: #B7B7B7;
+	}
+	#main-text {
+		text-align: center;
+		font-size: xx-large;
+		font-style: italic;
+		color: #94D2E6;
+		font-weight: bold;
+	}
+
+	.carousel-control-prev-icon {
+	 	background-color: #94D2E6;
+	 }
+	.carousel-control-next-icon {
+		background-color: #94D2E6;
 	}
 </style>
 </head>
@@ -290,11 +305,16 @@
 					</div>
 				
 					<c:if test="${not empty timetableVo}">
+						<c:set var="firstTimetable" value="${timetableVo[0]}" />
+						<c:set var="endValue" value="${firstTimetable.totalDate}" />
+						<div id="main-text">
+							${firstTimetable.startDate} ~ ${firstTimetable.endDate}
+						</div>
 							<div id="shedule-area">
 							
 							    <div class="bold-text big-text">일정표</div>
 							    
-								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+								<div id="carouselExampleControls" class="carousel slide">
 					    			<c:set var="firstTimetable" value="${timetableVo[0]}" />
 									<c:set var="endValue" value="${firstTimetable.totalDate}" />
 								<div class="carousel-inner">

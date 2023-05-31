@@ -250,7 +250,7 @@
 	}
 	.content-text {
 		width: 100%;
-		height: 300px;
+		height : 100%;
 		border: none;
 		outline: none;
 	}
@@ -274,6 +274,13 @@
 		font-style: italic;
 		color: #94D2E6;
 		font-weight: bold;
+	}
+
+	.carousel-control-prev-icon {
+	 	background-color: #94D2E6;
+	 }
+	.carousel-control-next-icon {
+		background-color: #94D2E6;
 	}
 </style>
 </head>
@@ -308,7 +315,7 @@
 							
 							    <div class="bold-text big-text">일정표</div>
 							    
-								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+								<div id="carouselExampleControls" class="carousel slide">
 					    			<c:set var="firstTimetable" value="${timetableVo[0]}" />
 									<c:set var="endValue" value="${firstTimetable.totalDate}" />
 								<div class="carousel-inner">
