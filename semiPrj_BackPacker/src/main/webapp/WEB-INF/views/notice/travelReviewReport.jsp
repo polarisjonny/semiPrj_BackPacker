@@ -61,6 +61,12 @@
 		float: right ;
 		font-size: 17px;
 	}
+
+	.report-btn{
+		background-color: #94d2e6;
+		color: white;
+		border: 1px solid #94d2e6;
+	}
 </style>
 </head>
 <body>

@@ -74,13 +74,14 @@
 	
 	#category-area{
 	 border-radius: 20px;
-        background-color: #B9eeff;
-        border-color:#B9eeff;
+        background-color: #94d2e6;
+        border-color:#94d2e6;
         width: 150px;
         height:40px;
         text-align:center;
         font-size:18px;
         margin-bottom:20px;
+		color: white;
 	}
 	
 	#main-content{
@@ -121,8 +122,8 @@
 	
 	#submit-input>input{
 		border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
         padding:15px;
         font-size:18px;

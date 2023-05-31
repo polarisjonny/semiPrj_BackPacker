@@ -79,8 +79,9 @@ footer, header, hgroup, menu, nav, section {
     
     #review-search-area select{
         border-radius: 20px;
-        background-color: #B9eeff;
-        border-color:#B9eeff;
+        background-color: #94d2e6;
+        border-color:#94d2e6;
+		color: white;
         width: 77px;
         height:30px;
         
@@ -137,8 +138,8 @@ footer, header, hgroup, menu, nav, section {
     
     .noticeBtn>button{
         border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         color:white;
     }
     
@@ -231,8 +232,8 @@ footer, header, hgroup, menu, nav, section {
         <div id="page-area">
             	
             	<c:if test="${pv.currentPage > 1}">
-				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
-				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
+				  <a style="color:#94d2e6" href="${root}/notice/review-top-hit?page=1&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> << </a>
+				  <a style="color:#94d2e6" href="${root}/notice/review-top-hit?page=${pv.currentPage - 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> < </a>
 				</c:if>
     
             	<c:forEach begin="${pv.startPage}" end="${pv.endPage}" step="1" var="i">
@@ -241,13 +242,13 @@ footer, header, hgroup, menu, nav, section {
             		</c:if>
             		
             		<c:if test="${pv.currentPage == i }">	<!-- == 현재 페이지랑 일치하는 경우 -->
-            	      	<a style="color:#99ccff">${i}</a>
+            	      	<a style="color:#94d2e6">${i}</a>
             		</c:if>
             	</c:forEach>
             	
             	<c:if test="${pv.currentPage < pv.maxPage}">
-				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-				  <a style="color:#99ccff" href="${root}/notice/review-top-hit?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
+				  <a style="color:#94d2e6" href="${root}/notice/review-top-hit?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
+				  <a style="color:#94d2e6" href="${root}/notice/review-top-hit?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a>
 				</c:if>
             </div>
    
