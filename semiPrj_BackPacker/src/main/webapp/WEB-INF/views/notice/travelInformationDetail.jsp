@@ -54,7 +54,7 @@ body {
 	}
 	
 	#notice-content-area{
-		height:700px;
+		height:900px;
 		width:100%;
 		text-align:center;
 	}
@@ -88,6 +88,10 @@ body {
         color:white;
         padding:10px;
         margin:0px 10px 10px;
+	}
+
+	.note-editor{
+		margin: auto;
 	}
 	
 </style>
@@ -140,12 +144,11 @@ body {
 			
 			<hr class="hr">
 			
+			<br>
 			
 			<div id="notice-content-area">
 			
-				<div id="notice-content">
-					${vo.content}
-				</div>
+					<textarea id="summernote" style="resize:none;">${vo.content}</textarea>
 				
 			</div>
 			
@@ -156,12 +159,28 @@ body {
 					<button onclick="history.back();">목록으로</button>
 			</div>
 		
+<!-- 썸머노트 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 		</main>
 	
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		
 
 		<script>
+
+			$('#summernote').summernote({
+	    	  placeholder: 'Hello stand alone ui',
+	    	  tabsize: 2,
+	    	  height: 800,
+			  width: 800,
+	    	  callbacks : {
+	            } ,
+	    	  toolbar: [
+	    	    
+	    	  ]
+	    	});
 
 			function del(params) {
 				
