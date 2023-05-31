@@ -36,7 +36,7 @@ public class GetScheduler extends HttpServlet{
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();
 			out.write(sjsonStr);
-			System.out.println(sjsonStr);
+//			System.out.println(sjsonStr);
 			
 //			HttpSession session = req.getSession();
 //			session.setAttribute("scheduler", sjsonStr);

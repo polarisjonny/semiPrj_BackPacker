@@ -52,7 +52,7 @@
 		box-sizing: border-box;
 		display: grid;
 
-		width: 298px;
+		width: 100%;
 		
 		grid-template-columns: 1.3fr 4fr 1.3fr;
 		justify-items: center;
@@ -172,7 +172,7 @@
 	
 	.btnn{
 		display: none;
-		width: 250px;
+		width: 100%;
 		height: 70px;
 		padding: 5px;
 		margin-top: 15px;
@@ -180,7 +180,7 @@
 		border: 0;
 		background-color: rgb(225, 224, 224);
 		font-size: 20px;
-		margin-left: 22px;
+		
 	}
 	
 	#tripDate{
@@ -258,11 +258,11 @@
 		height: 40vh;
 		background-color: white;
 		display: grid;
-		grid-template-columns: 60% 35% 5% ;
+		grid-template-columns: 50% 45% 5% ;
 	}
 	#modal-in{
 		display: flex;
-		padding: 10px;
+		padding-left : 30px;
 		justify-content: center;
 		flex-direction: column;
 		
@@ -306,7 +306,9 @@
     	top: 250px;
 		text-align: center;
 	}
-    
+
+
+	
 	
     
 	</style>
@@ -318,6 +320,8 @@
 	<main>
 	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+	
 	
 	<div id="wrap">
 	
@@ -376,7 +380,7 @@
 	
 			<div id="placeName">
 				<i id="po" class="fa-solid fa-magnifying-glass fa-sm" style="color: #8c8c8c;"></i>
-				<input type="text" id="search" placeholder="여행지검색" name="placeName" >
+				<input type="text" id="search" placeholder="여행지검색" name="placeName" data-country="${placeList[0].countryNo}" >
 			</div>
 	
 			
@@ -407,7 +411,7 @@
 							<img id="place-img" src="${root}/static/img/place/${place.placeImage}" alt="">
 							<div id="p-place">${place.placeName}</div>
 							<div id="p-area">
-								<div id="p-introduce"><i class="bi bi-info-circle cursor" ></i></div>
+								<div id="p-introduce"><i class="bi bi-info-circle plus cursor" ></i></div>
 								<div id="p-pick"><i class="bi bi-plus-circle cursor"  data-placeno="${place.placeNo}" ></i></div>
 							</div>
 						</div>
@@ -417,7 +421,7 @@
 									<img style="width: 100%; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
 								</div>
 								<div id="modal-in">
-									<div id="modal-name" style="padding-bottom: 10px; font-size: large;">
+									<div id="modal-name" style="padding-bottom: 30px; font-size: large; font-weight:bold;">
 										${place.placeName}
 									</div>
 									<div id="modal-tro">
@@ -428,7 +432,7 @@
 									</div>
 								</div>
 							<div id="modal-btn">
-								<button id="close" class="close">X</button>
+								<button id="close" class="close"><i class="bi bi-x"></i></button>
 							</div>
 						</div>
 						</div>
@@ -534,10 +538,10 @@
 				$('#search').on('keydown', function(event) {
 					if (event.key === 'Enter') {
 						var searchPlaceName = $('#search').val();
-						searchPlace(searchPlaceName);
+						var countryNo=$('#search').data('country');
+						searchPlace(searchPlaceName,countryNo);
 						scrollToTop();
 					}
-
 
 				});//검색
 				
@@ -547,14 +551,13 @@
 					var nameValue = $("#userName").val();
 					var timeValue = $("#userTime").val();
 					// 날짜에 일수를 더함
-					console.log(timeValue);
 					
 					setTimeTable($(this).data('placeno'),nameValue,timeValue);
 					
 				});//사용자 생성
 				
 				//일정표 생성
-				$('.bi-plus-circle').on('click', function () {
+				$('.plus').on('click', function () {
 					datadayValue = $(".carousel-item:visible").find('#dataday');
 					
 					// 날짜에 일수를 더함
@@ -568,13 +571,14 @@
 
 			//여행지 검색
 
-			function searchPlace(searchPlaceName) {
+			function searchPlace(searchPlaceName,countryNo) {
 
 				$.ajax({
 					type:'get',
 					url: '${root}/schedulermake/searchPlace',
 					data: { 
-						searchPlace:searchPlaceName
+						searchPlace:searchPlaceName,
+						countryNo:countryNo
 					},
 					success : function(x) { 
 						s=JSON.parse(x);
@@ -591,7 +595,7 @@
 								sstr+=	'<div id="p-place">'+s[i].placeName+'</div>'
 								sstr+=	'<div id="p-area">'
 								sstr+=		'<div id="p-introduce"><i class="bi bi-info-circle cursor" ></i></div>'
-								sstr+=		'<div id="p-pick"><i class="bi bi-plus-circle cursor" data-placeno="'+s[i].placeNo+'" ></i></div>'
+								sstr+=		'<div id="p-pick"><i class="bi bi-plus-circle splus cursor" data-placeno="'+s[i].placeNo+'" ></i></div>'
 								sstr+='</div>'
 								sstr+='</div>'
 								sstr+='<div id="modal-area" class="modal-area">'
@@ -600,7 +604,7 @@
 								sstr+=			'<img style="width: 100%; height: 298px;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
 								sstr+=		'</div>'
 								sstr+=		'<div id="modal-in">'
-								sstr+=			'<div id="modal-name" style="padding-bottom: 10px; font-size: large;">'
+								sstr+=			'<div id="modal-name" style="padding-bottom: 30px; font-size: large; font-weight:bold;">'
 								sstr+=				s[i].placeName
 								sstr+=			'</div>'
 								sstr+=			'<div id="modal-tro">'
@@ -629,6 +633,14 @@
 						openModals.forEach(function(openModal, index) {
 							openModal.addEventListener('click', function() {
 								modals[index].style.display = 'flex';
+								Swal.fire({
+									title: 'Sweet!',
+									text: 'Modal with a custom image.',
+									imageUrl: 'https://unsplash.it/400/200',
+									imageWidth: 400,
+									imageHeight: 200,
+									imageAlt: 'Custom image',
+									})
 							});
 						});
 						
@@ -641,7 +653,7 @@
 
 
 					//+버튼
-						$('.bi-plus-circle').on('click', function () {
+						$('.splus').on('click', function () {
 							datadayValue = $(".carousel-item:visible").find('#dataday');
 							
 							

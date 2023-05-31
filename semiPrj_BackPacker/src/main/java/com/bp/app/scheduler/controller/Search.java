@@ -21,13 +21,17 @@ public class Search extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
+			
+			String searchPlace = req.getParameter("searchPlace");
+			String countryNo = req.getParameter("countryNo");
+			
 			SchedulerService ss = new SchedulerService();
-			List<PlaceVo>list = ss.search(req);
+			List<PlaceVo>list = ss.search(searchPlace,countryNo);
 			
 			Gson gson = new Gson();
 			String jsonStr = gson.toJson(list);
 			
-			System.out.println(list);
+//			System.out.println(list);
 			//문자열 내보내기
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();

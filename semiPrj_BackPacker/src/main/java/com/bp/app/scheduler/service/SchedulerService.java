@@ -72,12 +72,12 @@ public class SchedulerService {
 		
 	}
 
-	public List<TimetableVo> getTimetable(HttpServletRequest req) throws Exception {
+	public List<TimetableVo> getTimetable(String scheduler , String timetableDate) throws Exception {
 
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<TimetableVo>list = dao.getTimetable(req,conn);
+		List<TimetableVo>list = dao.getTimetable(scheduler,timetableDate,conn);
 	
 		JDBCTemplate.close(conn);
 	
@@ -99,42 +99,42 @@ public class SchedulerService {
 
 	}
 	
-	//예린추가 : 넘버로 스케쥴 따오기 =>게시글 상세조회시
-	public TimetableVo getTimetable(String schedulerNo) throws Exception {
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		//sql
-		String sql="SELECT * FROM TIMETABLE WHERE SCHEDULER_NO =?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, schedulerNo);
-		ResultSet rs = pstmt.executeQuery();
-		//rs
-		TimetableVo tVo = null;
-		while(rs.next()) {
-			String timetableNo= rs.getString("TIMETABLE_NO");
-			String placeNo =rs.getString("PLACE_NO");
-			String timetableDate= rs.getString("TIMETABLE_DATE");
-			String bespokePlace= rs.getString("BESPOKE_PLACE");
-			String timetableStartTime= rs.getString("TIMETABLE_START_TIME");
-			String bespokeTime= rs.getString("BESPOKE_TIME");
-			
-			tVo = new TimetableVo();
-			tVo.setTimetableNo(timetableNo);
-			tVo.setPlaceNo(placeNo);
-			tVo.setSchedulerNo(schedulerNo);
-			tVo.setTimetableDate(timetableDate);
-			tVo.setBespokePlace(bespokePlace);
-			tVo.setTimetableStartTime(timetableStartTime);
-			tVo.setBespokeTime(bespokeTime);
-			
-		}
-		//close
-		JDBCTemplate.close(conn);
-		JDBCTemplate.close(pstmt);
-		JDBCTemplate.close(rs);
-	
-		return tVo;
-}
+//	//예린추가 : 넘버로 스케쥴 따오기 =>게시글 상세조회시
+//	public TimetableVo getTimetable(String schedulerNo) throws Exception {
+//		//conn
+//		Connection conn = JDBCTemplate.getConnection();
+//		//sql
+//		String sql="SELECT * FROM TIMETABLE WHERE SCHEDULER_NO =?";
+//		PreparedStatement pstmt = conn.prepareStatement(sql);
+//		pstmt.setString(1, schedulerNo);
+//		ResultSet rs = pstmt.executeQuery();
+//		//rs
+//		TimetableVo tVo = null;
+//		while(rs.next()) {
+//			String timetableNo= rs.getString("TIMETABLE_NO");
+//			String placeNo =rs.getString("PLACE_NO");
+//			String timetableDate= rs.getString("TIMETABLE_DATE");
+//			String bespokePlace= rs.getString("BESPOKE_PLACE");
+//			String timetableStartTime= rs.getString("TIMETABLE_START_TIME");
+//			String bespokeTime= rs.getString("BESPOKE_TIME");
+//			
+//			tVo = new TimetableVo();
+//			tVo.setTimetableNo(timetableNo);
+//			tVo.setPlaceNo(placeNo);
+//			tVo.setSchedulerNo(schedulerNo);
+//			tVo.setTimetableDate(timetableDate);
+//			tVo.setBespokePlace(bespokePlace);
+//			tVo.setTimetableStartTime(timetableStartTime);
+//			tVo.setBespokeTime(bespokeTime);
+//			
+//		}
+//		//close
+//		JDBCTemplate.close(conn);
+//		JDBCTemplate.close(pstmt);
+//		JDBCTemplate.close(rs);
+//	
+//		return tVo;
+//}
 
 	public int deTimetable(TimetableVo vo) throws Exception {
 	
@@ -191,11 +191,11 @@ public class SchedulerService {
 		return result;
 	}
 
-	public List<PlaceVo> search(HttpServletRequest req) throws Exception {
+	public List<PlaceVo> search(String searchPlace, String countryNo) throws Exception {
 	
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<PlaceVo> list =dao.search(req,conn);
+		List<PlaceVo> list = dao.search(searchPlace,countryNo,conn);
 		
 		
 		
@@ -205,12 +205,12 @@ public class SchedulerService {
 		return list;
 	}
 
-	public int deScheduler(HttpServletRequest req) throws Exception {
+	public int deScheduler(String schedulerNo) throws Exception {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		String sql="DELETE FROM SCHEDULER WHERE SCHEDULER_NO=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, req.getParameter("schedulerNo"));
+		pstmt.setString(1, schedulerNo);
 		int result = pstmt.executeUpdate();
 		
 		if(result==1) {

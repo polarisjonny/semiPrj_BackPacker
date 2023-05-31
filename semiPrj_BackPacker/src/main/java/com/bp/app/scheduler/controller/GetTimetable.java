@@ -23,16 +23,18 @@ public class GetTimetable extends HttpServlet{
 
 		try {
 			//데이터 
+			String schedulerNo = req.getParameter("schedulerNo");
+			String timetableDate = req.getParameter("timetableDate");
 			
 			//서비스
 			SchedulerService ss = new SchedulerService();
-			List<TimetableVo>list =  ss.getTimetable(req);
+			List<TimetableVo>list =  ss.getTimetable(schedulerNo,timetableDate);
 			
 			//자바객체를 JSON 형태의 문자열로 변환
 			Gson gson = new Gson();
 			String jsonStr = gson.toJson(list);
 			
-			System.out.println(list);
+//			System.out.println(list);
 			//문자열 내보내기
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();
