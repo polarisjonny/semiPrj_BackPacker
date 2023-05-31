@@ -635,7 +635,7 @@ public class BoardManageDao {
 	
 	}
 
-	public int write(Connection conn, TravelReviewVo trvo) throws Exception {
+public int write(Connection conn, TravelReviewVo trvo) throws Exception {
 		
 		String sql="INSERT INTO INFO_BOARD( INFO_NO ,INFO_CATEGORY_NO ,WRITER_NO ,TITLE ,CONTENT,MAIN_IMG ) VALUES (SEQ_INFO_BOARD_NO.NEXTVAL , 2 , ? , ? , ?,?)";
 		

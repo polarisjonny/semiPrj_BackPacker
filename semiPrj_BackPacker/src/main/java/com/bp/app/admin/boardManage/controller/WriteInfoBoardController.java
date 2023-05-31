@@ -59,7 +59,6 @@ public class WriteInfoBoardController extends HttpServlet {
 
 			//데이터 꺼내기
 			
-			
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			String writerNo = loginMember.getMemberNo();
@@ -69,8 +68,8 @@ public class WriteInfoBoardController extends HttpServlet {
 			trvo.setContent(content);
 			trvo.setWriterNo(writerNo);
 		
-			BoardManageService bms = new BoardManageService();
 			
+			BoardManageService bms = new BoardManageService();
 			int result = bms.write(trvo);
 			
 			//화면
@@ -92,6 +91,7 @@ public class WriteInfoBoardController extends HttpServlet {
 		
 		
 	}//dopost
+	
 	
 
 }

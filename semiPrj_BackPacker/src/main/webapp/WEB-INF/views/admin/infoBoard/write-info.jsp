@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<!-- alert창 꾸미기 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -80,8 +81,8 @@
 	#submit > input{
 		margin-right:80px;
         border-radius: 10px;
-        border: 1px solid #99ccff;
-        background-color:  #99ccff;
+        border: 1px solid #94d2e6;
+        background-color:  #94d2e6;
         height:40px;
         color:white;
         margin-top:10px;
@@ -123,10 +124,10 @@
 		<div id="travelReviewWrite">
 			<br>
 			<br>
-			<div id="reviewWrite">여행후기 게시글 작성</div>
+			<div id="reviewWrite">여행정보 게시글 작성</div>
 		
 			<br>
-				<form action="${root}/admin/infoBoard/write" method="post" enctype="multipart/form-data">
+				<form name="sub1" action="${root}/admin/infoBoard/write" method="post" enctype="multipart/form-data">
 					<div id="main">
 						<img id="imgUpload">
 						<div id="Thumnail">
@@ -143,9 +144,10 @@
 						
 						<textarea id="summernote" name="content" style="resize:none;" ></textarea>
 						
-						<div id="submit">
-							<input type="submit" value="작성 완료">
-						</div>
+						
+							<div id="submit">
+								<input type="button" value="작성 완료" onclick="send();">
+							</div>
 				</form>
 
 			
@@ -159,13 +161,17 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
     <script>
+
+
+
     	$('#summernote').summernote({
+			
     	  placeholder: 'Hello stand alone ui',
     	  tabsize: 2,
     	  height: 450,
           callbacks : {
-              onImageUpload : f01
-            } ,
+              onImageUpload : f01,
+      			},
     	  toolbar: [
     	    ['style', ['style']],
     	    ['font', ['bold', 'underline', 'clear']],
@@ -192,13 +198,17 @@
             processData : false ,
             contentType : false ,
             dataType : 'json' ,
-            success : function(changeNameList){
-              console.log(changeNameList);
-              for(let changeName of changeNameList){
-                $('#summernote').summernote('insertImage' , '${root}/static/img/travelInformation/' + changeName);
-              }
-
-            } ,
+            success: function(changeNameList) {
+			console.log(changeNameList);
+			for (let changeName of changeNameList) {
+				const imageUrl = '${root}/static/img/travelReview/' + changeName;
+				$('<img>').on('load', function() {
+				$(this).attr('width', '300'); // Set the desired width
+				$(this).attr('height', '200'); // Set the desired height
+				$('#summernote').summernote('insertNode', this);
+				}).attr('src', imageUrl);
+			}
+			},
             error : function(error){
               console.log(error);
             } ,
@@ -229,6 +239,26 @@
 			}
 			
 		})
+
+		//후기작성시 제목 안넣었을때 작성 못하게
+		function send(params) {
+			if(document.querySelector('input[name=title]').value==""){
+				Swal.fire({
+				title : '정보 작성을 실패하였습니다.',
+				icon: 'warning',
+				text: '제목을 입력해주세요',
+			})
+				return false;
+			}else{
+				document.querySelector('form[name=sub1]').submit();
+				Swal.fire({
+				title : '정보 작성을 성공하였습니다.',
+				icon: 'success',
+				text: '',
+			
+			})
+		}
+	}		
 
 		
      </script>
