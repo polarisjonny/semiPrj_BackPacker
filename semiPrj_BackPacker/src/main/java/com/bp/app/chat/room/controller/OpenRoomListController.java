@@ -40,7 +40,6 @@ public class OpenRoomListController extends HttpServlet {
 			int listCount = cs.selectCnt1(searchType, searchValue,no);
 //			int listCount2 = cs.selectCnt2(searchType, searchValue,no);
 //			int listCount = listCount1 + listCount2;
-			System.out.println("리스트"+listCount);
             String page = req.getParameter("page");
             if(page == null) page = "1";
             int currentPage = Integer.parseInt(page);
@@ -48,9 +47,10 @@ public class OpenRoomListController extends HttpServlet {
             int boardLimit= 4;
             PageVo pv = new PageVo(listCount, currentPage, pageLimit, boardLimit);
             
-			
+			System.out.println("loginMember"+loginMember);
 			List<ChattingRoomVo> roomList = null;
 			ChattingRoomVo crv = new ChattingRoomVo();
+			
 			crv.setChattingUserNo(no);
 //			crv.setChattingUser2No(chattingUser2No);
 			

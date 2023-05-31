@@ -19,16 +19,17 @@ public class MemberReviewService {
   	public MemberReviewService() {
   		dao=new MemberReviewDao();
   	}
-   public ChattingRoomVo checkCanWriteReview(String loginMemberNo, String selectMemberNo) throws Exception {
+   public List<ChattingRoomVo> checkCanWriteReview(String loginMemberNo, String selectMemberNo) throws Exception {
       ChattingRoomVo vo = null;
       //conn
       Connection conn = JDBCTemplate.getConnection();
          //update
-      vo = dao.checkCanWriteReview(conn , loginMemberNo,selectMemberNo );
+      List<ChattingRoomVo> crvList = null;
+      crvList = dao.checkCanWriteReview(conn , loginMemberNo,selectMemberNo );
          
       
       JDBCTemplate.close(conn);
-      return vo;
+      return crvList;
    }
    public int writeReview(MemberReviewVo mrv) throws Exception {
       

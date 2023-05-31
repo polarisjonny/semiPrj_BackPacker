@@ -17,6 +17,7 @@ public class ChattingRoomVo {
    private String chattingUser2Id;
    private String boardTitle;
    private String boardCategoryName;
+   private String guideBoardTitle;
 public String getChattingRoomNo() {
 	return chattingRoomNo;
 }
@@ -107,6 +108,12 @@ public String getBoardCategoryName() {
 public void setBoardCategoryName(String boardCategoryName) {
 	this.boardCategoryName = boardCategoryName;
 }
+public String getGuideBoardTitle() {
+	return guideBoardTitle;
+}
+public void setGuideBoardTitle(String guideBoardTitle) {
+	this.guideBoardTitle = guideBoardTitle;
+}
 @Override
 public String toString() {
 	return "ChattingRoomVo [chattingRoomNo=" + chattingRoomNo + ", chattingUserNo=" + chattingUserNo
@@ -115,12 +122,12 @@ public String toString() {
 			+ ", chattingUserNick=" + chattingUserNick + ", chattingUser2Nick=" + chattingUser2Nick
 			+ ", chattingUserProfile=" + chattingUserProfile + ", chattingUser2Profile=" + chattingUser2Profile
 			+ ", chattingUserId=" + chattingUserId + ", chattingUser2Id=" + chattingUser2Id + ", boardTitle="
-			+ boardTitle + ", boardCategoryName=" + boardCategoryName + "]";
+			+ boardTitle + ", boardCategoryName=" + boardCategoryName + ", guideBoardTitle=" + guideBoardTitle + "]";
 }
 public ChattingRoomVo(String chattingRoomNo, String chattingUserNo, String chattingUser2No, String guideBoardNo,
 		String matchingCheck, String matchingCheck2, String chattingStatus, String chattingUserNick,
 		String chattingUser2Nick, String chattingUserProfile, String chattingUser2Profile, String chattingUserId,
-		String chattingUser2Id, String boardTitle, String boardCategoryName) {
+		String chattingUser2Id, String boardTitle, String boardCategoryName, String guideBoardTitle) {
 	super();
 	this.chattingRoomNo = chattingRoomNo;
 	this.chattingUserNo = chattingUserNo;
@@ -137,12 +144,13 @@ public ChattingRoomVo(String chattingRoomNo, String chattingUserNo, String chatt
 	this.chattingUser2Id = chattingUser2Id;
 	this.boardTitle = boardTitle;
 	this.boardCategoryName = boardCategoryName;
+	this.guideBoardTitle = guideBoardTitle;
 }
 public ChattingRoomVo() {
 	super();
 	// TODO Auto-generated constructor stub
 }
- 
+   
    
 
 }

@@ -34,7 +34,6 @@ public class OpenChatRoomController extends HttpServlet {
 				 chattingUserNo = req.getParameter("chattingUserNo");
 			}else {
 				 chattingUserNo = req.getParameter("writerNo");
-				 System.out.println("Writer" +chattingUserNo);
 			}
 			if(req.getParameter("1chattingUser2No") != null) {
 				
@@ -42,7 +41,6 @@ public class OpenChatRoomController extends HttpServlet {
 			}else {
 				
 				chattingUser2No = loginMember.getMemberNo();
-				System.out.println("2loginmemeberno" +chattingUser2No);
 			}
 			String type = req.getParameter("type");
 			if("new".equals(type) && chattingUserNo.equals(chattingUser2No)) {
@@ -75,7 +73,6 @@ public class OpenChatRoomController extends HttpServlet {
 					
 				}
 			}
-			System.out.println(vo);
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/chat/room.jsp").forward(req, resp);
 		}catch(Exception e) {
