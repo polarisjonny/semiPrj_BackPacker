@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -238,7 +239,17 @@
 	                    <div class="content-area" onclick="location.href ='${root}/findFpacker/detail?no='+${vo.guideBoardNo}+'&writerNo='+${vo.writerNo}+'&schedulerNo='+${vo.schedulerNo}">
 	                        <img class="thum-Img" src="${root}/static/img/Fpacker/${vo.mainImg}" alt="">
 	                        <div class="text-area">
-	                            <div class="text-small content-small-bold">${vo.title}</div>
+	                        	
+	                            <div class="text-small content-small-bold">
+	                           	 <c:set var="titleLength" value="${fn:length(vo.title)}" />
+		                            <c:if test="${titleLength >= 14}">
+		                            ${vo.title}...
+		                            </c:if>
+		                            <c:if test="${titleLength <14 }">
+		                            ${vo.title}
+		                            </c:if>
+		                            
+	                            </div>
 	                            <div class="text-small">작성자  ${vo.nick}</div>
 	                            <c:if test="${not empty vo.startDate}">
 		                          <div class="small-text">${vo.startDate}~${vo.endDate}</div>

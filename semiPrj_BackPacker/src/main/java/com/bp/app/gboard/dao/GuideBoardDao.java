@@ -170,7 +170,7 @@ public class GuideBoardDao {
 		List<GuideBoardVo> bvoList = new ArrayList<>(); 
 		while(rs.next()) {
 			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
-			String title = rs.getString("TITLE");
+			String title_ = rs.getString("TITLE");
 			String id = rs.getString("ID");
 			String nick = rs.getString("NICK");
 			String age = rs.getString("AGE");
@@ -213,6 +213,26 @@ public class GuideBoardDao {
 			bvo.setCategoryName(categoryName);
 			
 			bvo.setGuideBoardNo(guideBoardNo);
+			
+			//타이틀 가공하기 27자 까지 자르기
+			String title = "";
+			if(bvo.getGuideBoardCategoryNo().equals("3")) {
+				
+				if(title_.length()>=27) {
+					title = title_.substring(0, 27);
+				}else {
+					title = title_;
+				}
+			}else {
+				if(title_.length()>=14) {
+					title = title_.substring(0, 14);
+				}else {
+					title = title_;
+				}
+			}
+			
+			
+			
 			bvo.setTitle(title);
 			bvo.setId(id);
 			bvo.setNick(nick);
@@ -311,7 +331,7 @@ public class GuideBoardDao {
 		List<GuideBoardVo> bvoList = new ArrayList<>(); 
 		while(rs.next()) {
 			String guideBoardNo = rs.getString("GUIDE_BOARD_NO");
-			String title = rs.getString("TITLE");
+			String title_ = rs.getString("TITLE");
 			String id = rs.getString("ID");
 			String nick = rs.getString("NICK");
 			String age = rs.getString("AGE");
@@ -353,6 +373,23 @@ public class GuideBoardDao {
 			bvo.setCategoryName(categoryName);
 			
 			bvo.setGuideBoardNo(guideBoardNo);
+			
+			//타이틀 가공하기 27자 까지 자르기
+			String title = "";
+			if(bvo.getGuideBoardCategoryNo().equals("3")) {
+				
+				if(title_.length()>=27) {
+					title = title_.substring(0, 27);
+				}else {
+					title = title_;
+				}
+			}else {
+				if(title_.length()>=14) {
+					title = title_.substring(0, 14);
+				}else {
+					title = title_;
+				}
+			}
 			bvo.setTitle(title);
 			bvo.setId(id);
 			bvo.setNick(nick);
