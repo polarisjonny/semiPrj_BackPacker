@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 수정</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
       #joinTitle {
             text-align: center;
@@ -225,7 +226,7 @@
 	 <main>
         <h1 id="joinTitle">개인정보 수정</h1>
 
-    <form action="${pageContext.request.contextPath}/member/modify/myPage" method="POST" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/member/modify/myPage" method="POST" enctype="multipart/form-data" >
         <div id="join-area">
         
             <div id="first-area">
@@ -280,7 +281,7 @@
                 <br>
                 <br>
                 <br>
-                <input id="submit-btn" type="submit" value="수정하기">
+                <input id="submit-btn" type="submit" value="수정하기" onclick="return checkValidation();">
             </div>
         </div>
     </form>
@@ -311,6 +312,28 @@
 				previewArea.appendChild(imgTag);
 			}
 		};
+		
+		function checkValidation(){
+			const phoneNumber = document.querySelector('input[name="phoneNumber"]').value;
+			
+			if(phoneNumber.length != 11) {
+		    	Swal.fire({
+		    		icon: 'error',
+		    		title : '핸드폰번호 작성 오류',
+		    		text : '핸드폰번호는 11자로 작성하셔야 합니다.'
+		    	});
+		    	return false;
+		    }
+			
+			Swal.fire({
+				  icon: 'success',
+				  title: '마이페이지 수정 성공',
+				});
+			
+		    return true;
+		    
+		    
+		}
 	</script>
 	
 	

@@ -81,7 +81,7 @@ public class MemberMyPageModifyController extends HttpServlet {
 			
 			if(updatedMember != null) {
 				req.getSession().setAttribute("loginMember", updatedMember);
-				resp.sendRedirect(req.getContextPath()+"/home");
+				resp.sendRedirect(req.getContextPath()+"/member/myPage");
 			} else {
 				throw new Exception("[ERROR] 마이페이지 회원 정보 수정 중 에러 발생");
 			}

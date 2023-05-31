@@ -248,7 +248,7 @@
                 </div>
                 <br>
                 <div class="input-style">
-                    <input type="text" name="nick" id="nick" placeholder="닉네임(8자 이내)">
+                    <input type="text" name="nick" id="nick" placeholder="닉네임(8자 이내)" maxlength="8">
                     <button type="button" id="checkNick"><span class="button-text">닉네임 중복 확인</span></button>
                 </div>
                 <br>
@@ -384,6 +384,15 @@
 		            text: '비밀번호가 일치하지 않습니다.',
 		        });
 		        return false;
+		    }
+		    
+		    if(passwordInput.value.length < 4) {
+		    	Swal.fire({
+		    		icon: 'error',
+		    		title: '비밀번호 오류',
+		    		text: '비밀번호는 4자 이상이어야 합니다.'
+		    	});
+		    	return false;
 		    }
 		    
 		    const phoneNumber = document.querySelector('input[name="phoneNumber"]').value;

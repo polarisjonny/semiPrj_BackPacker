@@ -116,6 +116,17 @@
 				return false;
 			}
 			
+			if(changePassword.length < 4) {
+				Swal.fire({
+					  title: '비밀번호는 바꾸기 실패',
+					  icon: 'warning',
+					  text: '비밀번호는 4자 이상이어야 합니다.',
+					  confirmButtonColor: '#94d2e6',
+					  confirmButtonText: '확인'
+					});
+				return false;
+			}
+			
 			return true;
 		}
 	</script>
