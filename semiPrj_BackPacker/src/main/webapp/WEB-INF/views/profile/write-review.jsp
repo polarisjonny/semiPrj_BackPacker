@@ -85,7 +85,9 @@
             text-align: center;
         }
 
-       
+       #checkBoard{
+       		text-align: center;
+       }
         #sendReivewBtn{
             margin-left: 150px;
             text-align: center;
@@ -173,11 +175,17 @@
                 <div id="inputTitle">
                     <b>여행 후기를 작성해 주세요</b>
                 </div>
+                 <div id="checkBoard">
+                    <select name="chattingRoomNo">
+                    	<c:forEach items="${crvList}" var="crv">
+						   <option value="${crv.chattingRoomNo}">"${crv.guideBoardTitle}"</option>
+						</c:forEach>
+					 </select>
+                </div>
                 <div class="tArea">
                     <textarea name="reviewContent" class="tArea"  ></textarea>
                      <input type="hidden" name="selectMemberNo" value="${selectMember.memberNo}">
                   <input type="hidden" name="loginMemberNo" value="${loginMember.memberNo}">
-                       <input type="hidden" name="chattingRoomNo" value="${crv.chattingRoomNo}">
                 </div>
                 <br>
                 <div id="btnDiv">

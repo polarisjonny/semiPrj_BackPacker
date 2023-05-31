@@ -17,8 +17,8 @@ import com.bp.app.memberReview.vo.MemberReviewVo;
 
 public class MemberReviewDao {
 
-   public ChattingRoomVo checkCanWriteReview(Connection conn, String loginMemberNo, String selectMemberNo) throws Exception {
-      String sql = "SELECT CHATTING_ROOM_NO, CHATTING_USER_NO, CHATTING_USER2_NO, GUIDE_BOARD_NO, MATCHING_CHECK, MATCHING_CHECK2, CHATTING_STATUS ,M1.NICK AS NICK1,M2.NICK AS NICK2 FROM CHATTING_ROOM C JOIN MEMBER M1 ON C.CHATTING_USER_NO = M1.MEMBER_NO JOIN MEMBER M2 ON C.CHATTING_USER2_NO = M2.MEMBER_NO WHERE ((CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?) OR (CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?))AND MATCHING_CHECK = 'Y' AND MATCHING_CHECK2='Y'";
+   public List<ChattingRoomVo> checkCanWriteReview(Connection conn, String loginMemberNo, String selectMemberNo) throws Exception {
+      String sql = "SELECT CHATTING_ROOM_NO, CHATTING_USER_NO, CHATTING_USER2_NO, C.GUIDE_BOARD_NO, MATCHING_CHECK, MATCHING_CHECK2, CHATTING_STATUS ,M1.NICK AS NICK1,M2.NICK AS NICK2 , B.TITLE AS TITLE FROM CHATTING_ROOM C JOIN MEMBER M1 ON C.CHATTING_USER_NO = M1.MEMBER_NO JOIN MEMBER M2 ON C.CHATTING_USER2_NO = M2.MEMBER_NO JOIN GUIDE_BOARD B ON C.GUIDE_BOARD_NO = B.GUIDE_BOARD_NO WHERE ((CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?) OR (CHATTING_USER_NO = ? AND CHATTING_USER2_NO = ?))AND MATCHING_CHECK = 'Y' AND MATCHING_CHECK2='Y'";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, loginMemberNo);
       pstmt.setString(2, selectMemberNo);
@@ -27,8 +27,10 @@ public class MemberReviewDao {
       ResultSet rs = pstmt.executeQuery();
       
       //tx || rs
-      ChattingRoomVo vo = null;
-      if(rs.next()) {
+      List<ChattingRoomVo> crvList= new ArrayList<>();
+      
+      
+      while(rs.next()) {
          String chattingRoomNo = rs.getString("CHATTING_ROOM_NO");
          String chattingUserNo = rs.getString("CHATTING_USER_NO");
          String chattingUser2No = rs.getString("CHATTING_USER2_NO");
@@ -38,7 +40,9 @@ public class MemberReviewDao {
          String chattingStatus = rs.getString("CHATTING_STATUS");
          String chattingUserNick = rs.getString("NICK1");
          String chattingUser2Nick = rs.getString("NICK2");
+         String guideBoardTitle = rs.getString("TITLE");
          
+         ChattingRoomVo vo = null;
          
          
          vo = new ChattingRoomVo();
@@ -52,12 +56,15 @@ public class MemberReviewDao {
          vo.setChattingStatus(chattingStatus);
          vo.setChattingUserNick(chattingUserNick);
          vo.setChattingUser2Nick(chattingUser2Nick);
+         vo.setGuideBoardTitle(guideBoardTitle);
+         
+         crvList.add(vo);
       }
       
       //close
       JDBCTemplate.close(rs);
       JDBCTemplate.close(pstmt);
-      return vo;
+      return crvList;
    }
 
    public int writeReview(Connection conn, MemberReviewVo mrv) throws Exception {

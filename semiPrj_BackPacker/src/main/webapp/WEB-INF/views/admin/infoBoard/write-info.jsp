@@ -139,7 +139,7 @@
 						
 					</div>
 
-						<input type="text" name="title" id="write-title"placeholder="제목을 20자 이내로 적어주세요.">
+						<input type="text" name="title" id="write-title"placeholder="제목을 30자 이내로 적어주세요." maxlength="30">
 						<br>
 						
 						<textarea id="summernote" name="content" style="resize:none;" ></textarea>
@@ -240,7 +240,7 @@
 			
 		})
 
-		//후기작성시 제목 안넣었을때 작성 못하게
+		//정보작성시 제목 안넣었을때 작성 못하게
 		function send(params) {
 			if(document.querySelector('input[name=title]').value==""){
 				Swal.fire({

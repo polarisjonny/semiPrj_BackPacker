@@ -93,6 +93,10 @@ body {
 	.note-editor{
 		margin: auto;
 	}
+	.note-editior {
+		overflow :auto;
+        pointer-events: none; /* 이벤트 차단 */
+	}
 	
 </style>
 </head>
@@ -148,7 +152,7 @@ body {
 			
 			<div id="notice-content-area">
 			
-					<textarea id="summernote" style="resize:none;">${vo.content}</textarea>
+					<textarea readonly id="summernote" style="resize:none;">${vo.content}</textarea>
 				
 			</div>
 			
@@ -197,6 +201,7 @@ body {
 
 			}
 
+			$('#summernote').summernote('disable');
 		</script>
 
 </body>

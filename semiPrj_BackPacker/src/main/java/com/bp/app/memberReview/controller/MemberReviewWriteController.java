@@ -29,22 +29,29 @@ public class MemberReviewWriteController extends HttpServlet{
          String loginMemberNo = req.getParameter("loginMemberNo");
          String selectMemberNo = req.getParameter("selectMemberNo");
          //데뭉
+         System.out.println(1);
          if (loginMemberNo.equals(selectMemberNo)) {
         	 req.setAttribute("errorMsg", "자기 자신에게는 후기를 작성할 수 없습니다.");
              String root = req.getContextPath();
              req.getRequestDispatcher("/WEB-INF/views/common/error-page.jsp").forward(req, resp);
              return;
          }
+         System.out.println(2);
          //서비스
-         ChattingRoomVo crv = null;
+         List<ChattingRoomVo> crvList = null;
+         System.out.println(3);
          MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
+         System.out.println(4);
          MemberVo selectMember = mrs.getSelectMemberVo(selectMemberNo);
-         crv = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
+         System.out.println(5);
+         crvList = mrs.checkCanWriteReview(loginMemberNo,selectMemberNo);
+         System.out.println(6);
+         System.out.println("ccccrrrrvvv"+crvList);
 
-         if(crv != null) {
+         if(crvList != null) {
             req.setAttribute("loginMember", loginMember);
             req.setAttribute("selectMember", selectMember);
-            req.setAttribute("crv", crv);
+            req.setAttribute("crvList", crvList);
             req.getRequestDispatcher("/WEB-INF/views/profile/write-review.jsp").forward(req, resp);
          }else {
             req.setAttribute("errorMsg", "같이 여행한 적이 없어요");

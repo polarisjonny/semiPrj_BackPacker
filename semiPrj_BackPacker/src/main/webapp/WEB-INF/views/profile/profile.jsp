@@ -114,13 +114,16 @@
            letter-spacing: 1px;
            color:  #94d2e6;
        }
-       #profileMidRightDown{
+       .profileMidRightDown{
           word-wrap: break-word;
-         width: 320px;
+         width: 430px;
          height: 200px;
            letter-spacing: 0.5px;
            overflow: auto;
-           
+           border : 0px ;
+            resize: none; /* 크기 조절 방지 */
+            border: none; /* 보더 제거 */
+       	 outline: none; 
    
        }
    
@@ -225,9 +228,11 @@
                 </div>
             </div>
             
-            <div id="profileMidRightDown">
+            <div class="profileMidRightDown">
+               <textarea class="profileMidRightDown" readonly >
                
                     ${ selectMember.introMessage}
+               </textarea>
                 
             </div>
 
