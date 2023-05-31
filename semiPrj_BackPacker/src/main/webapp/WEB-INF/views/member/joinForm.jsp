@@ -397,13 +397,40 @@
 		    	return false;
 		    }
 		    
-		    Swal.fire({
-				  icon: 'success',
-				  title: '회원가입 성공',
-				  text: '환영합니다!',
-				});
+		    let isValid = true;
 		    
-		    return true;
+		    $.ajax({
+		        url: "${root}/member/join/checkPhoneNumber",
+		        data: { 'phoneNumber': phoneNumber },
+		        method: "POST",
+		        dataType: "json",
+		        async: false, // Make the request synchronous
+		        success: function(data) {
+		          if (data === false) {
+		            Swal.fire({
+		              title: '핸드폰번호 등록 불가',
+		              icon: 'warning',
+		              text: '입력하신 핸드폰번호는 이미 사용중입니다.'
+		            });
+		            isValid = false; // Set isValid flag to false
+		          }
+		        },
+		        error: function(error) {
+		          console.log(error);
+		        }
+		      });
+		    
+		    if(isValid) {
+		    	Swal.fire({
+					  icon: 'success',
+					  title: '회원가입 성공',
+					  text: '환영합니다!',
+					});
+			    
+			    return true;
+		    }
+		    
+		    return false;
 		}
 		
 		
