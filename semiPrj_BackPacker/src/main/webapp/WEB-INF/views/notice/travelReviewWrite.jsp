@@ -242,14 +242,15 @@
 
 		//후기작성시 제목 안넣었을때 작성 못하게
 		function send(params) {
-			if(document.querySelector('input[name=title]').value==""){
+			if(document.querySelector('input[name=title]').value=="") {
 				Swal.fire({
 				title : '후기 작성을 실패하였습니다.',
 				icon: 'warning',
-				text: '제목을 입력해주세요',
+				text: '제목 또는 내용을 입력해주세요',
 			})
 				return false;
-			}else{
+			}
+			else{
 				document.querySelector('form[name=sub1]').submit();
 				Swal.fire({
 				title : '후기 작성을 성공하였습니다.',

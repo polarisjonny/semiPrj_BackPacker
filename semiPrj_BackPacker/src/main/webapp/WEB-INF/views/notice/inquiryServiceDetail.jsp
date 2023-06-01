@@ -110,7 +110,9 @@
         #content{
             margin: 10px;
             font-size:16px;
-
+			width: 700px;
+			resize: none;
+			border: none;
         }
         #answer{
             display: flex;
@@ -201,7 +203,7 @@
         </div>
 
         <div id="content-area">
-            <div id="content">${vo.content}</div>
+            <textarea id="content">${vo.content}</textarea>
         </div>
 
         <div id="answer">문의답변 ></div>
