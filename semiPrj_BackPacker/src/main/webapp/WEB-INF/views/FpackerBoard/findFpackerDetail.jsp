@@ -21,7 +21,7 @@
 	#main-box {
 		display: grid;
 		grid-template-columns: 1.15fr 3fr 0.9fr 1.15fr;
-		
+		column-gap: 15px;
 	}
 	
 	/* main-area의 내용물이 가득차면 main-box의 길이에도 영향을 미치는지 */
