@@ -498,7 +498,7 @@
 						if(no != ${loginMember.memberNo}){
 							str+='<div class="chat-area content">';
 							str+='<input type="hidden" value="'+x[i].messageNo+'">';
-							str+='<div class="profileImage" style=" cursor: pointer;" onclick="goProfile('+no+')" style="text-align:center;"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:60px; border-radius:30px; "></div>';
+							str+='<div class="profileImage" style=" cursor: pointer;" onclick="goProfile('+no+')" style="text-align:center;"><img class="profile" src="${root}/static/img/member/profile/'+x[i].senderProfileImage+'" alt="" style="height:60px; border-radius:70%; "></div>';
 							str+='<div class = "content" style="width : 250px;"><textarea class="content" style="border : 1px solid black;  background-color : white; border-radius:10px;  margin-right:50px; padding-left : 10px;">'+x[i].content+'</textarea></div>';
 							str+='<div>'+x[i].senderNick+'</div>';
 							str+='<div class="enrollDate" style="font-size : 12px; text-align:right; margin-right:50px;">'+x[i].enrollDate;
