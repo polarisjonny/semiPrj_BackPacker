@@ -44,6 +44,7 @@
 	#btn > input {
 		float: right ;
 		font-size: 17px;
+		cursor: pointer;
 	}
 	
 	#btn > .answer-btn{

@@ -67,6 +67,7 @@
 	#btn > input {
 		float: right ;
 		font-size: 17px;
+		cursor: pointer;
 	}
 	#left {
 		float: left;
@@ -90,7 +91,6 @@
 			<textarea id="summernote" name="content" style="resize:none;">${vo.content}</textarea>
 			</div>
 			<div id="btn">
-				<div id="left"><i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>자기소개는 마이페이지에서 변경할 수 있습니다.</div>
 				<input type="submit" class="edit-btn"  value="수정하기">
 			</div>
 		</div>
