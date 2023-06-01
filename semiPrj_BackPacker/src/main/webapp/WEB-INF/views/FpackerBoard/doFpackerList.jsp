@@ -111,7 +111,7 @@
         color: white;
         border-radius: 10px;
         border: none;
-        margin-right: 30px;
+        margin-right: 50px;
     }
 
     #main-img > img {
@@ -140,9 +140,9 @@
     /* main-area content-area 관련 스타일*/
     #main-area {
         display: grid;
-        height: 1050px;
+        height: 1300px;
         margin-top: 30px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
@@ -154,8 +154,8 @@
     }
 
     .content-area {
-        margin-bottom: 50px;
-        margin-right: 20px;
+        margin-bottom: 70px;
+        margin-right: 50px;
     }
     .text-small {
         font-size: 16px;
@@ -253,10 +253,10 @@
 	                        <div class="text-area">
 	                            <div class="text-small content-small-bold">
 									<c:set var="titleLength" value="${fn:length(vo.title)}" />
-		                            <c:if test="${titleLength >= 14}">
+		                            <c:if test="${titleLength >= 22}">
 		                            ${vo.title}...
 		                            </c:if>
-		                            <c:if test="${titleLength <14 }">
+		                            <c:if test="${titleLength <22 }">
 		                            ${vo.title}
 		                            </c:if>
 		                            

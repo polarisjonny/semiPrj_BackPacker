@@ -224,8 +224,8 @@ public class GuideBoardDao {
 					title = title_;
 				}
 			}else {
-				if(title_.length()>=14) {
-					title = title_.substring(0, 14);
+				if(title_.length()>=22) {
+					title = title_.substring(0, 22);
 				}else {
 					title = title_;
 				}
@@ -384,8 +384,8 @@ public class GuideBoardDao {
 					title = title_;
 				}
 			}else {
-				if(title_.length()>=14) {
-					title = title_.substring(0, 14);
+				if(title_.length()>=22) {
+					title = title_.substring(0, 22);
 				}else {
 					title = title_;
 				}

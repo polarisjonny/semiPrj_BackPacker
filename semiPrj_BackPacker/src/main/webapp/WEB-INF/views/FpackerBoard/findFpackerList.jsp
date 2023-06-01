@@ -111,7 +111,7 @@
         color: white;
         border-radius: 10px;
         border: none;
-        margin-right: 30px;
+        margin-right: 50px;
     }
 
     #main-img > img {
@@ -140,9 +140,9 @@
     /* main-area content-area 관련 스타일*/
     #main-area {
         display: grid;
-        height: 1050px;
+        height: 1200px;
         margin-top: 30px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
@@ -155,7 +155,7 @@
 
     .content-area {
         margin-bottom: 50px;
-        margin-right: 20px;
+        margin-right: 50px;
     }
     .text-small {
         font-size: 16px;
@@ -218,7 +218,7 @@
                 <div><button class="s-btn active-btn">구해요</button><button class="s-btn" type="button" onclick="location.href='${root}/doFpacker/list?page=1'">합니다</button></div>
                 <div id="middle-area">
                 	
-                    <span id="big-text">프패커</span>
+                    <span id="big-text">프패커게시판</span>
                     <c:if test="${empty loginMember}">
 	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
 	                    <script>
