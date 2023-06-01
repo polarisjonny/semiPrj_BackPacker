@@ -156,6 +156,7 @@
     .content-area {
         margin-bottom: 50px;
         margin-right: 50px;
+        cursor : pointer;
     }
     .text-small {
         font-size: 16px;
