@@ -111,7 +111,7 @@
         color: white;
         border-radius: 10px;
         border: none;
-        margin-right: 30px;
+        margin-right: 50px;
     }
 
     #main-img > img {
@@ -125,7 +125,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 70px;
+        font-size: 50px;
         position: absolute;
         top: 100px;
         left: 50px;
@@ -140,9 +140,9 @@
     /* main-area content-area 관련 스타일*/
     #main-area {
         display: grid;
-        height: 1050px;
+        height: 1300px;
         margin-top: 30px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
@@ -154,8 +154,9 @@
     }
 
     .content-area {
-        margin-bottom: 50px;
-        margin-right: 20px;
+        margin-bottom: 70px;
+        margin-right: 50px;
+        cursor : pointer;
     }
     .text-small {
         font-size: 16px;
@@ -193,11 +194,11 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <div id="main-img">
-            <img src="${root}/static/img/board-main.jpg" alt="">
+            <img src="${root}/static/img/board-dofpacker-main.jpg" alt="">
             <div id="info-text">
-                백패커들이<br>
-                당신을<br>
-                찾습니다<br>
+                전문적인<br>
+                프패커를<br>
+                만나보세요<br>
             </div>
         </div>
         <div id="content-area">
@@ -253,10 +254,10 @@
 	                        <div class="text-area">
 	                            <div class="text-small content-small-bold">
 									<c:set var="titleLength" value="${fn:length(vo.title)}" />
-		                            <c:if test="${titleLength >= 14}">
+		                            <c:if test="${titleLength >= 22}">
 		                            ${vo.title}...
 		                            </c:if>
-		                            <c:if test="${titleLength <14 }">
+		                            <c:if test="${titleLength <22 }">
 		                            ${vo.title}
 		                            </c:if>
 		                            

@@ -111,7 +111,7 @@
         color: white;
         border-radius: 10px;
         border: none;
-        margin-right: 30px;
+        margin-right: 50px;
     }
 
     #main-img > img {
@@ -125,7 +125,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 70px;
+        font-size: 50px;
         position: absolute;
         top: 100px;
         left: 50px;
@@ -140,9 +140,9 @@
     /* main-area content-area 관련 스타일*/
     #main-area {
         display: grid;
-        height: 1050px;
+        height: 1200px;
         margin-top: 30px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
     }
 
@@ -155,7 +155,8 @@
 
     .content-area {
         margin-bottom: 50px;
-        margin-right: 20px;
+        margin-right: 50px;
+        cursor : pointer;
     }
     .text-small {
         font-size: 16px;
@@ -188,7 +189,7 @@
 	<main>
         
         <div id="main-img">
-            <img src="${root}/static/img/board-main.jpg" alt="">
+            <img src="${root}/static/img/board-main-fpacker.jpg" alt="">
             <div id="info-text">
                 백패커들이<br>
                 당신을<br>
@@ -218,7 +219,7 @@
                 <div><button class="s-btn active-btn">구해요</button><button class="s-btn" type="button" onclick="location.href='${root}/doFpacker/list?page=1'">합니다</button></div>
                 <div id="middle-area">
                 	
-                    <span id="big-text">프패커</span>
+                    <span id="big-text">프패커게시판</span>
                     <c:if test="${empty loginMember}">
 	                    <button id="write-btn" type="button" onclick="f01();">게시글 작성</button>
 	                    <script>

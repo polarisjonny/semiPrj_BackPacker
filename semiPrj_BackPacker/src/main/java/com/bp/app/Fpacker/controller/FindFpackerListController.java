@@ -37,7 +37,7 @@ public class FindFpackerListController extends HttpServlet {
 			int cnt = gbs.countCnt(2,searchType,searchValue); //게시글 수 얻어오기
 			
 			//페이징
-			PageVo pvo = new PageVo(cnt, currentPage, 5, 10);
+			PageVo pvo = new PageVo(cnt, currentPage, 5, 8);
 			
 			List<GuideBoardVo> bvoList = null;
 			if(searchType ==null || searchType.equals("")) {
