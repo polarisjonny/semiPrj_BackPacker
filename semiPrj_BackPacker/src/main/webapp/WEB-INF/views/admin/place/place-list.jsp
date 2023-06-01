@@ -96,6 +96,13 @@
   	#deletebtn{
   		border : 0px;
   	}
+  	   #page-area{
+         width : 300px;
+         margin: auto;
+         display: flex;
+         justify-content: space-evenly; 
+         padding-bottom: 10px;
+   }
 </style>
 </head>
 <body>

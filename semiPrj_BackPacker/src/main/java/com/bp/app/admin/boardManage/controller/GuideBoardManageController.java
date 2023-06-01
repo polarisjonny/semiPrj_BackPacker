@@ -33,7 +33,7 @@ public class GuideBoardManageController extends HttpServlet {
 			}else {
 				page = 1;
 			}
-			PageVo pv = new PageVo(cnt, page, 10, 5);
+			PageVo pv = new PageVo(cnt, page, 5, 5);
 			List<GuideBoardVo> voList = null;
 			if(searchType == null || searchType.equals("")) {
 				
