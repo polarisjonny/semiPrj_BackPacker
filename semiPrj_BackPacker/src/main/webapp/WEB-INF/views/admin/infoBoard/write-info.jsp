@@ -139,7 +139,7 @@
 						
 					</div>
 
-						<input type="text" name="title" id="write-title"placeholder="제목을 20자 이내로 적어주세요.">
+						<input type="text" name="title" id="write-title"placeholder="제목을 30자 이내로 적어주세요." maxlength="30">
 						<br>
 						
 						<textarea id="summernote" name="content" style="resize:none;" ></textarea>

@@ -135,7 +135,7 @@ footer, header, hgroup, menu, nav, section {
 		margin-top: 15px;
 	}    
 	
-	#reviewList img{
+	#reviewList .fImg{
 		width:450px;
 		height:200px;
 		border-radius:30px;
@@ -188,7 +188,9 @@ footer, header, hgroup, menu, nav, section {
 		text-overflow: ellipsis;
 	}
 
-	
+	#profile-img{
+		border-radius: 70%;
+	}
   	
   		
 </style>
@@ -244,12 +246,20 @@ footer, header, hgroup, menu, nav, section {
 
       <div id="reviewList">
       	<c:forEach items="${trList}" var="trList">
-	        <div id="review-area">
-	        	<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img alt="서브 이미지" src="${root}/static/img/travelReview/${trList.mainImg}"></a>
-	           	<div>
-	            <a class="reviewTitle" href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
-	            <!-- infoNo를 get방식으로 전달하여 req.getParameter에 담김 -->
-	           	</div>
+			  <div id="review-area">
+				<c:if test="${empty trList.profileImage }">
+					<div><img width="30px" height="30px" id="profile-img" src="${root}/static/img/member/profile/profile_default.jpg">${trList.writerNick}</div>
+				</c:if>
+
+				<c:if test="${not empty trList.profileImage}">
+					<div><img width="30px" height="30px" id="profile-img" src="${root}/static/img/member/profile/${trList.profileImage}">${trList.writerNick}</div>
+				</c:if>
+
+				<a href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}"><img class="fImg" alt="서브 이미지" src="${root}/static/img/travelReview/${trList.mainImg}"></a>
+				
+				<div>
+					<a class="reviewTitle" href="${root}/notice/travelReviewDetail?infoNo=${trList.infoNo}">${trList.title}</a> 
+				</div>
 	        </div>
       	</c:forEach>
       

@@ -59,7 +59,7 @@ public class TravelReviewDao {
 	//여행후기 조회
 	public List<TravelReviewVo> selectReviewList(Connection conn, PageVo pv) throws Exception {
 		
-		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG FROM INFO_BOARD I JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' AND INFO_CATEGORY_NO = 1 ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql="SELECT * FROM ( SELECT ROWNUM RNUM,T.* FROM (SELECT I.INFO_NO ,I.INFO_CATEGORY_NO ,I.WRITER_NO ,I.TITLE ,I.CONTENT ,I.ENROLL_DATE ,I.MODIFY_DATE ,I.HIT ,I.DELETE_YN ,I.REPORT_CNT, I.MAIN_IMG,M.ID,M.NICK,M.PROFILE_IMAGE FROM INFO_BOARD I JOIN MEMBER M ON M.MEMBER_NO = I.WRITER_NO WHERE DELETE_YN ='N' AND INFO_CATEGORY_NO = 1 ORDER BY INFO_NO DESC) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pv.getBeginRow());
 		pstmt.setInt(2, pv.getLastRow());
@@ -77,9 +77,10 @@ public class TravelReviewDao {
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String hit = rs.getString("HIT");
 			String deleteYn = rs.getString("DELETE_YN");
-//			String writerId = rs.getString("ID");
-//			String writerNick = rs.getString("NICK");
+			String writerId = rs.getString("ID");
+			String writerNick = rs.getString("NICK");
 			String mainImg = rs.getString("MAIN_IMG");
+			String profileImage = rs.getString("PROFILE_IMAGE");
 			
 			
 			TravelReviewVo vo = new TravelReviewVo();
@@ -92,9 +93,10 @@ public class TravelReviewDao {
 			vo.setModifyDate(modifyDate);
 			vo.setHit(hit);
 			vo.setDeleteYn(deleteYn);
-//			vo.setWriterId(writerId);
-//			vo.setWriterNick(writerNick);
+			vo.setWriterId(writerId);
+			vo.setWriterNick(writerNick);
 			vo.setMainImg(mainImg);
+			vo.setProfileImage(profileImage);
 			
 			trList.add(vo);
 		}

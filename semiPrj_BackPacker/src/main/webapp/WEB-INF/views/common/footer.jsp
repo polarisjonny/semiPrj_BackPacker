@@ -1,5 +1,7 @@
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <style>
  	footer {
@@ -88,7 +90,6 @@
                 </a>
             </div>
         </div>
-       
     
         
         <div class="end">
@@ -103,9 +104,9 @@
                     <div class="mini">서울특별시 강남구 테헨란로 14길 6층</div>
                 </div>
                 <div class="area3">
-                    <div class="bold"><a href="#">문의사항</a></div>
-                    <div class="mini"><a href="#">공지사항/FAQ</a></div>
-                    <div class="mini"><a href="#">1:1문의하기</a></div>
+                    <div class="bold"><a href="${root}/notice/inquiry">문의사항</a></div>
+                    <div class="mini"><a href="${root}/notice/inquiry">공지사항/FAQ</a></div>
+                    <div class="mini"><a href="${root}/notice/inquiryWrite">1:1문의하기</a></div>
                 </div>
             </div>
             <div></div>
