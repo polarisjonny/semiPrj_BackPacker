@@ -21,6 +21,7 @@
 	#main-box {
 		display: grid;
 		grid-template-columns: 1.15fr 3fr 0.9fr 1.15fr;
+		column-gap: 15px;
 		
 	}
 	
