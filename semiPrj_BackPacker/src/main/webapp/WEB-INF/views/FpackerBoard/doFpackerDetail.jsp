@@ -21,6 +21,7 @@
 	#main-box {
 		display: grid;
 		grid-template-columns: 1.15fr 3fr 0.9fr 1.15fr;
+		column-gap: 15px;
 		
 	}
 	
@@ -53,6 +54,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
+		height: 380px;
 		overflow : auto;
 	}
 
@@ -279,6 +281,12 @@
 		font-style: italic;
 		color: #94D2E6;
 		font-weight: bold;
+	}
+	.content-textarea {
+		width: 100%;
+		height : 350px;
+		border: none;
+		outline: none;
 	}
 </style>
 </head>
