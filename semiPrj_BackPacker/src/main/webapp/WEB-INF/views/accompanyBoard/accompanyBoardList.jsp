@@ -309,11 +309,7 @@
 </body>
 </html>
 <script>
-	let alertMsg = '${alertMsg}';
-	console.log(alertMsg);
-	if(alertMsg!=''){
-		alert(alertMsg);		
-	}
+	
 
     const searchType = '${searchVo.searchType}';
     const searchValue = '${searchVo.searchValue}';
