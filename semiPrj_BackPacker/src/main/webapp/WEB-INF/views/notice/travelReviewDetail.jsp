@@ -157,6 +157,10 @@ body {
 		color: white;
 		
 	}
+	
+	#notice-content-area .note-editable{
+			background: white;
+		}
 
 	.note-editor{
 		margin: auto;
@@ -276,6 +280,8 @@ body {
 	    	    
 	    	  ]
 	    	});
+
+			$('#summernote').summernote('disable');
 
 			//후기삭제
 			function reviewDelete(params) {

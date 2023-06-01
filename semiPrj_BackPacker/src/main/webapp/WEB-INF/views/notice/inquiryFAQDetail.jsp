@@ -108,6 +108,7 @@
             border-bottom : 1px solid gray;
 			height: 400px;
         }
+
         #content{
             margin: 10px;
             font-size:16px;
@@ -186,7 +187,7 @@
         </div>
 
         <div id="content-area">
-            <textarea id="contnet">${vo.content}</textarea>
+            <textarea id="content">${vo.content}</textarea>
         </div>
 
         <!-- <div id="answer">문의답변 ></div>
