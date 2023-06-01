@@ -90,6 +90,9 @@ body {
         margin:0px 10px 10px;
 	}
 
+	#notice-content-area .note-editable{
+		background: white;
+	}
 	.note-editor{
 		margin: auto;
 	}
