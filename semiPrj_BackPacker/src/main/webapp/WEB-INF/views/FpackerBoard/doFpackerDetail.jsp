@@ -427,8 +427,10 @@
 						<div>
 							<i class="fa-solid fa-circle-info fa-lg" style="color: #94D2E6;"></i>프로필을 눌러 거리점수를 확인하세요
 						</div>
-						<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">프패커매칭하기</button>
-						<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						<c:if test="${loginMember.memberNo!=1}">
+							<button class="btn-blue " id="openChat" onclick="openNewChatByUsersNo(${gbvo.guideBoardNo},${writerMember.memberNo},${loginMember.memberNo})">프패커매칭하기</button>
+							<button class="btn-red report-btn disable-btn">게시글신고하기</button>
+						</c:if>
 						<c:if test="${gbvo.matchingState=='O' && writerMember.memberNo==loginMember.memberNo}">
 							<button class="btn-gray" type="button" onclick="location.href='${root}/doFpacker/finish?no=${gbvo.guideBoardNo}'">게시글 마감하기</button>
 						</c:if>
