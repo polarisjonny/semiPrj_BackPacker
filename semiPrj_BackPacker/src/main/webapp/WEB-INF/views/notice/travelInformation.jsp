@@ -282,7 +282,7 @@ body {
             	
 					<c:if test="${pv.currentPage < pv.maxPage}">
 						<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${pv.currentPage + 1}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> > </a>
-						<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${nextPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
+						<a style="color:#94d2e6" href="${root}/notice/travelInformation?page=${pv.maxPage}&searchType=${searchVo.searchType}&searchValue=${searchVo.searchValue}"> >> </a> 
 					</c:if>
         </div>
    
