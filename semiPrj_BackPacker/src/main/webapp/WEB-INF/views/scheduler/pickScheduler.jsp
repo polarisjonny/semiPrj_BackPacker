@@ -316,7 +316,7 @@
 
 
             <!--                    싱가폴 시작                           -->
-            <div id="place-location-ko" class="si-area noReady" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+            <div id="place-location-ko" class="si-area" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
                 <a  href="/semi/schedulermake?countryNo=4&locationNo=401">
                     <div>SINGAPORE</div>
                     <div class="place-location">

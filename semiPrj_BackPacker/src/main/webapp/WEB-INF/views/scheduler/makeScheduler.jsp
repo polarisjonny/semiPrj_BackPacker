@@ -118,7 +118,7 @@
 		width: 100%;
 		margin-top: -5px;
 		overflow:auto;
-		height:550px
+		height:75vh;
 		
 	}
 	#place{
@@ -418,7 +418,7 @@
 						<div id="modal-area" class="modal-area">
 							<div id="box">
 								<div id="modal-img">
-									<img style="width: 100%; height: 298px;" src="${root}/static/img/place/${place.placeImage}" alt="">
+									<img style="width: 100%; height: 100%;" src="${root}/static/img/place/${place.placeImage}" alt="">
 								</div>
 								<div id="modal-in">
 									<div id="modal-name" style="padding-bottom: 30px; font-size: large; font-weight:bold;">
@@ -601,7 +601,7 @@
 								sstr+='<div id="modal-area" class="modal-area">'
 								sstr+=	'<div id="box">'
 								sstr+=		'<div id="modal-img">'
-								sstr+=			'<img style="width: 100%; height: 298px;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
+								sstr+=			'<img style="width: 100%; height: 100%;" src="${root}/static/img/place/'+s[i].placeImage+'" alt="">'
 								sstr+=		'</div>'
 								sstr+=		'<div id="modal-in">'
 								sstr+=			'<div id="modal-name" style="padding-bottom: 30px; font-size: large; font-weight:bold;">'

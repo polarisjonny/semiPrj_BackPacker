@@ -263,7 +263,7 @@
 				</div>
 
 				<div>
-					<textarea name="content" id="content" cols="70" rows="20" 
+					<textarea name="content" style="resize: none;" id="content" cols="70" rows="20" 
 					placeholder=
 					"1.구할 동행인원
 					
