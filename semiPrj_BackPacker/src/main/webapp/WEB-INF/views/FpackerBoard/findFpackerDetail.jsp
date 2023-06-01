@@ -54,6 +54,7 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
 		overflow : auto;
+		height: 380px;
 	}
 
 	#img-area  > div{
@@ -281,6 +282,12 @@
 	.carousel-control-next-icon {
 		background-color: #94D2E6;
 	}
+	.content-textarea {
+		width: 100%;
+		height : 350px;
+		border: none;
+		outline: none;
+	}
 </style>
 </head>
 <body>
@@ -329,7 +336,7 @@
 								            <!-- 이미지 대신 shedule박스 넣기 -->
 												<div id="shedule-box" class="d-block">
 													<div class="big-text bold-text middle-text">DAY${index}</div>
-													<div class="middle-text">2023-04-27(화)</div>
+													
 													<div id="img-area">
 													
 														<c:forEach items="${timetableVo}" var="item">
