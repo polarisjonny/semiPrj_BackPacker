@@ -202,7 +202,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <div id="main-img">
-            <img src="${root}/static/img/board-main.jpg" alt="">
+            <img src="${root}/static/img/board-main-accom.jpg" alt="">
             <div id="info-text">동행을 구해보세요!</div>
         </div>
         <div id="content-area">

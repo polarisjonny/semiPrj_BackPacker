@@ -125,7 +125,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 70px;
+        font-size: 50px;
         position: absolute;
         top: 100px;
         left: 50px;
@@ -193,11 +193,11 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
         <div id="main-img">
-            <img src="${root}/static/img/board-main.jpg" alt="">
+            <img src="${root}/static/img/board-dofpacker-main.jpg" alt="">
             <div id="info-text">
-                백패커들이<br>
-                당신을<br>
-                찾습니다<br>
+                전문적인<br>
+                프패커를<br>
+                만나보세요<br>
             </div>
         </div>
         <div id="content-area">

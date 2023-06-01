@@ -125,7 +125,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 70px;
+        font-size: 50px;
         position: absolute;
         top: 100px;
         left: 50px;
@@ -188,7 +188,7 @@
 	<main>
         
         <div id="main-img">
-            <img src="${root}/static/img/board-main.jpg" alt="">
+            <img src="${root}/static/img/board-main-fpacker.jpg" alt="">
             <div id="info-text">
                 백패커들이<br>
                 당신을<br>
