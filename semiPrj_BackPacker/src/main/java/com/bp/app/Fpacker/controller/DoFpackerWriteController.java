@@ -42,7 +42,7 @@ public class DoFpackerWriteController extends HttpServlet{
 				AttachmentVo attachmentVo = FileUploader.saveFile(path,f);	
 				vo.setMainImg(attachmentVo.getChangeName());
 			}else {
-				String changeName = "fpacker_main.jpg";
+				String changeName = "fpacker_basic.jpg";
 				vo.setMainImg(changeName);
 			}
 			
