@@ -230,8 +230,7 @@
 				</div>
 	
 				<div class="packer-img">
-					<img width=400 height="200" src="" alt="">
-					<img width=400 height="200" src="" alt="">
+					<img width=500 height="400" src="${root}/static/img/info/iiii.png" alt="">
 				</div>
 			</div>
 	
