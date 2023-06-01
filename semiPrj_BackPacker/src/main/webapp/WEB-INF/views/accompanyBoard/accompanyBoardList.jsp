@@ -168,7 +168,7 @@
     }
     #info-text {
         font-weight: 800;
-        font-size: 80px;
+        font-size: 50px;
         position: absolute;
         top: 100px;
         left: 50px;
