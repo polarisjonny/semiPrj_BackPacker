@@ -175,7 +175,7 @@
 <script>
 
 	function goBoard(infoNo){
-	window.location.href = '${root}/notice/travelInformationDetail?infoNo='+infoNo;
+	window.location.href = '${root}/notice/travelReview?infoNo='+infoNo;
 	}	
 	const searchType = '${searchVo.searchType}';
 	const searchValue = '${searchVo.searchValue}';
