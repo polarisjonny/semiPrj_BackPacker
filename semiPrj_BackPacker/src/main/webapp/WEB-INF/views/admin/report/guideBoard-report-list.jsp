@@ -50,6 +50,7 @@
       margin: auto;
       display: flex;
       justify-content: space-evenly; 
+      padding-bottom: 10px;
    }
     
     

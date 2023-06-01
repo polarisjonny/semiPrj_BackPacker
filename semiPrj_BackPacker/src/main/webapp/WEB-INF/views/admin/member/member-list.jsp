@@ -59,6 +59,7 @@
          margin: auto;
          display: flex;
          justify-content: space-evenly; 
+         padding-bottom: 10px;
    }
    #subbtnstForm{
    		height: 20px;
