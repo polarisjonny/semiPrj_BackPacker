@@ -53,7 +53,7 @@
     <p float="left">
        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/82c15cbc-0460-4576-a776-267994ee93e8" width="400" height="220" />
        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/38da04bc-8b45-4bb4-916f-c759b8000b80" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4f3b290f-4100-4737-9ab9-4fc1ca8bab9d" width="500" height="220" />
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4f3b290f-4100-4737-9ab9-4fc1ca8bab9d" width="800" height="440" />
     </p>
 
 <br>
