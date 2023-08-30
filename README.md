@@ -148,7 +148,7 @@
 
 <div>
    <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
-   ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
+   
 
 ![AJAX](https://img.shields.io/badge/AJAX-F7DF1E?style=for-the-badge&)
 
