@@ -1,96 +1,193 @@
-<h1>여행 종합 커뮤니티 백패커입니다.</h1>
+# 🎒 백패커(BackPacker)
     
-<h3>목차</h3>
-<ul>
-<li>안내사항</li>
-<li>프로젝트 소개 요약 </li>
-<li>사용한 툴</li>
-<li>기간안내</li>
-<li>팀원들의 역할</li>
-<li>노션링크</li>
-<li>erdCould링크</li>
+<img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/1634b939-e3d3-4435-b177-8bb32d9da202" width="1000" height="500">
+<br>
+<br>
+<br>
 
-</ul>
-<h3>안내사항</h3>
-지도는 유료라서 기간 제한이 있어 무료인 시점까지만 이용할 수 있습니다
-따라서 일정짜기는 구동이 안될 수 있습니다. 양해 부탁드립니다.
+## 🖥 프로젝트 소개
+백패커는 전문 가이드가 아닌 그 여행지에 사는 누구나 지식이나 이색적인 경험이 있다면 가이드로 참여 가능한 프로그램입니다. 
 
-<h3 id="content1">프로젝트 요약</h3>
-요약 
-여행 종합 커뮤니티 
-일정을 짤 수 있고 짜여진 일정을 통해 파트너를 구하는 게시글도 작성 가능 <br>
-여행다녀온 후기를 작성하는 커뮤니티의 성격을 많이 가짐 <br>
+<br>
+<br>
+<br>
+
+## 📘 프로젝트 제목 의미
++ 백패커 : bagPacker라는 신조어에서 가져온 말로, 자신만을 위한 시간을 가질 목적으로 혼자 여행을 떠나는 여행족의 의미와 더불어, 우리 사이트에서는 frontPacker(프패커)를 뒤따라간다는 의미를 지니고 있습니다.
++ 프패커 : 백패커의 반댓말로, 일종의 가이드를 의미합니다. 전문 가이드가 아니어도 그 여행지에 사는 누구나 프패커가 될 수 있습니다. 해당 지역의 지식이나 이색적인 경험이 있다면 프패커로 활동할 수 있습니다.
+
+<br>
+<br>
+<br>
+
+## 👧🧑 팀원 소개
++ 지세연(조장) : 회원가입, 로그인, 아이디 찾기, 비밀번호 찾기, 마이페이지
++ 윤예린(형상관리자) : 프패커구해요 게시판(CRUD), 프패커합니다 게시판(CRUD), 동행구해요게시판(CRUD)
++ 김민규(이슈관리자) : 채팅, 관리자, 프로필
++ 김찬진(일정관리자) : 여행플래너 일정짜기, 여행지 등록, 여행지 수정
++ 이승권(DB관리자) : 여행정보게시판(CRUD), 후기게시판(CRUD), 문의게시판(CRUD)
+
+  
+<br>
+<br>
+<br>
+
+## 📚 기능
+1.  회원가입/로그인/아이디찾기/비밀번호찾기
+   <br>
+  <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/b09f521a-e08f-4bbc-88a6-23612e412785" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e62d683c-c276-4ff4-81c1-c447815a6c13" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/f3256e5e-785e-4bd5-851e-b320518505bd" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/cef078a0-8a4b-417f-b9ee-3a20be99973e" width="400" height="220"/>
+    </p>
+
+<br>
+<br>
+
+2. 여행일정
+   <br>
+   원하는 지역을 선택하고 그 지역에서 추천하는 여행지를 추가하거나 직접 여행지를 추가하여 일정표를 완성합니다.
+   <br>
+   <br>
+    <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/82c15cbc-0460-4576-a776-267994ee93e8" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/38da04bc-8b45-4bb4-916f-c759b8000b80" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4f3b290f-4100-4737-9ab9-4fc1ca8bab9d" width="400" height="220" />
+    </p>
+
+<br>
+<br>
+
+3. 동행구해요 게시판/프패커구해요 게시판/프패커합니다 게시판
+   <br>
+   일정표를 완성하고 일정을 공유해 동행을 구할 수 있는 게시판입니다.
+   <br>
+   일정을 공유해 일정에 따른 프패커를 구하거나 프패커를 직접 할 수 있습니다.
+
+   <br>
+    <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0a14ceb0-86ab-4a66-bf9f-cb45f70e6e6f" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/547e4d3d-2a77-466c-b6dd-f67e19fb1c93" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e59d1cea-2980-42b4-9783-fc0eb3bc5da3" width="400" height="220" />
+    </p>
+   
+<br>
+<br>
+
+4. 여행정보 게시판/여행후기 게시판/문의게시판
+   <br>
+   여행후기를 공유하고, 여행정보를 조회할 수 있습니다.
+   <br>
+    <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/26377ace-443f-4b2a-ba72-07394902d9b4" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/46b42486-dc7e-46f7-b2a7-967bc9b0ece1" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4b99f0dd-5cc4-443c-99ef-fd6d5c3735db" width="400" height="220" />
+    </p>
+
+<br>
+<br>
+
+5. 마이페이지/마이프로필
+   <br>
+   마이페이지에서 회원정보와 내가 짠 여행 일정을 조회하고, 내가 작성한 글 목록, 매칭완료된 회원 목록을 볼 수 있습니다.
+   <br>
+   마이프로필에서 거리 점수(신뢰도 점수)를 조회하고, 같이 여행 간 동행자들이 남긴 리뷰를 조회할 수 있습니다.
+   <br>
+     <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/9583c0f3-ee2b-4ac3-b1f0-4fb9a88e1e61" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0d9e0a75-a876-4486-89db-c86d5321f305" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/5dc67911-931c-41d9-9949-8ed4cf62183a" width="400" height="220" />
+         <br>
+         <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/fd87f210-5f25-48fd-a961-91f195fbe665" width="400" height="500" />
+    </p>
+    <br>
+    <br>
+![채팅목록]()
+![채팅상세페이지]()
+
+6. 채팅
+   <br>
+   1:1채팅을 통해 회원 매칭이 가능합니다.
+   <br>
+    <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e1815eb3-5aa5-4497-82aa-d2f169a012bf" width="400" height="500"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7ce1637b-e317-412a-ba3a-1d051d1418ff" width="400" height="500" />
+    </p>
+
+<br>
+<br>
+
+7. 관리자 - 회원조회, 여행지 등록 및 수정
+    <p float="left">
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7c9b32b4-bbea-4b29-a821-1c396ea84a83" width="400" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/066360df-2e0b-4388-a5e3-1152a482fce4" width="400" height="220" />
+    </p>
+
+<br>
+<br>
+<br>
+
+## 📆 일정
+2023-04-14 ~ 2023-06-02
+
+<br>
+<br>
+<br>
+
+## 🧩 DB설계
+![전체테이블](https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7049f855-9e69-446a-a6e4-d64a2b9ce873)
 
 
-용어의 의미
-백패커 : 혼자여행가기를 원하는 또는 모르는 사람과 여행파트너를 맺고싶어하는 사람 <br>
-프패커 : bagPacker이지만 발음상 똑같은 back의 반대인 front Packer의 줄임말. <br>
-앞에서 이끌어 준다는 의미도 가지고 있다 생각해서 프패커라고 짓게 됨. <br>
-일종의 가이드라고 생각하시면 됩니다. 다만 꼭 전문적일 필요는 없는 여행의 달인같은 느낌입니다. <br>
 
-게시글의 매칭신청하기를 통해 채팅방 오픈. 채팅방에서 매칭완료 가능. 여러명과 매칭완료 가능. 작성자는 매칭완료가 하나라도 <br>
-완료되면 매칭마감을 통해 매칭마감 가능. 마감되면 해당 게시판에서 사라짐. 본인 마이페이지에서 조회 가능 <br>
+<a href="https://www.erdcloud.com/d/3ZqPd6i4TLmNR8rHm">ERD Cloud 링크</a>
 
-<h3>사용한 툴</h3>
-깃허브, 오라클, 자바 서블렛, html, javaScript, css, java, jsp, 깃허브, 피그마, 노션
+<br>
+<br>
+<br>
 
-<h3>프로젝트 기간</h3>
-기획 (~2023/4/14) <br>
-DB모델링 (2023/4/15~2023/4/21)<br>
-UI설계 (2023/4/22~2023/4/28)<br>
-UI구현 (2023/4/29~2023/5/12)<br>
-서버구현 (2023/5/13~2023/5/31)<br>
-마감 및 더미데이터 준비 (2023/6/1~2023/6/2)
+## ⚙ 기술스택
 
-<h3 id="content3">팀원 역할 소개</h3>
-지세연님 : 회원가입, 로그인, 아이디찾기, 비밀번호 찾기, 마이페이지
-<details>
-    <summary>마이페이지 상세 기능</summary>
-    회원가입, 로그인, 아이디 찾기, 비밀번호 찾기, 회원탈퇴, 마이페이지 개인정보 수정 <br>
-    프패커 등록, 일정다시보기, 등록한 게시글 목록, 매칭완료된 회원보기 <br>
-</details>
-<hr>
-윤예린님 : 프패커구해요, 프패커합니다, 동행구해요게시판
-<details>
-    <summary>기능 상세설명</summary>
-    UI가 다를뿐 세 게시판의 기능은 거의 동일함. <br>
-    게시글 등록이 가능해야함(합니다게시판은 프패커만 작성가능해야함) <br>
-    게시글 삭제, 게시글 검색, 게시글 수정이 가능해야함 <br>
-    댓글 추가, 삭제 <br>
-    게시글 신고하기 <br>
-    매칭마감버튼이 매칭완료된사람이 한사람이라도있으면 활성화되야함 <br>
-    매칭마감된 글은 댓글 등록, 댓글 삭제, 게시글 수정이 불가하게 되야함 <br>
-    매칭신청하기버튼을 통해 채팅방으로 이동되어야함 <br>
-    일정짜기를 통해 작성된 글은 일정이 보여야함.  <br>
-    마감시 매칭완료된 회원과 작성자에게 점수 부여  <br>
-</details>
-<hr>
-김찬진님 : 일정짜기, 일정을 통해 게시글 작성하기, 문의게시판 어시스트
-<details>
-    <summary>일정짜기 상세 기능</summary>
-    날짜 선택, 일정표 추가, 여행지 추가, 여행지 검색, 사용자 지정 일정추가, 일정표를 저장하여 게시글을 작성
-</details>
-<hr>
-이승권님 : 문의게시판, 후기게시판, 정보게시판(게시글작성은 아님)
-<details>
-    <summary>상세 기능</summary>
-    문의게시판에 게시글 등록, 문의게시판 검색기능, 1:1 문의 등록, 1:1 문의 답변등록, 공지사항등록, 서비스 문의 등록, 답변등록, FAQ등록 <br>
-    후기 정보게시판 UI구현, <br>
-    후기정보게시판 게시글 작성, 후기게시판 삭제, 인기순으로보기, 조회순으로 보기, 댓글 작성, 댓글 삭제, 신고하기(자기자신 신고불가능, 중복 신고 불가능), 게시물 수정하기 
-</details>
-<hr>
-김민규님 : 정보게시판(게시글 작성), 채팅방, 관리자기능, 회원평가, 프로필
-<details>
-    <summary>상세 기능</summary>
-    1:1 채팅구현 구현, 매칭완료, 채팅방 나가기, 읽지 않은 메세지 숫자 확인 <br>
-    회원상태확인,회원 검색, 신고관리 <br>
-    전체 게시판 목록 조회, 게시글의 신고 수 조회 가능, 해당 게시글로 이동하여 삭제가능 <br>
-    문의게시판 QNA작성 <br>
-    여행지의 추가, 수정, 삭제 여행정보글 작성가능 <br>
-    매칭완료된 회원 리뷰남기기, 거리점수 부여 
+<div>
+   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+   ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
 
-</details>
+![AJAX](https://img.shields.io/badge/AJAX-F7DF1E?style=for-the-badge&)
 
-<a href="https://www.notion.so/ebf82c2064744ff499c980d573b2ad74">노션링크</a>
 
-<a href="https://www.erdcloud.com/d/3ZqPd6i4TLmNR8rHm">ERD Cloud설계</a>
+  
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+  <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+  <br>
+  
+  <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> 
+ 
+  <br>
+  <img src="https://img.shields.io/badge/JSP-007396?style=for-the-badge&logo=java&logoColor=white">
+  <img src="https://img.shields.io/badge/Servlet-007396?style=for-the-badge&logo=java&logoColor=white">
+
+  <br>
+  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <br>
+
+  <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
+  <br>
+  
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/fontawesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white">
+  <br>
+
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white)
+![Sourcetree](https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white)
+![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white)
+![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
+
+
+  
+</div>
+
+
+
