@@ -109,8 +109,8 @@
    1:1채팅을 통해 회원 매칭이 가능합니다.
    <br>
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e1815eb3-5aa5-4497-82aa-d2f169a012bf" width="400" height="500"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7ce1637b-e317-412a-ba3a-1d051d1418ff" width="400" height="500" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e1815eb3-5aa5-4497-82aa-d2f169a012bf" width="380" height="500"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7ce1637b-e317-412a-ba3a-1d051d1418ff" width="380" height="500" />
     </p>
 
 <br>
