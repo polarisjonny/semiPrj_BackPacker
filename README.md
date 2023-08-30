@@ -1,6 +1,6 @@
 # 🎒 백패커(BackPacker)
     
-<img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/1634b939-e3d3-4435-b177-8bb32d9da202" width="1000" height="500">
+<img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/1634b939-e3d3-4435-b177-8bb32d9da202" width="1000" height="400">
 <br>
 <br>
 <br>
