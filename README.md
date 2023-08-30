@@ -51,9 +51,9 @@
    <br>
    <br>
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/82c15cbc-0460-4576-a776-267994ee93e8" width="400" height="220" />
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/38da04bc-8b45-4bb4-916f-c759b8000b80" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4f3b290f-4100-4737-9ab9-4fc1ca8bab9d" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/82c15cbc-0460-4576-a776-267994ee93e8" width="500" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/38da04bc-8b45-4bb4-916f-c759b8000b80" width="500" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4f3b290f-4100-4737-9ab9-4fc1ca8bab9d" width="500" height="220" />
     </p>
 
 <br>
@@ -67,9 +67,9 @@
 
    <br>
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0a14ceb0-86ab-4a66-bf9f-cb45f70e6e6f" width="400" height="200" />
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/547e4d3d-2a77-466c-b6dd-f67e19fb1c93" width="400" height="200"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e59d1cea-2980-42b4-9783-fc0eb3bc5da3" width="400" height="200" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0a14ceb0-86ab-4a66-bf9f-cb45f70e6e6f" width="500" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/547e4d3d-2a77-466c-b6dd-f67e19fb1c93" width="500" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e59d1cea-2980-42b4-9783-fc0eb3bc5da3" width="500" height="220" />
     </p>
    
 <br>
@@ -80,9 +80,9 @@
    여행후기를 공유하고, 여행정보를 조회할 수 있습니다.
    <br>
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/26377ace-443f-4b2a-ba72-07394902d9b4" width="400" height="220" />
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/46b42486-dc7e-46f7-b2a7-967bc9b0ece1" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4b99f0dd-5cc4-443c-99ef-fd6d5c3735db" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/26377ace-443f-4b2a-ba72-07394902d9b4" width="500" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/46b42486-dc7e-46f7-b2a7-967bc9b0ece1" width="500" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/4b99f0dd-5cc4-443c-99ef-fd6d5c3735db" width="500" height="220" />
     </p>
 
 <br>
@@ -95,11 +95,11 @@
    마이프로필에서 거리 점수(신뢰도 점수)를 조회하고, 같이 여행 간 동행자들이 남긴 리뷰를 조회할 수 있습니다.
    <br>
      <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/9583c0f3-ee2b-4ac3-b1f0-4fb9a88e1e61" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0d9e0a75-a876-4486-89db-c86d5321f305" width="400" height="220" />
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/5dc67911-931c-41d9-9949-8ed4cf62183a" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/9583c0f3-ee2b-4ac3-b1f0-4fb9a88e1e61" width="00" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0d9e0a75-a876-4486-89db-c86d5321f305" width="500" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/5dc67911-931c-41d9-9949-8ed4cf62183a" width="500" height="220" />
          <br>
-         <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/fd87f210-5f25-48fd-a961-91f195fbe665" width="400" height="500" />
+         <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/fd87f210-5f25-48fd-a961-91f195fbe665" width="500" height="500" />
     </p>
     <br>
     <br>
@@ -119,8 +119,8 @@
 
 7. 관리자 - 회원조회, 여행지 등록 및 수정
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7c9b32b4-bbea-4b29-a821-1c396ea84a83" width="300" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/066360df-2e0b-4388-a5e3-1152a482fce4" width="300" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7c9b32b4-bbea-4b29-a821-1c396ea84a83" width="500" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/066360df-2e0b-4388-a5e3-1152a482fce4" width="500" height="220" />
     </p>
 
 <br>
