@@ -103,8 +103,7 @@
     </p>
     <br>
     <br>
-![채팅목록]()
-![채팅상세페이지]()
+
 
 6. 채팅
    <br>
@@ -120,8 +119,8 @@
 
 7. 관리자 - 회원조회, 여행지 등록 및 수정
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7c9b32b4-bbea-4b29-a821-1c396ea84a83" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/066360df-2e0b-4388-a5e3-1152a482fce4" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/7c9b32b4-bbea-4b29-a821-1c396ea84a83" width="300" height="220"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/066360df-2e0b-4388-a5e3-1152a482fce4" width="300" height="220" />
     </p>
 
 <br>
