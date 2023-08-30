@@ -67,9 +67,9 @@
 
    <br>
     <p float="left">
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0a14ceb0-86ab-4a66-bf9f-cb45f70e6e6f" width="400" height="220" />
-       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/547e4d3d-2a77-466c-b6dd-f67e19fb1c93" width="400" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e59d1cea-2980-42b4-9783-fc0eb3bc5da3" width="400" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0a14ceb0-86ab-4a66-bf9f-cb45f70e6e6f" width="400" height="200" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/547e4d3d-2a77-466c-b6dd-f67e19fb1c93" width="400" height="200"/>
+        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/e59d1cea-2980-42b4-9783-fc0eb3bc5da3" width="400" height="200" />
     </p>
    
 <br>
