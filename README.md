@@ -95,7 +95,7 @@
    <br>
      <p float="left">
        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/9583c0f3-ee2b-4ac3-b1f0-4fb9a88e1e61" width="300" height="220"/>
-        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/0d9e0a75-a876-4486-89db-c86d5321f305" width="380" height="220" />
+       <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/9e13ad60-5d66-4eae-8ac1-0d86f489d820" width="300" height="220"/>
        <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/5dc67911-931c-41d9-9949-8ed4cf62183a" width="380" height="220" />
          <br>
          <img src="https://github.com/polarisjonny/semiPrj_BackPacker/assets/116703070/fd87f210-5f25-48fd-a961-91f195fbe665" width="500" height="500" />
